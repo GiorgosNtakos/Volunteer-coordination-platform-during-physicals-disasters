@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../CSS/admin_index_page.css">
+    <link rel="stylesheet" href="../CSS/showbox_admin.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="admin-profile">
+            <img src="" alt="Admin Icon" id = "adminImage">  
+            <div class="dropdown" id="user-options">
+                <span class="admin-name" id="adminName">Admin</span>
+                <div class="dropdown-content">
+                  <a href="admin_profile_setting.html">Επεξεργασία Προφίλ</a>
+                  <a href="admin_login.html">Αποσύνδεση</a>
+                </div>
+            </div>
+              </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="upload_products.html">Upload Data</a></li>
+                <li><a href="products_page.html">Προϊοντα</a></li>
+                <li><a href="POIS_page.html">Καταστηματα</a></li>
+                <li><a href="statistics_page.html">Στατιστικα</a></li>
+                <li><a href="leaderboard_page.html">Leaderboard</a></li>
+                <li><a href="ShowMap.html">Χαρτης</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div id="showbox"></div>
+        <!-- Εδώ μπορείτε να προσθέσετε το περιεχόμενο του κυρίως περιεχομένου της σελίδας -->
+    </main>
+
+    <script src="../Javascript/admin_index.js"></script>
+    <script src="../Javascript/showMessage.js"></script>
+
+</body>
+</html>

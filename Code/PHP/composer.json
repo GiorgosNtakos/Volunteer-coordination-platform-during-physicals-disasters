@@ -1,0 +1,17 @@
+{
+    "name": "myvendor/my-package",
+    "description": "Web platform for prices on products",
+    "autoload": {
+        "psr-4": {
+            "Myvendor\\MyPackage\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "GiorgosNtakos"
+        }
+    ],
+    "require": {
+        "ramsey/uuid": "^4.2"
+    }
+}
