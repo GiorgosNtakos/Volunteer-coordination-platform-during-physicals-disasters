@@ -1,0 +1,49 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url("../../img/logo.png") no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Στυλ για τη φόρμα δημιουργίας λογαριασμού */
+#rescuer-form {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+  border-radius: 15px; /* Στρογγυλεμένες ακρές στο button */
+}
+
+#rescuer-form button[type="submit"] {
+  background-color: #430063;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  border-radius: 15px; /* Στρογγυλεμένες ακρές στο button */
+}
+
+#rescuer-form button[type="submit"]:hover {
+  transition: background-color 0.4s;
+  background-color: #2c0045;
+}

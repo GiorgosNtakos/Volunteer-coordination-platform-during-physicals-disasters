@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Διαχείριση Προϊόντων</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../CSS/showbox_admin.css">
+    <link rel="stylesheet" href="../CSS/products_page.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div id="overlay"></div>
+    <header>
+        <div class="admin-profile">
+            <img src="admin-icon.png" alt="Admin Icon">  <!-- TODO Να φτιαξω την εικονα με τετοιο τροπο ωστε καθε φορα που συνδεεται καποιος να εχει και την δικη του εικονα δυναμικα. Ισως με καποια ΒΔ-->
+            <span class="admin-name">Admin</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="admin_index_page.html">Αρχική</a></li>
+                <li><a href="upload_products.html">Upload Data</a></li>
+                <li><a href="POIS_page.html">Καταστηματα</a></li>
+                <li><a href="statistics_page.html">Στατιστικα</a></li>
+                <li><a href="leaderboard_page.html">Leaderboard</a></li>
+                <li><a href="ShowMap.html">Χαρτης</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1>Διαχείριση Προϊόντων</h1>
+
+    <div>
+        <button id="show-add-product-form" >Προσθήκη Νέου Προϊόντος</button>
+        </div>
+
+    <div>
+        <button id="delete-all-button">Διαγραφή Όλων</button>
+    </div>
+
+    <main>
+   
+    <div id="search_bar">
+    <input type="text" id="search-input" placeholder="Αναζήτηση προϊόντων...">
+    <span  class="icon"><i id="search" class="fas fa-search"></i></span>
+    <button id="search-button">Αναζήτηση</button>
+    </div>
+
+<!-- Κρύψτε αρχικά τη φόρμα με CSS -->
+<div id="add-product-form-container">
+    <form id="add-product-form" >
+        <label for="product-name">Όνομα Προϊόντος:</label>
+        <input type="text" id="product-name" name="product-name" ><br>
+
+        <label for="category">Κατηγορία:</label>
+        <input type="text" id="category" name="category" ><br>
+
+        <label for="subcategory">Υποκατηγορία:</label>
+        <input type="text" id="subcategory" name="subcategory" ><br>
+
+        <label for="price">Τιμή:</label>
+        <input type="text" id="price" name="price" ><br> <!--TODO TO PRICE PREPEI NA GINEI NUMBER-->
+
+        <button type="submit">Προσθήκη Προϊόντος</button>
+    </form>
+</div>
+
+
+    <label for="category-filter" class="filter-label">Κατηγορία:</label>
+<select id="category-filter" class="filter-select">
+
+    <option value="">Όλες οι κατηγορίες</option>
+
+        <optgroup label="Α"> <!-- Ομάδα με το αρχικό γράμμα -->
+            <option value="Αντισηπτικά">Αντισηπτικά</option>
+        </optgroup>
+
+    <optgroup label="Β"></optgroup>
+        <option value="Βρεφικά Είδη">Βρεφικά Είδη</option>
+    </optgroup>
+
+    <optgroup label="Γ"></optgroup>
+        <option value="Για κατοικίδια">Για κατοικίδια</option>
+    </optgroup>
+
+    <optgroup label="Κ"></optgroup>
+        <option value="Καθαριότητα">Καθαριότητα</option>
+    </optgroup>
+
+    <optgroup label="Π"></optgroup>
+        <option value="Προστασία Υγείας">Προστασία Υγείας</option>
+        <option value="Προσωπική φροντίδα">Προσωπική φροντίδας</option>
+        <option value="Ποτά - Αναψυκτικά">Ποτά - Αναψυκτικά</option>
+    </optgroup>
+
+    <optgroup label="Τ"></optgroup>
+        <option value="Τρόφιμα">Τρόφιμα</option>
+    </optgroup>
+
+    </select>
+    
+    <label for="subcategory-filter" class="filter-label">Υποκατηγορία:</label>
+<select id="subcategory-filter" class="filter-select">
+
+    <option value="">Όλες οι υποκατηγορίες</option>
+
+    <optgroup label="Α">
+        <option value="Αλεύρι - Σιμιγδάλι">Αλεύρι - Σιμιγδάλι</option>
+        <option value="Αλλαντικά">Αλλαντικά</option>
+        <option value="Αναψυκτικά - Ενεργειακά Ποτά">Αναψυκτικά - Ενεργειακά Ποτά</option>
+        <option value="Αντισηπτικά">Αντισηπτικά</option>
+        <option value="Αντρική περιποίηση">Αντρική περιποίηση</option>
+        <option value="Απορρυπαντικά">Απορρυπαντικά</option>
+        <option value="Αποσμητικά">Αποσμητικά</option>
+        <option value="Αποσμητικά Χώρου">Αποσμητικά Χώρου</option>
+        <option value="Αυγά">Αυγά</option>
+    </optgroup>
+    
+    <optgroup label="Β">
+        <option value="Βαμβάκια">Βαμβάκια</option>
+        <option value="Βαφές μαλλιών">Βαφές μαλλιών</option>
+        <option value="Βούτυρο - Μαργαρίνη">Βούτυρο - Μαργαρίνη</option>
+        <option value="Βρεφικές τροφές">Βρεφικές τροφές</option>
+    </optgroup>
+
+    <optgroup label="Γ">
+        <option value="Γάλα">Γάλα</option>
+        <option value="Γιαούρτια">Γιαούρτια</option>
+        <option value="Γλυκά αλλείματα">Γλυκά αλλείματα</option>
+        <option value="Γλυκά/Κέικ">Γλυκά/Κέικ</option>
+        <option value="Γλυκά/Σοκολάτες">Γλυκά/Σοκολάτες</option>
+    </optgroup>
+    
+    <optgroup label="Δ">
+        <option value="Δημητριακά">Δημητριακά</option>
+    </optgroup>
+
+    <optgroup label="Ε">
+        <option value="Είδη γενικού καθαρισμού">Είδη γενικού καθαρισμού</option>
+        <option value="Ειδική διατροφή">Ειδική διατροφή</option>
+        <option value="Είδη Ζαχαροπλαστικής">Είδη Ζαχαροπλαστικής</option>
+        <option value="Είδη κουζίνας - Μπάνιου">Είδη κουζίνας - Μπάνιου</option>
+        <option value="Εμφιαλωμένα νερά">Εμφιαλωμένα νερά</option>
+        <option value="Εντομoκτόνα - Εντομοαπωθητικά">Εντομoκτόνα - Εντομοαπωθητικά</option>
+        <option value="Επίδεσμοι">Επίδεσμοι</option>
+        <option value="Επιδόρπια">Επιδόρπια</option>
+        <option value="Έτοιμα γεύματα/Σαλάτες">Έτοιμα γεύματα/Σαλάτες</option>
+        <option value="Έτοιμα γεύματα/Σούπες">Έτοιμα γεύματα/Σούπες</option>
+    </optgroup>
+
+    <optgroup label="Ζ">
+        <option value="Ζάχαρη - Υποκατάστατα ζάχαρης">Ζάχαρη - Υποκατάστατα ζάχαρης</option>
+        <option value="Ζυμαρικά">Ζυμαρικά</option>
+    </optgroup>
+
+    <optgroup label="Κ">
+        <option value="Καραμέλες - Τσίχλες">Καραμέλες - Τσίχλες</option>
+        <option value="Καφέδες">Καφέδες</option>
+        <option value="Κατεψυγμένα/Κρεατικά">Κατεψυγμένα/Κρεατικά"</option>
+        <option value="Κατεψυγμένα/Λαχανικά">Κατεψυγμένα/Λαχανικά</option>
+        <option value="Κατεψυγμένα/Πατάτες">Κατεψυγμένα/Πατάτες</option>
+        <option value="Κατεψυγμένα/Πίτες">Κατεψυγμένα/Πίτες</option>
+        <option value="Κατεψυγμένα/Πίτσες">Κατεψυγμένα/Πίτσες</option>
+        <option value="Κατεψυγμένα/Φύλλα - Βάσεις">Κατεψυγμένα/Φύλλα - Βάσεις</option>
+        <option value="Κατεψυγμένα/Ψάρια">Κατεψυγμένα/Ψάρια</option>
+        <option value="Κονσέρβες">Κονσέρβες</option>
+        <option value="Κρασιά">Κρασιά</option>
+        <option value="Κρέμες γάλακτος">Κρέμες γάλακτος</option>
+        <option value="Κρέμες ενυδάτωσης">Κρέμες ενυδάτωσης</option>
+        <option value="Κρέμα ημέρας">Κρέμα ημέρας</option>
+        <option value="Κρέμες μαλλιών">Κρέμες μαλλιών</option>
+        <option value="Κρεμοσάπουνα - Σαπούνι">Κρεμοσάπουνα - Σαπούνι</option>
+        <option value="Κρέμα Σώματος">Κρέμα Σώματος</option>
+        <option value="Κύβοι">Κύβοι</option>
+    </optgroup>
+
+    <optgroup label="Λ">
+        <option value="Λάδι">Λάδι</option>
+        <option value="Λοιπά προϊόντα">Λοιπά προϊόντα</option>
+    </optgroup>
+
+    <optgroup label="Μ">
+        <option value="Μάσκες Προσώπου">Μάσκες Προσώπου</option>
+        <option value="Μπαχαρικά">Μπαχαρικά</option>
+        <option value="Μπύρες">Μπύρες</option>
+        <option value="Μωρομάντηλα">Μωρομάντηλα</option>
+    </optgroup>
+
+    <optgroup label="Ξ">
+        <option value="Ξύδι">Ξύδι</option>
+        <option value="Ξυριστικά - Αποτριχωτικά">Ξυριστικά - Αποτριχωτικά</option>
+    </optgroup>
+
+    <optgroup label="Ο">
+        <option value="Οδοντόβουρτσες">Οδοντόβουρτσες</option>
+        <option value="Όσπρια">Όσπρια</option>
+    </optgroup>
+
+    <optgroup label="Π">
+        <option value="Παγωτά">Παγωτά</option>
+        <option value="Πάνες">Πάνες</option>
+        <option value="Πάνες ενηλίκων">Πάνες ενηλίκων</option>
+        <option value="Πελτές τομάτας">Πελτές τομάτας</option>
+        <option value="Περιποίηση προσώπου">Περιποίηση προσώπου</option>
+        <option value="Περιποιήση σώματος">Περιποιήση σώματος</option>
+        <option value="Ποτά">Ποτά</option>
+        <option value="Πουρές">Πουρές</option>
+        <option value="Προϊόντα μαλλιών">Προϊόντα μαλλιών</option>
+        <option value="Προφυλακτικά">Προφυλακτικά</option>
+    </optgroup>
+
+    <optgroup label="Ρ">
+        <option value="Ροφήματα">Ροφήματα</option>
+        <option value="Ρύζι">Ρύζι</option>
+    </optgroup>
+
+    <optgroup label="Σ">
+        <option value="Σάλτσες - Dressings">Σάλτσες - Dressings</option>
+        <option value="Σαμπουάν - Αφρόλουτρα">Σαμπουάν - Αφρόλουτρα</option>
+        <option value="Σερβιέτες">Σερβιέτες</option>
+        <option value="Σνάκς/Αρτοσκευάσματα">Σνάκς/Αρτοσκευάσματα</option>
+        <option value="Σνάκς/Γαριδάκια">Σνάκς/Γαριδάκια</option>
+        <option value="Σνάκς/Κρουασάν">Σνάκς/Κρουασάν</option>
+        <option value="Σνάκς/Μπάρες - Ράβδοι">Σνάκς/Μπάρες - Ράβδοι</option>
+        <option value="Σνάκς/Μπισκότα">Σνάκς/Μπισκότα</option>
+        <option value="Σνάκς/Πατατάκια">Σνάκς/Πατατάκια</option>
+        <option value="Σνάκς/Ποπ κορν">Σνάκς/Ποπ κορν</option>
+        <option value="Στοματικά διαλύματα">Στοματικά διαλύματα</option>
+        <option value="Στοματική υγιεινή">Στοματική υγιεινή</option> 
+    </optgroup>
+
+    <optgroup label="Τ">
+        <option value="Τυποποιημένα κρεατικά">Τυποποιημένα κρεατικά</option>
+        <option value="Τυριά">Τυριά</option>
+    </optgroup>
+
+    <optgroup label="Υ">
+        <option value="Υγρομάντηλα">Υγρομάντηλα</option>
+    </optgroup>
+
+    <optgroup label="Φ">
+        <option value="Φρέσκα/Αρνί">Φρέσκα/Αρνί</option>
+        <option value="Φρέσκα/Αφρόψαρο">Φρέσκα/Αφρόψαρο</option>
+        <option value="Φρέσκα/Κατσίκι">Φρέσκα/Κατσίκι</option>
+        <option value="Φρέσκα/Κοτόπουλο">Φρέσκα/Κοτόπουλο</option>
+        <option value="Φρέσκα/Λαχανικά">Φρέσκα/Λαχανικά</option>
+        <option value="Φρέσκα/Μοσχάρι">"Φρέσκα/Μοσχάρι</option>
+        <option value="Φούρνος/Παξιμάδια">Φούρνος/Παξιμάδια</option>
+        <option value="Φούρνος/Τσουρέκια">Φούρνος/Τσουρέκια</option>
+        <option value="Φρέσκα/Φρούτα">Φρέσκα/Φρούτα</option>
+        <option value="Φούρνος/Φρυγανίες">Φούρνος/Φρυγανίες</option>
+        <option value="Φρέσκα/Χοιρινό">Φρέσκα/Χοιρινό</option>
+        <option value="Φρέσκα/Ψάρι">Φρέσκα/Ψάρι</option>
+        <option value="Φούρνος/Ψωμί">Φούρνος/Ψωμί</option>
+    </optgroup>
+
+    <optgroup label="Χ">
+        <option value="Χαρτικά">Χαρτικά</option> 
+        <option value="Χυμοί">Χυμοί</option>
+        <option value="Χυμός τομάτας">Χυμός τομάτας</option>  
+    </optgroup>
+
+    <optgroup label="P">
+        <option value="Pet shop/Τροφή γάτας">Pet shop/Τροφή γάτας</option>
+        <option value="Pet shop/Τροφή σκύλου">Pet shop/Τροφή σκύλου</option>
+    </optgroup>   
+
+</select>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Όνομα Προϊόντος</th>
+                <th>Κατηγορία</th>
+                <th>Υποκατηγορία</th>
+                <th>Τιμή</th>
+                <th>Επιλογή</th>
+            </tr>
+        </thead>
+        <tbody id="product-list">
+            <!-- Εδώ θα εμφανιστούν τα προϊόντα από τη βάση δεδομένων -->
+        </tbody>
+    </table>
+
+    <div id="pagination">
+        <button id="prev"><</button>
+        <button id="next">></button>
+    </div>
+
+</main>
+
+    <script src="../Javascript/get_products.js"></script>
+    <script src="../Javascript/add_product.js"></script>
+    <script src="../Javascript/showMessage.js"></script>
+</body>
+</html>

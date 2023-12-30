@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Στοιχεία Διαχειριστή</title>
+    <link rel="stylesheet" href="../CSS/admin_index_page.css">
+    <link rel="stylesheet" href="../CSS/admin_profile_settings.css">
+    <link rel="stylesheet" href="../CSS/showbox_admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <header>
+        <div class="admin-profile">
+              </div>
+
+        <nav>
+            <ul>
+                <li><a href="javascript:void(0);" onclick="goBack()">Πίσω</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1>Στοιχεία Διαχειριστή</h1>
+    
+    
+    <div class="container">
+
+        <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+        <div class="image-container">
+            <img src="../../upload_img/Admin/User-avatar.svg.png" id="adminPhoto" alt="Background Image">
+            <div class="overlay">
+                <i class="fas fa-plus" title="Αλλαγή Φωτογραφίας"></i>
+            </div>
+        </div>
+
+        <div id="showbox" ></div>
+    <div class = "Info">
+        <h2 class ="Username-H2">Όνομα Διαχειριστή:</h2>
+        <p id="adminUsername">Όνομα Διαχειριστή</p>
+    </div>
+    <div class = "Info">
+        <h2 class="Email-H2">Email:</h2>
+        <p id="adminEmail">admin@example.com</p>
+    </div>
+
+    <button id="changePasswordButton">Αλλαγή Κωδικού</button>
+
+    <div id="showbox" ></div>
+    <div>
+        <form id="changePasswordForm" class="formPass">
+            <label for="oldPassword">Παλιός Κωδικός:</label>
+            <input id="oldPassword" type="password" class="input" data-type="password" placeholder="Old Password">
+            <span class="icon"><i id="eye-old-password" class="fas fa-eye"></i></span>
+            <br>
+            <label for="newPassword">Νέος Κωδικός:</label>
+            <input id="newPassword" type="password" class="input" data-type="password" placeholder="New Password">
+            <span class="icon"><i id="eye-new-password" class="fas fa-eye"></i></span>
+            <br>
+            <label for="RepeatnewPassword">Επανέλαβε τον νεο κωδικό:</label>
+            <input id="RepeatNewPassword" type="password" class="input" data-type="password" placeholder="Repeat New Password">
+            <span class="icon"><i id="eye-repeatNew-password" class="fas fa-eye"></i></span>
+            <br>
+            <input type="submit" value="Αποθήκευση">
+        </form>
+    </div>
+
+    
+</div>
+
+    <script src="../Javascript/upload_img.js"></script>
+    <script src="../Javascript/showPassword.js"></script>
+    <script src="../Javascript/admin_profile_settings.js"></script>
+    <script src="../Javascript/goBackPage.js"></script>
+    <script src="../Javascript/showMessage.js"></script>
+</body>
+</html>

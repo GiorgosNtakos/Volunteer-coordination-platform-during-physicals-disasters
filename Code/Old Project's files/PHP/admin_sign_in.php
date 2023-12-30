@@ -1,0 +1,74 @@
+<?php
+// Προσθήκη στην αρχή του αρχείου
+if(empty($_SERVER["HTTPS"]) || $_SERVER["HTTPS"] !== "on"){
+    header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+    exit();
+}
+
+header('Access-Control-Allow-Origin: http://127.0.0.1:5500');
+header('Content-Type: application/json');
+require '../Global/db_connect.php';
+$conn->set_charset("utf8");
+
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    $admin_name = isset($_GET["admin_name"]) ? mysqli_real_escape_string($conn, $_GET["admin_name"]) : null;
+    $password = isset($_GET["password"]) ? mysqli_real_escape_string($conn,$_GET["password"]) : null;
+
+
+    if($admin_name !== null && $password !== null){
+    $sql = "SELECT * FROM admins WHERE admin_name = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $admin_name);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        if (password_verify($password, $row["password"])) {
+            session_start();
+            $_SESSION['admin_auth'] = array(
+                'admin_id' => $row['id'],
+                'admin_name' => $admin_name,
+                'email' => $row['email'],  // Προσθήκη πεδίου email από τη βάση δεδομένων
+                'image_path' => $row['img_path'],
+                'login_time' => time()  // Προσθήκη timestamp
+            );
+
+            http_response_code(200);
+            $response = array("status" => "success", "message" => "Επιτυχής Σύνδεση!");
+            
+
+        } else {
+
+            http_response_code(401);
+            $response = array("status" => "password_401", "message" => "Λάθος κωδικός πρόσβασης. Παρακαλώ δοκιμάστε ξανά.");
+
+
+        }
+    } else if($result->num_rows === 0) {
+
+           http_response_code(401);
+           $response = array("status" => "username_401", "message" => "Λάθος username χρήστη. Παρακαλώ δοκιμάστε ξανά.");
+
+     } else{
+
+            http_response_code(404); // Επιστροφή κωδικού σφάλματος 404
+            $response = array("status" => "not_found_404", "message" => "Ο χρηστης που ζητήθηκε δεν βρέθηκε: " . $conn->error);
+
+     }
+    } else{
+
+        http_response_code(400); // Επιστροφή κωδικού σφάλματος 400
+        $response = array("status" => "missing_400", "message" => "Λείπουν παράμετροι από το αίτημα GET.");
+
+    }
+} else{
+
+    http_response_code(405); // Επιστροφή κωδικού σφάλματος 400
+    $response = array("status" => "wrong_method_405", "message" => "Μη έγκυρη αίτηση.". $conn->error);
+
+}
+
+echo json_encode($response);
+$conn->close();
+?>
