@@ -1,9 +1,6 @@
+// ! ΝΑ ΔΩ ΓΙΑΤΙ ΟΤΑΝ ΜΕ ΒΑΣΗ ΤΑ ΣΤΟΙΧΕΙΑ ΤΗΣ ΔΙΈΥΘΥΝΣΗΣ ΜΟΥ ΠΕΤΑΕΙ 2 τιμες για τα LAT και LON
 "use strict";
 var formData;
-
-// * TA DO ME THN SEIRA POY LENE OI PARENTHESEIS
-// TODO(MANDOTARY) Να μονταρω το γαμιδι το node.js για το module (μου εχει βγαλει την ψυχη)
-
 document.addEventListener("DOMContentLoaded", function () {
   document
     .getElementById("rescuer-form")
@@ -39,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
         showMessage(
           "error-message",
           "Παρακαλώ εισάγετε έγκυρο Όνομα και Επίθετο με ελληνικούς μόνο χαρακτήρες.(πχ Νίκος Κούκος)",
-          $("#full_name")
+          "#full_name"
         );
         return;
       }
@@ -48,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
         showMessage(
           "error-message",
           "Το κινητό τηλέφωνο πρεπει να ακολουθεί τα στανταρ του ελληνικου προτυπου τηλεφωνίας(πχ. +30 69********).",
-          $("#phone")
+          "#phone"
         );
         return;
       }
@@ -56,11 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
       //Street
 
       if (street.trim() === "") {
-        showMessage(
-          "error-message",
-          "Συμπληρώστε το πεδίο Οδός.",
-          $("#street")
-        );
+        showMessage("error-message", "Συμπληρώστε το πεδίο Οδός.", "#street");
         return;
       }
 
@@ -68,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
         showMessage(
           "error-message",
           "Η Οδός πρέπει να περιέχει μόνο ελληνικούς χαρακτήρες.",
-          $("#street")
+          "#street"
         );
         return;
       }
@@ -77,13 +70,13 @@ document.addEventListener("DOMContentLoaded", function () {
         showMessage(
           "error-message",
           "Συμπληρώστε το πεδίο Αριθμός Οδού.",
-          $("#number")
+          "#number"
         );
         return;
       }
 
       if (!/^\d+$/.test(number)) {
-        showMessage("error-message", "Λάθος αριθμός διεύθυνσης.", $("#number"));
+        showMessage("error-message", "Λάθος αριθμός διεύθυνσης.", "#number");
         // Επαναφέρουμε την τιμή στην προκαθορισμένη μορφή
         number.value = "";
       }
@@ -153,7 +146,7 @@ function createRescuer(full_name, phone, street, number, town) {
         dataType: "json",
         success: function (response) {
           if (response.status === "created") {
-            showMessage("success-message", response.message, $("#full_name"));
+            showMessage("success-message", response.message, "#full_name");
             // Εδώ μπορείτε να προσθέσετε άλλες ενέργειες μετά την επιτυχή δημιουργία
           } else {
             showMessage(
@@ -168,39 +161,19 @@ function createRescuer(full_name, phone, street, number, town) {
 
           if (errorResponse.status === "need_connection") {
             window.location.href = "admin_login.html";
-            showMessage(
-              "error-message",
-              errorResponse.message,
-              $("#full_name")
-            );
+            showMessage("error-message", errorResponse.message, "#full_name");
           } else if (errorResponse.status === "server_error") {
-            showMessage(
-              "error-message",
-              errorResponse.message,
-              $("#full_name")
-            );
+            showMessage("error-message", errorResponse.message, "#full_name");
           } else if (errorResponse.status === "exists_phone") {
             showMessage("error-message", errorResponse.message, $("#phone"));
           } else if (errorResponse.status === "missing_400") {
             console.log("Form Data: ", formData);
 
-            showMessage(
-              "error-message",
-              errorResponse.message,
-              $("#full_name")
-            );
+            showMessage("error-message", errorResponse.message, "#full_name");
           } else if (errorResponse.status === "wrong_method_405") {
-            showMessage(
-              "error-message",
-              errorResponse.message,
-              $("#full_name")
-            );
+            showMessage("error-message", errorResponse.message, "#full_name");
           } else {
-            showMessage(
-              "error-message",
-              errorResponse.message,
-              $("#full_name")
-            );
+            showMessage("error-message", errorResponse.message, "#full_name");
           }
         },
       });
@@ -209,7 +182,7 @@ function createRescuer(full_name, phone, street, number, town) {
       showMessage(
         "error-message",
         "Σφάλμα κατά την ανάκτηση των συντεταγμένων: " + error.message,
-        $("#full_name")
+        "#full_name"
       );
     });
 }
@@ -232,7 +205,7 @@ function getCoordinatesFromAddress(address) {
         showMessage(
           "error-message",
           "Δεν βρέθηκαν συντεταγμένες για τη διεύθυνση",
-          $("#street")
+          "#street"
         );
         throw new Error("Δεν βρέθηκαν συντεταγμένες για τη διεύθυνση");
       }

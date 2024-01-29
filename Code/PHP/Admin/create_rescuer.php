@@ -1,5 +1,6 @@
 <?php
 // ! Δεν το ενεργοποιω ακομα για να μπορω να δουλευω το live server
+// ! Επισης πρεπει να βρουμε μια λυση για duplicates usernames,phones,ονομ/νυμα,emails(κυριως username, ονομ/νυμα).Να λαβουμε και υποψι αν χρειαστει λυση με το τυπο του καθε χρήστη
 /*
 if(empty($_SERVER["HTTPS"]) || $_SERVER["HTTPS"] !== "on"){
     header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
@@ -36,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $location_lat = $_POST['location_lat'];
         $location_lon = $_POST['location_lon'];
 
-        $stmt = $conn->prepare("SELECT * FROM rescuers WHERE username = ?");
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
         $checkUsernameResult = $stmt->get_result();
@@ -50,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $counter++;
                 $newUsername = $username . "#" . $counter;
-                $stmt = $conn->prepare("SELECT * FROM rescuers WHERE username = ?");
+                $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
                 $stmt->bind_param("s", $newUsername);
                 $stmt->execute();
                 $checkUsernameResult = $stmt->get_result();
@@ -60,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt -> close();
         }
 
-        $checkPhoneQuery = "SELECT * FROM rescuers WHERE phone= ?";
+        $checkPhoneQuery = "SELECT * FROM users WHERE phone= ?";
         $stmt_check_phone = $conn->prepare($checkPhoneQuery);
         $stmt_check_phone->bind_param("s", $phone );
         $stmt_check_phone->execute();
@@ -74,16 +75,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $uuid = Uuid::uuid4();
         $rescuer_id = mysqli_real_escape_string($conn,$uuid->toString());
+        $type = "Rescuer";
         
             // Προετοιμασμένη δήλωση για την εισαγωγή νέου διασωστή
-            $query = $conn->prepare("INSERT INTO rescuers (id, username, password, full_name, phone, street, number, town, location_lat, location_lon, email) 
-                                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $query = $conn->prepare("INSERT INTO users (id, username, password, full_name, phone, street, number, town, type, location_lat, location_lon, email) 
+                                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
             // Κρυπτογράφηση του κωδικού πρόσβασης
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
             // Σύνδεση των παραμέτρων με τις τιμές
-            $query->bind_param("ssssssisdds", $rescuer_id, $username, $hashed_password, $full_name, $phone, $street, $number, $town, $location_lat, $location_lon, $email);
+            $query->bind_param("ssssssissdds", $rescuer_id, $username, $hashed_password, $full_name, $phone, $street, $number, $town, $type, $location_lat, $location_lon, $email);
 
             // Εκτέλεση της δήλωσης
             $result = $query->execute();

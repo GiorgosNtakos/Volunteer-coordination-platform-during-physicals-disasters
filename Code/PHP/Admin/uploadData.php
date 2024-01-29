@@ -58,15 +58,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $detailsString = '';
 
         foreach ($detailsArray as $detail) {
-            if($detail['detail_name'] ==="" || $detail['detail_value'] ===""){
-                $detailsString = "";
-            } else {
-            $detailsString .= $detail['detail_name'] . ' : ' . $detail['detail_value'] . "\n";
+            // Make sure $detail is an array and has 'detail_name' and 'detail_value'
+            if (is_array($detail) && isset($detail['detail_name']) && isset($detail['detail_value']) && !empty($detail['detail_name']) && !empty($detail['detail_value'])) {
+                $detailName = $detail['detail_name'];
+                $detailValue = $detail['detail_value'];
+                $detailsString .= $detailName . ': ' . $detailValue;
+                if (next($detailsArray)) {
+                    $detailsString .= ",\n ";
+                }
             }
         }
-
-        // Αφαιρούμε το τελευταίο ', ' από το τέλος του string
-        $detailsString = rtrim($detailsString, ', ');
+    
 
         // Αντικαθιστούμε τα δεδομένα των details με το νέο string
         $item['details'] = $detailsString;

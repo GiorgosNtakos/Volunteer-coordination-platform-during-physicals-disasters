@@ -1,0 +1,214 @@
+/*! Φτιαξιμο στυλ select(Προσθηκη και Uplaod)(δες και https://www.w3schools.com/howto/howto_custom_select.asp)*/
+
+#add-form-container,
+#load-data-form-container,
+#load-quantities-form-container,
+#options-form-container {
+  width: 325px;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #430063; /* Θολό φόντο με χρώμα */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Σκιά */
+  z-index: 2;
+}
+
+#check-categories-form-container,
+#deleteCategory-form-container {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #430063; /* Θολό φόντο με χρώμα */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Σκιά */
+  z-index: 2;
+}
+
+.categories-container {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 10px;
+  margin: 20px 0;
+  align-items: start;
+}
+
+.category-checkbox {
+  margin: 0;
+  padding: 0;
+  /* ...other styles... */
+}
+
+.category-checkbox + label {
+  margin-left: 5px;
+  padding-right: 5px;
+  color: gold; /* ή οποιοδήποτε άλλο χρώμα ταιριάζει με το φόντο σας */
+  font-weight: bold;
+}
+
+.category-label {
+  display: block; /* Make the label take up the full width of its container */
+  max-width: 150px; /* Adjust this value as needed */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.category-item {
+  display: flex;
+  justify-content: start; /* Aligns items to the start of the flex container */
+  align-items: center; /* Vertically centers the items in the container */
+  min-height: 40px; /* You can set a minimum height to ensure that items with less content don't collapse and misalign */
+}
+
+#add-category-form,
+#add-item-form,
+#uploadDataForm,
+#check-categories-form-container,
+#deleteCategory-form-container,
+#uploadQuantitiesForm,
+#options-item-form {
+  text-align: center;
+}
+
+#add-category-form label,
+#add-item-form label,
+#uploadDataForm label[for="jsonUrl"],
+#uploadDataForm label[for="loadType"],
+#check-label-title,
+#deleteCategory-label-title,
+#uploadQuantitiesForm label[for="loadTypeQuantities"],
+#options-item-form label {
+  display: block;
+  font-weight: bold;
+  color: gold; /* Χρυσό χρώμα για τις ετικέτες */
+}
+
+#add-detail,
+#add-category-form input,
+#add-item-form input[type="text"],
+#uploadDataForm select,
+#add-item-form select,
+#uploadDataForm input[type="url"],
+#uploadQuantitiesForm select,
+#options-item-form input[type="text"],
+#options-item-form input[type="number"],
+#options-item-form textarea,
+#options-item-form select {
+  width: 80%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+#add-detail {
+  background-color: gold;
+}
+
+#uploadDataForm input[type="url"] {
+  color: dodgerblue;
+}
+
+#fileSection input[type="file"],
+#fileSectionQuantities input[type="file"] {
+  display: none;
+}
+
+#fileSection label,
+#fileSectionQuantities label {
+  display: block;
+  font-weight: bold;
+  background-color: #60008d;
+  border: 1px solid #ccc;
+  color: gold;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#fileSection label::before,
+#fileSectionQuantities label::before {
+  content: "\f07c"; /* Κώδικας για το εικονίδιο φάκελου (Font Awesome) */
+  font-family: "Font Awesome 5 Free";
+  margin-right: 10px;
+  color: gold;
+}
+
+#fileSection label::after,
+#fileSectionQuantities label::after {
+  content: "";
+  display: none;
+}
+
+#fileSection label:hover,
+#fileSectionQuantities label:hover {
+  background-color: #5a197d; /* Αλλάξτε το χρώμα όπως επιθυμείτε */
+}
+
+/* Στυλ για το όνομα του αρχείου που έχει επιλεγεί */
+#fileSection .filename,
+#fileSectionQuantities .filename {
+  font-style: italic;
+  color: gold;
+}
+
+/* Στυλ για να τονίσεις ότι δεν έχει επιλεγεί αρχείο */
+#fileSection .no-file,
+#fileSectionQuantities .no-file {
+  color: gold;
+}
+
+#add-category-form button,
+#add-item-form button[type="submit"],
+#uploadDataForm input[type="submit"],
+#submitCategories,
+#submitDeleteCategories,
+#uploadQuantitiesForm input[type="submit"],
+#options-item-form button[type="submit"] {
+  background-color: gold; /* Μωβ χρώμα για το κουμπί */
+  color: black;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+#add-category-form button:hover,
+#add-item-form button:hover,
+#uploadDataForm input[type="submit"]:hover,
+#submitCategories:hover,
+#submitDeleteCategories:hover,
+#uploadQuantitiesForm input[type="submit"]:hover,
+#options-item-form button[type="submit"]:hover {
+  transition: background-color 0.4s;
+  background-color: goldenrod;
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Χρώμα για το θολό φόντο με 50% διαφάνεια */
+  z-index: 1; /* Τοποθετούμε το θολό φόντο πίσω από τα άλλα στοιχεία */
+  display: none; /* Αρχικά αόρατο */
+}

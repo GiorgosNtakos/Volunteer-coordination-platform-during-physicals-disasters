@@ -6,8 +6,31 @@
 //? Solution 2:Επιβεβαίωση ότι το αίτημα προς τον server ολοκληρώνεται προτού ξεκινήσετε τον επόμενο κύκλο του refresh : χρηση συναρτησης complete στο αιτημα ajax
 
 $(document).ready(function () {
-  loadCategories("checkbox", "#categoriesList");
-  categoriesStatus();
+  const showCheckCategoriesFormButton = document.getElementById(
+    "show-check-categories-form"
+  );
+
+  const CheckCategoriesFormContainer = document.getElementById(
+    "check-categories-form-container"
+  );
+
+  showCheckCategoriesFormButton.addEventListener("click", function () {
+    // Αλλάζετε το φόντο του overlay σε θολό χρώμα και το εμφανίζετε όταν εμφανίζεται η φόρμα
+    const overlay = document.getElementById("overlay");
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)"; // Προσαρμόστε το χρώμα ανάλογα με τις ανάγκες σας
+    overlay.style.display = "block";
+    CheckCategoriesFormContainer.style.display = "block";
+
+    loadCategories("checkbox-activate", "#categoriesList", false);
+    categoriesStatus();
+  });
+
+  overlay.addEventListener("click", function () {
+    document.getElementById("categoriesList").innerHTML = "";
+    // Κλείστε τη φόρμα και το overlay όταν γίνει κλικ στο overlay
+    CheckCategoriesFormContainer.style.display = "none";
+    overlay.style.display = "none";
+  });
 
   // Προσθήκη event listener στο κουμπί με id "submitCategories"
   $("#submitCategories").on("click", function () {

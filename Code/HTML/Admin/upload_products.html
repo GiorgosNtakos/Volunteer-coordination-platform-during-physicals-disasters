@@ -7,8 +7,21 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link rel="stylesheet" href="../../CSS/Global/Header.css" />
+    <link rel="stylesheet" href="../../CSS/Admin/forms_containers_style.css" />
+    <link rel="stylesheet" href="../../CSS/Admin/toolbar_style.css" />
+    <link rel="stylesheet" href="../../CSS/Global/showbox.css" />
     <link rel="stylesheet" href="../../CSS/Admin/items_page.css" />
+    <link rel="stylesheet" href="../../CSS/Admin/toolbars_buttons.css" />
+    <link rel="stylesheet" href="../../CSS/Admin/tabs-style.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <!-- <link rel="stylesheet" href="../CSS/upload_products.css" />
     <link rel="stylesheet" href="../CSS/admin_index_page.css" />
     <link rel="stylesheet" href="../CSS/showbox_admin.css" /> -->
@@ -18,85 +31,268 @@
     <div id="overlay"></div>
     <div id="Header"></div>
 
-    <main>
-      <div>
-        <button id="show-add-item-form">Προσθήκη Νέου Αντικειμένου</button>
-      </div>
+    <div class="container">
+      <div class="toolbar">
+        <div id="options-form-container">
+          <form id="options-item-form">
+            <label for="name">Όνομα Είδους:</label>
+            <input type="text" id="name" name="name" required /><br /><br />
 
-      <div>
-        <button id="delete-all-button">Διαγραφή Όλων</button>
-      </div>
+            <label for="category">Κατηγορία:</label>
+            <select id="category" name="category">
+              <!-- Populate this dropdown with categories obtained from PHP --></select
+            ><br /><br />
 
-      <form
-        id="uploadDataForm"
-        action="/submit"
-        method="post"
-        enctype="multipart/form-data"
-      >
-        <label for="loadType">Επιλογή Τύπου Φόρτωσης:</label>
-        <select name="loadType" id="loadType">
-          <option value="url">Φόρτωση από URL</option>
-          <option value="file">Μεταφόρτωση Αρχείου JSON</option>
-        </select>
-        <br /><br />
+            <label for="quantity">Ποσότητα:</label>
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              required
+            /><br /><br />
 
-        <div id="urlSection">
-          <label for="jsonUrl">URL του JSON:</label>
-          <input
-            type="url"
-            name="jsonUrl"
-            id="jsonUrl"
-            value="http://usidas.ceid.upatras.gr/web/2023/export.php"
-            readonly
-          />
-          <br /><br />
+            <label for="details">λεπτομέρειας:</label>
+            <textarea id="details" name="details" rows="4" cols="50"></textarea
+            ><br /><br />
+
+            <button type="submit" formnovalidate>Υποβολή Αλλαγών</button>
+          </form>
         </div>
 
-        <div id="fileSection" style="display: none">
-          <label for="jsonFile">Επιλογή Αρχείου JSON:</label>
-          <input type="file" name="jsonFile" id="jsonFile" />
-          <br /><br />
+        <div>
+          <button id="show-add-form">Προσθήκη Αντικειμένου/Κατηγορίας</button>
         </div>
 
-        <input type="submit" value="Υποβολή" />
-      </form>
+        <!-- Κρύψτε αρχικά τη φόρμα με CSS -->
+        <div id="add-form-container">
+          <div class="tab">
+            <button class="tablinks" id="AddItemTab">
+              Προσθήκη Νέου Αντικειμένου
+            </button>
+            <button class="tablinks" id="AddCategoryTab">
+              Προσθήκη Κατηγορίας
+            </button>
+          </div>
 
-      <form id="categoriesListForm">
-        <!-- Δυναμικά γεμισμένη λίστα με τις κατηγορίες -->
-        <label>Επιλέξτε κατηγορίες:</label>
-        <div id="categoriesList"></div>
+          <form id="add-item-form" class="tabcontent">
+            <label for="item-name">Όνομα Είδους:</label>
+            <input
+              type="text"
+              id="item-name"
+              name="item-name"
+              placeholder="Όνομα"
+            /><br />
 
-        <!-- Κουμπί για επικύρωση επιλογών -->
-        <button type="button" id="submitCategories">Επικύρωση Επιλογών</button>
-      </form>
+            <label for="item_category">Κατηγορία:</label>
+            <select id="item_category" name="item_category"></select
+            ><br />
 
-      <!-- Φόρμα για Κατηγορίες -->
-      <form id="categoriesForm">
-        <label for="category_name">Όνομα Κατηγορίας:</label>
-        <input type="text" id="category_name" name="category_name" />
-        <button type="submit">Προσθήκη Κατηγορίας</button>
-      </form>
+            <!-- Νέα πεδία για λεπτομέρειες -->
+            <div id="item-details-container">
+              <!-- Πεδία λεπτομέρειας εισάγονται εδώ -->
+            </div>
+            <button type="button" id="add-detail">
+              Προσθήκη Περισσότερων Λεπτομερειών</button
+            ><br />
 
-      <!-- Κρύψτε αρχικά τη φόρμα με CSS -->
-      <div id="add-item-form-container">
-        <form id="add-item-form">
-          <label for="item-name">Όνομα Είδους:</label>
-          <input type="text" id="item-name" name="item-name" /><br />
+            <button type="submit">Προσθήκη Είδους</button>
+          </form>
 
-          <label for="item_category">Κατηγορία:</label>
-          <select id="item_category" name="item_category"></select>
+          <!-- Φόρμα για Κατηγορίες -->
+          <form id="add-category-form" class="tabcontent">
+            <label for="category_name">Όνομα Κατηγορίας:</label>
+            <input
+              type="text"
+              id="category_name"
+              name="category_name"
+              placeholder="Όνομα Κατηγορίας"
+            />
+            <button type="submit">Προσθήκη Κατηγορίας</button>
+          </form>
+        </div>
 
-          <button type="submit">Προσθήκη Είδους</button>
-        </form>
+        <div>
+          <button id="delete-all-button">Διαγραφή Όλων των Αντικειμένων</button>
+        </div>
+
+        <div>
+          <button id="show-delete-categories-form">Διαγραφή Κατηγορίας</button>
+        </div>
+
+        <div id="deleteCategory-form-container">
+          <form id="deleteCategory">
+            <label id="deleteCategory-label-title"
+              >Επέλεξε την/τις κατηγορία/ες προς Διαγραφή <br />
+              (Μαζί με τις κατηγορίες θα διαγραφούν και τα αντικειμενά
+              τους)</label
+            >
+            <div id="deleteCategoriesList" class="categories-container"></div>
+
+            <!-- Κουμπί για επικύρωση επιλογών -->
+            <button type="sumbit" id="submitDeleteCategories">Διαγραφή</button>
+          </form>
+        </div>
+
+        <div>
+          <button id="show-check-categories-form">
+            Ενεργοποίηση/Απενεργοποίηση Κατηγοριών
+          </button>
+        </div>
+
+        <div id="check-categories-form-container">
+          <form id="categoriesListForm">
+            <!-- Δυναμικά γεμισμένη λίστα με τις κατηγορίες -->
+            <label id="check-label-title">Επιλέξτε κατηγορίες</label>
+            <div id="categoriesList" class="categories-container"></div>
+
+            <!-- Κουμπί για επικύρωση επιλογών -->
+            <button type="sumbit" id="submitCategories">
+              Επικύρωση Επιλογών
+            </button>
+          </form>
+        </div>
+
+        <div>
+          <button id="show-load-data-form">Φόρτωση Δεδομένων</button>
+        </div>
+
+        <div id="load-data-form-container">
+          <form
+            id="uploadDataForm"
+            action="/submit"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <label for="loadType">Επιλογή Τύπου Φόρτωσης:</label>
+            <select name="loadType" id="loadType">
+              <option value="url">Φόρτωση από URL</option>
+              <option value="file">Μεταφόρτωση Αρχείου JSON</option>
+            </select>
+            <br /><br />
+
+            <div id="urlSection">
+              <label for="jsonUrl">URL του JSON:</label>
+              <input
+                type="url"
+                name="jsonUrl"
+                id="jsonUrl"
+                value="http://usidas.ceid.upatras.gr/web/2023/export.php"
+                readonly
+              />
+              <br /><br />
+            </div>
+
+            <div id="fileSection" style="display: none">
+              <label for="jsonFile"
+                >Επιλογή Αρχείου JSON:<span class="filename no-file"
+                  >Δεν επιλέχθηκε κανένα αρχείο.</span
+                ></label
+              >
+              <input type="file" name="jsonFile" id="jsonFile" />
+              <br /><br />
+            </div>
+
+            <input type="submit" value="Υποβολή" />
+          </form>
+        </div>
+
+        <div>
+          <button id="show-load-quantities-form">Φόρτωση Ποσοτήτων</button>
+        </div>
+
+        <div id="load-quantities-form-container">
+          <form
+            id="uploadQuantitiesForm"
+            action="/submit"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <label for="loadTypeQuantities">Επιλογή Τύπου Φόρτωσης:</label>
+            <select name="loadTypeQuantities" id="loadTypeQuantities">
+              <option value="rng">
+                Φόρτωση από Τυχαία Γεννήτρια Αναπαραγωγής
+              </option>
+              <option value="file">Μεταφόρτωση Αρχείου JSON</option>
+            </select>
+            <br /><br />
+
+            <div id="fileSectionQuantities" style="display: none">
+              <label for="jsonFileQuantities"
+                >Επιλογή Αρχείου JSON:<span class="filename no-file"
+                  >Δεν επιλέχθηκε κανένα αρχείο.</span
+                ></label
+              >
+              <input
+                type="file"
+                name="jsonFileQuantities"
+                id="jsonFileQuantities"
+              />
+              <br /><br />
+            </div>
+
+            <input type="submit" value="Υποβολή" />
+          </form>
+        </div>
       </div>
-    </main>
 
+      <div class="main">
+        <div class="search-area">
+          <div id="search_bar">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Αναζήτηση είδους..."
+            />
+            <span class="icon"><i id="search" class="fas fa-search"></i></span>
+            <button id="search-button">Αναζήτηση</button>
+          </div>
+        </div>
+
+        <div class="custom-select">
+          <div class="tags-input" tabindex="0" onclick="toggleDropdown()">
+            Επιλογή Ειδών Βάση Κατηγορίας...
+          </div>
+          <i class="fas" id="dropElement">&#xf107;</i>
+          <div class="custom-dropdown" style="display: none">
+            <div id="categoryFilter"></div>
+            <!-- Εδώ θα πάνε τα υπόλοιπα checkboxes, γεννημένα μέσω JavaScript -->
+          </div>
+        </div>
+
+        <!--! ΤΡΟΠΟΠΟΙΗΣΗ ΟΤΑΝ ΘΑ ΜΠΕΙ ΚΑΙ ΤΟ CARGO ΤΟΥ ΟΧΗΜΑΤΟΣ -->
+        <table>
+          <thead>
+            <tr>
+              <th>Όνομα Αντικειμένου</th>
+              <th>Κατηγορία</th>
+              <th>Ποσοότητα</th>
+              <th>Πληροφορίες</th>
+              <th>Ημ/νια Εισαγωγής</th>
+              <th>Ημ/νια Τροποποίησης</th>
+              <th>Επιλογή</th>
+            </tr>
+          </thead>
+          <tbody id="items-list">
+            <!-- Εδώ θα εμφανιστούν τα προϊόντα από τη βάση δεδομένων -->
+          </tbody>
+        </table>
+
+        <div id="pagination">
+          <button id="prev"><</button>
+          <button id="next">></button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../../JavaScript/Admin/upload_quantities.js"></script>
+    <script src="../../JavaScript/Admin/get_items.js"></script>
     <script src="../../JavaScript/Admin/loadCategories.js"></script>
     <script src="../../JavaScript/Admin/confirmCategories.js"></script>
     <script src="../../JavaScript/Admin/uploadData.js"></script>
-    <script src="../../JavaScript/Admin/addCategory.js"></script>
+    <script src="../../JavaScript/Admin/category_operations.js"></script>
     <script src="../../JavaScript/Global/HeaderCall.js"></script>
     <script src="../../JavaScript/Admin/operations_products.js"></script>
     <script src="../../JavaScript/Global/showMessage.js"></script>
+    <script src="../../JavaScript/Admin/tabs-operations.js"></script>
   </body>
 </html>

@@ -1,4 +1,5 @@
-function loadCategories(type, element) {
+function loadCategories(type, element, listen) {
+  var categoryMapping = {};
   $.ajax({
     method: "GET",
     url: "http://localhost/webproject/Code/PHP/Admin/getCategories.php",
@@ -15,10 +16,16 @@ function loadCategories(type, element) {
       }
 
       categories.forEach(function (category) {
-        if (type === "checkbox") {
+        categoryMapping[category.category_name] = category.id;
+        if (type === "checkbox-activate") {
           categoryList.append(
-            `<input type="checkbox" class="category-checkbox" id="${category.id}" name="selectedCategories[]" value="${category.category_name}">
-               <label>${category.category_name}</label><br>`
+            `<div class="category-item"><input type="checkbox" class="category-checkbox" id="${category.id}" name="selectedCategories[]" value="${category.category_name}">
+               <label class="category-label">${category.category_name}</label><br></div>`
+          );
+        } else if (type === "checkbox-filter") {
+          categoryList.append(
+            `<div class="custom-checkbox"><input type="checkbox" class="category-checkbox-filter" id="filter-${category.id}" name="selectedCategories[]" value="${category.category_name}">
+               <label for="category-${category.id}">${category.category_name}</label><br></div>`
           );
         } else if (type === "select") {
           categoryList.append(
@@ -26,9 +33,98 @@ function loadCategories(type, element) {
           );
         }
       });
+      if (listen === true) {
+        updateCategoryCheckboxesListeners();
+      }
     },
     error: function (xhr, status, error) {
       console.error("AJAX Error: " + status, error);
     },
   });
+}
+
+function updateCategoryCheckboxesListeners() {
+  var checkboxes = document.querySelectorAll(".category-checkbox-filter");
+  checkboxes.forEach(function (checkbox) {
+    checkbox.removeEventListener("change", handleCheckboxChange);
+    checkbox.addEventListener("change", function () {
+      handleCheckboxChange();
+      updateItemsBasedOnCategoryAndSearch(); // Νέα συνάρτηση που θα φτιάξουμε
+    });
+  });
+}
+
+function handleCheckboxChange() {
+  console.log("Checkbox value:", this.value);
+  var tagsInput = document.querySelector(".tags-input");
+  // Ελέγχουμε εάν το checkbox είναι επιλεγμένο ή όχι
+  if (this.checked) {
+    // Δημιουργούμε μια νέα ετικέτα
+    var tag = createTag(this.value);
+    tagsInput.appendChild(tag);
+  } else {
+    // Αναζητούμε και αφαιρούμε την αντίστοιχη ετικέτα
+    var tag = tagsInput.querySelector(`.tag[data-value="${this.value}"]`);
+    if (tag) {
+      tagsInput.removeChild(tag);
+    }
+  }
+  updatePlaceholderText();
+}
+
+function createTag(value) {
+  var span = document.createElement("span");
+  span.className = "tag";
+  span.setAttribute("data-value", value);
+  span.textContent = value;
+  var i = document.createElement("i");
+  i.className = "fas fa-times";
+  i.onclick = function (e) {
+    tagClicked(e, span); // Περνάμε το event object και το span ως όρισμα
+  };
+  span.appendChild(i);
+  return span;
+}
+
+function tagClicked(e, span) {
+  e.stopPropagation();
+  removeTag(span);
+  updatePlaceholderText();
+}
+
+function removeTag(tag) {
+  var value = tag.getAttribute("data-value");
+  // Ο ενημερωμένος selector τώρα περιορίζει την αναζήτηση μόνο στα checkboxes που σχετίζονται με tags
+  var checkbox = document.querySelector(
+    `.category-checkbox-filter[value="${value}"]`
+  );
+  if (checkbox) {
+    checkbox.checked = false;
+  }
+  tag.remove();
+  updateItemsBasedOnCategoryAndSearch();
+}
+
+function updatePlaceholderText() {
+  var checkboxes = document.querySelectorAll(".category-checkbox-filter");
+  var selectedCategories = Array.from(checkboxes).filter(
+    (checkbox) => checkbox.checked
+  );
+  var tagsInput = document.querySelector(".tags-input");
+
+  // Καθαρίζουμε το tags-input div
+  tagsInput.innerHTML = "";
+
+  if (selectedCategories.length > 0) {
+    // Δημιουργούμε και προσθέτουμε tags
+    selectedCategories.forEach((checkbox) => {
+      var tag = createTag(checkbox.value);
+      tagsInput.appendChild(tag);
+    });
+  } else if (selectedCategories.length === checkboxes.length) {
+    tagsInput.textContent = "Επιλέχθηκαν όλες οι κατηγορίες";
+  } else {
+    // Προσθέτουμε το αρχικό κείμενο ως placeholder
+    tagsInput.textContent = "Επιλογή Ειδών Βάση Κατηγορίας";
+  }
 }
