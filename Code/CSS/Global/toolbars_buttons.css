@@ -1,0 +1,49 @@
+#show-add-form,
+#delete-all-button,
+#show-check-categories-form,
+#show-load-data-form,
+#show-delete-categories-form,
+#show-load-quantities-form,
+#show-base-cargo,
+#unload-vehicle-cargo {
+  position: relative;
+  background-color: #5a197d;
+  color: gold;
+  border: none;
+  border-radius: 25px; /* Δημιουργεί στρογγυλεμένα άκρα */
+  padding: 8px 16px;
+  margin: 10px 0;
+  cursor: pointer;
+  width: 75%;
+  left: 48px;
+}
+
+#unload-vehicle-cargo{
+  display: none;
+}
+
+#show-add-form:hover,
+#delete-all-button:hover,
+#show-check-categories-form:hover,
+#show-load-data-form:hover,
+#show-delete-categories-form:hover,
+#show-load-quantities-form:hover,
+#show-base-cargo:hover,
+#unload-vehicle-cargo:hover {
+  transition: background-color 0.3s;
+  background-color: #440466;
+}
+
+/*
+.toolbar button {
+  background-color: #5a197d; /* Initially set to a lighter shade of purple, adjust as needed 
+  color: white; /* Text color for the buttons 
+  border: none; /* No border for a flat style 
+  padding: 8px 16px; /* Padding inside the buttons 
+  margin: 10px 0; /* Margin between buttons 
+  cursor: pointer; /* Pointer cursor on hover 
+  transition: background-color 0.3s; /* Smooth background color transition for hover effect 
+  width: 100%; /* Make buttons fill the toolbar width 
+  box-sizing: border-box; /* Include padding in the button's total width 
+} 
+*/

@@ -1,0 +1,12 @@
+.container {
+  display: flex; /* Use flexbox layout */
+}
+
+.toolbar {
+  background-color: #f2f2f2; /* Dark purple background to match the header */
+  padding: 10px; /* Padding for spacing inside the toolbar */
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack children vertically */
+  height: 100vh; /* Full height of the viewport */
+  box-sizing: border-box; /* Include padding in the element's total width and height */
+}
