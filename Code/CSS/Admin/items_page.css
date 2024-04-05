@@ -13,212 +13,25 @@ body {
   padding: 20px; /* Padding around the content */
 }
 
-.search-area {
-  display: flex;
-  justify-content: space-between; /* If you want space between the search bar and button */
-  margin-bottom: 20px; /* Space below the search area */
-}
-
-#search_bar {
-  flex-grow: 1; /* Let the search bar take up the available space */
-  margin-right: 10px; /* Margin between the search bar and button */
-  text-align: center;
-}
-
-/* Στυλ για το search bar */
-#search-input {
-  width: 100%;
-  max-width: 400px; /* Ορίστε το πλάτος του search bar όπως θέλετε */
-  margin: 0 auto;
-  padding: 10px;
-  border: 2px solid #ccc;
-  border-radius: 25px; /* Δημιουργεί στρογγυλεμένα άκρα */
-  font-size: 16px;
-  background-color: #f2f2f2;
-  background-repeat: no-repeat;
-  background-position: 10px center;
-  padding-left: 40px; /* Το πλάτος του εικονιδίου + περιθώριο */
-}
-
-.icon {
-  text-align: center;
-  color: #e05cfd;
-  margin-left: -40px;
-  margin-right: 40px;
-}
-
-/* Στυλ για το κουμπί αναζήτησης */
-#search-button {
-  background-color: #e57aff;
-  color: gold;
-  border: none;
-  border-radius: 25px; /* Δημιουργεί στρογγυλεμένα άκρα */
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin-left: 5px; /* Μικρό περιθώριο μεταξύ του κουμπιού και του search bar */
-  cursor: pointer;
-}
-
-/* Στυλ για το κουμπί "Αναζήτηση" όταν είναι σε hover */
-#search-button:hover {
-  transition: background-color 0.4s;
-  background-color: #e05cfd;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-/* Στυλ για την επικεφαλίδα του πίνακα */
-table th {
-  background-color: #f2f2f2;
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-/* Στυλ για τις γραμμές του πίνακα */
-table td {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-/* Κατάλληλο περιθώριο για τα κελιά */
-table td,
-table th {
-  margin: 0;
-}
-
-.custom-select {
-  width: 350px;
-  position: relative;
-}
-
-.tags-input {
-  margin-bottom: 5px;
-  border-radius: 25px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  cursor: pointer;
-  display: flex;
-  flex-wrap: wrap;
-  background-color: #fff;
-}
-
-.tag {
-  display: inline-block; /* ώστε να μην πιάνουν όλο το πλάτος και να μπορούν να κάνουν scroll */
-  margin-right: 5px;
-  background-color: #5a197db9;
-  color: gold;
-  border-radius: 25px;
-  padding: 5px;
-  margin-right: 5px;
-  margin-bottom: 5px;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.tag:hover {
-  transition: background-color 0.4s;
-  background-color: #5a197d;
-}
-
-.tag i {
-  cursor: pointer;
-}
-
-.tags-input:focus {
-  outline: none;
-  border: 2px solid #ccc;
-  box-shadow: 0 0 5px rgba(104, 2, 187, 0.5);
-}
-
-.custom-dropdown {
-  position: absolute;
-  width: 100%;
-  border: 1px solid #ccc;
-  background: white;
-  z-index: 100;
-}
-
-.custom-dropdown div {
-  padding: 5px 10px;
-}
-
-#categoryFilter div:hover {
-  background-color: #f2f2f2;
-}
-
-#pagination {
-  display: flex; /* Establishes a flex container */
-  justify-content: center; /* Centers the flex items on the main axis */
-  margin-top: 20px; /* Adds space between the table and the pagination */
-}
-
-#prev,
-#next {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color 0.3s;
-  border: 1px solid #ddd;
-}
-
-#prev:not(:disabled):hover,
-#next:not(:disabled):hover {
-  background-color: #ddd;
-}
-
-#prev:disabled,
-#next:disabled {
-  color: #ccc; /* Dims the button text to indicate it's disabled */
-  border-color: #ccc; /* Dims the button border */
-  cursor: default; /* Reverts the cursor to the default to indicate the button is not clickable */
-}
-
-#dropElement {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-40%);
-}
-
-.category-checkbox-filter:checked {
-  /* Προσθέστε τα επιθυμητά στυλ εδώ, π.χ.: */
-  accent-color: #9900ffb9; /* Αλλάξτε το χρώμα του checkbox */
-}
-
-.category-checkbox-filter:checked + label {
-  color: #9900ffb9; /* Χρώμα όταν το checkbox είναι επιλεγμένο */
-}
-
-.fa {
+#deleteIcon {
   color: rgb(168, 3, 3);
   font-size: 20px;
   cursor: pointer;
 }
 
-.fas {
+#optionIcon {
   color: grey;
   font-size: 20px;
   cursor: pointer;
 }
 
-.fa:hover {
+#deleteIcon:hover {
   transition: 0.5s;
   font-size: 25px;
   color: red;
 }
 
-.fas:hover {
+#optionIcon:hover {
   transition: 0.5s;
   font-size: 25px;
   color: black;
