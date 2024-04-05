@@ -15,14 +15,24 @@ function login(event) {
     success: function (response) {
       if (response.status === "success" && response.type === "Citizen") {
         // Η σύνδεση ήταν επιτυχής
-        window.location.href = "user_index_page.html";
-        showMessage("extra-success-message", response.message, "#user-login");
-        // Ενέργειες που θέλετε να κάνετε μετά την επιτυχημένη σύνδεση
+        if(response.form === 1){
+
+          window.location.href = "user_index_page.html";
+          showMessage("extra-success-message", response.message, "#user-login");
+          // Ενέργειες που θέλετε να κάνετε μετά την επιτυχημένη σύνδεση
+
+        } else {
+
+          window.location.href = "personal_info_form.html";
+          showMessage("extra-success-message", response.message, "#user-login");
+          // Ενέργειες που θέλετε να κάνετε μετά την επιτυχημένη σύνδεση
+
+        }
       } else if (response.status === "success" && response.type === "Admin") {
         window.location.href = "/Code/HTML/Admin/admin_index_page.html";
         showMessage("extra-success-message", response.message, "#user-login");
       } else if (response.status === "success" && response.type === "Rescuer") {
-        window.location.href = "/Code/HTML/Rescuer/rescuer_index_page.html";
+        window.location.href = "/webproject/Code/HTML/Rescuer/choose_vehicle.html";
         showMessage("extra-success-message", response.message, "#user-login");
       } else {
         // Η σύνδεση απέτυχε

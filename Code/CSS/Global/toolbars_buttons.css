@@ -3,7 +3,9 @@
 #show-check-categories-form,
 #show-load-data-form,
 #show-delete-categories-form,
-#show-load-quantities-form {
+#show-load-quantities-form,
+#show-base-cargo,
+#unload-vehicle-cargo {
   position: relative;
   background-color: #5a197d;
   color: gold;
@@ -16,12 +18,18 @@
   left: 48px;
 }
 
+#unload-vehicle-cargo{
+  display: none;
+}
+
 #show-add-form:hover,
 #delete-all-button:hover,
 #show-check-categories-form:hover,
 #show-load-data-form:hover,
 #show-delete-categories-form:hover,
-#show-load-quantities-form:hover {
+#show-load-quantities-form:hover,
+#show-base-cargo:hover,
+#unload-vehicle-cargo:hover {
   transition: background-color 0.3s;
   background-color: #440466;
 }

@@ -53,8 +53,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
         $start = ($page - 1) * $per_page;
 
-
-        //! ΘΑ ΧΡΕΙΑΣΤΕΙ ΦΤΙΑΞΙΜΟ ΓΙΑ ΤΟ QUANTITY ΜΕ LEFT JOIN στο warehouse_stock ΚΑΙ SELECT
         $sql = "SELECT items.id, items.name, categories.category_name AS category, items.details, warehouse_stock.quantity AS quantity,   
         items.created_at, items.updated_at FROM items
         LEFT JOIN categories ON items.category_id = categories.id

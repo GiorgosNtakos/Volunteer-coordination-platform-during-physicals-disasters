@@ -1,0 +1,72 @@
+.tags-input {
+    margin-bottom: 5px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #fff;
+  }
+  
+  .tag {
+    display: inline-block; /* ώστε να μην πιάνουν όλο το πλάτος και να μπορούν να κάνουν scroll */
+    margin-right: 5px;
+    background-color: #5a197db9;
+    color: gold;
+    border-radius: 25px;
+    padding: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .tag:hover {
+    transition: background-color 0.4s;
+    background-color: #5a197d;
+  }
+  
+  .tag i {
+    cursor: pointer;
+  }
+  
+  .tags-input:focus {
+    outline: none;
+    border: 2px solid #ccc;
+    box-shadow: 0 0 5px rgba(104, 2, 187, 0.5);
+  }
+  
+  .custom-dropdown {
+    position: absolute;
+    width: 100%;
+    border: 1px solid #ccc;
+    background: white;
+    z-index: 100;
+  }
+  
+  .custom-dropdown div {
+    padding: 5px 10px;
+  }
+  
+  #categoryFilter div:hover {
+    background-color: #f2f2f2;
+  }
+
+  #dropElement {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-40%);
+  }
+  
+  .category-checkbox-filter:checked {
+    /* Προσθέστε τα επιθυμητά στυλ εδώ, π.χ.: */
+    accent-color: #9900ffb9; /* Αλλάξτε το χρώμα του checkbox */
+  }
+  
+  .category-checkbox-filter:checked + label {
+    color: #9900ffb9; /* Χρώμα όταν το checkbox είναι επιλεγμένο */
+  }

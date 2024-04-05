@@ -1,38 +1,25 @@
 <?php
-// Include  database connection code
-require_once(__DIR__.'/../Global/db_connect.php');
-
-header("Access-Control-Allow-Origin: *"); // Allow requests from any origin
-//header("Content-Type: application/json");
-
-
-
-
-// Fetch vehicle, request, and offer data from the database
-$sql = "SELECT Users.id, Users.full_name, Users.phone, Users.location_lat, Users.location_lon, Tasks.id AS task_id,
-              Tasks.quantity, Tasks.type, Tasks.status, Tasks.created_at, Tasks.vehicle_id,
-             vehicles.updated_at, vehicles.name
-
-        FROM  Tasks
-        INNER JOIN Users ON Tasks.user_id = Users.id
-        INNER JOIN vehicles ON Tasks.vehicle_id = vehicles.id";
-   
-
-$result = mysqli_query($conn, $sql);
-
-if (!$result) {
-    die('Error fetching data: ' . mysqli_error($conn));
-}
-
-// Store the data in an array
-$data = array();
-while ($row = mysqli_fetch_assoc($result)) {
-    $data[] = $row;
-}
-
-// Return the data as JSON
+header('Access-Control-Allow-Origin: http://127.0.0.1:5500');
 header('Content-Type: application/json');
-echo json_encode($data);
+require '../Global/db_connect.php';
+$conn->set_charset("utf8");
 
-mysqli_close($conn);
+// Ερώτημα SQL για ανάκτηση όλων των Tasks
+$sql = "SELECT Tasks.*, Items.name AS item_name
+        FROM Tasks
+        INNER JOIN Items ON Tasks.item_id = Items.id";
+$result = $conn->query($sql);
+
+$tasks = array();
+
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        // Τα δεδομένα του κάθε task ---> $tasks
+        $tasks[] = $row;
+    }
+    echo json_encode($tasks); // Επιστροφή των δεδομένων ως JSON
+} else {
+    echo "0 results";
+}
+$conn->close();
 ?>

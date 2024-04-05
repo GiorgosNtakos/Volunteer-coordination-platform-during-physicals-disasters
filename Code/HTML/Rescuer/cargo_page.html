@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Διαχείριση Φορτίου</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="../../CSS/Global/Header.css" />
+    <link rel="stylesheet" href="../../CSS/Global/showbox.css" />
+    <link rel="stylesheet" href="../../CSS/Admin/forms_containers_style.css" />
+    <link rel="stylesheet" href="../../CSS/Global/toolbar_style.css" />
+    <link rel="stylesheet" href="../../CSS/Global/toolbars_buttons.css" />
+    <link rel="stylesheet" href="../../CSS/Global/tables_style.css" />
+    <link rel="stylesheet" href="../../CSS/Global/filter_style.css" />
+    <link rel="stylesheet" href="../../CSS/Rescuer/cargo_page.css"/>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  </head>
+  <body>
+    <div id="overlay"></div>
+    <div id="Header"></div>
+    <div class="container">
+    <div class="toolbar">
+
+      <div id="removeStock-form-container">
+        <form id="remove-stock-form">
+          <label for="name">Όνομα Είδους:</label>
+          <input type="text" id="r_name" name="name" readonly /><br /><br />
+
+          <label for="quantity">Ποσότητα:</label>
+          <input
+            type="number"
+            id="r_quantity"
+            name="quantity"
+            required
+          /><br /><br />
+
+          <button type="submit" formnovalidate>Υποβολή</button>
+        </form>
+      </div>
+
+      <div id="addStock-form-container">
+        <form id="add-stock-form">
+          <label for="name">Όνομα Είδους:</label>
+          <input type="text" id="a_name" name="name" readonly /><br /><br />
+
+          <label for="quantity">Ποσότητα:</label>
+          <input
+            type="number"
+            id="a_quantity"
+            name="quantity"
+            required
+          /><br /><br />
+
+          <button type="submit" formnovalidate>Υποβολή</button>
+        </form>
+      </div>
+
+      <div>
+        <button id="show-base-cargo">Εμφάνιση Ειδών από την Βάση</button>
+      </div>
+
+      <div>
+        <button id="unload-vehicle-cargo">Εκφόρτωση Ειδών από το Όχημα</button>
+      </div>
+    </div>
+
+    <div class = "main"> 
+        <div class="search-area">
+            <div id="search_bar">
+              <input
+                type="text"
+                id="search-input"
+                placeholder="Αναζήτηση είδους..."
+              />
+              <span class="icon"><i id="search" class="fas fa-search"></i></span>
+              <button id="search-button">Αναζήτηση</button>
+            </div>
+          </div>
+          
+          <div class="custom-select">
+            <div class="tags-input" tabindex="0" onclick="toggleDropdown()">
+              Επιλογή Ειδών Βάση Κατηγορίας...
+            </div>
+            <i class="fas" id="dropElement">&#xf107;</i>
+            <div class="custom-dropdown" style="display: none">
+              <div id="categoryFilter"></div>
+              <!-- Εδώ θα πάνε τα υπόλοιπα checkboxes, γεννημένα μέσω JavaScript -->
+            </div>
+          </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Όνομα Αντικειμένου</th>
+            <th>Κατηγορία</th>
+            <th>Ποσότητα</th>
+            <th>Πληροφορίες</th>
+            <th>Επιλογή</th>
+          </tr>
+        </thead>
+        <tbody id="items-list">
+
+        </tbody>
+      </table>
+
+      <div id="pagination">
+        <button id="prev"><</button>
+        <button id="next">></button>
+      </div>
+  </div>
+</div>
+
+
+    <script src="../../JavaScript/Global/HeaderCall.js"></script>
+    <script src="../../JavaScript/Admin/loadCategories.js"></script>
+    <script src="../../JavaScript/Global/showMessage.js"></script>
+    <script src="../../JavaScript/Global/PSF.js"></script>
+    <script src="../../JavaScript/Admin/get_items.js"></script>
+    <script src="../../JavaScript/Rescuer/vehicle_items_operations.js"></script>
+  </body>
+</html>

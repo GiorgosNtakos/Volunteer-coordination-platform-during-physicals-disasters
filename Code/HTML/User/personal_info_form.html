@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../CSS/Global/forms_style.css" />
+    <link rel="stylesheet" href="../../CSS/Global/showbox.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+    <title>User Profile</title>
+</head>
+<body>
+    <form id="Global_form">
+      <div id="map" class="hidden"  style="height: 400px;"></div>
+        <label for="full_name">Ονομ/νυμο:</label>
+        <input
+          type="text"
+          name="full_name"
+          id="full_name"
+          placeholder="Ονομ/νυμο"
+          required
+        />
+  
+        <label for="phone">Κινητό Τηλέφωνο:</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="Αριθμός Κινητού Τηλεφώνου"
+          value="+30 "
+          required
+        />
+  
+        <label for="street">Οδός:</label>
+        <input
+          type="text"
+          id="street"
+          name="street"
+          placeholder="Οδός"
+          required
+        />
+  
+        <label for="number">Αριθμός Οδού:</label>
+        <input
+          type="text"
+          id="number"
+          name="number"
+          placeholder="Αριθμός Οδού"
+          min="1"
+          required
+        />
+
+        <button type="submit" id="submitUserInfo" formnovalidate>
+            Δημιουργία Λογαριασμού
+          </button>
+        <button type="button" id="showMap">Προβολή Χάρτη</button>
+    </form>
+
+    <script src="../../JavaScript/Admin/create_rescuer.js"></script>
+    <script src="../../JavaScript/Global/showMessage.js"></script>
+    <script src="../../JavaScript/Global/antigeo_form.js"></script>
+</body>
+</html>

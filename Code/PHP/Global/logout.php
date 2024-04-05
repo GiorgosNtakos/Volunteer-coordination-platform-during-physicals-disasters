@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 
 session_start();
 
-if (isset($_SESSION['admin_auth'])){
+if (isset($_SESSION['user_auth'])){
     if($_SERVER["REQUEST_METHOD"] === "POST"){
 // Εκκαθάριση όλων των στοιχείων του session
 $_SESSION = array();

@@ -1,0 +1,29 @@
+{
+    "items_quantities": [
+        {
+            "id": "ad8f5980-8a7b-492c-a496-c9c93a1210cf",
+            "quantity": "550",
+            "item_id": "16"
+        },
+        {
+            "id": "044bb730-aa19-4b53-b736-1806625df38c",
+            "quantity": "650",
+            "item_id": "17"
+        },
+        {
+            "id": "8b14d3e6-afd0-4c13-8847-ee308e090a7d",
+            "quantity": "750",
+            "item_id": "18"
+        },
+        {
+            "id": "4aef8cd6-e72e-4e5b-a625-dafca1102493",
+            "quantity": "850",
+            "item_id": "19"
+        },
+        {
+            "id": "e816fda1-9507-4ca2-9d1a-d3b45d5f584d",
+            "quantity": "950",
+            "item_id": "20"
+        }
+    ]
+}

@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         if (password_verify($password, $row["password"])) {
             session_start();
 
-            $_SESSION['admin_auth'] = array(
+            $_SESSION['user_auth'] = array(
                 'id' => $row['id'],
                 'username' => $username,
                 'email' => $row['email'],  // Προσθήκη πεδίου email από τη βάση δεδομένων
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             );
 
             http_response_code(200);
-            $response = array("status" => "success", "message" => "Επιτυχής Σύνδεση!", "type" => $row['type']);
+            $response = array("status" => "success", "message" => "Επιτυχής Σύνδεση!", "type" => $row['type'], "form" => $row['formCompleted']);
             $_SESSION['username'] = $username;
             
         } else {

@@ -1,0 +1,190 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#delete-all-button
+{
+    background-color: rgb(255, 59, 59);
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 25px; /* Δημιουργεί στρογγυλεμένα άκρα */
+    padding: 10px 20px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    position: relative;
+    top: 35px;
+    right: -10px;
+    cursor: pointer;
+}
+
+#delete-all-button:hover
+{
+    transition: background-color .4s;
+    background-color:  red;
+}
+
+#show-add-announcement-form
+{
+    background-color: rgb(0, 255, 34);
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 25px; /* Δημιουργεί στρογγυλεμένα άκρα */
+    padding: 10px 20px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    position: relative;
+    right: -10px;
+    top: 20px;
+    cursor: pointer;
+}
+
+#show-add-announcement-form:hover
+{
+    transition: background-color .4s;
+    background-color: rgb(36, 221, 61);
+}
+
+#add-announcement-form-container{
+  width: 325px;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color:#430063; /* Θολό φόντο με χρώμα */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Σκιά */
+  z-index: 2;
+}
+
+#add-announcement-form {
+  text-align: center;
+}
+
+#add-announcement-form label {
+  display: block;
+  font-weight: bold;
+  color: gold; /* Χρυσό χρώμα για τις ετικέτες */
+}
+
+#add-announcement-form input[type="text"] {
+  width: 80%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+#add-announcement-form button[type="submit"] {
+  background-color: green; /* Μωβ χρώμα για το κουμπί */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#add-announcement-form button:hover
+{   
+  transition: background-color .4s;
+  background-color: rgb(0, 179, 0);
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Χρώμα για το θολό φόντο με 50% διαφάνεια */
+  z-index: 1; /* θολό φόντο ένα επίπεδο πίσω από τα άλλα στοιχεία */
+  display: none; /* Αρχικά αόρατο */
+  
+}
+
+main {
+  padding-top: 100px; /* Απόσταση από την κορυφή για να φαίνεται το περιεχόμενο κάτω από το header */
+  width: 80%;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#taskSelect {
+  width: 87%;
+  padding: 10px;
+  margin: 5px auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+#taskSelect option {
+  font-size: 14px; /* Μέγεθος γραμματοσειράς επιλογών */
+}
+
+/* Όταν επιλεγεί αντικείμενο */
+#taskSelect:focus {
+  outline: none; /* Κατάργηση περιγράμματος  */
+  border-color: #66afe9; /* Περίγραμμα  */
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+.announcement-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.announcement-table th,
+.announcement-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.announcement-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.announcement-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* Δυναμικά δημιουργημένα κουμπιά διαγραφής */
+button {
+  background-color: rgb(255, 59, 59);
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 20px; /* Δημιουργεί στρογγυλεμένα άκρα */
+  padding: 8px 16px;
+  text-decoration: none;
+  font-size: 16px;
+  top: 35px;
+  right: -10px;
+  cursor: pointer;
+}
+
+button:hover 
+{
+    transition: background-color .4s;
+    background-color:  red;
+}

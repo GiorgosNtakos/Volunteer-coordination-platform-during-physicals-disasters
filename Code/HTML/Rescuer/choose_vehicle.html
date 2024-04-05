@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Πίνακας Διαθέσιμων Οχημάτων</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="../../CSS/Global/Header.css" />
+    <link rel="stylesheet" href="../../CSS/Rescuer/choose_vehicle.css" />
+    <link rel="stylesheet" href="../../CSS/Global/showbox.css" />
+    <link rel="stylesheet" href="../../CSS/Global/tables_style.css" />
+  </head>
+  <body>
+    <div id="Header"></div>
+
+    <main>    
+      <h2 id = "tables_title">Πίνακας Επιλογης Οχήματος</h2>
+
+      <table class="Available_Vehicles">
+        <thead>
+          <tr>
+            <th>Όνομα Οχήματος</th>
+            <th>Συνολικό Πλήρωμα</th>
+            <th>Οδός</th>
+            <th>Αριθμός Οδού</th>
+            <th>Πόλη</th>
+            <th>Επιλογή</th>
+          </tr>
+        </thead>
+        <tbody id="vehicle_list">
+
+        </tbody>
+      </table>
+    </main>
+
+    <script src="../../JavaScript/Global/HeaderCall.js"></script>
+    <script src="../../JavaScript/Rescuer/getAvailableVehicles.js"></script>
+    <script src="../../JavaScript/Global/showMessage.js"></script>
+  </body>
+</html>

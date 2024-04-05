@@ -1,0 +1,142 @@
+/* Στυλ για το ενεργό link */
+nav ul li a.active {
+  /* Προσαρμόζεις το στυλ όπως θέλεις για το ενεργό link */
+  font-weight: bold; /* Για παράδειγμα, εδώ χρησιμοποιώ bold κείμενο */
+  color: gold; /* Χρώμα του ενεργού link */
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #430063;
+  color: white;
+  padding: 10px;
+}
+
+.citizen-profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 5%;
+}
+
+.citizen-name {
+  font-weight: bold;
+  font-size: large;
+}
+
+body.menu-open {
+  overflow: hidden; /* Αποτρέπει την κύλιση της σελίδας όταν το μενού είναι ανοιχτό */
+}
+
+.hamburger-menu {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  top: 2%;
+  right: 5%;
+  z-index: 1000;
+  transition: 0.4s; /* Προσθήκη μετάβασης για ομαλή κίνηση */
+}
+
+.hamburger-menu.show {
+  position: fixed;
+  top: 70px; /* Υπολογίστε το κατάλληλο ύψος ανάλογα με τη δική σας σχεδίαση */
+  right: 5%;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  margin: 6px 0;
+}
+
+.hamburger-menu.right .bar {
+  background-color: white; /* Χρώμα για τις γραμμές στη δεξιά πλευρά */
+}
+
+.hamburger-menu.right:hover .bar {
+  background-color: pink; /* Χρώμα για τις γραμμές στη δεξιά πλευρά κατά το hover */ 
+}
+
+@media only screen and (max-width: 600px) {
+  nav ul.hide-on-mobile {
+    display: none;
+  }
+
+  nav ul.show {
+    display: block;
+  }
+
+  .hamburger-menu {
+    display: block;
+  }
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav li {
+  margin-right: 20px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  position: relative; /* Προσθήκη θέσης στοιχείου για το εφέ */
+  transition: color 0.3s, transform 0.3s; /* Μετάβαση χρώματος και μετασχηματισμού */
+}
+
+nav a:hover {
+  color: #FFD700; /* Αλλαγή χρώματος κατά το hover */
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+  transition: color 0.3s ease-in-out;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  color: #333;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}

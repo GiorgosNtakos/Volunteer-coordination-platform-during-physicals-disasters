@@ -10,7 +10,7 @@ body {
 }
 
 /* Στυλ για τη φόρμα δημιουργίας λογαριασμού */
-#rescuer-form {
+#Global_form {
   max-width: 400px;
   margin: auto;
   padding: 20px;
@@ -33,17 +33,26 @@ input {
   border-radius: 15px; /* Στρογγυλεμένες ακρές στο button */
 }
 
-#rescuer-form button[type="submit"] {
-  background-color: #430063;
-  color: white;
+#Global_form button[type="submit"],
+#Global_form button[type="button"],
+#toggleForm {
+  background-color: #5a197d;
+  color: gold;
   padding: 10px 15px;
+  margin-top: 5px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   border-radius: 15px; /* Στρογγυλεμένες ακρές στο button */
 }
 
-#rescuer-form button[type="submit"]:hover {
+#Global_form button[type="submit"]:hover,
+#Global_form button[type="button"]:hover,
+#toggleForm {
   transition: background-color 0.4s;
-  background-color: #2c0045;
+  background-color: #440466;
+}
+
+.hidden {
+  display: none;
 }

@@ -11,13 +11,16 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="../../CSS/Global/Header.css" />
     <link rel="stylesheet" href="../../CSS/Admin/forms_containers_style.css" />
-    <link rel="stylesheet" href="../../CSS/Admin/toolbar_style.css" />
+    <link rel="stylesheet" href="../../CSS/Global/toolbar_style.css" />
     <link rel="stylesheet" href="../../CSS/Global/showbox.css" />
     <link rel="stylesheet" href="../../CSS/Admin/items_page.css" />
-    <link rel="stylesheet" href="../../CSS/Admin/toolbars_buttons.css" />
+    <link rel="stylesheet" href="../../CSS/Global/toolbars_buttons.css" />
     <link rel="stylesheet" href="../../CSS/Admin/tabs-style.css" />
+    <link rel="stylesheet" href="../../CSS/Global/tables_style.css" />
+    <link rel="stylesheet" href="../../CSS/Global/filter_style.css" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
@@ -26,6 +29,8 @@
     <link rel="stylesheet" href="../CSS/admin_index_page.css" />
     <link rel="stylesheet" href="../CSS/showbox_admin.css" /> -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </head>
   <body>
     <div id="overlay"></div>
@@ -51,7 +56,7 @@
               required
             /><br /><br />
 
-            <label for="details">λεπτομέρειας:</label>
+            <label for="details">λεπτομέρειες:</label>
             <textarea id="details" name="details" rows="4" cols="50"></textarea
             ><br /><br />
 
@@ -285,6 +290,7 @@
     </div>
 
     <script src="../../JavaScript/Admin/upload_quantities.js"></script>
+    <script src="../../JavaScript/Global/PSF.js"></script>
     <script src="../../JavaScript/Admin/get_items.js"></script>
     <script src="../../JavaScript/Admin/loadCategories.js"></script>
     <script src="../../JavaScript/Admin/confirmCategories.js"></script>
