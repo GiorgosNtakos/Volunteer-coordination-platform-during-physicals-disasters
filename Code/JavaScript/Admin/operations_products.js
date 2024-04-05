@@ -92,6 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
     changeitemInformation(formData);
+    updateItemsBasedOnCategoryAndSearch();
   });
 
   addItemForm.addEventListener("submit", function (event) {
@@ -162,6 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
     addProduct(formData);
+    updateItemsBasedOnCategoryAndSearch();
   });
 
   // Προσθήκη λειτουργικότητας για την προσθήκη πεδίων λεπτομερειών
@@ -385,9 +387,9 @@ function changeitemInformation(form) {
     success: function (response) {
       if (response.status === "success_change") {
         showMessage("success-message", response.message, "#options-item-form");
-      } else if(response.status="success_but_no_changes"){
+      } else if ((response.status = "success_but_no_changes")) {
         showMessage("success-message", response.message, "#options-item-form");
-      }else {
+      } else {
         showMessage(
           "error-message",
           "Ενώ η αλλαγή πληροφοριών του είδους ήταν επιτυχής κάτι πήγε στραβά. Παρακαλώ δοκιμάστε ξανα.",
@@ -422,7 +424,7 @@ function changeitemInformation(form) {
           errorResponse.message,
           "#options-item-form"
         );
-      }else {
+      } else {
         showMessage(
           "error-message",
           "Προέκυψε σφάλμα κατά την αλλαγή πληροφοριών του είδους. Παρακαλώ δοκιμάστε ξανά.",
@@ -440,9 +442,6 @@ function resetForms(id) {
     forms[i].reset(); // This will reset all forms to their default values
   }
 }
-//! SYNEXEIA FITAKSIMO LOGIKHS GIA ELEGXO DIPLOY ENTRY KAI LOGIKHS GIA ENTOPISMO KENWN PEDIWN
-//// 2.Διαγραφη κατηγοριας.
-//// 3.Τροπος εισαγωγης ποσοτητων στα αντικειmena
-//! 4.Γραναζι στην στηλη επιλογη οπου οταν επιλεχθει εμφανιζει φορμα με με ολα τα πεδια του αντικειμενου που επιλεχθηκε για περεταιρω αλλαγες.
+
 //! (FREEZE).Φτιαξιμο επεξεργασια προφιλ(Telika tha to paw pros to telos gia na ftiajw mia koinh html poy tha xrhsimopoihoyn kai 3 typoy xrhstwn)
 //! 4. ΔΙΑΒΑΣΕ ΘΕΩΡΙΑ ΜΛΚ ΘΑ ΚΟΠΕΙΣ

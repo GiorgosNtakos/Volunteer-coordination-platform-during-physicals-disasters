@@ -32,12 +32,12 @@ CREATE TABLE Items (
 
 -- Ποσότητα των Items στην αποθήκη
 CREATE TABLE Warehouse_Stock (
-    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    id INT VARCHAR(36) PRIMARY KEY NOT NULL,
     quantity INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     item_id INT,
-    warehouse_id INT,
+    warehouse_id VARCHAR(36),
     FOREIGN KEY (item_id) REFERENCES Items(id),
     FOREIGN KEY (warehouse_id) REFERENCES Warehouse(id)
 );
@@ -54,9 +54,18 @@ CREATE TABLE Vehicles (
     location_lon DECIMAL(11, 8) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    user_id INT,
     FOREIGN KEY (user_id) REFERENCES Users(id),
     CONSTRAINT max_tasks CHECK (assigned_tasks <= 4)
+    CONSTRAINT max_rescuers CHECK (assigned_rescuers <= 2)
+);
+
+CREATE TABLE VehicleAssignments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    vehicle_id VARCHAR(36) NOT NULL,
+    user_id VARCHAR(36) NOT NULL,
+    FOREIGN KEY (vehicle_id) REFERENCES Vehicles(id),
+    FOREIGN KEY (user_id) REFERENCES Users(id),
+    UNIQUE (user_id)  -- Εξασφαλίζει ότι κάθε διασώστης μπορεί να ανατεθεί μόνο σε ένα όχημα
 );
 
 -- Ποσότητα των Items στα οχήματα
@@ -66,9 +75,10 @@ CREATE TABLE VehicleCargo (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     item_id INT,
-    vehicle_id INT,
+    vehicle_id VARCHAR(36),
     FOREIGN KEY (item_id) REFERENCES Items(id),
-    FOREIGN KEY (vehicle_id) REFERENCES Vehicles(id)
+    FOREIGN KEY (vehicle_id) REFERENCES Vehicles(id),
+    UNIQUE INDEX vehicle_item_unique (vehicle_id, item_id)
 );
 
 -- Πίνακας Χρηστών
@@ -87,6 +97,7 @@ CREATE TABLE Users (
     location_lon DECIMAL(11, 8) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    formCompleted BOOLEAN DEFAULT false,
     img_path VARCHAR(255)
 );
 
@@ -110,7 +121,7 @@ CREATE TABLE Tasks (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     item_id INT,
     vehicle_id INT,
-    user_id INT,
+    user_id VARCHAR(36),
     FOREIGN KEY (item_id) REFERENCES Items(id),
     FOREIGN KEY (vehicle_id) REFERENCES Vehicles(id),
     FOREIGN KEY (user_id) REFERENCES User(id)
@@ -125,7 +136,7 @@ CREATE TABLE Announcements (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     expiry_date TIMESTAMP,
     is_hidden BOOLEAN DEFAULT FALSE,
-    user_id INT,
+    user_id VARCHAR(36),
     task_id INT,
     FOREIGN KEY (user_id) REFERENCES User(id),
     FOREIGN KEY (task_id) REFERENCES Tasks(id)
