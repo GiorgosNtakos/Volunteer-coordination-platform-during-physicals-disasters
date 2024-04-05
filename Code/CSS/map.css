@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+main {
+    display: flex;
+}
+
+#map {
+    height: 1080px;
+    width: 1920px;
+}
+
+.filter-switch {
+    margin-right: 10px;
+  }
+

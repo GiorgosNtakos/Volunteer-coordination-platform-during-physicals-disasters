@@ -44,7 +44,7 @@ CREATE TABLE Warehouse_Stock (
 
 -- Πίνακας Οχημάτων
 CREATE TABLE Vehicles (
-    id VARCHAR(36) PRIMARY KEY,
+    id int AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) UNIQUE NOT NULL,
     assigned_tasks INT DEFAULT 0,
     street VARCHAR(255) NOT NULL,

@@ -1,0 +1,17 @@
+<Limit GET POST PUT PATCH DELETE> 
+    Allow from all 
+</Limit>
+
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Content-Type "application/json"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+</IfModule>
+
+<IfModule mod_charset.c> 
+    AddDefaultCharset UTF-8 
+</IfModule>
+
+<IfModule mod_mime.c> 
+    #AddType application/x-javascript .js # 
+</IfModule>
