@@ -125,7 +125,7 @@ const taskPopupContent = (task) => {
 
 (async () => {
     await fetchAndProcessData('../../PHP/Admin/get_vehicles.php', handleVehicleData);
-    await fetchAndProcessData('../../PHP/Admin/get_tasks.php', handleTaskData);
+    await fetchAndProcessData('../../PHP/Admin/get_task.php', handleTaskData);
 })();
 
 map.on('mouseup', confirmBaseLocation);
