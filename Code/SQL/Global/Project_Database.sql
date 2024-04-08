@@ -44,7 +44,7 @@ CREATE TABLE Warehouse_Stock (
 
 -- Πίνακας Οχημάτων
 CREATE TABLE Vehicles (
-    id int AUTO_INCREMENT PRIMARY KEY,
+    id VARCHAR(36) PRIMARY KEY,
     name VARCHAR(255) UNIQUE NOT NULL,
     assigned_tasks INT DEFAULT 0,
     street VARCHAR(255) NOT NULL,
@@ -54,7 +54,6 @@ CREATE TABLE Vehicles (
     location_lon DECIMAL(11, 8) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES Users(id),
     CONSTRAINT max_tasks CHECK (assigned_tasks <= 4)
     CONSTRAINT max_rescuers CHECK (assigned_rescuers <= 2)
 );

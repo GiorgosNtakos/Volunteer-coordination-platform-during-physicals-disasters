@@ -53,7 +53,7 @@ const handleVehicleData = (vehicleData) => {
         vehicleMarkers.push(marker);
         if (vehicle.name === 'Base') {
             baseMarker = marker;
-            baseMarker.dragging.enable();
+           // baseMarker.dragging.enable();
         }
     });
 };
