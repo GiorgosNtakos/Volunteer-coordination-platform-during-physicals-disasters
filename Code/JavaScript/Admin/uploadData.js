@@ -55,7 +55,7 @@ function uploadDatas() {
 
     $.ajax({
       method: "POST",
-      url: "http://localhost/webproject/Code/PHP/Admin/uploadData.php", // Αντικαταστήστε με το πραγματικό όνομα του PHP αρχείου
+      url: "../../PHP/Admin/uploadData.php", // Αντικαταστήστε με το πραγματικό όνομα του PHP αρχείου
       data: formData,
       contentType: false,
       processData: false,

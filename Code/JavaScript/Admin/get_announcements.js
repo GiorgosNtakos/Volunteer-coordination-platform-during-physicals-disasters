@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $.ajax({
-        url: "http://localhost/webproject/Code/PHP/Admin/get_announcements.php",
+        url: "../../PHP/Admin/get_announcements.php",
         type: 'GET',
         dataType: 'json',
         success: function(data) {

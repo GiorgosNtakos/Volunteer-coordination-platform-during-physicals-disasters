@@ -56,7 +56,7 @@ function uploadQuantities() {
     }
 
     $.ajax({
-      url: "http://localhost/webproject/Code/PHP/Admin/uploadQuantities.php",
+      url: "../../PHP/Admin/uploadQuantities.php",
       method: "POST",
       data: formData,
       contentType: false,

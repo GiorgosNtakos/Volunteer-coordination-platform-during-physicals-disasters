@@ -62,7 +62,7 @@ function loadItems(page, perPage, searchTerm, selectedCategories = []) {
     selectedCategories,
   });
   $.ajax({
-    url: "http://localhost/webproject/Code/PHP/Admin/get_items.php",
+    url: "../../PHP/Admin/get_items.php",
     method: "GET",
     data: {
       page: page,
@@ -227,7 +227,7 @@ function loadItems(page, perPage, searchTerm, selectedCategories = []) {
 function loadVehicleCargo(page, perPage, searchTerm, selectedCategories = []){
   var itemList = document.getElementById("items-list");
   $.ajax({
-    url: "http://localhost/webproject/Code/PHP/Rescuer/get_vehicle_cargo.php",
+    url: "../../PHP/Rescuer/get_vehicle_cargo.php",
     method: "GET",
     data: {
       page: page,

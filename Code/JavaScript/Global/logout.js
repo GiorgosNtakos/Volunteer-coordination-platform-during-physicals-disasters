@@ -8,7 +8,7 @@ $(document).ready(function () {
 
 function Logout() {
   $.ajax({
-    url: "https://localhost/webproject/Code/PHP/logout.php",
+    url: "../../PHP/logout.php",
     method: "POST",
     dataType: "json",
     success: function (response) {

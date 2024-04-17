@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function deleteAllProducts() {
   $.ajax({
-    url: "http://localhost/webproject/Code/PHP/Admin/delete_all_products.php",
+    url: "../../PHP/Admin/delete_all_products.php",
     method: "DELETE",
     success: function (response) {
       console.log("Απάντηση από τον διακομιστή:", response);
@@ -242,7 +242,7 @@ function deleteAllProducts() {
 
 function addProduct(form) {
   $.ajax({
-    url: "http://localhost/webproject/Code/PHP/Admin/addProduct.php", // Αντικαταστήστε με το δικό σας URL
+    url: "../../PHP/Admin/addProduct.php", // Αντικαταστήστε με το δικό σας URL
     method: "POST",
     data: form,
     processData: false,
@@ -286,7 +286,7 @@ function addProduct(form) {
 
 function deleteItem(itemName) {
   $.ajax({
-    url: "http://localhost/webproject/Code/PHP/Admin/delete_item.php",
+    url: "../../PHP/Admin/delete_item.php",
     method: "DELETE",
     data: { itemName: itemName },
     success: function (response) {
@@ -324,7 +324,7 @@ function deleteItem(itemName) {
 
 function getitemInformation(itemName) {
   $.ajax({
-    url: "http://localhost/webproject/Code/PHP/Admin/get_item_info.php",
+    url: "../../PHP/Admin/get_item_info.php",
     method: "GET",
     data: { itemName: itemName },
     success: function (response) {
@@ -379,7 +379,7 @@ function getitemInformation(itemName) {
 
 function changeitemInformation(form) {
   $.ajax({
-    url: "http://localhost/webproject/Code/PHP/Admin/change_item_info.php",
+    url: "../../PHP/Admin/change_item_info.php",
     method: "POST",
     data: form,
     processData: false,

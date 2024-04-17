@@ -54,7 +54,7 @@ function addCategory() {
   // Κλήση στο PHP για προσθήκη κατηγορίας
   $.ajax({
     method: "POST",
-    url: "http://localhost/webproject/Code/PHP/Admin/addCategory.php",
+    url: "../../PHP/Admin/addCategory.php",
     data: { category_name: categoryName },
     success: function (response) {
       // Επεξεργασία της απάντησης από τον διακομιστή (ενδεχομένως εμφάνιση μηνύματος)
@@ -84,7 +84,7 @@ function deleteCategories() {
   }
   $.ajax({
     method: "DELETE",
-    url: "http://localhost/webproject/Code/PHP/Admin/deleteCategories.php",
+    url: "../../PHP/Admin/deleteCategories.php",
     data: { categories: selectedCategories.join(",") },
     success: function (response) {
       if (response.status === "success") {

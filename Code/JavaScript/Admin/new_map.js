@@ -16,7 +16,7 @@ $(document).ready(function() {
 // Συνάρτηση για την ανάκτηση και εμφάνιση της βάσης
 function fetchAndDisplayBase(map) {
     $.ajax({
-        url: "http://localhost/webproject/Code/PHP/Global/get_warehouse_adress.php",
+        url: "../../PHP/Global/get_warehouse_adress.php",
         method: "GET",
         dataType: "json",
         success: function(response) {
@@ -52,7 +52,7 @@ function fetchAndDisplayBase(map) {
 
                                         // Ενημερώνουμε τη βάση με τη νέα τοποθεσία και διεύθυνση
                                         $.ajax({
-                                            url: "http://localhost/webproject/Code/PHP/Admin/change_warehouse_adress.php",
+                                            url: "../../PHP/Admin/change_warehouse_adress.php",
                                             method: "POST",
                                             data: {
                                                 location_lat: newPos.lat,
@@ -93,7 +93,7 @@ function fetchAndDisplayBase(map) {
 // Συνάρτηση για την ανάκτηση και εμφάνιση των οχημάτων
 function fetchAndDisplayVehicles(map) {
     $.ajax({
-        url: "http://localhost/webproject/Code/PHP/Global/get_all_vehicles.php",
+        url: "../../PHP/Global/get_all_vehicles.php",
         method: "GET",
         dataType: "json",
         success: function(response) {
@@ -121,7 +121,7 @@ function fetchAndDisplayVehicles(map) {
 
 function displayPendingOffers(map) {
     $.ajax({
-        url: "http://localhost/webproject/Code/PHP/Global/get_pending_offers.php",
+        url: "../../PHP/Global/get_pending_offers.php",
         method: "GET",
         dataType: "json",
         success: function(response) {
@@ -148,7 +148,7 @@ function displayPendingOffers(map) {
 
 function displayPendingRequests(map) {
     $.ajax({
-        url: "http://localhost/webproject/Code/PHP/Global/get_pending_requests.php",
+        url: "../../PHP/Global/get_pending_requests.php",
         method: "GET",
         dataType: "json",
         success: function(response) {

@@ -110,7 +110,7 @@ function confirmSelection() {
     // Εάν ο χρήστης πατήσει "ΟΚ", καλέστε το PHP για να επικυρώσετε τις επιλεγμένες κατηγορίες
     $.ajax({
       method: "POST",
-      url: "http://localhost/webproject/Code/PHP/Admin/confirmCategories.php",
+      url: "../../PHP/Admin/confirmCategories.php",
       data: {
         activeCategories: activeCategories,
         inactiveCategories: inactiveCategories,
@@ -132,7 +132,7 @@ function confirmSelection() {
 function categoriesStatus() {
   $.ajax({
     method: "GET",
-    url: "http://localhost/webproject/Code/PHP/Admin/categoriesStatus.php",
+    url: "../../PHP/Admin/categoriesStatus.php",
     success: function (categoriesStatus) {
       // Έλεγχος της κατάστασης και τσεκάρισμα των κουτιών
       for (var id in categoriesStatus) {

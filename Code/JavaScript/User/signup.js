@@ -89,7 +89,7 @@ function signup(username, password, email) {
   // Εδώ κάνουμε την AJAX κλήση για το Sign Up //TODO ισως καποιο χρονομετρο μετα την επιτυχης συνδεση με τυπωση του μηνυματος και μετα αλλαγη σε αλλη σελιδα ή απλα εμφανιση μηνυματος
   //TODO(ΣΕΝΕΧΕΙΑ) και οταν παταει στο tab του login να γινονται κενα τα στοιχεια στο signup.
   $.ajax({
-    url: "http://localhost/webproject/Code/PHP/User/sign_up.php",
+    url: "../../PHP/User/sign_up.php",
     method: "POST",
     data: { username: username, password: password, email: email },
     success: function (response) {

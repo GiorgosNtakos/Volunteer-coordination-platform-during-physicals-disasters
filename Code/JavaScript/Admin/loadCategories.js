@@ -2,7 +2,7 @@ function loadCategories(type, element, listen) {
   var categoryMapping = {};
   $.ajax({
     method: "GET",
-    url: "http://localhost/webproject/Code/PHP/Admin/getCategories.php",
+    url: "../../PHP/Admin/getCategories.php",
     success: function (response) {
       // Επεξεργασία της απάντησης από τον διακομιστή (πιθανόν JSON)
       var categories = response.categories;

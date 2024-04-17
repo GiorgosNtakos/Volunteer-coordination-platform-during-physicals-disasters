@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function getitemInformation(itemName) {
     $.ajax({
-      url: "http://localhost/webproject/Code/PHP/Admin/get_item_info.php",
+      url: "../../PHP/Admin/get_item_info.php",
       method: "GET",
       data: { itemName: itemName },
       success: function (response) {
@@ -121,7 +121,7 @@ function getitemInformation(itemName) {
 
   function getVehicleitemInformation(itemName) {
     $.ajax({
-      url: "http://localhost/webproject/Code/PHP/Rescuer/get_vehicle_item_info.php",
+      url: "../../PHP/Rescuer/get_vehicle_item_info.php",
       method: "GET",
       data: { itemName: itemName },
       success: function (response) {
@@ -188,7 +188,7 @@ function getitemInformation(itemName) {
   function isInDistance(){
     return new Promise((resolve, reject) => {
     $.ajax({
-        url: "http://localhost/webproject/Code/PHP/Rescuer/distance_VW.php",
+        url: "../../PHP/Rescuer/distance_VW.php",
         method: "GET",
         success: function (response) {
           if (response.status === "success") {
@@ -210,7 +210,7 @@ function getitemInformation(itemName) {
       isInDistance().then(isClose => {
         if(isClose) {
       $.ajax({
-        url: "http://localhost/webproject/Code/PHP/Rescuer/unload_all_cargo.php",
+        url: "../../PHP/Rescuer/unload_all_cargo.php",
         method: "DELETE",
         success: function (response) {
           if (response.status === "success") {
@@ -285,7 +285,7 @@ function addItemInCargo(quantity){
   isInDistance().then(isClose => {
     if(isClose) {
   $.ajax({
-    url: "http://localhost/webproject/Code/PHP/Rescuer/add_items_quantity.php",
+    url: "../../PHP/Rescuer/add_items_quantity.php",
     method: "POST",
     data:{quantity : quantity},
     success: function (response) {
@@ -367,7 +367,7 @@ function removeStockItem(quantity){
   isInDistance().then(isClose => {
     if(isClose) {
   $.ajax({
-    url: "http://localhost/webproject/Code/PHP/Rescuer/remove_stock_items.php",
+    url: "../../PHP/Rescuer/remove_stock_items.php",
     method: "POST",
     data:{quantity : quantity},
     success: function (response) {

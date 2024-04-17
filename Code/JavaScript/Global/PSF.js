@@ -10,7 +10,7 @@ function searchOperation(){
 $( "#search-input" ).autocomplete({
     source: function(request, response) {
       $.ajax({
-        url: "http://localhost/webproject/Code/PHP/Global/autocomplete_data.php", // Η διεύθυνση του σεναρίου αναζήτησης στον server
+        url: "../../PHP/Global/autocomplete_data.php", // Η διεύθυνση του σεναρίου αναζήτησης στον server
         dataType: "json",
         data: {
           term: request.term

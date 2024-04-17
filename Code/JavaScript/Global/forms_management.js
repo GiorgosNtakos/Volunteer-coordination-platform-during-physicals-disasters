@@ -162,7 +162,7 @@ function createForm(full_name, phone, street, number, town) {
         console.log(formData);
 
       $.ajax({
-        url: "http://localhost/webproject/Code/PHP/Admin/create_rescuer.php",
+        url: "../../PHP/Admin/create_rescuer.php",
         method: "POST",
         data: formData,
         dataType: "json",
@@ -202,7 +202,7 @@ function createForm(full_name, phone, street, number, town) {
     } else if(window.location.href === "http://localhost/webproject/Code/Html/Global/form_completion.html" && (!checkActiveForm())){
 
     $.ajax({
-      url: "http://localhost/webproject/Code/PHP/Admin/create_vehicle.php",
+      url: "../../PHP/Admin/create_vehicle.php",
       method: "POST",
       data: formData,
       dataType: "json",
@@ -242,7 +242,7 @@ function createForm(full_name, phone, street, number, town) {
 
     } else if(window.location.href === "http://localhost/webproject/Code/Html/User/personal_info_form.html"){
       $.ajax({
-        url: "http://localhost/webproject/Code/PHP/User/personal_info_form.php",
+        url: "../../PHP/User/personal_info_form.php",
         method: "POST",
         data: formData,
         dataType: "json",

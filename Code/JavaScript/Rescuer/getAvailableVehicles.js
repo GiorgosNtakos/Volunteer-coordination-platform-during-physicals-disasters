@@ -7,7 +7,7 @@ function getAvailableVehicles(){
     var vehiclesList = document.getElementById("vehicle_list");
 
     $.ajax({
-        url: "http://localhost/webproject/Code/PHP/Rescuer/get_available_vehicles.php",
+        url: "../../PHP/Rescuer/get_available_vehicles.php",
         method: "GET",
         success: function (response) {
           if (response.status === "success") {
@@ -100,7 +100,7 @@ function getAvailableVehicles(){
 
 function assignvehicle(id){
   $.ajax({
-    url: "http://localhost/webproject/Code/PHP/Rescuer/assign_to_vehicle.php",
+    url: "../../PHP/Rescuer/assign_to_vehicle.php",
     method: "POST",
     data: {vehicle_id:id},
     success: function (response) {

@@ -1,6 +1,6 @@
 function deleteAnnouncement(announcementId, row) {
   $.ajax({
-    url: "http://localhost/webproject/Code/PHP/Admin/delete_announcement.php",
+    url: "../../PHP/Admin/delete_announcement.php",
     method: "POST",
     data: { id: announcementId },
     success: function (response) {

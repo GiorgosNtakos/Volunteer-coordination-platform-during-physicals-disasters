@@ -1,4 +1,4 @@
-// Λειτουργικότητα για το Sign In //TODO(OXI MONO ALLA KAI OPOY ALLOY XREIAZETAI) Na ginoyn oloi oi js opoy xreiazetai document.addEventListener("DOMContentLoaded", function())
+In// Λειτουργικότητα για το Sign In //TODO(OXI MONO ALLA KAI OPOY ALLOY XREIAZETAI) Na ginoyn oloi oi js opoy xreiazetai document.addEventListener("DOMContentLoaded", function())
 //TODO(SYNEXEIA) kalontas synarthseis ekei mesa.Epishs opoy xreiazetai ektos apo to pathma me aristero click na ginetai kai me to pathma toy koympioy "ENTER" apo to keyboard(opoy xreaizetai kai ayto)
 "use strict";
 
@@ -9,7 +9,7 @@ function login(event) {
 
   // Εδώ κάνουμε την AJAX κλήση για το Sign In
   $.ajax({
-    url: "http://localhost/webproject/Code/PHP/User/sign_in.php",
+    url: "../../PHP/User/sign_in.php",
     method: "GET",
     data: { username: username, password: password },
     success: function (response) {

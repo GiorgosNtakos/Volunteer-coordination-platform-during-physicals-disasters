@@ -17,7 +17,7 @@ function getTaskIds() {
     }
   };
 
-  xhr.open('GET', 'http://localhost/webproject/Code/PHP/Admin/get_tasks.php', true);
+  xhr.open('GET', '../../PHP/Admin/get_tasks.php', true);
   xhr.send();
 }
 
@@ -34,7 +34,7 @@ function loadItemsData() {
     }
   };
 
-  xhr.open('GET', 'http://localhost/webproject/Code/PHP/Admin/get_items.php', true);
+  xhr.open('GET', '../../PHP/Admin/get_items.php', true);
   xhr.send();
 }
 
@@ -70,7 +70,7 @@ function getTaskDetails() {
       }
     };
 
-    xhr.open('GET', 'http://localhost/webproject/Code/PHP/Admin/get_tasks.php?' + selectedTaskId, true);
+    xhr.open('GET', '../../PHP/Admin/get_tasks.php?' + selectedTaskId, true);
     xhr.send();
   }
 }
