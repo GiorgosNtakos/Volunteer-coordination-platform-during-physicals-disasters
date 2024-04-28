@@ -4,54 +4,46 @@ header('Content-Type: application/json');
 require '../Global/db_connect.php';
 $conn->set_charset("utf8");
 
-parse_str(file_get_contents("php://input"), $_DELETE);
+// Ελέγξτε αν το αίτημα είναι POST
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['task_id']) && isset($_POST['item']) && isset($_POST['quantity']) && isset($_POST['task_type']) && isset($_POST['username'])){
 
-if (isset($_GET['task_id'])) {
-    $task_id = $_GET['task_id'];
+        // Λήψη των δεδομένων από τη φόρμα
+        $task_id = $_POST['task_id'];
+        $item = $_POST['item'];
+        $quantity = $_POST['quantity'];
+        $task_type = $_POST['task_type'];
+        $username = $_POST['username']
 
-    // Ερώτημα SQL για το Task
-    $task_sql = "SELECT * FROM Tasks WHERE task_id = ?";
-    if ($stmt = $conn->prepare($task_sql)) {
-        $stmt->bind_param("i", $task_id);
-        $stmt->execute();
-        
-        // Αποθήκευση αποτελεσμάτων Task
-        $task_result = $stmt->get_result();
-        $task_data = $task_result->fetch_assoc();
-        $stmt->close();
-    } else {
-        echo json_encode(array('error' => 'Failed to prepare Task SQL statement'));
-        exit();
-    }
+        // Προετοιμασία του SQL ερωτήματος για εισαγωγή στον πίνακα Ανακοινώσεων
+        $stmt = $conn->prepare("INSERT INTO Announcements (task_id, item, quantity, task_type, username) VALUES (?, ?, ?, ?, ?)");
+        // Δέσιμο των παραμέτρων
+        $stmt->bind_param("ssii", $task_id, $item, $quantity, $task_type, $username);
 
-    // Ερώτημα SQL για το Username του δημιουργού του Task
-    $username_sql = "SELECT Users.username
-                     FROM Users
-                     JOIN Users_Tasks ON Users.user_id = Users_Tasks.user_id
-                     WHERE Users_Tasks.task_id = ?";
-    if ($stmt = $conn->prepare($username_sql)) {
-        $stmt->bind_param("i", $task_id);
-        $stmt->execute();
-        
-        // Αποθήκευση αποτελεσμάτων Username
-        $username_result = $stmt->get_result();
-        $usernames = [];
-        while ($row = $username_result->fetch_assoc()) {
-            $usernames[] = $row['username'];
+        // Εκτέλεση του ερωτήματος
+        if ($stmt->execute()) {
+            http_response_code(201);
+            $response = array("status" => "created", "message" => "The announcement was successfuully added to the backend and database");
+        } else {
+            http_response_code(500);
+            $response = array("status" => "server_error", "message" => "backend or database error during data insertion: " . $stmt->error);
         }
+
+        // Κλείσιμο της δήλωσης
         $stmt->close();
     } else {
-        echo json_encode(array('error' => 'Failed to prepare Username SQL statement'));
-        exit();
+        // Αν λείπουν πεδία
+        http_response_code(400);
+        $response = array("status" => "missing_400", "message" => "missing post parameters.");
     }
-
-    // Συγχώνευση δεδομένων σε ένα JSON αντικείμενο
-    $response = array(
-        'task_data' => $task_data,
-        'usernames' => $usernames
-    );
-
-    // Επιστροφή δεδομένων ως JSON
-    echo json_encode($response);
+} else {
+    // Αν η αίτηση δεν είναι POST
+    http_response_code(405);
+    $response = array("status" => "wrong_method_405", "message" => "Μη έγκυρη αίτηση.");
 }
+
+echo json_encode($response);
+
+// Κλείσιμο της σύνδεσης
+$conn->close();
 ?>
