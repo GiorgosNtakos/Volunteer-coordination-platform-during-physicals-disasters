@@ -8,7 +8,6 @@ function getTaskIds() {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
         var response = JSON.parse(xhr.responseText);
-        loadItemsData();
         populateSelect(response); // Καλεί συνάρτηση για να γεμίσει το select με τα δεδομένα που παίρνει από τον server
 
       } else {
@@ -45,7 +44,7 @@ function populateSelect(taskIds) {
     option.value = task.id;
 
     // Κάνει populate το select με τα στοιχεία του task ως options, αν αυτά υπάρχουν
-    option.text = task.id + ', ' + task.item_name + ', ' + task.quantity + ', ' + task.type + ', ' + task.status
+    option.text = task.id + ', ' + task.item_name + ', ' + task.username + ', ' + task.quantity + ', ' + task.type + ', ' + task.status
 
     select.appendChild(option);
   });
@@ -76,9 +75,12 @@ function getTaskDetails() {
 }
 
 function fillFormFields(taskData) {
-  console.log(taskData);
-  document.getElementById('item').value = taskData.item_name;
-  document.getElementById('quantity').value = taskData.quantity;
-  document.getElementById('task_type').value = taskData.type;
-  document.getElementById('status').value = taskData.status;
+  console.log(taskData[0]);
+  var task = taskData[0];
+
+  document.getElementById('item').value = task.item_name;
+  document.getElementById('quantity').value = task.quantity;
+  document.getElementById('username').value = task.username;
+  document.getElementById('task_type').value = task.type;
+  document.getElementById('status').value = task.status;
 }

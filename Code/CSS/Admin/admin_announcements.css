@@ -153,6 +153,11 @@ h2 {
   margin-top: 20px;
 }
 
+.announcement-table th:nth-child(1),
+.announcement-table td:nth-child(1) {
+  display: none;
+}
+
 .announcement-table th,
 .announcement-table td {
   border: 1px solid #ddd;

@@ -5,9 +5,11 @@ require '../Global/db_connect.php';
 $conn->set_charset("utf8");
 
 // Ερώτημα SQL για ανάκτηση όλων των Tasks
-$sql = "SELECT Tasks.*, Items.name AS item_name
+$sql = "SELECT Tasks.*, Items.name AS item_name, Users.username AS username
         FROM Tasks
-        INNER JOIN Items ON Tasks.item_id = Items.id";
+        INNER JOIN Items ON Tasks.item_id = Items.id
+        INNER JOIN Users ON Tasks.user_id = Users.id";
+
 $result = $conn->query($sql);
 
 $tasks = array();

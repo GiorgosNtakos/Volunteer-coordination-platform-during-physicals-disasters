@@ -130,14 +130,17 @@ CREATE TABLE Tasks (
 -- Πίνακας Ανακοινώσεων
 CREATE TABLE Announcements (
     id VARCHAR(36) PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    content TEXT NOT NULL,
+    quantity INT,
+    -- title VARCHAR(255) NOT NULL,
+    -- content TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     expiry_date TIMESTAMP,
     is_hidden BOOLEAN DEFAULT FALSE,
-    user_id VARCHAR(36),
-    task_id INT,
+    item_id INT,
+    user_id INT,
+    -- task_id INT,
     FOREIGN KEY (user_id) REFERENCES User(id),
-    FOREIGN KEY (task_id) REFERENCES Tasks(id)
+    -- FOREIGN KEY (task_id) REFERENCES Tasks(id),
+    FOREIGN KEY (user_id) REFERENCES User(id)
 );
