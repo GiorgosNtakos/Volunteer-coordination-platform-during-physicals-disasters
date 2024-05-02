@@ -66,71 +66,44 @@ function getRequests(){
 
                 CurrentRequestsList.innerHTML = "";
                 OldRequestsList.innerHTML = "";
-                if(requests.type === 'completed'){
 
                     requests.forEach(function(request){
-                        var row_o = document.createElement("tr");
+                        var row = document.createElement("tr");;
 
                         // Αίτηση Προιοντος
                         var requestCell = document.createElement("td");
                         requestCell.textContent ="Αίτηση για " + request.name;
-                        row_o.appendChild(requestCell);
+                        row.appendChild(requestCell);
 
                         // Κατασταση Αιτησης
                         var statusCell = document.createElement("td");
                         statusCell.textContent = request.status;
-                        row_o.appendChild(statusCell);
+                        row.appendChild(statusCell);
 
                         // Ατομα
                         var populationCell = document.createElement("td");
                         populationCell.textContent = (request.quantity)/2;
-                        row_o.appendChild(populationCell);
+                        row.appendChild(populationCell);
 
                         // Ημερομηνια Εισαγωγης
                         var importDateCell = document.createElement("td");
                         importDateCell.textContent = request.created_at;
-                        row_o.appendChild(importDateCell);
+                        row.appendChild(importDateCell);
 
-                        // Ημερομηνια Ολοκλήρωσης
+                        // Ημερομηνια Ολοκλήρωσης/Εγκρισης
                         var completeDateCell = document.createElement("td");
                         completeDateCell.textContent = request.updated_at;
-                        row_o.appendChild(completeDateCell);
+                        row.appendChild(completeDateCell);
 
-                        OldRequestsList.appendChild(row_o);
+                        if(request.status === "completed"){
+
+                            OldRequestsList.appendChild(row);
+
+                        } else {
+
+                            CurrentRequestsList.appendChild(row);
+                        }
                     });
-
-                } else {
-                    requests.forEach(function(request){
-                        var row_c = document.createElement("tr");
-
-                        // Αίτηση Προιοντος
-                        var requestCell = document.createElement("td");
-                        requestCell.textContent ="Αίτηση για " + request.name;
-                        row_c.appendChild(requestCell);
-
-                        // Κατασταση Αιτησης
-                        var statusCell = document.createElement("td");
-                        statusCell.textContent = request.status;
-                        row_c.appendChild(statusCell);
-
-                        // Ατομα
-                        var populationCell = document.createElement("td");
-                        populationCell.textContent = (request.quantity)/2;
-                        row_c.appendChild(populationCell);
-
-                        // Ημερομηνια Εισαγωγης
-                        var importDateCell = document.createElement("td");
-                        importDateCell.textContent = request.created_at;
-                        row_c.appendChild(importDateCell);
-
-                        // Ημερομηνια Εγκρισης
-                        var completeDateCell = document.createElement("td");
-                        completeDateCell.textContent = request.updated_at;
-                        row_c.appendChild(completeDateCell);
-
-                        CurrentRequestsList.appendChild(row_c);
-                    });
-                }
             } else if (response.status === "success_but_empty") {
                 CurrentRequestsList.innerHTML =
                   "<tr><td colspan='7'>Δεν υπάρχουν αιτήσεις.</td></tr>";
