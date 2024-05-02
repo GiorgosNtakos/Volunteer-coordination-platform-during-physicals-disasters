@@ -5,7 +5,8 @@
 #show-delete-categories-form,
 #show-load-quantities-form,
 #show-base-cargo,
-#unload-vehicle-cargo {
+#unload-vehicle-cargo,
+#Show_History_Requests {
   position: relative;
   background-color: #5a197d;
   color: gold;
@@ -16,6 +17,10 @@
   cursor: pointer;
   width: 75%;
   left: 48px;
+}
+
+#Show_History_Requests {
+  left: 18px;
 }
 
 #unload-vehicle-cargo{
@@ -29,7 +34,8 @@
 #show-delete-categories-form:hover,
 #show-load-quantities-form:hover,
 #show-base-cargo:hover,
-#unload-vehicle-cargo:hover {
+#unload-vehicle-cargo:hover,
+#Show_History_Requests:hover {
   transition: background-color 0.3s;
   background-color: #440466;
 }

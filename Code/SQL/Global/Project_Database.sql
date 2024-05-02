@@ -119,11 +119,12 @@ CREATE TABLE Tasks (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     item_id INT,
-    vehicle_id INT,
+    vehicle_id VARCHAR(36),
     user_id VARCHAR(36),
     FOREIGN KEY (item_id) REFERENCES Items(id),
     FOREIGN KEY (vehicle_id) REFERENCES Vehicles(id),
     FOREIGN KEY (user_id) REFERENCES User(id)
+    UNIQUE INDEX vehicle_item_unique (user_id, item_id)
 );
 
 -- Πίνακας Ανακοινώσεων
