@@ -29,7 +29,7 @@ function loadCategories(type, element, listen) {
           );
         } else if (type === "select") {
           categoryList.append(
-            `<option value="${category.id}">${category.category_name}</option>`
+            `<option value="${category.id} σ">${category.category_name}</option>`
           );
         }
       });

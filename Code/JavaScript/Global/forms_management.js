@@ -1,9 +1,12 @@
 // // ΝΑ ΔΩ ΓΙΑΤΙ ΟΤΑΝ ΜΕ ΒΑΣΗ ΤΑ ΣΤΟΙΧΕΙΑ ΤΗΣ ΔΙΈΥΘΥΝΣΗΣ ΜΟΥ ΠΕΤΑΕΙ 2 τιμες για τα LAT και LON
 //* NA ΦΤΙΑΞΩ PHP ΕΛΕΓΧΟΥ ΤΥΠΟΥ ΧΡΗΣΤΗ ΓΙΑ ΝΑ ΕΜΦΑΝΙΖΩ ΤΙΣ ΦΟΡΜΕΣ ΚΑΤΑΛΛΗΛΑ ΕΧΟΝΤΑΣ ΜΟΝΟ ΜΙΑ ΣΕΛΙΔΑ ΔΙΑΧΕΙΡΙΣΗΣ HTML ΓΙΑ ΤΗΝ ΦΟΡΜΑ
+//! ΦΤΙΑΞΙΜΟ ΓΙΑ ΤΑ ΚΟΥΜΠΙΑ (ΠΟΙΑ ΝΑ ΛΕΙΤΟΥΡΓΟΥΝ ΜΕ ENTER ΚΑΙ ΠΟΙΑ ΟΧΙ)
 "use strict";
 var formData;
 document.addEventListener("DOMContentLoaded", function () {
+  if (window.location.href === "http://localhost/webproject/Code/Html/Global/form_completion.html"){
   ChangeForms();
+}
   document
     .getElementById("Global_form")
     .addEventListener("submit", function (event) {
@@ -21,6 +24,8 @@ document.addEventListener("DOMContentLoaded", function () {
       // Ελληνικοί χαρακτήρες και έγκυρη μορφή "Όνομα Επώνυμο"
       var greekRegex = /^[Α-ΩΆ-Ώα-ωά-όώΐϊΰύ\s]*$/u;
       var nameFormatRegex = /^[Α-ΩΆ-Ώα-ωά-όώΐϊΰύ]+\s[Α-ΩΆ-Ώα-ωά-όώΐϊΰύ]+$/u;
+
+      if (window.location.href === "http://localhost/webproject/Code/Html/Global/form_completion.html"){
 
       console.log(checkActiveForm())
       if (full_name.trim() === "" && (!checkActiveForm())) {
@@ -59,6 +64,40 @@ document.addEventListener("DOMContentLoaded", function () {
         );
         return;
       }
+     }
+
+     if (window.location.href === "http://localhost/webproject/Code/Html/User/personal_info_form.html"){
+
+     if (full_name.trim() === "") {
+      showMessage(
+        "error-message",
+        "Συμπληρώστε το πεδίο Ονομ/νυμο.",
+        "#full_name"
+      );
+      return;
+    }
+
+    if (
+      (!greekRegex.test(trimmedFullName) ||
+      !nameFormatRegex.test(trimmedFullName) )
+    ) {
+      showMessage(
+        "error-message",
+        "Παρακαλώ εισάγετε έγκυρο Όνομα και Επίθετο με ελληνικούς μόνο χαρακτήρες.(πχ Νίκος Κούκος)",
+        "#full_name"
+      );
+      return;
+    }
+
+    if (!validatePhoneNumber(phone)) {
+      showMessage(
+        "error-message",
+        "Το κινητό τηλέφωνο πρεπει να ακολουθεί τα στανταρ του ελληνικου προτυπου τηλεφωνίας(πχ. +30 69********).",
+        "#phone"
+      );
+      return;
+    }
+    }
 
       //Street
 
@@ -119,7 +158,6 @@ function createForm(full_name, phone, street, number, town) {
   console.log("Create Rescuer - Street:", street);
   console.log("Create Rescuer - Number:", number);
   console.log("Create Rescuer - Town:", town);
-  console.log(checkActiveForm());
 
   //const transliterate = require('../../../node_modules/transliteration');
 
@@ -130,6 +168,7 @@ function createForm(full_name, phone, street, number, town) {
   getCoordinatesFromAddress(address)
     .then((coordinates) => {
       // Προετοιμασία των δεδομένων για αποστολή με τη χρήση AJAX
+    if(window.location.href === "http://localhost/webproject/Code/Html/Global/form_completion.html"){
       if (checkActiveForm()) {
         // Είμαστε στη φόρμα του διασώστη, συμπεριλαμβάνουμε όλα τα πεδία
         formData = $("#Global_form").serialize();
@@ -137,6 +176,9 @@ function createForm(full_name, phone, street, number, town) {
         // Είμαστε στη φόρμα του οχήματος, αποκλείουμε το πεδίο τηλεφώνου από τη σειριοποίηση
         formData = $("#Global_form").find("input, select, textarea").not("#phone").serialize();
       }
+    } else {
+      formData = $("#Global_form").serialize();
+    }
       formData +=
         "&town=" +
         town +
@@ -433,9 +475,11 @@ function ChangeForms(){
       });
   }
 
+if (window.location.href === "http://localhost/webproject/Code/Html/Global/form_completion.html"){
   function checkActiveForm()
   {
     var phoneFieldDisplay = document.getElementById("rescuerFields").style.display;
     var isActiveRescuerForm = phoneFieldDisplay !== "none";
     return isActiveRescuerForm;
   }
+}

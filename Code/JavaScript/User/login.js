@@ -17,7 +17,7 @@ function login(event) {
         // Η σύνδεση ήταν επιτυχής
         if(response.form === 1){
 
-          window.location.href = "user_index_page.html";
+          window.location.href = "request_page.html";
           showMessage("extra-success-message", response.message, "#user-login");
           // Ενέργειες που θέλετε να κάνετε μετά την επιτυχημένη σύνδεση
 

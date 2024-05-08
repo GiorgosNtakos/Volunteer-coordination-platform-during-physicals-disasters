@@ -146,3 +146,46 @@ color: gold; /* Χρώμα κειμένου */
 .ui-menu .ui-menu-item:last-child  {
 border-bottom: none;
 }
+
+.ui-autocomplete::-webkit-scrollbar {
+  width: 8px; /* Πλάτος του scrollbar */
+}
+
+.ui-autocomplete::-webkit-scrollbar-track {
+  background: #f0f0f0; /* Χρώμα του track */
+}
+
+.ui-autocomplete::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1; /* Χρώμα της λαβής του scrollbar */
+  border-radius: 10px; /* Στρογγυλεμένες γωνίες για τη λαβή */
+}
+
+.ui-autocomplete::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8; /* Χρώμα της λαβής όταν το ποντίκι περνάει πάνω της */
+}
+
+.history_requests{
+  display: none;
+}
+
+.history-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.history-table {
+  flex: 1;  /* Κάθε πίνακας παίρνει ίσο χώρο στη διάταξη */
+  padding: 10px; /* Προαιρετικά, προσθέστε padding για εσοχή ανάμεσα στους πίνακες */
+}
+
+.history-table h2 {
+  text-align: center;  /* Κεντράρει το κείμενο οριζόντια */
+  margin-top: 20px;    /* Προσθέτει απόσταση από το πάνω μέρος του container */
+  margin-bottom: 20px; /* Προσθέτει απόσταση πριν το περιεχόμενο που ακολουθεί */
+}
+
+.history-table table {
+  max-height: 660px; /* Θέτει το μέγιστο ύψος του πίνακα */
+  overflow-y: auto; /* Ενεργοποιεί την κάθετη κύλιση αν χρειάζεται */
+  margin-bottom: 20px;
+}

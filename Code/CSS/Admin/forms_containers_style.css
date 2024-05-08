@@ -5,7 +5,8 @@
 #load-quantities-form-container,
 #options-form-container,
 #removeStock-form-container,
-#addStock-form-container {
+#addStock-form-container,
+#request-form-container {
   width: 325px;
   display: none;
   position: fixed;
@@ -80,7 +81,8 @@
 #uploadQuantitiesForm,
 #options-item-form,
 #remove-stock-form,
-#add-stock-form {
+#add-stock-form,
+#request-form {
   text-align: center;
 }
 
@@ -93,7 +95,8 @@
 #uploadQuantitiesForm label[for="loadTypeQuantities"],
 #options-item-form label,
 #remove-stock-form,
-#add-stock-form {
+#add-stock-form,
+#request-form {
   display: block;
   font-weight: bold;
   color: gold; /* Χρυσό χρώμα για τις ετικέτες */
@@ -113,7 +116,8 @@
 #remove-stock-form input[type="text"],
 #remove-stock-form input[type="number"],
 #add-stock-form input[type="text"],
-#add-stock-form input[type="number"]{
+#add-stock-form input[type="number"],
+#request-form input{
   width: 80%;
   padding: 10px;
   margin: 5px 0;
@@ -187,7 +191,8 @@
 #uploadQuantitiesForm input[type="submit"],
 #options-item-form button[type="submit"],
 #remove-stock-form button[type="submit"],
-#add-stock-form button[type="submit"]
+#add-stock-form button[type="submit"],
+#request-form button[type="submit"]
  {
   background-color: gold; /* Μωβ χρώμα για το κουμπί */
   color: black;
@@ -207,7 +212,8 @@
 #uploadQuantitiesForm input[type="submit"]:hover,
 #options-item-form button[type="submit"]:hover,
 #remove-stock-form button[type="submit"]:hover,
-#add-stock-form button[type="submit"]:hover {
+#add-stock-form button[type="submit"]:hover,
+#request-form button[type="submit"]:hover {
   transition: background-color 0.4s;
   background-color: goldenrod;
 }

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <iframe src="citizen_navbar.html">
+    <!-- <iframe src="../Global/Header.html">
        Μήνυμα για τους χρήστες που δεν υποστηρίζουν το object
       Το αρχείο HTML δεν μπορεί να φορτωθεί.
     </iframe> -->
@@ -12,6 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
+    <div id="Header"></div>
     <div id="overlay"></div>
 
     <main>
@@ -26,7 +27,7 @@
       <div id="add-announcement-form-container">
         <form id="add-announcement-form">
           <label for="taskSelect">Επιλογή Task</label>
-          <select id="taskSelect" onchange="getTaskDetails()">
+          <select id="taskSelect" name="task_id" onchange="getTaskDetails()">
             <option value=""><Επιλέξτε Task></option>
             <!-- Εδώ θα εμφανίζονται τα Tasks από τη βάση --></select><br />
 
@@ -35,17 +36,17 @@
 
           <label for="quantity">Ποσότητα</label>
           <input type="text" id="quantity" name="quantity" /><br />
-
+          
+          <label for="username">Πολίτης</label>
+          <input type="text" id="username" name="username" /><br />
+          
           <label for="task_type">Τύπος</label>
           <input type="text" id="task_type" name="task_type" /><br />
           
           <label for="status">Κατάσταση</label>
           <input type="text" id="status" name="status" /><br />
-          
-          <!-- <label for="username">Πολίτης</label>
-          <input type="text" id="username" name="username" /><br /> -->
 
-          <button type="submit">Υποβολή</button>
+          <button type="submit" >Υποβολή</button>
         </form>
       </div>
       
@@ -54,14 +55,12 @@
       <table class="announcement-table">
         <thead>
           <tr>
-            <!-- TODO : Να κρύψω το ID -->
             <th>ID</th>
             <th>Προϊόν</th>
             <th>Ποσότητα</th>
+            <th>Πολίτης</th>
             <th>Τύπος</th>
             <th>Κατάσταση</th>
-            <!-- TODO : Να βάλω το username του Πολίτη που έφτιαξε το task -->
-            <!-- <th>Πολίτης</th> -->
             <th></th>
           </tr>
         </thead>
@@ -71,6 +70,7 @@
       </table>
     </main>
     
+    <script src="../../JavaScript/Global/HeaderCall.js"></script>
     <script src="../../JavaScript/Admin/get_tasks.js"></script>
     <script src="../../JavaScript/Admin/get_announcements.js"></script>
     <script src="../../JavaScript/Admin/add_announcement.js"></script>

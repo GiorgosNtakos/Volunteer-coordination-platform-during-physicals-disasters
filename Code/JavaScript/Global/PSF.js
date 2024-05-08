@@ -93,8 +93,10 @@ function handlePreviousButton() {
                 if (isBaseCargoShown) {
                     loadVehicleCargo(currentPage, 15, currentSearchTerm, selectedCategories);
                 } else {
-                    loadItems(currentPage, 15, currentSearchTerm, selectedCategories);
+                    loadItems(c, 15, currentSearchTerm, selectedCategories);
                 }
+    } else if (window.location.href === "http://localhost/webproject/Code/Html/User/request_page.html"){
+      getAvailableItems(currentPage, 15, currentSearchTerm, selectedCategories);
     }
   }
 

@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         if ($result->num_rows > 0) {
             $item_id = $result->fetch_assoc();
             session_start();
-            $_SESSION['item_id_auth'] = $item_id['id'];;
+            $_SESSION['item_id_auth'] = $item_id['id'];
 
         $sql = "SELECT items.name, items.category_id, items.details, warehouse_stock.quantity AS quantity FROM items
         LEFT JOIN warehouse_stock ON warehouse_stock.item_id = items.id WHERE name = ?";
