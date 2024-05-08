@@ -1,5 +1,5 @@
 "use strict";
-import { vehicleMarkers, taskMarkers, map, lineMarkers } from './map.js';
+import { map, vehicleMarkers, offerMarkers, requestMarkers, polylineLayers } from './new_map.js';
 
 // Define the filterMarkers function
 function filterMarkers() {
@@ -12,27 +12,27 @@ function filterMarkers() {
     const showLines = document.getElementById('showLinesSwitch').checked;
 
     // Filter task markers based on checkbox states
-    taskMarkers.forEach(marker => {
+    requestMarkers.forEach(marker => {
 
-        if (!marker.options || !marker.options.type || !marker.options.status) {
+        if (!marker.status) {
             console.log("Marker options are invalid:", marker);
             return; // Skip processing invalid marker
         }
-        const markerType = marker.options.type;
-        const markerStatus = marker.options.status;
+
+        const markerStatus = marker.status;
 
         // Default visibility
         let shouldBeVisible = true;
 
         // Apply filters based on checkbox states
-        if ((markerType === 'Request' && markerStatus === 'accepted' && !acceptedRequests) ||
-            (markerType === 'Request' && markerStatus === 'pending' && !pendingRequests) ||
-            (markerType === 'Offer' && !offers)) {
+        if ((markerStatus === 'accepted' && !acceptedRequests) ||
+            (markerStatus === 'pending' && !pendingRequests) 
+            ) {
             shouldBeVisible = false;
         }
 
         // Show or hide the marker based on shouldBeVisible flag
-        console.log("Marker:", markerType, markerStatus, "Should be visible:", shouldBeVisible);
+        console.log("Marker:", markerStatus, "Should be visible:", shouldBeVisible);
         if (shouldBeVisible) {
             map.addLayer(marker);
         } else {
@@ -40,7 +40,7 @@ function filterMarkers() {
         }
     });
 
-    lineMarkers.forEach(line => {
+    polylineLayers.forEach(line => {
         if (!showLines) {
             map.removeLayer(line); // Remove the line marker if showLines checkbox is unchecked
         } else {
@@ -50,7 +50,7 @@ function filterMarkers() {
 
     // Filter vehicle markers based on checkbox states
     vehicleMarkers.forEach(marker => {
-        const hasTask = marker.options.type === "accepted";
+        const hasTask = marker.task_status === "accepted";
 
         // Default visibility
         let shouldBeVisible = true;

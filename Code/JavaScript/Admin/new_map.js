@@ -1,20 +1,34 @@
 "use strict";
 
+let map;
+let vehicleMarkers = [];
+let offerMarkers = [];
+let requestMarkers = [];
+let polylineLayers = [];
+
+
 $(document).ready(function() {
-    var map = L.map('map').setView([38.246242, 21.7350847], 13);
+    initializeMap();
+    setupDataLayers();
+});
+
+function initializeMap() {
+    // Δημιουργία του map object
+    map = L.map('map').setView([38.246242, 21.7350847], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
     }).addTo(map);
+}
 
-    // Καλέστε τη συνάρτηση για την ανάκτηση και εμφάνιση της βάσης (η οποία με τη σειρά της θα καλέσει τη συνάρτηση για τα οχήματα)
-    fetchAndDisplayBase(map);
-    displayPendingOffers(map);
-    displayPendingRequests(map);
-});
-
+function setupDataLayers() {
+    // Κλήσεις συναρτήσεων για τη φόρτωση δεδομένων στον χάρτη
+    fetchAndDisplayBase();
+    displayPendingOffers();
+    displayPendingRequests();
+}
 
 // Συνάρτηση για την ανάκτηση και εμφάνιση της βάσης
-function fetchAndDisplayBase(map) {
+function fetchAndDisplayBase() {
     $.ajax({
         url: "../../PHP/Global/get_warehouse_adress.php",
         method: "GET",
@@ -91,7 +105,7 @@ function fetchAndDisplayBase(map) {
 }
 
 // Συνάρτηση για την ανάκτηση και εμφάνιση των οχημάτων
-function fetchAndDisplayVehicles(map) {
+function fetchAndDisplayVehicles() {
     $.ajax({
         url: "../../PHP/Global/get_all_vehicles.php",
         method: "GET",
@@ -106,9 +120,27 @@ function fetchAndDisplayVehicles(map) {
                         popupAnchor: [0, -35]
                     });
 
-                    L.marker([vehicle.location_lat, vehicle.location_lon], {icon: vehicleIcon}).addTo(map)
-                        .bindPopup("Όνομα: " + vehicle.name + "<br>Διεύθυνση: " + vehicle.street + " " + vehicle.number + ", " + vehicle.town);
-                });
+                    var taskStatus = vehicle.tasks.length > 0 ? vehicle.tasks[0].task_status : "No tasks";
+                    var vehicleMarker = L.marker([vehicle.location_lat, vehicle.location_lon], {icon: vehicleIcon}).addTo(map)
+                    .bindPopup("Όνομα: " + vehicle.name + "<br>Διεύθυνση: " + vehicle.street + " " + vehicle.number + ", " + vehicle.town
+                        + "<br>status: " + taskStatus   );
+                    
+                    vehicleMarker.taskStatus = taskStatus;
+                    vehicleMarkers.push(vehicleMarker);  // Προσθήκη στο array
+                     // Draw lines to each task
+                    vehicle.tasks.forEach(task => {
+                        if (task.location_lat && task.location_lon) {  // Check task has valid location data
+                            var linePoints = [
+                                [vehicle.location_lat, vehicle.location_lon],
+                                [task.location_lat, task.location_lon]
+                            ];
+                            const polylineLayer = L.polyline(linePoints, { color: 'green' }).addTo(map);
+                            polylineLayers.push(polylineLayer); // Storing layer for potential later use or manipulation
+                        }
+                    });
+
+            });
+
             } else {
                 console.error("An error occurred fetching vehicles: " + response.message);
             }
@@ -119,7 +151,7 @@ function fetchAndDisplayVehicles(map) {
     });
 }
 
-function displayPendingOffers(map) {
+function displayPendingOffers() {
     $.ajax({
         url: "../../PHP/Global/get_pending_offers.php",
         method: "GET",
@@ -135,8 +167,12 @@ function displayPendingOffers(map) {
                         popupAnchor: [0, -35]
                     });
 
-                    L.marker([offer.location_lat, offer.location_lon], {icon: offerIcon}).addTo(map)
-                        .bindPopup("Προσφορά: " + offer.quantity + "<br>Από: " + offer.username);
+                     var offerMarker = L.marker([offer.location_lat, offer.location_lon], {icon: offerIcon}).addTo(map)
+                        .bindPopup("Προσφορά: " + offer.quantity + "<br>Από: " + offer.username + "<br>Όνομα: " + offer.full_name +
+                         "<br>οχημα: " + offer.vehicle_username);
+
+                    offerMarkers.push(offerMarker);  // Προσθήκη στο array
+                        
                 });
             }
         },
@@ -146,7 +182,7 @@ function displayPendingOffers(map) {
     });
 }
 
-function displayPendingRequests(map) {
+function displayPendingRequests() {
     $.ajax({
         url: "../../PHP/Global/get_pending_requests.php",
         method: "GET",
@@ -161,8 +197,12 @@ function displayPendingRequests(map) {
                         popupAnchor: [0, -35]
                     });
 
-                    L.marker([request.location_lat, request.location_lon], {icon: requestIcon}).addTo(map)
-                        .bindPopup("Αίτημα: " + request.quantity + "<br>Από: " + request.username);
+                    var requestMarker = L.marker([request.location_lat, request.location_lon], {icon: requestIcon}).addTo(map)
+                    .bindPopup("Αίτημα: " + request.quantity + "<br>Από: " + request.username + "<br> status: " + request.status);
+                    // Store the status as a property of the marker object
+                    requestMarker.status = request.status;
+
+                    requestMarkers.push(requestMarker);  // Προσθήκη στο array
                 });
             }
         },
@@ -171,3 +211,6 @@ function displayPendingRequests(map) {
         }
     });
 }
+
+export { offerMarkers, vehicleMarkers, requestMarkers, map, polylineLayers };
+

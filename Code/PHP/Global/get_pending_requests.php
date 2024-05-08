@@ -1,21 +1,21 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-require '../Global/db_connect.php'; // Αντικαταστήστε με την πραγματική διαδρομή του αρχείου σας για σύνδεση στην βάση δεδομένων
+require 'db_connect.php'; // Αντικαταστήστε με την πραγματική διαδρομή του αρχείου σας για σύνδεση στην βάση δεδομένων
 $conn->set_charset("utf8");
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
-    $status = 'pending';
+    //$status = 'pending';
     $type = 'Request';
 
 $sql = "SELECT tasks.id, tasks.quantity, tasks.status, users.username, users.location_lat, users.location_lon 
         FROM Tasks 
         LEFT JOIN Users ON tasks.user_id = users.id 
-        WHERE tasks.status = ? AND tasks.type = ?";
+        WHERE  tasks.type = ?";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ss", $status, $type);
+$stmt->bind_param("s", $type);
 $stmt->execute();
 $result = $stmt->get_result();
 
