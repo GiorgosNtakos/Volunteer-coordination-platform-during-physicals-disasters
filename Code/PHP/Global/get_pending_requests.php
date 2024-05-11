@@ -9,9 +9,11 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     //$status = 'pending';
     $type = 'Request';
 
-$sql = "SELECT tasks.id, tasks.quantity, tasks.status, users.username, users.location_lat, users.location_lon 
+$sql = "SELECT tasks.id, tasks.quantity, tasks.status, users.full_name, tasks.created_at, tasks.updated_at, users.phone, users.street, users.number, users.town, users.location_lat, users.location_lon, items.name, vehicles.name as vehicle_name
         FROM Tasks 
-        LEFT JOIN Users ON tasks.user_id = users.id 
+        LEFT JOIN Users ON tasks.user_id = users.id
+        LEFT JOIN items ON tasks.item_id = items.id
+        LEFT JOIN vehicles ON tasks.vehicle_id = vehicles.id
         WHERE  tasks.type = ?";
 
 $stmt = $conn->prepare($sql);

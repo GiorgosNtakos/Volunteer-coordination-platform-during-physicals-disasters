@@ -9,12 +9,13 @@ $conn->set_charset("utf8");
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $type = 'Offer';
 
-    $sql = "SELECT tasks.id, tasks.quantity, tasks.status, users.username, users.full_name, users.phone,
+    $sql = "SELECT tasks.id, tasks.quantity, tasks.status, tasks.created_at, tasks.updated_at, items.name, users.full_name, users.phone, users.street, users.number, users.town,
             users.location_lat, users.location_lon,
-            vehicles.name AS vehicle_username 
+            vehicles.name AS vehicle_name 
             FROM tasks 
-            JOIN users ON tasks.user_id = users.id 
+            LEFT JOIN users ON tasks.user_id = users.id 
             LEFT JOIN vehicles ON tasks.vehicle_id = vehicles.id
+            LEFT JOIN items ON tasks.item_id = items.id
             WHERE tasks.type = ?";
 
     $stmt = $conn->prepare($sql);

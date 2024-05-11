@@ -10,6 +10,26 @@ let polylineLayers = [];
 $(document).ready(function() {
     initializeMap();
     setupDataLayers();
+
+    map.on('popupopen', function(e) {
+        // Βρείτε τη θέση του popup
+        var popupAnchor = e.popup.getLatLng();
+        var point = map.latLngToContainerPoint(popupAnchor);
+    
+        var cargoDetailsDiv = document.getElementById('vehicleCargoDetails');
+        // Ενημερώστε τη θέση του div ανάλογα με τη θέση του popup
+        cargoDetailsDiv.style.top = (point.y + window.scrollY - 107) + 'px'; // Μετακινήστε το div λίγο πάνω από το popup
+        cargoDetailsDiv.style.left = (point.x + window.scrollX + 430) + 'px'; // Μετακινήστε το div δεξιά του popup
+    });
+
+    map.on('zoomend moveend', function() {
+        updateCargoDetailsPosition();
+    });
+
+    map.on('popupclose', function() {
+    document.getElementById('vehicleCargoDetails').style.display = 'none'; // Κρύβετε το div
+    document.querySelector('.cargo-title').style.display = 'none';
+});
 });
 
 function initializeMap() {
@@ -43,7 +63,10 @@ function fetchAndDisplayBase() {
                 });
 
                 var baseMarker = L.marker([response.cordinates.location_lat, response.cordinates.location_lon], {icon: baseIcon, draggable: 'true'}).addTo(map)
-                    .bindPopup("Όνομα: Κεντρική Αποθήκη" + "<br>Διεύθυνση: " + response.cordinates.street + " " + response.cordinates.number + " " + response.cordinates.town);
+                    .bindPopup(`<div class="popup-content">
+                    <div class="popup-title">Κεντρική Αποθήκη</div>
+                    <div class="popup-info"><strong>Διεύθυνση:</strong> ${response.cordinates.street} ${response.cordinates.number}, ${response.cordinates.town}</div>
+                    </div>`);
 
                     fetchAndDisplayVehicles(map);
 
@@ -120,10 +143,16 @@ function fetchAndDisplayVehicles() {
                         popupAnchor: [0, -35]
                     });
 
-                    var taskStatus = vehicle.tasks.length > 0 ? vehicle.tasks[0].task_status : "No tasks";
+                    var taskStatus = vehicle.tasks.length < 4 ? "Διαθέσιμο" : "Μη διαθέσιμο";
                     var vehicleMarker = L.marker([vehicle.location_lat, vehicle.location_lon], {icon: vehicleIcon}).addTo(map)
-                    .bindPopup("Όνομα: " + vehicle.name + "<br>Διεύθυνση: " + vehicle.street + " " + vehicle.number + ", " + vehicle.town
-                        + "<br>status: " + taskStatus   );
+                    .bindPopup(`
+                    <div class="popup-content">
+                        <div class="popup-title">Όχημα ${vehicle.name}</div>
+                        <div class="popup-info"><strong>Διεύθυνση:</strong> ${vehicle.street} ${vehicle.number}, ${vehicle.town}</div>
+                        <div class="popup-info"><strong>Κατάσταση:</strong> ${taskStatus}</div>
+                        <div class="popup-info"><strong>Ενεργά Tasks:</strong> ${vehicle.assigned_tasks}</div>
+                        <div class="popup-info"><button id = "popup_button_id" class="popup-button" onclick="showCargo('${vehicle.id}')">Εμφάνιση φορτίου οχήματος</button></div>
+                    </div>`);
                     
                     vehicleMarker.taskStatus = taskStatus;
                     vehicleMarkers.push(vehicleMarker);  // Προσθήκη στο array
@@ -150,7 +179,7 @@ function fetchAndDisplayVehicles() {
         }
     });
 }
-
+Intl.DateTimeFormat()
 function displayPendingOffers() {
     $.ajax({
         url: "../../PHP/Global/get_pending_offers.php",
@@ -168,8 +197,26 @@ function displayPendingOffers() {
                     });
 
                      var offerMarker = L.marker([offer.location_lat, offer.location_lon], {icon: offerIcon}).addTo(map)
-                        .bindPopup("Προσφορά: " + offer.quantity + "<br>Από: " + offer.username + "<br>Όνομα: " + offer.full_name +
-                         "<br>οχημα: " + offer.vehicle_username);
+                        .bindPopup(function() {
+                            var popupContent = `<div class="popup-content">
+                                <div class="popup-title">${offer.full_name}</div>
+                                <div class="popup-info"><strong>Τηλέφωνο:</strong> ${offer.phone}</div>
+                                <div class="popup-info"><strong>Διεύθυνση:</strong> ${offer.street} ${offer.number}, ${offer.town}</div>
+                                <div class="popup-info"><strong>Είδος Προσφοράς:</strong> ${offer.name}</div>
+                                <div class="popup-info"><strong>Ποσότητα Προσφοράς:</strong> ${offer.quantity}</div>
+                                <div class="popup-info"><strong>Ημερομηνία Καταχώρησης:</strong> ${formatDateIntl(offer.created_at)}</div>`;
+                        
+                            // Έλεγχος αν το vehicle_id είναι null
+                            if (offer.vehicle_id === '') {
+                                popupContent += `<div class="popup-info"><strong>Κατάσταση:</strong> Δεν έχει αναληφθεί ακόμα</div>`;
+                            } else {
+                                popupContent += `<div class="popup-info"><strong>Όνομα Οχήματος:</strong> ${offer.vehicle_name}</div>
+                                <div class="popup-info"><strong>Ημερομηνία Ανάληψης:</strong> ${formatDateIntl(offer.updated_at)}</div>`; // Χρησιμοποιήστε τη formatDate για την ημερομηνία ανάληψης
+                            }
+                        
+                            popupContent += `</div>`;
+                            return popupContent;
+                        });
 
                     offerMarkers.push(offerMarker);  // Προσθήκη στο array
                         
@@ -198,7 +245,26 @@ function displayPendingRequests() {
                     });
 
                     var requestMarker = L.marker([request.location_lat, request.location_lon], {icon: requestIcon}).addTo(map)
-                    .bindPopup("Αίτημα: " + request.quantity + "<br>Από: " + request.username + "<br> status: " + request.status);
+                    .bindPopup(function() {
+                        var popupContent = `<div class="popup-content">
+                            <div class="popup-title">${request.full_name}</div>
+                            <div class="popup-info"><strong>Τηλέφωνο:</strong> ${request.phone}</div>
+                            <div class="popup-info"><strong>Διεύθυνση:</strong> ${request.street} ${request.number}, ${request.town}</div>
+                            <div class="popup-info"><strong>Είδος Αίτησης:</strong> ${request.name}</div>
+                            <div class="popup-info"><strong>Ποσότητα Αίτηματος:</strong> ${request.quantity}</div>
+                            <div class="popup-info"><strong>Ημερομηνία Καταχώρησης:</strong> ${formatDateIntl(request.created_at)}</div>`;
+                    
+                        // Έλεγχος αν το vehicle_id είναι null
+                        if (request.vehicle_id === '') {
+                            popupContent += `<div class="popup-info"><strong>Κατάσταση:</strong> Δεν έχει αναληφθεί ακόμα</div>`;
+                        } else {
+                            popupContent += `<div class="popup-info"><strong>Όνομα Οχήματος:</strong> ${request.vehicle_name}</div>
+                            <div class="popup-info"><strong>Ημερομηνία Ανάληψης:</strong> ${formatDateIntl(request.updated_at)}</div>`; // Χρησιμοποιήστε τη formatDate για την ημερομηνία ανάληψης
+                        }
+                    
+                        popupContent += `</div>`;
+                        return popupContent;
+                    });
                     // Store the status as a property of the marker object
                     requestMarker.status = request.status;
 
@@ -210,6 +276,89 @@ function displayPendingRequests() {
             console.error("An error occurred fetching requests: " + status + ", " + error);
         }
     });
+}
+
+function formatDateIntl(dateStr) {
+    const dateObj = new Date(dateStr); // Δημιουργία ενός αντικειμένου Date από τη συμβολοσειρά
+    return new Intl.DateTimeFormat('el-GR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    }).format(dateObj);
+}
+
+window.showCargo = function(vehicleId) {
+
+    var pop_button = document.getElementById('popup_button_id');
+
+
+    const cargoDetailsDiv = document.getElementById('vehicleCargoDetails');
+    const cargoListDiv = document.getElementById('cargoList');
+
+    if (cargoDetailsDiv.style.display === 'block') {
+        cargoDetailsDiv.style.display = 'none';
+        cargoListDiv.innerHTML = '';  // Καθαρίζει το περιεχόμενο
+        pop_button.innerHTML = `Εμφάνιση φορτίου οχήματος`
+    } else {
+
+    cargoListDiv.innerHTML = ''; // Καθαρίζετε το περιεχόμενο πριν την ανανέωση
+    
+
+    $.ajax({
+        url: "../../PHP/Admin/get_vehicle_cargo.php",
+        method: "GET",
+        data: {
+          vehicleId: vehicleId
+        }, success: function (response) {
+
+            if(response.status === 'success'){
+
+                pop_button.innerHTML = `Κλείσιμο Φορτίου`
+                cargoDetailsDiv.style.display = 'block'; // Εμφάνιση του div
+                document.querySelector('.cargo-title').style.display = 'block';
+
+            var items = response.items;
+
+            const header = document.createElement('div');
+            header.className = 'cargo-header';
+            header.innerHTML = `<div>Είδος</div><div>Ποσότητα</div>`;
+            cargoListDiv.appendChild(header);
+            
+            items.forEach(function(item){
+                const itemElement = document.createElement('div');
+                itemElement.className = 'cargo-item';
+                itemElement.innerHTML =``
+                itemElement.innerHTML = `<div>${item.name}</div><div>${item.quantity}</div>`;
+                cargoListDiv.appendChild(itemElement);
+            });
+        } else if (response.status === 'success_but_empty'){
+            showMessage(
+                "success-message",
+                "Το φορτίο του οχήματος είναι άδειο.",
+                "#popup_button_id"
+            );
+        }
+
+        }, 
+        error: function() {
+            console.error("Failed to fetch cargo details.");
+        }
+    });
+ }
+}
+
+function updateCargoDetailsPosition() {
+    const popup = map._popup;  // Προσπελαύνει το τρέχον popup αν υπάρχει
+    if (popup && popup.isOpen()) {
+        const popupAnchor = popup.getLatLng();
+        const point = map.latLngToContainerPoint(popupAnchor);  // Μετατροπή σε pixel συντεταγμένες
+
+        const cargoDetailsDiv = document.getElementById('vehicleCargoDetails');
+        if (cargoDetailsDiv.style.display !== 'none') {
+            cargoDetailsDiv.style.top = (point.y + window.scrollY - 107) + 'px';
+            cargoDetailsDiv.style.left = (point.x + window.scrollX + 430) + 'px';
+        }
+    }
 }
 
 export { offerMarkers, vehicleMarkers, requestMarkers, map, polylineLayers };
