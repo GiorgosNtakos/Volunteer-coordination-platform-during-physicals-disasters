@@ -29,7 +29,7 @@ function login(event) {
 
         }
       } else if (response.status === "success" && response.type === "Admin") {
-        window.location.href = "/Code/HTML/Admin/admin_index_page.html";
+        window.location.href = "/webproject/Code/HTML/Admin/admin_announcements.html";
         showMessage("extra-success-message", response.message, "#user-login");
       } else if (response.status === "success" && response.type === "Rescuer") {
         window.location.href = "/webproject/Code/HTML/Rescuer/choose_vehicle.html";

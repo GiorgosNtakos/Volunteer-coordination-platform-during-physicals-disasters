@@ -1,49 +1,59 @@
 <?php
 header('Access-Control-Allow-Origin: http://127.0.0.1:5500');
 header('Content-Type: application/json');
-require '../Global/db_connect.php';
+require '../Global/db_connect.php'; 
+
 $conn->set_charset("utf8");
+use Ramsey\Uuid\Uuid;
+session_start();
 
-// Ελέγξτε αν το αίτημα είναι POST
+if (isset($_SESSION['user_auth'])){
+
+    $user_id = $_SESSION['user_auth']['id'];
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['task_id']) && isset($_POST['item']) && isset($_POST['quantity']) && isset($_POST['task_type']) && isset($_POST['username'])){
+    $data = json_decode($_POST['select_item'], true);
 
-        // Λήψη των δεδομένων από τη φόρμα
-        $task_id = $_POST['task_id'];
-        $item = $_POST['item'];
-        $quantity = $_POST['quantity'];
-        $task_type = $_POST['task_type'];
-        $username = $_POST['username']
+    if (!empty($data['select_item'])) {
+        $items = $data['select_item'];
 
-        // Προετοιμασία του SQL ερωτήματος για εισαγωγή στον πίνακα Ανακοινώσεων
-        $stmt = $conn->prepare("INSERT INTO Announcements (task_id, item, quantity, task_type, username) VALUES (?, ?, ?, ?, ?)");
-        // Δέσιμο των παραμέτρων
-        $stmt->bind_param("ssii", $task_id, $item, $quantity, $task_type, $username);
+        $uuid = Uuid::uuid4();
+        $announcement_id = mysqli_real_escape_string($conn,$uuid->toString());
 
-        // Εκτέλεση του ερωτήματος
-        if ($stmt->execute()) {
-            http_response_code(201);
-            $response = array("status" => "created", "message" => "The announcement was successfuully added to the backend and database");
-        } else {
-            http_response_code(500);
-            $response = array("status" => "server_error", "message" => "backend or database error during data insertion: " . $stmt->error);
-        }
 
-        // Κλείσιμο της δήλωσης
+            // Εισαγωγή στον πίνακα Announcements
+            $stmt = $conn->prepare("INSERT INTO announcements (id, user_id) VALUES (?, ?)");
+            $stmt->bind_param("ss", $announcement_id, $user_id);
+            $stmt->execute();
+
+            // Εισαγωγή στον πίνακα AnnouncementItems για κάθε είδος
+            $stmt = $conn->prepare("INSERT INTO AnnouncementItems (announcement_id, item_id, quantity) VALUES (?, ?, ?)");
+            foreach ($items as $item) {
+                $stmt->bind_param("sii", $announcement_id, $item['item_id'], $item['quantity']);
+
+                $stmt->execute(); 
+                if ($stmt->affected_rows > 0) {
+                    http_response_code(201);
+                    $response = array('status' => 'success', 'message' => 'Η ανακοινωσή σας δημιουργήθηκε με επιτυχία.');
+                } else {
+                    http_response_code(500);
+                    $response = array('status' => 'server_error', 'message' => 'Προέκυψε σφάλμα κατά τη δημιουργία της ανακοίνωσης.');
+                }
+        } 
         $stmt->close();
+        } else {
+            $response = array("status" => "missing_data", "message" => "Missing required data.");
+            http_response_code(400);
+        }
     } else {
-        // Αν λείπουν πεδία
-        http_response_code(400);
-        $response = array("status" => "missing_400", "message" => "missing post parameters.");
+        $response = array("status" => "invalid_request", "message" => "Invalid request method.");
+        http_response_code(405);
     }
-} else {
-    // Αν η αίτηση δεν είναι POST
-    http_response_code(405);
-    $response = array("status" => "wrong_method_405", "message" => "Μη έγκυρη αίτηση.");
+} else{
+    http_response_code(401);
+    $response = array("status" => "need_connection", "message" => 'Δεν υπήρχε σύνδεση χρήστη ή συνδεσή σας έληξε.');
 }
 
 echo json_encode($response);
-
-// Κλείσιμο της σύνδεσης
 $conn->close();
 ?>

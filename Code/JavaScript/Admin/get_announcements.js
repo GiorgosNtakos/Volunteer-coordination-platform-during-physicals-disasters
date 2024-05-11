@@ -14,7 +14,7 @@ $(document).ready(function(){
                     // Δίνει το id του announcement στο κουμπί για τη διαγραφή
                     var deleteButton = '<button class="delete-button" data-id="' + announcement.id + '">Διαγραφή</button>';
 
-                    var row = '<tr><td>' + announcement.id + '</td><td>' + announcement.item_name + '</td><td>' + announcement.task_quantity +'</td><td>' + announcement.username + '</td><td>' + announcement.task_type + '</td><td>' + announcement.task_status +  '</td><td>' + deleteButton + '</td></tr>';
+                    var row = '<tr><td>' + announcement.id + '</td><td>' + announcement.item_name + '</td><td>' + announcement.gathered + '</td><td>' + deleteButton + '</td></tr>';
                     $('#announcements_body').append(row);
                 });
             } else {
@@ -25,8 +25,8 @@ $(document).ready(function(){
             // Κρύβει την πρώτη στήλη με τα IDs μετά την προσθήκη δεδομένων
             $('.announcement-table th:first-child, .announcement-table td:first-child').hide();
         },
-        error: function(xhr, status, error) {
-            console.error(status + ": " + error);
-        }
+        // error: function(xhr, status, error) {
+        //     console.error(status + ": " + error);
+        // }
     });
 });

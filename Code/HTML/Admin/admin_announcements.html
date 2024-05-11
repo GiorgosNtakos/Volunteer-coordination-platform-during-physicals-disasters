@@ -3,79 +3,72 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <iframe src="../Global/Header.html">
-       Μήνυμα για τους χρήστες που δεν υποστηρίζουν το object
-      Το αρχείο HTML δεν μπορεί να φορτωθεί.
-    </iframe> -->
-    <link rel="stylesheet" href="../../CSS/Admin/admin_announcements.css" />
+    <link rel="stylesheet" href="../../CSS/Global/toolbar_style.css" />
+    <link rel="stylesheet" href="../../CSS/Global/toolbars_buttons.css" />
+    <link rel="stylesheet" href="../../CSS/Global/tables_style.css" />
+    <link rel="stylesheet" href="../../CSS/Admin/forms_containers_style.css" />
+    <link rel="stylesheet" href="../../CSS/Global/filter_style.css" />
     <title>Πίνακας Ανακοινώσεων</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
     <div id="Header"></div>
     <div id="overlay"></div>
+    <div class="container">
+      <div class="toolbar">
+        <!-- Buttons -->
+        <div>
+          <button id="show-add-announcement-form">Προσθήκη Ανακοίνωσης</button>
+        </div>
 
-    <main>
-      <div>
-        <button id="show-add-announcement-form">Προσθήκη Ανακοίνωσης</button>
+        <div>
+          <button id="delete-all-button">Διαγραφή Όλων</button>
+        </div>
       </div>
 
-      <div>
-        <button id="delete-all-button">Διαγραφή Όλων</button>
-      </div>
-
-      <div id="add-announcement-form-container">
+      <!-- Κρυμμένη φόρμα προσθήκης -->
+      <div id="add-form-container">
         <form id="add-announcement-form">
-          <label for="taskSelect">Επιλογή Task</label>
-          <select id="taskSelect" name="task_id" onchange="getTaskDetails()">
-            <option value=""><Επιλέξτε Task></option>
-            <!-- Εδώ θα εμφανίζονται τα Tasks από τη βάση --></select><br />
-
-          <label for="item">Προϊόν</label>
-          <input type="text" id="item" name="item" /><br />
+          <label for="item_name">Είδος:</label>
+          <select class="select_item" id="item_name" name="item_name"></select
+          ><br />
 
           <label for="quantity">Ποσότητα</label>
-          <input type="text" id="quantity" name="quantity" /><br />
-          
-          <label for="username">Πολίτης</label>
-          <input type="text" id="username" name="username" /><br />
-          
-          <label for="task_type">Τύπος</label>
-          <input type="text" id="task_type" name="task_type" /><br />
-          
-          <label for="status">Κατάσταση</label>
-          <input type="text" id="status" name="status" /><br />
+          <input type="number" id="content" placeholder="Ποσότητα" />
+          <!-- Νέα πεδία για επιπλέον είδη -->
+          <div id="more-items-container">
+            <!-- Πεδία ειδών εισάγονται εδώ -->
+          </div>
+          <button type="button" id="add-item">
+            Προσθήκη Περισσότερων Ειδών</button
+          ><br />
 
-          <button type="submit" >Υποβολή</button>
+          <button type="submit">Προσθήκη Ανακοίνωσης</button>
         </form>
       </div>
-      
-      <h2>Πίνακας Ανακοινώσεων</h2>
+      <main>
+        <h2>Πίνακας Ανακοινώσεων</h2>
 
-      <table class="announcement-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Προϊόν</th>
-            <th>Ποσότητα</th>
-            <th>Πολίτης</th>
-            <th>Τύπος</th>
-            <th>Κατάσταση</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody id="announcements_body">
-          <!-- Εδώ θα εμφανιστούν οι ανακοινώσεις αν υπάρχουν -->
-        </tbody>
-      </table>
-    </main>
-    
+        <table class="announcement-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Προϊόν</th>
+              <th>Ποσότητα</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="announcements_body">
+            <!-- Εδώ θα εμφανιστούν οι ανακοινώσεις αν υπάρχουν -->
+          </tbody>
+        </table>
+      </main>
+    </div>
+
     <script src="../../JavaScript/Global/HeaderCall.js"></script>
-    <script src="../../JavaScript/Admin/get_tasks.js"></script>
     <script src="../../JavaScript/Admin/get_announcements.js"></script>
     <script src="../../JavaScript/Admin/add_announcement.js"></script>
     <script src="../../JavaScript/Admin/delete_announcement.js"></script>
     <script src="../../JavaScript/Admin/delete_all_announcements.js"></script>
   </body>
 </html>
-

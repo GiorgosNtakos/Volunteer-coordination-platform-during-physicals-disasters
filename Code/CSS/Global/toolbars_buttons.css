@@ -6,7 +6,9 @@
 #show-load-quantities-form,
 #show-base-cargo,
 #unload-vehicle-cargo,
-#Show_History_Requests {
+#Show_History_Requests,
+#unload-vehicle-cargo, 
+#show-add-announcement-form {
   position: relative;
   background-color: #5a197d;
   color: gold;
@@ -28,6 +30,7 @@
 }
 
 #show-add-form:hover,
+#show-add-announcement-form:hover,
 #delete-all-button:hover,
 #show-check-categories-form:hover,
 #show-load-data-form:hover,

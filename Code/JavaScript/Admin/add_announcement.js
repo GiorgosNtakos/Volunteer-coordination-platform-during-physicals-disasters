@@ -1,13 +1,11 @@
 "use strict";
 
-let taskSelect;
 let overlay = document.getElementById("overlay");
 
 document.addEventListener("DOMContentLoaded", function () {
-  taskSelect = document.getElementById("taskSelect");
 
   const addannouncementFormContainer = document.getElementById(
-    "add-announcement-form-container"
+    "add-form-container"
   );
   const showAddannouncementFormButton = document.getElementById(
     "show-add-announcement-form"
@@ -26,7 +24,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Πέρνει διναμικά το κουμπί για να μπορεσει να προσθεσει event listener στην σειρα 54
     addannouncementForm = document.getElementById(
       "add-announcement-form"
-    );    
+    );
+    loadItems("select_item");    
   });
 
   overlay.addEventListener("click", function () {
@@ -35,79 +34,130 @@ document.addEventListener("DOMContentLoaded", function () {
     overlay.style.display = "none";
   });
 
-  // Φορτώνει δυναμικά τις εργασίες όταν η σελίδα φορτώνεται
-  fetch('../../PHP/Admin/get_tasks.php')
-      .then(response => response.json())
-      .then(data => {
-          // Προσθέτει κάθε εργασία ως επιλογή στο select
-          data.forEach(task => {
-              const option = document.createElement("option");
-              option.value = task.id;
-              option.text = `Task ID: ${task.id}`;
-              taskSelect.appendChild(option);
-          });
-      })
-      .catch(error => {
-          console.error('Σφάλμα:', error);
-      });
-
   addannouncementForm.addEventListener("submit", function (event) {
-    console.log("ΠΑΤΗΘΗΚΕ!!");
-    event.preventDefault();
-    const formData = new FormData(addannouncementForm);
-    const taskId = formData.get('task_id');
-    const item = document.getElementById("item").value;
-    const task_type = document.getElementById("task_type").value;
-    const quantity = document.getElementById("quantity").value;
-    const username = document.getElementById("username").value;    
+    event.preventDefault(); // Αποτρέψτε την προεπιλεγμένη υποβολή φόρμας
 
-    // Ελέγξτε αν όλα τα πεδία έχουν συμπληρωθεί
-    if (
-      item.trim() === "" ||
-      task_type.trim() === "" ||
-      quantity.trim() === "" ||
-      username.trim() === ""
-    ) {
-      showMessage(
-        "error-message",
-        "Συμπληρώστε όλα τα πεδία με έγκυρες τιμές.",
-        "item"
-      );
-      return;
+    // Δημιουργία αντικειμένου FormData για τη συλλογή δεδομένων φόρμας
+    var formData = new FormData(addannouncementForm);
+
+    var select_item = [];
+    var itemNames = document.querySelectorAll(
+      'select[name="item-name[]"]'
+    );
+    var itemValues = document.querySelectorAll(
+      'input[name="item-value[]"]'
+    );
+    for (var i = 0; i < itemNames.length; i++) {
+      select_item.push({
+        name: itemNames[i].value,
+        value: itemValues[i].value,
+      });
     }
-    insertannouncementToDatabase(taskId, item, quantity, task_type, username);
-    document.getElementById("item").value = "";
-    document.getElementById("task_type").value = "";
-    document.getElementById("quantity").value = "";
-    document.getElementById("username").value = "";
+    formData.append("select_item", JSON.stringify(select_item));
+
+    addAnnouncement(formData);
   });
+
+  var addItemButton = document.getElementById("add-item");
+  addItemButton.addEventListener("click", function () {
+    var container = document.getElementById("more-items-container");
+
+    var labelItemName = document.createElement("label");
+    labelItemName.textContent = "Όνομα Είδους:";
+
+    var newItemName = document.createElement("select");
+    newItemName.name = "item-name[]";
+    newItemName.className = "select_item";
+    loadItems("select_item");    
+
+    var labelItemValue = document.createElement("label");
+    labelItemValue.textContent = "Ποσότητα:";
+
+    var newItemValue = document.createElement("input");
+    newItemValue.type = "number";
+    newItemValue.name = "item-value[]";
+
+    container.appendChild(labelItemName);
+    container.appendChild(newItemName);
+    container.appendChild(labelItemValue);
+    container.appendChild(newItemValue);
+    container.appendChild(document.createElement("br"));
+  });
+
+  
 });
 
-// Κώδικας για εισαγωγή της ανακοίνωσης στη βάση δεδομένων
-function insertannouncementToDatabase(taskId, item, quantity, task_type, username) {
-  // Κώδικας για την αποστολή των δεδομένων προς τον διακομιστή για την εισαγωγή του προϊόντος
-  // Χρησιμοποιήστε τα $item, $quantity, $task_type και $username όπως πριν
+function loadItems(elementClass) {
+  var itemsMapping = {}
+  $.ajax({
+    method: "GET",
+    url: "../../PHP/Admin/get_all_items.php",
+    success: function (response) {
+      
+      var items = response.items;
 
-fetch('../../PHP/Admin/add_announcement.php', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+      var itemsList = document.querySelectorAll('.' + elementClass);
+      
+      itemsList.forEach(function (list) {
+        $(list).empty(); // Καθαρίζει τα προηγούμενα στοιχεία από τη λίστα
+
+        items.forEach(function (item) {
+          itemsMapping[item.name] = item.id;
+          $(list).append(
+            `<option value="${item.id}">${item.name}</option>`
+          );
+        });
+      });
     },
-    body: JSON.stringify({
-      task_id: taskId,
-      item: item,
-      quantity: quantity,
-      task_type: task_type,
-      username: username
-    })
-  })
-  .then(response => response.text())
-  .then(data => {
-    // Εδώ μπορείτε να χρησιμοποιήσετε τα δεδομένα που λάβατε από το PHP
-    console.log(data);
-  })
-  .catch(error => {
-    console.error('Σφάλμα:', error);
+    error: function (xhr, status, error) {
+      console.error("AJAX Error: " + status, error);
+    },
   });
-  
+}
+
+
+// Eισαγωγή νέας ανακοίνωσης στη βάση δεδομένων
+function addAnnouncement(form) {
+
+  $.ajax({
+    url: "../../PHP/Admin/add_announcement.php", 
+    method: "POST",
+    data: form,
+    processData: false,
+    contentType: false,
+    success: function (response) {
+
+      console.log("Επιτυχής προσθήκη προϊόντος", response);
+
+      if (response.status === "success") {
+        showMessage("success-message", response.message, "#item-name");
+      } else {
+        showMessage(
+          "error-message",
+          "Ενώ η προσθήκη του νέου είδους ήταν επιτυχής κάτι πήγε στραβά. Παρακαλώ δοκιμάστε ξανα.",
+          "#item-name"
+        );
+      }
+    },
+    error: function (response) {
+      // Χειριστείτε εδώ τα σφάλματα
+      var errorResponse = JSON.parse(response.responseText);
+
+      if (errorResponse.status === "wrong_method_405") {
+        showMessage("error-message", errorResponse.message, "#item-name");
+      } else if (errorResponse.status === "server_error") {
+        showMessage("error-message", errorResponse.message, "#item-name");
+      } else if (errorResponse.status === "missing_400") {
+        showMessage("error-message", errorResponse.message, "#item-name");
+      } else if (errorResponse.status === "exists") {
+        showMessage("error-message", errorResponse.message, "#item-name");
+      } else {
+        showMessage(
+          "error-message",
+          "Σφάλμα κατά την διάρκεια προσθήκης του νέου αντικειμένου. Παρακαλώ δοκιμάστε ξανά.",
+          "#item-name"
+        );
+      }
+    },
+  });
 }

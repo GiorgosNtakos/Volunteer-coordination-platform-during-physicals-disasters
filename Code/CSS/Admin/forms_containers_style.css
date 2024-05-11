@@ -75,6 +75,7 @@
 
 #add-category-form,
 #add-item-form,
+#add-announcement-form,
 #uploadDataForm,
 #check-categories-form-container,
 #deleteCategory-form-container,
@@ -88,6 +89,7 @@
 
 #add-category-form label,
 #add-item-form label,
+#add-announcement-form label,
 #uploadDataForm label[for="jsonUrl"],
 #uploadDataForm label[for="loadType"],
 #check-label-title,
@@ -103,7 +105,10 @@
 }
 
 #add-detail,
+#add-item,
 #add-category-form input,
+#add-announcement-form select,
+#add-announcement-form input[type="number"],
 #add-item-form input[type="text"],
 #uploadDataForm select,
 #add-item-form select,
@@ -126,7 +131,8 @@
   font-size: 16px;
 }
 
-#add-detail {
+#add-detail,
+#add-item {
   background-color: gold;
 }
 
@@ -184,6 +190,7 @@
 }
 
 #add-category-form button,
+#add-announcement-form button,
 #add-item-form button[type="submit"],
 #uploadDataForm input[type="submit"],
 #submitCategories,
@@ -205,6 +212,7 @@
 }
 
 #add-category-form button:hover,
+#add-announcement-form button:hover,
 #add-item-form button:hover,
 #uploadDataForm input[type="submit"]:hover,
 #submitCategories:hover,
