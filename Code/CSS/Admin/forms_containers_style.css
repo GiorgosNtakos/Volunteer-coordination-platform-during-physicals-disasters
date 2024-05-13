@@ -190,7 +190,8 @@
 }
 
 #add-category-form button,
-#add-announcement-form button,
+#add-announcement-form button[type="submit"],
+#add-announcement-form button[type="button"],
 #add-item-form button[type="submit"],
 #uploadDataForm input[type="submit"],
 #submitCategories,
@@ -212,7 +213,8 @@
 }
 
 #add-category-form button:hover,
-#add-announcement-form button:hover,
+#add-announcement-form button[type="submit"]:hover,
+#add-announcement-form button[type="button"]:hover,
 #add-item-form button:hover,
 #uploadDataForm input[type="submit"]:hover,
 #submitCategories:hover,

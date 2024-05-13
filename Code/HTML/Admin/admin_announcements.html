@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../CSS/Global/tables_style.css" />
     <link rel="stylesheet" href="../../CSS/Admin/forms_containers_style.css" />
     <link rel="stylesheet" href="../../CSS/Global/filter_style.css" />
+    <link rel="stylesheet" href="../../CSS/Global/showbox.css" />
     <title>Πίνακας Ανακοινώσεων</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
@@ -34,7 +35,7 @@
           ><br />
 
           <label for="quantity">Ποσότητα</label>
-          <input type="number" id="content" placeholder="Ποσότητα" />
+          <input type="number" id="content"/>
           <!-- Νέα πεδία για επιπλέον είδη -->
           <div id="more-items-container">
             <!-- Πεδία ειδών εισάγονται εδώ -->
@@ -43,7 +44,7 @@
             Προσθήκη Περισσότερων Ειδών</button
           ><br />
 
-          <button type="submit">Προσθήκη Ανακοίνωσης</button>
+          <button type="submit" formnovalidate>Προσθήκη Ανακοίνωσης</button>
         </form>
       </div>
       <main>
@@ -70,5 +71,6 @@
     <script src="../../JavaScript/Admin/add_announcement.js"></script>
     <script src="../../JavaScript/Admin/delete_announcement.js"></script>
     <script src="../../JavaScript/Admin/delete_all_announcements.js"></script>
+    <script src="../../JavaScript/Global/showMessage.js"></script>
   </body>
 </html>

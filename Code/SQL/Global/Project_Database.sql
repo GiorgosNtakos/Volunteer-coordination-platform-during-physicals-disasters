@@ -123,7 +123,7 @@ CREATE TABLE Tasks (
     user_id VARCHAR(36),
     FOREIGN KEY (item_id) REFERENCES Items(id),
     FOREIGN KEY (vehicle_id) REFERENCES Vehicles(id),
-    FOREIGN KEY (user_id) REFERENCES User(id)
+    FOREIGN KEY (user_id) REFERENCES Users(id)
     UNIQUE INDEX vehicle_item_unique (user_id, item_id)
 );
 
@@ -134,7 +134,8 @@ CREATE TABLE Announcements (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     expiry_date TIMESTAMP,
     is_hidden BOOLEAN DEFAULT FALSE,
-    user_id INT,
+    user_id VARCHAR(36),
+    FOREIGN KEY (user_id) REFERENCES Users(id)
     -- task_id INT,
     -- FOREIGN KEY (task_id) REFERENCES Tasks(id),
 );

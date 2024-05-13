@@ -4,6 +4,8 @@ let overlay = document.getElementById("overlay");
 
 document.addEventListener("DOMContentLoaded", function () {
 
+  var numberPattern = /^[1-9]\d*$/;
+
   const addannouncementFormContainer = document.getElementById(
     "add-form-container"
   );
@@ -40,6 +42,30 @@ document.addEventListener("DOMContentLoaded", function () {
     // Δημιουργία αντικειμένου FormData για τη συλλογή δεδομένων φόρμας
     var formData = new FormData(addannouncementForm);
 
+    var item_name = document.getElementById("item_name").value;
+    var content   = document.getElementById("content").value;
+
+    if (content.trim() === "") {
+      showMessage(
+        "error-message",
+        "Παρακαλώ εισάγεται κάποια ποσότητα.",
+        "#content"
+      );
+      return; // Σταματά την εκτέλεση της function
+    }
+
+    if (!numberPattern.test(content)) {
+      showMessage(
+        "error-message",
+        "Η ποσότητα πρέπει να είναι ακέραια και οχι αρνητική.",
+        "#content"
+      );
+      return;
+    }
+
+    formData.append("item_name", item_name);
+    formData.append("content",  content);
+
     var select_item = [];
     var itemNames = document.querySelectorAll(
       'select[name="item-name[]"]'
@@ -49,11 +75,36 @@ document.addEventListener("DOMContentLoaded", function () {
     );
     for (var i = 0; i < itemNames.length; i++) {
       select_item.push({
-        name: itemNames[i].value,
-        value: itemValues[i].value,
+        item_name: itemNames[i].value,
+        content: itemValues[i].value,
       });
     }
-    formData.append("select_item", JSON.stringify(select_item));
+
+    for (var i = 0; i < itemNames.length; i++) {
+      if (
+        itemValues[i].value.trim() === ""
+      ) {
+        event.preventDefault(); // Αποτροπή υποβολής της φόρμας
+        showMessage(
+          "error-message",
+          "Παρακαλώ συμπληρώστε όλα τα πεδία ποσοτήτων.",
+          "#content"
+        );
+        return; // Διακοπή της εκτέλεσης της συνάρτησης
+      }
+
+      if (!numberPattern.test(itemValues[i].value)) {
+        event.preventDefault(); // Αποτροπή υποβολής της φόρμας
+        showMessage(
+          "error-message",
+          "Οι ποσότητες πρέπει να είναι ακέραιες θετικές τιμές.",
+          "#content"
+        );
+        return; // Διακοπή της εκτέλεσης της συνάρτησης
+      }
+    }
+
+    formData.append("items", JSON.stringify(select_item));
 
     addAnnouncement(formData);
   });
@@ -63,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var container = document.getElementById("more-items-container");
 
     var labelItemName = document.createElement("label");
-    labelItemName.textContent = "Όνομα Είδους:";
+    labelItemName.textContent = "Είδος:";
 
     var newItemName = document.createElement("select");
     newItemName.name = "item-name[]";
@@ -127,15 +178,13 @@ function addAnnouncement(form) {
     contentType: false,
     success: function (response) {
 
-      console.log("Επιτυχής προσθήκη προϊόντος", response);
-
       if (response.status === "success") {
-        showMessage("success-message", response.message, "#item-name");
+        showMessage("success-message", response.message, "#item_name");
       } else {
         showMessage(
           "error-message",
-          "Ενώ η προσθήκη του νέου είδους ήταν επιτυχής κάτι πήγε στραβά. Παρακαλώ δοκιμάστε ξανα.",
-          "#item-name"
+          "Ενώ η προσθήκη της νέας ανακοίνωσης ήταν επιτυχής κάτι πήγε στραβά. Παρακαλώ δοκιμάστε ξανα.",
+          "#item_name"
         );
       }
     },
@@ -144,18 +193,18 @@ function addAnnouncement(form) {
       var errorResponse = JSON.parse(response.responseText);
 
       if (errorResponse.status === "wrong_method_405") {
-        showMessage("error-message", errorResponse.message, "#item-name");
+        showMessage("error-message", errorResponse.message, "#item_name");
       } else if (errorResponse.status === "server_error") {
-        showMessage("error-message", errorResponse.message, "#item-name");
+        showMessage("error-message", errorResponse.message, "#item_name");
       } else if (errorResponse.status === "missing_400") {
-        showMessage("error-message", errorResponse.message, "#item-name");
-      } else if (errorResponse.status === "exists") {
-        showMessage("error-message", errorResponse.message, "#item-name");
+        showMessage("error-message", errorResponse.message, "#item_name");
+      } else if (errorResponse.status === "need_connection") {
+        showMessage("error-message", errorResponse.message, "#item_name");
       } else {
         showMessage(
           "error-message",
-          "Σφάλμα κατά την διάρκεια προσθήκης του νέου αντικειμένου. Παρακαλώ δοκιμάστε ξανά.",
-          "#item-name"
+          "Σφάλμα κατά την διάρκεια δημιουργίας της νέας ανακοίνωσης. Παρακαλώ δοκιμάστε ξανά.",
+          "#item_name"
         );
       }
     },
