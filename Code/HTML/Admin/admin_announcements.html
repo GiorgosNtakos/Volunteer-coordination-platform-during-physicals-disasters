@@ -3,12 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link rel="stylesheet" href="../../CSS/Global/toolbar_style.css" />
     <link rel="stylesheet" href="../../CSS/Global/toolbars_buttons.css" />
     <link rel="stylesheet" href="../../CSS/Global/tables_style.css" />
     <link rel="stylesheet" href="../../CSS/Admin/forms_containers_style.css" />
     <link rel="stylesheet" href="../../CSS/Global/filter_style.css" />
     <link rel="stylesheet" href="../../CSS/Global/showbox.css" />
+    <link rel="stylesheet" href="../../CSS/Admin/admin_announcements.css" />
     <title>Πίνακας Ανακοινώσεων</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
@@ -49,28 +58,27 @@
       </div>
       <main>
         <h2>Πίνακας Ανακοινώσεων</h2>
-
+        <div class="scroll-container">
         <table class="announcement-table">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Προϊόν</th>
-              <th>Ποσότητα</th>
-              <th></th>
+              <th>Είδη και ποσότητες</th>
+              <th>Ημ/νια Εισαγωγής</th>
+              <th>Ημ/νια Τροποποίησης</th>
+              <th>Επιλογή</th>
             </tr>
           </thead>
           <tbody id="announcements_body">
             <!-- Εδώ θα εμφανιστούν οι ανακοινώσεις αν υπάρχουν -->
           </tbody>
         </table>
+      </div>
       </main>
     </div>
 
     <script src="../../JavaScript/Global/HeaderCall.js"></script>
-    <script src="../../JavaScript/Admin/get_announcements.js"></script>
+    <script src="../../JavaScript/Admin/operations_announcements.js"></script>
     <script src="../../JavaScript/Admin/add_announcement.js"></script>
-    <script src="../../JavaScript/Admin/delete_announcement.js"></script>
-    <script src="../../JavaScript/Admin/delete_all_announcements.js"></script>
     <script src="../../JavaScript/Global/showMessage.js"></script>
   </body>
 </html>

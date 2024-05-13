@@ -1,18 +1,16 @@
 <?php
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: http://127.0.0.1:5500");
-header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Methods: DELETE");
 require '../Global/db_connect.php';
 $conn->set_charset("utf8");
 
-// TODO : Να το φτιάξω με DELETE και επίσης να ανανεώνει κατευθείαν τον πίνακα
-// Για την DELETE μέθοδο χρειάζεται
-// parse_str(file_get_contents("php://input"), $_DELETE);
+parse_str(file_get_contents("php://input"), $_DELETE);
 
-if ($_SERVER["REQUEST_METHOD"] === 'POST') {
-    if (isset($_POST['id'])) {
+if ($_SERVER["REQUEST_METHOD"] === 'DELETE') {
+    if (isset($_DELETE['id'])) {
         
-        $id = $_POST["id"];
+        $id = $_DELETE["id"];
 
         $sql = "SELECT id FROM Announcements WHERE id = ?";
         $stmt = $conn->prepare($sql);
@@ -22,7 +20,9 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
 
         if ($result->num_rows > 0) {
             // Διαγραφή του προϊόντος
-            $sql = "DELETE FROM Announcements WHERE id = ?";
+            $sql = "DELETE announcements, announcementitems FROM announcements 
+            INNER JOIN announcementitems ON announcements.id = announcementitems.announcement_id 
+            WHERE id = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("s", $id);
             if ($stmt->execute()) {                
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
             } else {
                 // Σφάλμα κατά τη διαγραφή της ανακοίνωσης
                 http_response_code(500); // Επιστροφή κωδικού σφάλματος 500
-                $response = array("status" => "server_error", "message" => "Σφάλμα κατά τη διαγραφή του είδους: " . $conn->error);
+                $response = array("status" => "server_error", "message" => "Σφάλμα κατά τη διαγραφή της ανακοίνωσης: " . $conn->error);
             }
         } else {
             // Η ανακοίνωση δε βρέθηκε

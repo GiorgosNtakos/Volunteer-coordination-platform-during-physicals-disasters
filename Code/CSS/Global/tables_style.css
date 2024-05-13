@@ -184,8 +184,9 @@ border-bottom: none;
   margin-bottom: 20px; /* Προσθέτει απόσταση πριν το περιεχόμενο που ακολουθεί */
 }
 
-.history-table table {
-  max-height: 660px; /* Θέτει το μέγιστο ύψος του πίνακα */
+.history-table table{
+  max-height: 100px; /* Θέτει το μέγιστο ύψος του πίνακα */
   overflow-y: auto; /* Ενεργοποιεί την κάθετη κύλιση αν χρειάζεται */
   margin-bottom: 20px;
 }
+

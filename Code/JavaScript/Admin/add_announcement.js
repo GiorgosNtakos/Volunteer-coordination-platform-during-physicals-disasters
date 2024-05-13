@@ -16,6 +16,13 @@ document.addEventListener("DOMContentLoaded", function () {
     "add-announcement-form"
   );
 
+  document.getElementById("delete-all-button").addEventListener("click", function() {
+    if (confirm("Είστε σίγουρος/η ότι θέλετε να διαγράψετε όλες τις ανακοινώσεις;")) {
+    deleteAllAnnouncement();
+    getAvailableAnnouncements();
+    }
+  });
+
   showAddannouncementFormButton.addEventListener("click", function () {
     console.log("Το κουμπί προσθηκη ανακοινωσης πατήθηκε!");
     // Αλλάζει το φόντο του overlay σε θολό χρώμα όταν εμφανίζεται η φόρμα
