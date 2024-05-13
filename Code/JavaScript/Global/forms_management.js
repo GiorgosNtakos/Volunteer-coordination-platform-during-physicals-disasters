@@ -1,7 +1,7 @@
 // // ΝΑ ΔΩ ΓΙΑΤΙ ΟΤΑΝ ΜΕ ΒΑΣΗ ΤΑ ΣΤΟΙΧΕΙΑ ΤΗΣ ΔΙΈΥΘΥΝΣΗΣ ΜΟΥ ΠΕΤΑΕΙ 2 τιμες για τα LAT και LON
 //* NA ΦΤΙΑΞΩ PHP ΕΛΕΓΧΟΥ ΤΥΠΟΥ ΧΡΗΣΤΗ ΓΙΑ ΝΑ ΕΜΦΑΝΙΖΩ ΤΙΣ ΦΟΡΜΕΣ ΚΑΤΑΛΛΗΛΑ ΕΧΟΝΤΑΣ ΜΟΝΟ ΜΙΑ ΣΕΛΙΔΑ ΔΙΑΧΕΙΡΙΣΗΣ HTML ΓΙΑ ΤΗΝ ΦΟΡΜΑ
 //! ΦΤΙΑΞΙΜΟ ΓΙΑ ΤΑ ΚΟΥΜΠΙΑ (ΠΟΙΑ ΝΑ ΛΕΙΤΟΥΡΓΟΥΝ ΜΕ ENTER ΚΑΙ ΠΟΙΑ ΟΧΙ)
-"use strict";
+
 var formData;
 document.addEventListener("DOMContentLoaded", function () {
   if (window.location.href === "http://localhost/webproject/Code/Html/Global/form_completion.html"){
