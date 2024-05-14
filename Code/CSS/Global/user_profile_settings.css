@@ -1,0 +1,129 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex-grow: 1; /* Καταλαμβάνει τον υπόλοιπο διαθέσιμο χώρο */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+
+.profile-form,
+.form-container {
+    width: 100%;
+    max-width: 700px;
+    padding: 100px 20px 20px; /* Αύξηση του πάνω padding για αποφυγή επικάλυψης */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    border: 1px solid gold;
+    background: #440466;
+    border-radius: 25px;
+}
+
+.profile-image-container {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    left: 50%;
+    top: -60px; /* Αύξηση του αποκεντρώματος ώστε να βρίσκεται εν μέρει εντός της φόρμας */
+    transform: translateX(-50%);
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid gold;
+}
+
+.profile-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: background-color 0.3s, opacity 0.3s;
+    cursor: pointer;
+}
+
+.overlay:hover {
+    background-color: rgba(0,0,0,0.7);
+    opacity: 1;
+}
+
+.plus-icon {
+    font-size: 24px;
+    color: gold;
+    display: none;
+}
+
+.overlay:hover .plus-icon {
+    display: block;
+}
+
+.input-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-container input {
+    width: calc(100% - 40px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding-right: 40px; /* Προσθέστε χώρο για το εικονίδιο */
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.input-container .icon {
+    position: absolute;
+    right: 10px;
+    top: 75%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+#changePassword,
+#submitPasswordChange,
+#cancelPasswordChange,
+#submitForgotPassForm {
+    margin-top: 15px;
+    width: 100%;
+    padding: 15px;
+    background-color: gold;
+    color: black;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+#changePassword:hover,
+#submitPasswordChange:hover,
+#cancelPasswordChange:hover,
+#submitForgotPassForm:hover {
+  transition: background-color 0.4s;
+  background-color: goldenrod;
+}
+
+
+label {
+    margin-top: 10px;
+    display: block;
+    font-weight: bold;
+    color: gold;
+    text-align: center; /* Center the label */
+}

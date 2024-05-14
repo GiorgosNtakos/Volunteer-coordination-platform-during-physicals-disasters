@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        />
+    <link rel="stylesheet" href="../../CSS/Global/user_profile_settings.css">
+    <link rel="stylesheet" href="../../CSS/Global/Header.css" />
+    <link rel="stylesheet" href="../../CSS/Global/showbox.css" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="Header"></div>
+
+    <main>
+<div class="profile-form">
+    <div class="profile-image-container">
+        <img src="" alt="Profile Picture" id="profileImage" class="profile-image"/>
+        <div class="overlay" id="overlay" title="Αλλαγή Φωτογραφίας">
+            <span class="plus-icon">+</span>
+        </div>
+        <input type="file" id="fileInput" style="display: none;" accept="image/*">
+    </div>
+    <form id="userData_form">
+        <div class="input-container">
+        <label for="Username">Username Χρήστη</label>
+        <input type="text" id="username" name="username" placeholder="Username" readonly>
+        </div>
+
+        <div class="input-container">
+        <label for="Email">Email Χρήστη</label>
+        <input type="email" id="email" name="email" placeholder="Email" readonly>
+        </div>
+
+         <!-- Περιοχή αλλαγής κωδικού -->
+         <div id="passwordChangeArea" style="display: none;">
+            <div class="input-container">
+            <label for="oldPassword">Παλιός Κωδικός</label>
+            <input type="password" id="oldPassword" name="oldPassword" placeholder="Παλιός Κωδικός">
+            <span class="icon"><i id="eye-old-password" class="fas fa-eye"></i></span>
+            </div>
+
+            <div class="input-container">
+            <label for="newPassword">Καινούργιος Κωδικός</label>
+            <input type="password" id="newPassword" name="newPassword" placeholder="Καινούργιος Κωδικός">
+            <span class="icon"><i id="eye-new-password" class="fas fa-eye"></i></span>
+            </div>
+
+            <div class="input-container">
+            <label for="confirmPassword">Επιβεβαίωση Καινούργιου Κωδικού</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Επιβεβαίωση Καινούργιου Κωδικού">
+            <span class="icon"><i id="eye-confirm-password" class="fas fa-eye"></i></span>
+            </div>
+
+            <button type="button" id="submitPasswordChange">Υποβολή Αλλαγής Κωδικού</button>
+            <button type="button" id="cancelPasswordChange">Ακύρωση</button>
+        </div>
+
+        <button type="button" id="changePassword">Αλλαγή Κωδικού</button>
+    </form>
+</div>
+</main>
+
+<script src="../../JavaScript/Global/HeaderCall.js"></script>
+<script src="../../JavaScript/Global/get_users_data.js"></script>
+<script src="../../JavaScript/Global/showMessage.js"></script>
+<script src="../../JavaScript/Global/showPassword.js"></script>
+</body>
+</html>
