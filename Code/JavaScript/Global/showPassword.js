@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   if (
     window.location.href ===
-    "http://localhost/webproject/Code/Html/User/login_signup.html"
+    "http://localhost/webproject/Code/Html/Global/login_signup.html"
   ) {
     const loginPasswordField = document.getElementById("pass-login");
     const signupPasswordField = document.getElementById("pass-signup");
@@ -25,20 +25,40 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   } else if (
     window.location.href ===
-    "https://localhost/webproject/Code/Html/admin_profile_setting.html"
+    "http://localhost/webproject/Code/Html/Global/forgot_my_password.html"
   ) {
-    const OldPasswordField = document.getElementById("oldPassword");
     const NewPasswordField = document.getElementById("newPassword");
-    const RepeatNewPasswordField = document.getElementById("RepeatNewPassword");
+    const RepeatNewPasswordField = document.getElementById("confirmPassword");
+
+    const toggleNewPassword = document.getElementById("eye-new-password");
+    const toggleRepeatNewPassword = document.getElementById(
+      "eye-confirm-password"
+    );
+
+    toggleNewPassword.addEventListener("click", function () {
+      togglePasswordVisibility(NewPasswordField, toggleNewPassword);
+    });
+
+    toggleRepeatNewPassword.addEventListener("click", function () {
+      togglePasswordVisibility(RepeatNewPasswordField, toggleRepeatNewPassword);
+    });
+  } else if (
+    window.location.href ===
+    "http://localhost/webproject/Code/Html/Global/user_profile_settings.html"
+  ) {
+
+    const oldPasswordField = document.getElementById("oldPassword")
+    const NewPasswordField = document.getElementById("newPassword");
+    const RepeatNewPasswordField = document.getElementById("confirmPassword");
 
     const toggleOldPassword = document.getElementById("eye-old-password");
     const toggleNewPassword = document.getElementById("eye-new-password");
     const toggleRepeatNewPassword = document.getElementById(
-      "eye-repeatNew-password"
+      "eye-confirm-password"
     );
 
     toggleOldPassword.addEventListener("click", function () {
-      togglePasswordVisibility(OldPasswordField, toggleOldPassword);
+      togglePasswordVisibility(oldPasswordField, toggleOldPassword);
     });
 
     toggleNewPassword.addEventListener("click", function () {

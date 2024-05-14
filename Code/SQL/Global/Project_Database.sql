@@ -97,7 +97,7 @@ CREATE TABLE Users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     formCompleted BOOLEAN DEFAULT false,
-    img_path VARCHAR(255)
+    img_path VARCHAR(255) DEFAULT '../../../upload_img/global/user.png'
 );
 
 -- Ενδιάμεσος Πίνακας Συσχέτισης Χρηστών-Εργασιών
