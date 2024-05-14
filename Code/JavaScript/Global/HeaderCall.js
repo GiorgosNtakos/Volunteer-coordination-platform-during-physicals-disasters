@@ -19,9 +19,6 @@ function updateHeaderTitle() {
     'offers_page.html': 'Διαχείριση Προσφορών',
     'personal_info_form.html': 'Υποχρεωτική Φόρμα Προσωπικών στοιχείων',
     'request_page.html': 'Διαχείριση Αιτήσεων',
-    'choose_vehicle.html': 'Επιλογή Οχήματος',
-    'choose_vehicle.html': 'Επιλογή Οχήματος',
-
   };
 
   const pathname = window.location.pathname.split("/").pop();
