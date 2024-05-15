@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+.main {
+    position: relative;
+    flex-grow: 1; /* Take up the remaining space */
+    padding: 20px; /* Padding around the content */
+  }
+
+h2 {
+    display: none;
+  }
+
+  #offerIcon,
+  #deleteIcon{
+    color: rgb(168, 3, 3);
+    font-size: 25px;
+    cursor: pointer;
+  }
+
+  #offerIcon:hover,
+  #deleteIcon:hover {
+    transition: 0.5s;
+    font-size: 30px;
+    color: red;
+  }
+
+  /* Προσαρμογή του scrollbar */
+.scroll-container::-webkit-scrollbar {
+  width: 8px;  /* Πλάτος του scrollbar */
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: #f0f0f0;  /* Χρώμα του track */
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1;  /* Χρώμα της λαβής */
+  border-radius: 4px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;  /* Χρώμα κατά την επιλογή */
+}
+
+.scroll-container {
+  overflow-y: auto;
+  max-height: 500px;  /* Αντιστοιχίστε αυτό με το max-height του tbody */
+}
+
+table th, table td {
+  height: 50px;  /* ή όποιο ύψος επιλέξετε */
+  padding: 8px 12px;  /* Προσαρμόστε το padding αναλόγως */
+}
+
+#table_of_announcements{
+  margin-top: 0px;
+}

@@ -164,7 +164,8 @@ border-bottom: none;
   background: #a8a8a8; /* Χρώμα της λαβής όταν το ποντίκι περνάει πάνω της */
 }
 
-.history_requests{
+.history_requests,
+.history_offers{
   display: none;
 }
 
@@ -185,8 +186,7 @@ border-bottom: none;
 }
 
 .history-table table{
-  max-height: 100px; /* Θέτει το μέγιστο ύψος του πίνακα */
+  max-height: 300px; /* Θέτει το μέγιστο ύψος του πίνακα */
   overflow-y: auto; /* Ενεργοποιεί την κάθετη κύλιση αν χρειάζεται */
   margin-bottom: 20px;
 }
-

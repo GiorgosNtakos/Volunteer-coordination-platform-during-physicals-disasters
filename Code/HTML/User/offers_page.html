@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Διαχείριση Προσφορών</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../../CSS/User/offers_page_style.css" />
+    <link rel="stylesheet" href="../../CSS/Global/Header.css" />
+    <link rel="stylesheet" href="../../CSS/Admin/forms_containers_style.css" />
+    <link rel="stylesheet" href="../../CSS/Global/toolbar_style.css" />
+    <link rel="stylesheet" href="../../CSS/Global/tables_style.css" />
+    <link rel="stylesheet" href="../../CSS/Global/showbox.css" />
+    <link rel="stylesheet" href="../../CSS/Global/toolbars_buttons.css" />
+
+  
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  </head>
+  <body>
+    <div id="overlay"></div>
+    <div id="Header"></div>
+    <div class="container">
+      <div class="toolbar">
+        <div id="offer-form-container">
+          <form id="offer-form">
+            <input type="hidden" id="announcement_id" name="announcement_id">
+            <label for="name">Όνομα Είδους:</label>
+            <select class="select_item" id="item_name" name="item_name"></select
+              ><br /><br />
+
+            <label for="quantity">Ποσότητα:</label>
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              required
+            /><br /><br />
+
+            <button type="submit" formnovalidate>Υποβολή Προσφοράς</button>
+          </form>
+        </div>
+
+        <div>
+          <button id="Show_History_Offers">Ιστορικό των Προσφορών σας</button>
+        </div>
+      </div>
+
+      <div class="main">
+        <div class="scroll-container">
+        <table id="table_of_announcements">
+          <thead>
+            <tr>
+              <th>Είδη προς ανάγκη και ζητούμενες ποσότητες </th>
+              <th>Επιλογή</th>
+            </tr>
+          </thead>
+          <tbody id="Available-announcements-list">
+            <!-- Εδώ θα εμφανιστούν τα προϊόντα από τη βάση δεδομένων -->
+          </tbody>
+        </table>
+        </div>
+
+        <div class="history-container">
+          <div class="history-table">
+            <h2>Τρέχων Προσφορές</h2>
+            <div class="scroll-container">
+            <table class="history_offers">
+              <thead>
+                <tr>
+                  <th>Προσφορά</th>
+                  <th>Κατάσταση Προσφοράς</th>
+                  <th>Ποσότητα Προσφοράς</th>
+                  <th>Ημ/νια Δημιοργίας Προσφοράς</th>
+                  <th>Ημ/νια Έγκρισης Προσφοράς</th>
+                  <th>Επιλογή</th>
+                </tr>
+              </thead>
+              <tbody id="current_offers_list">
+                <!-- Εδώ θα εμφανιστούν τα προϊόντα από τη βάση δεδομένων -->
+              </tbody>
+            </table>
+            </div>
+          </div>
+
+          <div class="history-table">
+            <h2>Παλιότερες Αιτήσεις</h2>
+            <div class="scroll-container">
+            <table class="history_offers">
+              <thead>
+                <tr>
+                    <th>Προσφορά</th>
+                    <th>Κατάσταση Προσφοράς</th>
+                    <th>Ποσότητα Προσφοράς</th>
+                    <th>Ημ/νια Δημιοργίας Προσφοράς</th>
+                    <th>Ημ/νια Ολοκλήρωσης Προσφοράς</th>
+                </tr>
+              </thead>
+              <tbody id="old_offers_list">
+                <!-- Εδώ θα εμφανιστούν τα προϊόντα από τη βάση δεδομένων -->
+              </tbody>
+            </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <script src="../../JavaScript/Global/HeaderCall.js"></script>
+    <script src="../../JavaScript/User/available_announcements.js"></script>
+    <script src="../../JavaScript/Global/showMessage.js"></script>
+    <script src="../../JavaScript/User/manage_tables.js"></script>
+  </body>
+</html>

@@ -6,7 +6,8 @@
 #options-form-container,
 #removeStock-form-container,
 #addStock-form-container,
-#request-form-container {
+#request-form-container,
+#offer-form-container {
   width: 325px;
   display: none;
   position: fixed;
@@ -83,7 +84,8 @@
 #options-item-form,
 #remove-stock-form,
 #add-stock-form,
-#request-form {
+#request-form,
+#offer-form {
   text-align: center;
 }
 
@@ -98,7 +100,8 @@
 #options-item-form label,
 #remove-stock-form,
 #add-stock-form,
-#request-form {
+#request-form,
+#offer-form label {
   display: block;
   font-weight: bold;
   color: gold; /* Χρυσό χρώμα για τις ετικέτες */
@@ -122,7 +125,9 @@
 #remove-stock-form input[type="number"],
 #add-stock-form input[type="text"],
 #add-stock-form input[type="number"],
-#request-form input{
+#request-form input,
+#offer-form input,
+#offer-form select{
   width: 80%;
   padding: 10px;
   margin: 5px 0;
@@ -200,7 +205,8 @@
 #options-item-form button[type="submit"],
 #remove-stock-form button[type="submit"],
 #add-stock-form button[type="submit"],
-#request-form button[type="submit"]
+#request-form button[type="submit"],
+#offer-form button[type="submit"]
  {
   background-color: gold; /* Μωβ χρώμα για το κουμπί */
   color: black;
@@ -223,7 +229,8 @@
 #options-item-form button[type="submit"]:hover,
 #remove-stock-form button[type="submit"]:hover,
 #add-stock-form button[type="submit"]:hover,
-#request-form button[type="submit"]:hover {
+#request-form button[type="submit"]:hover,
+#offer-form button[type="submit"]:hover {
   transition: background-color 0.4s;
   background-color: goldenrod;
 }

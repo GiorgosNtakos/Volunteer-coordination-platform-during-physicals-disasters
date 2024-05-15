@@ -121,10 +121,12 @@ CREATE TABLE Tasks (
     item_id INT,
     vehicle_id VARCHAR(36),
     user_id VARCHAR(36),
+    announcement_id VARCHAR(36),
     FOREIGN KEY (item_id) REFERENCES Items(id),
     FOREIGN KEY (vehicle_id) REFERENCES Vehicles(id),
-    FOREIGN KEY (user_id) REFERENCES Users(id)
-    UNIQUE INDEX vehicle_item_unique (user_id, item_id)
+    FOREIGN KEY (user_id) REFERENCES Users(id),
+    FOREIGN KEY (announcement_id) REFERENCES Announcements(id)
+    UNIQUE INDEX vehicle_item_unique (user_id, item_id, announcement_id)
 );
 
 -- Πίνακας Ανακοινώσεων
@@ -145,6 +147,7 @@ CREATE TABLE AnnouncementItems (
     announcement_id VARCHAR(36),
     item_id INT,
     quantity INT,
+    covered_quantity INT DEFAULT 0,
     PRIMARY KEY (announcement_id, item_id),
     FOREIGN KEY (announcement_id) REFERENCES Announcements(id),
     FOREIGN KEY (item_id) REFERENCES Items(id)

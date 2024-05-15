@@ -8,7 +8,8 @@
 #unload-vehicle-cargo,
 #Show_History_Requests,
 #unload-vehicle-cargo, 
-#show-add-announcement-form {
+#show-add-announcement-form,
+#Show_History_Offers {
   position: relative;
   background-color: #5a197d;
   color: gold;
@@ -38,7 +39,8 @@
 #show-load-quantities-form:hover,
 #show-base-cargo:hover,
 #unload-vehicle-cargo:hover,
-#Show_History_Requests:hover {
+#Show_History_Requests:hover,
+#Show_History_Offers:hover {
   transition: background-color 0.3s;
   background-color: #440466;
 }

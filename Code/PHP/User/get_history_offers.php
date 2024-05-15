@@ -11,7 +11,7 @@ if (isset($_SESSION['user_auth'])){
 
     if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
-        $type = "Request";
+        $type = "Offer";
 
         $sql = "SELECT tasks.id, tasks.quantity, tasks.status, tasks.created_at, tasks.updated_at, tasks.user_id, items.name AS name FROM tasks
         LEFT JOIN items ON tasks.item_id = items.id
@@ -22,25 +22,25 @@ if (isset($_SESSION['user_auth'])){
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            $requests = array();
+            $offers = array();
         
             while ($row = $result->fetch_assoc()) {
-                $requests[] = $row;
+                $offers[] = $row;
             }
         
             http_response_code(200);
             $response = array(
                 "status" => "success",
                 "message" => "Επιτυχής ανάκτηση των αιτήσεων",
-                "requests" => $requests
+                "offers" => $offers
             );
 
         } else if($result->num_rows === 0) {
             http_response_code(200);
-            $response = array("status" => "success_but_empty" , "message" => "Δεν υπάρχουν αιτήσεις." . $conn->error);
+            $response = array("status" => "success_but_empty" , "message" => "Δεν υπάρχουν προσφορές." . $conn->error);
         } else{
             http_response_code(500);
-            $response = array("status" => "server_error" , "message" => "Σφάλμα κατά την ανάκτηση των αιτήσεων: " . $conn->error);
+            $response = array("status" => "server_error" , "message" => "Σφάλμα κατά την ανάκτηση των προσφορών: " . $conn->error);
         }
 
     } else{

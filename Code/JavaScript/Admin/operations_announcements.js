@@ -7,7 +7,7 @@ function getAvailableAnnouncements(){
     var AnnouncementsList = document.getElementById("announcements_body");
 
     $.ajax({
-        url: "../../PHP/Admin/get_announcements.php",
+        url: "../../PHP/Global/get_announcements.php",
         method: "GET",
         success: function(response){
             if (response.status === "success") {
