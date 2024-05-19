@@ -4,7 +4,7 @@
 
 var formData;
 document.addEventListener("DOMContentLoaded", function () {
-  if (window.location.href === "http://localhost/webproject/Code/Html/Global/form_completion.html"){
+  if (window.location.href === "http://localhost/webproject/Code/Html/Admin/form_completion.html"){
   ChangeForms();
 }
   document
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
       var greekRegex = /^[Α-ΩΆ-Ώα-ωά-όώΐϊΰύ\s]*$/u;
       var nameFormatRegex = /^[Α-ΩΆ-Ώα-ωά-όώΐϊΰύ]+\s[Α-ΩΆ-Ώα-ωά-όώΐϊΰύ]+$/u;
 
-      if (window.location.href === "http://localhost/webproject/Code/Html/Global/form_completion.html"){
+      if (window.location.href === "http://localhost/webproject/Code/Html/Admin/form_completion.html"){
 
       console.log(checkActiveForm())
       if (full_name.trim() === "" && (!checkActiveForm())) {
@@ -168,7 +168,7 @@ function createForm(full_name, phone, street, number, town) {
   getCoordinatesFromAddress(address)
     .then((coordinates) => {
       // Προετοιμασία των δεδομένων για αποστολή με τη χρήση AJAX
-    if(window.location.href === "http://localhost/webproject/Code/Html/Global/form_completion.html"){
+    if(window.location.href === "http://localhost/webproject/Code/Html/Admin/form_completion.html"){
       if (checkActiveForm()) {
         // Είμαστε στη φόρμα του διασώστη, συμπεριλαμβάνουμε όλα τα πεδία
         formData = $("#Global_form").serialize();
@@ -188,7 +188,7 @@ function createForm(full_name, phone, street, number, town) {
         coordinates.lon;
 
       // Κλήση της συνάρτησης createRescuer στο PHP
-      if (window.location.href === "http://localhost/webproject/Code/Html/Global/form_completion.html" && checkActiveForm()) {
+      if (window.location.href === "http://localhost/webproject/Code/Html/Admin/form_completion.html" && checkActiveForm()) {
 
 
         //var englishFullName = transliterate(full_name);
@@ -241,7 +241,7 @@ function createForm(full_name, phone, street, number, town) {
           }
         },
       });
-    } else if(window.location.href === "http://localhost/webproject/Code/Html/Global/form_completion.html" && (!checkActiveForm())){
+    } else if(window.location.href === "http://localhost/webproject/Code/Html/Admin/form_completion.html" && (!checkActiveForm())){
 
     $.ajax({
       url: "../../PHP/Admin/create_vehicle.php",
@@ -475,7 +475,7 @@ function ChangeForms(){
       });
   }
 
-if (window.location.href === "http://localhost/webproject/Code/Html/Global/form_completion.html"){
+if (window.location.href === "http://localhost/webproject/Code/Html/Admin/form_completion.html"){
   function checkActiveForm()
   {
     var phoneFieldDisplay = document.getElementById("rescuerFields").style.display;

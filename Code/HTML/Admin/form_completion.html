@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../CSS/Global/forms_style.css" />
+    <link rel="stylesheet" href="../../CSS/Global/Header.css" />
+    <link rel="stylesheet" href="../../CSS/Global/showbox.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+    <title>Δημιουργία Διασώστη/Οχήματος</title>
+  </head>
+
+  <body>
+    <div id="Header"></div>
+    <form id="Global_form">
+    <div id="map" class="hidden"  style="height: 400px;"></div>
+      <label for="full_name">Ονομ/νυμο:</label>
+      <input
+        type="text"
+        name="full_name"
+        id="full_name"
+        placeholder="Ονομ/νυμο"
+        required
+      />
+
+      <div id="rescuerFields">
+      <label for="phone">Κινητό Τηλέφωνο:</label>
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        placeholder="Αριθμός Κινητού Τηλεφώνου"
+        value="+30 "
+        required
+      />
+    </div>
+
+      <label for="street">Οδός:</label>
+      <input
+        type="text"
+        id="street"
+        name="street"
+        placeholder="Οδός"
+        required
+      />
+
+      <label for="number">Αριθμός Οδού:</label>
+      <input
+        type="text"
+        id="number"
+        name="number"
+        placeholder="Αριθμός Οδού"
+        min="1"
+        required
+      />
+      <!--? Εχω υποθέση ότι η πόλη είναι σταθερά στην Πατρα για τους διασώστες.Το συζηταμε αν μπορει να ειναι γενικα απο ολη την Ελλαδα -->
+      <!-- Προσθέστε όλα τα απαραίτητα πεδία που χρειάζεστε για τους διασωστές -->
+
+      <button type="submit" id="submitForm" formnovalidate>
+        Δημιουργία Λογαριασμού Διασώστη
+      </button>
+      <button type="button" id="showMap">Προβολή Χάρτη</button>
+      <button type="button" id="toggleForm">Φόρμα Προσθήκης Νέου Οχήματος</button>
+    </form>
+
+    <script src="../../JavaScript/Global/antigeo_form.js"></script>
+    <script src="../../JavaScript/Global/HeaderCall.js"></script>
+    <script src="../../JavaScript/Global/forms_management.js"></script>
+    <script src="../../JavaScript/Global/showMessage.js"></script>
+  </body>
+</html>
