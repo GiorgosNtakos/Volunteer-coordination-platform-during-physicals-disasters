@@ -47,13 +47,13 @@ header h1 {
   padding: 0;
 }
 
-.admin-profile {
+.user-profile {
   display: flex;
   align-items: center;
   order: -1; /* Τοποθετεί το .admin-profile πριν από τον τίτλο */
 }
 
-.admin-profile img {
+.user-profile img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -68,7 +68,7 @@ header h1 {
   }
 }
 
-.admin-name {
+.user-name {
   font-weight: bold;
   font-size: medium;
 }
