@@ -18,7 +18,7 @@ function login(event) {
         // Η σύνδεση ήταν επιτυχής
         if(response.form === 1){
 
-          window.location.href = "../../Html/User/offers_page.html";
+          window.location.href = "../../HTML/Global/index_page.html";
           showMessage("extra-success-message", response.message, "#user-login");
           // Ενέργειες που θέλετε να κάνετε μετά την επιτυχημένη σύνδεση
 
@@ -30,10 +30,10 @@ function login(event) {
 
         }
       } else if (response.status === "success" && response.type === "Admin") {
-        window.location.href = "/webproject/Code/HTML/Admin/admin_announcements.html";
+        window.location.href = "../../HTML/Global/index_page.html";
         showMessage("extra-success-message", response.message, "#user-login");
       } else if (response.status === "success" && response.type === "Rescuer") {
-        window.location.href = "/webproject/Code/HTML/Rescuer/choose_vehicle.html";
+        window.location.href = "../../HTML/Global/index_page.html";
         showMessage("extra-success-message", response.message, "#user-login");
       } else {
         // Η σύνδεση απέτυχε

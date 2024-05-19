@@ -8,12 +8,12 @@ $(document).ready(function () {
 
 function Logout() {
   $.ajax({
-    url: "../../PHP/logout.php",
+    url: "../../PHP/Global/logout.php",
     method: "POST",
     dataType: "json",
     success: function (response) {
       if (response.status === "success") {
-        window.location.href = "admin_login.html";
+        window.location.href = "../../HTML/Global/login_signup.html";
         console.log("APOSYNDESH ENTAJEI");
       } else {
         showMessage(
