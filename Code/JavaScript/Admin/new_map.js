@@ -43,8 +43,8 @@ function initializeMap() {
 function setupDataLayers() {
     // Κλήσεις συναρτήσεων για τη φόρτωση δεδομένων στον χάρτη
     fetchAndDisplayBase();
-    displayPendingOffers();
-    displayPendingRequests();
+    displayAllOffers();
+    displayAllRequests();
 }
 
 // Συνάρτηση για την ανάκτηση και εμφάνιση της βάσης
@@ -179,18 +179,18 @@ function fetchAndDisplayVehicles() {
         }
     });
 }
-Intl.DateTimeFormat()
-function displayPendingOffers() {
+function displayAllOffers() {
     $.ajax({
-        url: "../../PHP/Global/get_pending_offers.php",
+        url: "../../PHP/Global/get_all_offers.php",
         method: "GET",
         dataType: "json",
         success: function(response) {
             if (response.status === "success") {
                 console.log(response);
                 response.offers.forEach(function(offer) {
+                    var offerIconUrl = offer.status === 'accepted' ? '../../../upload_img/offer_accepted.png' : '../../../upload_img/offer_pending.png';
                     var offerIcon = L.icon({
-                        iconUrl: '../../../upload_img/offer_pending.png',
+                        iconUrl: offerIconUrl,
                         iconSize: [45, 45],
                         iconAnchor: [17, 35],
                         popupAnchor: [0, -35]
@@ -205,14 +205,13 @@ function displayPendingOffers() {
                                 <div class="popup-info"><strong>Είδος Προσφοράς:</strong> ${offer.name}</div>
                                 <div class="popup-info"><strong>Ποσότητα Προσφοράς:</strong> ${offer.quantity}</div>
                                 <div class="popup-info"><strong>Ημερομηνία Καταχώρησης:</strong> ${formatDateIntl(offer.created_at)}</div>`;
-                        
-                            // Έλεγχος αν το vehicle_id είναι null
-                            if (offer.vehicle_id === '') {
-                                popupContent += `<div class="popup-info"><strong>Κατάσταση:</strong> Δεν έχει αναληφθεί ακόμα</div>`;
-                            } else {
-                                popupContent += `<div class="popup-info"><strong>Όνομα Οχήματος:</strong> ${offer.vehicle_name}</div>
-                                <div class="popup-info"><strong>Ημερομηνία Ανάληψης:</strong> ${formatDateIntl(offer.updated_at)}</div>`; // Χρησιμοποιήστε τη formatDate για την ημερομηνία ανάληψης
-                            }
+
+                                if (offer.status === 'accepted') {
+                                    popupContent += `<div class="popup-info"><strong>Όνομα Οχήματος:</strong> ${offer.vehicle_name}</div>
+                                                     <div class="popup-info"><strong>Ημερομηνία Ανάληψης:</strong> ${formatDateIntl(offer.updated_at)}</div>`;
+                                } else {
+                                    popupContent += `<div class="popup-info"><strong>Κατάσταση:</strong> Δεν έχει αναληφθεί ακόμα</div>`;
+                                }
                         
                             popupContent += `</div>`;
                             return popupContent;
@@ -221,7 +220,7 @@ function displayPendingOffers() {
                     offerMarkers.push(offerMarker);  // Προσθήκη στο array
                         
                 });
-            }
+            } 
         },
         error: function(xhr, status, error) {
             console.error("An error occurred fetching offers: " + status + ", " + error);
@@ -229,16 +228,17 @@ function displayPendingOffers() {
     });
 }
 
-function displayPendingRequests() {
+function displayAllRequests() {
     $.ajax({
-        url: "../../PHP/Global/get_pending_requests.php",
+        url: "../../PHP/Global/get_all_requests.php",
         method: "GET",
         dataType: "json",
         success: function(response) {
             if (response.status === "success") {
                 response.requests.forEach(function(request) {
+                    var requestIconUrl = request.status === 'accepted' ? '../../../upload_img/request_accepted.png' : '../../../upload_img/request_pending.png';
                     var requestIcon = L.icon({
-                        iconUrl: '../../../upload_img/request_pending.png',
+                        iconUrl: requestIconUrl,
                         iconSize: [45, 45],
                         iconAnchor: [17, 35],
                         popupAnchor: [0, -35]
@@ -254,19 +254,16 @@ function displayPendingRequests() {
                             <div class="popup-info"><strong>Ποσότητα Αίτηματος:</strong> ${request.quantity}</div>
                             <div class="popup-info"><strong>Ημερομηνία Καταχώρησης:</strong> ${formatDateIntl(request.created_at)}</div>`;
                     
-                        // Έλεγχος αν το vehicle_id είναι null
-                        if (request.vehicle_id === '') {
-                            popupContent += `<div class="popup-info"><strong>Κατάσταση:</strong> Δεν έχει αναληφθεί ακόμα</div>`;
-                        } else {
-                            popupContent += `<div class="popup-info"><strong>Όνομα Οχήματος:</strong> ${request.vehicle_name}</div>
-                            <div class="popup-info"><strong>Ημερομηνία Ανάληψης:</strong> ${formatDateIntl(request.updated_at)}</div>`; // Χρησιμοποιήστε τη formatDate για την ημερομηνία ανάληψης
-                        }
+                            if (request.status === 'accepted') {
+                                popupContent += `<div class="popup-info"><strong>Όνομα Οχήματος:</strong> ${request.vehicle_name}</div>
+                                                 <div class="popup-info"><strong>Ημερομηνία Ανάληψης:</strong> ${formatDateIntl(request.updated_at)}</div>`;
+                            } else {
+                                popupContent += `<div class="popup-info"><strong>Κατάσταση:</strong> Δεν έχει αναληφθεί ακόμα</div>`;
+                            }
                     
                         popupContent += `</div>`;
                         return popupContent;
                     });
-                    // Store the status as a property of the marker object
-                    requestMarker.status = request.status;
 
                     requestMarkers.push(requestMarker);  // Προσθήκη στο array
                 });
