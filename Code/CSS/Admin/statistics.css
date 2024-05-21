@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+.main {
+    position: relative;
+    flex-grow: 1; /* Take up the remaining space */
+    padding: 20px; /* Padding around the content */
+  }
+
+.chart-container {
+    width: 80%;
+    margin: 20px auto; /* Κεντράρισμα του γραφήματος */
+    transition: width 0.5s;
+}
+
+.chart-container.doughnut {
+    width: 40%; /* Μικρότερο πλάτος για το doughnut */
+}
+
+#date-filter {
+    margin-left: 30%;
+    background-color: #430063; /* Μωβ φόντο */
+    padding: 20px;
+    border-radius: 25px;
+    color: gold; /* Χρυσά γράμματα */
+    display: inline-block; /* Για να μην απλώνεται σε όλο το πλάτος */
+}
+#date-filter label, #date-filter button {
+    color: gold; /* Χρυσά στοιχεία */
+}
+#date-filter button {
+    background-color: #430063;
+    border: 1px solid gold;
+    border-radius: 25px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+#date-filter button:hover {
+    transition: background-color 0.3s;
+    background-color: #5a0c9e;
+}
+.ui-datepicker {
+    background: #430063; /* Μωβ φόντο */
+    border: 1px solid #555;
+    color: gold; /* Χρυσά γράμματα */
+}
+.ui-datepicker-header {
+    background: #430063; /* Μωβ φόντο */
+    border-bottom: 1px solid #555;
+    color: gold;
+}
+
+.ui-datepicker-title {
+    color: gold; /* Χρυσά γράμματα */
+}
+
+.ui-datepicker-calendar .ui-state-default {
+    background: #fff; /* Λευκό φόντο για τις ημέρες */
+    color: #000; /* Μαύρα γράμματα για τις ημέρες */
+}
+.ui-datepicker-calendar .ui-state-hover {
+    background: gold; /* Χρυσό φόντο για την επιλεγμένη ημέρα */
+    color: #430063; /* Μωβ γράμματα για την επιλεγμένη ημέρα */
+}
+
+.ui-datepicker-prev span, .ui-datepicker-next span {
+    background-color: #ffd700 !important; /* Χρυσό φόντο για τα βελάκια */
+}
+
+.ui-datepicker-prev:hover, .ui-datepicker-next:hover {
+    background-color: #5a0c9e !important; /* Χρυσά γράμματα για τα βελάκια στο hover */
+}
+
+#toggleChartButton{
+    margin: 20px auto;
+    display: inline-block;
+    background-color: #5a197d;
+    color: gold;
+    border: none;
+    border-radius: 25px;
+    width: 100%;
+    cursor: pointer;
+    height: 5%;
+}
+
+#toggleChartButton{
+    transition: background-color 0.3s;
+    background-color: #440466;
+}
