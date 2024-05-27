@@ -1,10 +1,10 @@
-// map_filter.js
 import { map, vehicleMarkers, offerMarkers, requestMarkers, polylineLayers } from './new_map.js';
 
 const filters = {
     acceptedRequests: false,
     pendingRequests: false,
-    offers: false,
+    acceptedOffers: false,
+    pendingOffers: false,
     vehiclesWithTasks: false,
     vehiclesWithoutTasks: false,
     showLines: false
@@ -25,22 +25,27 @@ function updateMapVisibility() {
     vehicleMarkers.forEach(marker => {
         let shouldBeVisible = true;  // Default to true
         if (anyFilterIsActive) {
-            const hasTask = marker.taskStatus === "accepted";
-            shouldBeVisible = (filters.vehiclesWithTasks && hasTask) ||
-                              (filters.vehiclesWithoutTasks && !hasTask);
+            const hasTask = marker.options.tasks ;
+            shouldBeVisible = (filters.vehiclesWithTasks && (hasTask > 0)) ||
+                              (filters.vehiclesWithoutTasks && !(hasTask>0));
         }
         updateVisibility(marker, shouldBeVisible);
     });
 
     offerMarkers.forEach(marker => {
-        let shouldBeVisible = !anyFilterIsActive || filters.offers;
+        let shouldBeVisible = true;  // Default to true
+        if (anyFilterIsActive) {
+            const markerStatus = marker.options.status;
+            shouldBeVisible = (filters.acceptedOffers && markerStatus === "accepted") ||
+                              (filters.pendingOffers && markerStatus === "pending");
+        }
         updateVisibility(marker, shouldBeVisible);
     });
 
     requestMarkers.forEach(marker => {
         let shouldBeVisible = true;  // Default to true
         if (anyFilterIsActive) {
-            const markerStatus = marker.status;
+            const markerStatus = marker.options.status;
             shouldBeVisible = (filters.acceptedRequests && markerStatus === "accepted") ||
                               (filters.pendingRequests && markerStatus === "pending");
         }
@@ -66,7 +71,7 @@ function updateVisibility(layer, shouldBeVisible) {
 }
 
 // Event listeners
-['acceptedRequests', 'pendingRequests', 'offers', 'vehiclesWithTasks', 'vehiclesWithoutTasks', 'showLines'].forEach(id => {
+['acceptedRequests', 'pendingRequests', 'acceptedOffers', 'pendingOffers', 'vehiclesWithTasks', 'vehiclesWithoutTasks', 'showLines'].forEach(id => {
     document.getElementById(id + 'Switch').addEventListener('change', function() {
         toggleFilter(id, this.checked);
     });
