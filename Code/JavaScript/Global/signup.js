@@ -98,7 +98,7 @@ function signup(username, password, email) {
       if (response.status === "created") {
         // Η εγγραφή ήταν επιτυχής
         //showMessage("extra-success-message", response.message, "#user-signup");
-        window.location.href = "new_page.html";
+        window.location.href = "index_page.html";
 
         // Ενέργειες που θέλετε να κάνετε μετά την επιτυχημένη εγγραφή
       } else {

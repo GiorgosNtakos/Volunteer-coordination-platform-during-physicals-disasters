@@ -144,7 +144,7 @@ function fetchAndDisplayVehicles() {
                     });
 
                     var taskStatus = vehicle.tasks.length < 4 ? "Διαθέσιμο" : "Μη διαθέσιμο";
-                    var vehicleMarker = L.marker([vehicle.location_lat, vehicle.location_lon], {icon: vehicleIcon}).addTo(map)
+                    var vehicleMarker = L.marker([vehicle.location_lat, vehicle.location_lon], {icon: vehicleIcon, tasks: vehicle.tasks.length}).addTo(map)
                     .bindPopup(`
                     <div class="popup-content">
                         <div class="popup-title">Όχημα ${vehicle.name}</div>
@@ -196,7 +196,7 @@ function displayAllOffers() {
                         popupAnchor: [0, -35]
                     });
 
-                     var offerMarker = L.marker([offer.location_lat, offer.location_lon], {icon: offerIcon}).addTo(map)
+                     var offerMarker = L.marker([offer.location_lat, offer.location_lon], {icon: offerIcon, status: offer.status}).addTo(map)
                         .bindPopup(function() {
                             var popupContent = `<div class="popup-content">
                                 <div class="popup-title">${offer.full_name}</div>
@@ -244,7 +244,7 @@ function displayAllRequests() {
                         popupAnchor: [0, -35]
                     });
 
-                    var requestMarker = L.marker([request.location_lat, request.location_lon], {icon: requestIcon}).addTo(map)
+                    var requestMarker = L.marker([request.location_lat, request.location_lon], {icon: requestIcon, status: request.status}).addTo(map)
                     .bindPopup(function() {
                         var popupContent = `<div class="popup-content">
                             <div class="popup-title">${request.full_name}</div>
