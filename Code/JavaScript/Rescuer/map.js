@@ -94,7 +94,7 @@ function fetchMapData() {
                             <b>Created At:</b> ${task.created_at}<br>
                             <b>Accepted At:</b> ${task.accepted_at ? task.accepted_at : 'Not accepted yet'}<br>
                             <b>Vehicle:</b> ${task.vehicle_name ? task.vehicle_name : 'None'}<br>
-                            <button onclick="undertakeTask('${task.id}')">Undertake Task</button>
+                            <button onclick="undertakeTask('${task.id}', '${task.type}')">Undertake Task</button>
                         `;
                         L.marker([task.location_lat, task.location_lon], {
                             icon: L.icon({
@@ -155,7 +155,7 @@ function fetchMapData() {
 }
 
 
-function undertakeTask(taskId, taskType) {
+window.undertakeTask = function(taskId, taskType) {
     console.log('undertakeTask function called with Task ID:', taskId, 'and Task Type:', taskType);
 
     $.ajax({

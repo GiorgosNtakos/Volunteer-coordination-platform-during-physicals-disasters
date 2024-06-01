@@ -1,46 +1,60 @@
 <?php
+header('Access-Control-Allow-Origin: http://127.0.0.1:5500');
+header('Content-Type: application/json');
 session_start();
-require 'db_connection.php'; // Adjust the path as necessary
 
-$response = array('status' => 'error', 'message' => 'Unknown error occurred.');
+// Adjust the path to 'db_connection.php' according to your directory structure
+require 'db_connect.php'; 
 
-if (isset($_SESSION['user_id']) && isset($_POST['task_id']) && isset($_POST['task_type'])) {
-    $userId = $_SESSION['user_id'];
-    $taskId = $_POST['task_id'];
-    $taskType = $_POST['task_type'];
+$conn->set_charset("utf8");
 
-    // Fetch the vehicle assigned to the rescuer
-    $sql = "SELECT vehicle_id FROM VehicleAssignments WHERE user_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('s', $userId);
-    $stmt->execute();
-    $result = $stmt->get_result();
+$response = array();
 
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $vehicleId = $row['vehicle_id'];
+if (isset($_SESSION['user_auth'])) {
+    $username = $_SESSION['user_auth']['username'];
 
-        // Update the task with the vehicle_id
-        $updateSql = "UPDATE Tasks SET vehicle_id = ?, status = 'accepted' WHERE id = ? AND type = ? ";
-        $updateStmt = $conn->prepare($updateSql);
-        $updateStmt->bind_param('sss', $vehicleId, $taskId, $taskType);
-        $updateStmt->execute();
+    if (isset($_POST['task_id']) && isset($_POST['task_type'])) {
+        $task_id = $_POST['task_id'];
+        $task_type = $_POST['task_type'];
 
-        if ($updateStmt->affected_rows > 0) {
-            $response['status'] = 'success';
-            $response['message'] = 'Task successfully undertaken.';
+        // Get the rescuer's vehicle_id
+        $sql = "SELECT va.vehicle_id 
+                FROM VehicleAssignments va 
+                JOIN Users u ON va.user_id = u.id 
+                WHERE u.username = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $vehicle_id = $row['vehicle_id'];
+
+            // Update the task to assign it to the rescuer's vehicle
+            $sql = "UPDATE Tasks 
+                    SET status = 'accepted', vehicle_id = ?, updated_at = NOW() 
+                    WHERE id = ? AND status = 'pending'";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param('ss', $vehicle_id, $task_id);
+
+            if ($stmt->execute()) {
+                $response['status'] = 'success';
+            } else {
+                $response['status'] = 'error';
+                $response['message'] = 'Failed to update task.';
+            }
         } else {
-            $response['message'] = 'Failed to update task. It might be already undertaken by another vehicle.';
+            $response['status'] = 'error';
+            $response['message'] = 'Rescuer vehicle not found.';
         }
-
-        $updateStmt->close();
     } else {
-        $response['message'] = 'No vehicle assigned to the rescuer.';
+        $response['status'] = 'error';
+        $response['message'] = 'Invalid task data.';
     }
-
-    $stmt->close();
 } else {
-    $response['message'] = 'Invalid request.';
+    $response['status'] = 'error';
+    $response['message'] = 'User not authenticated.';
 }
 
 echo json_encode($response);
