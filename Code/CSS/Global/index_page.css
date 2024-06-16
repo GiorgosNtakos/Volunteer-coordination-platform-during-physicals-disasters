@@ -16,6 +16,7 @@ background-color: #f0f0f0;
 
 .welcome-message {
     text-align: center;
+    margin: 15px 3%;
     font-size: 2em;
     color: #333;
 }

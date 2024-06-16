@@ -15,7 +15,7 @@ body {
 
 .chart-container {
     width: 80%;
-    margin: 20px auto; /* Κεντράρισμα του γραφήματος */
+    margin: 2% 10%; /* Κεντράρισμα του γραφήματος */
     transition: width 0.5s;
 }
 
@@ -24,27 +24,52 @@ body {
 }
 
 #date-filter {
-    margin-left: 30%;
+    margin: 2% 10%;
     background-color: #430063; /* Μωβ φόντο */
     padding: 20px;
     border-radius: 25px;
+    justify-content: center;
     color: gold; /* Χρυσά γράμματα */
-    display: inline-block; /* Για να μην απλώνεται σε όλο το πλάτος */
+    display: inline-flex; /* Για να μην απλώνεται σε όλο το πλάτος */
+    width: 60vw;
+    height: 8vh;
 }
-#date-filter label, #date-filter button {
+
+.date, #date-filter label, #date-filter button {
+    box-sizing: border-box;
+    padding: 15px;
+    margin: 10px;
+    text-align: center;
     color: gold; /* Χρυσά στοιχεία */
 }
+
+#date-filter label {
+    padding: 0;
+    align-self: center;
+}
+
+.date {
+    color: initial;
+    font-size: 15px;
+    border-radius: 25px;
+    width: 14vw;
+}
+
 #date-filter button {
+    font-size: 15px;
+    align-self: center;
     background-color: #430063;
     border: 1px solid gold;
     border-radius: 25px;
-    padding: 5px 10px;
+    width: 10vw;
     cursor: pointer;
 }
+
 #date-filter button:hover {
     transition: background-color 0.3s;
     background-color: #5a0c9e;
 }
+
 .ui-datepicker {
     background: #430063; /* Μωβ φόντο */
     border: 1px solid #555;

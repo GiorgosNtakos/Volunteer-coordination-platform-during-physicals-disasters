@@ -10,3 +10,9 @@
   height: 100vh; /* Full height of the viewport */
   box-sizing: border-box; /* Include padding in the element's total width and height */
 }
+
+@media only screen and (max-width: 480px) {
+  .toolbar {
+    display: none; /* Hide the toolbar for phones' screens */
+  }
+}

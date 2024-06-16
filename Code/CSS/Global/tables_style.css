@@ -190,3 +190,17 @@ border-bottom: none;
   overflow-y: auto; /* Ενεργοποιεί την κάθετη κύλιση αν χρειάζεται */
   margin-bottom: 20px;
 }
+
+@media only screen and (max-width: 480px) {
+  table th, table td {
+    text-align: center;
+    height: 60px;
+    padding: 1%;
+    border: 1px solid #ddd;
+  }
+  
+  .custom-select {
+    width: 100%;
+    position: relative;
+  }
+}
