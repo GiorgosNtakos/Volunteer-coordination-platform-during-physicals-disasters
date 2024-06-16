@@ -45,7 +45,7 @@ if (isset($_SESSION['user_auth'])) {
 
     // Fetch unassigned tasks
     $sql =  "
-        SELECT t.id, t.type, u.location_lat, u.location_lon 
+        SELECT t.id, t.type, t.created_at, t.updated_at, t.quantity, u.location_lat, u.location_lon , u.full_name, u.phone
         FROM Tasks t 
         JOIN Users u ON t.user_id = u.id 
         WHERE t.status = 'pending' ";
@@ -61,7 +61,8 @@ if (isset($_SESSION['user_auth'])) {
 
     // Fetch tasks assigned to the rescuer's vehicle
     $sql = "
-        SELECT t.id, t.type, u.location_lat, u.location_lon, v.location_lat AS vehicle_lat, v.location_lon AS vehicle_lon
+        SELECT t.id, t.type,  t.created_at, t.updated_at as accepted_at, t.quantity, u.location_lat, u.location_lon,u.full_name, u.phone,
+         v.location_lat AS vehicle_lat,  v.location_lon AS vehicle_lon, v.name
         FROM Tasks t 
         JOIN VehicleAssignments va ON t.vehicle_id = va.vehicle_id 
         JOIN Vehicles v ON va.vehicle_id = v.id 
