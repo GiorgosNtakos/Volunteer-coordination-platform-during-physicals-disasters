@@ -1,6 +1,10 @@
 "use strict";
+import { updateTaskPanel } from './task_panel.js';
 
 let map;
+let unassignedtaskMarkers = [];
+let assignedtaskMarkers = [];
+let polylineLayers = [];
 
 $(document).ready(function() {
     initializeMap();
@@ -55,7 +59,7 @@ function fetchMapData() {
 
                 // Validate rescuer's location
                 if (rescuer.location_lat && rescuer.location_lon) {
-                    L.marker([rescuer.location_lat, rescuer.location_lon], {
+                    let marker = L.marker([rescuer.location_lat, rescuer.location_lon], {
                         icon: L.icon({
                             iconUrl: '../../../upload_img/vehicle.png',
                             iconSize: [45, 45],
@@ -93,17 +97,20 @@ function fetchMapData() {
                             <b>Quantity:</b> ${task.quantity}<br>
                             <b>Created At:</b> ${task.created_at}<br>
                             <b>Accepted At:</b> ${task.accepted_at ? task.accepted_at : 'Not accepted yet'}<br>
-                            <b>Vehicle:</b> ${task.vehicle_name ? task.vehicle_name : 'None'}<br>
+                            <b>Vehicle:</b> ${task.name ? task.name : 'None'}<br>
                             <button onclick="undertakeTask('${task.id}', '${task.type}')">Undertake Task</button>
                         `;
-                        L.marker([task.location_lat, task.location_lon], {
+                        let unassignedtaskMarker = L.marker([task.location_lat, task.location_lon], {
                             icon: L.icon({
                                 iconUrl: iconUrl,
                                 iconSize: [45, 45],
                                 iconAnchor: [17, 35],
                                 popupAnchor: [0, -35]
-                            })
+                            }),
+                            type: task.type
                         }).addTo(map).bindPopup(taskPopupContent);
+                        unassignedtaskMarkers.push(unassignedtaskMarker);
+                    
                     } else {
                         console.error('Invalid unassigned task coordinates', task);
                     }
@@ -121,28 +128,36 @@ function fetchMapData() {
                         <b>Quantity:</b> ${task.quantity}<br>
                         <b>Created At:</b> ${task.created_at}<br>
                         <b>Accepted At:</b> ${task.accepted_at}<br>
-                        <b>Vehicle:</b> ${task.vehicle_name}<br>
+                        <b>Vehicle:</b> ${task.name}<br>
+                        <button onclick="completeTask('${task.id}')">Complete Task</button>
+                        <button onclick="cancelTask('${task.id}')">Cancel Task</button>
                     `;
-                        const taskMarker = L.marker([task.location_lat, task.location_lon], {
+                        let assignedtaskMarker = L.marker([task.location_lat, task.location_lon], {
                             icon: L.icon({
                                 iconUrl: iconUrl,
                                 iconSize: [45, 45],
                                 iconAnchor: [17, 35],
                                 popupAnchor: [0, -35]
-                            })
+                            }),
+                            type: task.type
                         }).addTo(map).bindPopup(taskPopupContent);
+                          assignedtaskMarkers.push(assignedtaskMarker);
 
                         // Draw line between rescuer's vehicle and task location
-                        L.polyline([[rescuer.location_lat, rescuer.location_lon], [task.location_lat, task.location_lon]], {
+                        const polylineLayer = L.polyline([[rescuer.location_lat, rescuer.location_lon], [task.location_lat, task.location_lon]], {
                             color: 'green',
                             weight: 3,
                             opacity: 0.7,
                             smoothFactor: 1
                         }).addTo(map);
+                        polylineLayers.push(polylineLayer);
                     } else {
                         console.error('Invalid assigned task coordinates', task);
                     }
                 });
+
+                // Update the task panel
+                updateTaskPanel(assignedTasks);
 
             } else {
                 console.error('Error fetching map data:', response.message);
@@ -153,7 +168,6 @@ function fetchMapData() {
         }
     });
 }
-
 
 window.undertakeTask = function(taskId, taskType) {
     console.log('undertakeTask function called with Task ID:', taskId, 'and Task Type:', taskType);
@@ -176,7 +190,53 @@ window.undertakeTask = function(taskId, taskType) {
         error: function(xhr, status, error) {
             console.error('Error undertaking task:', status, error, xhr.responseText);
         }
-       
     });
 }
 
+window.completeTask = function(taskId) {
+    $.ajax({
+        url: '../../PHP/Global/complete_task.php',
+        method: 'POST',
+        data: { task_id: taskId },
+        dataType: 'json', // Expect JSON response
+        success: function(response) {
+            console.log('Server response:', response); // Log the server response for debugging
+            if (response.status === 'success') {
+                alert('Task successfully completed!');
+                fetchMapData();
+            } else {
+                alert('Failed to complete task: ' + response.message);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error completing task:', status, error, xhr.responseText);
+            alert('Failed to complete task: ' + error);
+        }
+    });
+}
+
+
+window.cancelTask = function(taskId) {
+    console.log('cancelTask function called with Task ID:', taskId);
+
+    $.ajax({
+        url: '../../PHP/Global/cancel_task.php',
+        method: 'POST',
+        data: {
+            task_id: taskId
+        },
+        success: function(response) {
+            if (response.status === 'success') {
+                alert('Task successfully cancelled!');
+                fetchMapData();
+            } else {
+                alert('Failed to cancel task: ' + response.message);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error cancelling task:', status, error, xhr.responseText);
+        }
+    });
+}
+
+export { map, polylineLayers, unassignedtaskMarkers, assignedtaskMarkers, fetchMapData };
