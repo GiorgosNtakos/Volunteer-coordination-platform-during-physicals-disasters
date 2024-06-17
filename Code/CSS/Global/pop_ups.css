@@ -1,13 +1,18 @@
 /* Επηρεάζει το κύριο στοιχείο του popup του Leaflet */
 .leaflet-popup-content-wrapper {
-  background-color: #430063; /* Μωβ χρώμα */
-  color: gold; /* Λευκό κείμενο για καλύτερη αντίθεση */
-  border-radius: 15px; /* Στρογγυλεμένες γωνίες */
-  padding: 10px; /* Εσοχή γύρω από το περιεχόμενο */
+  background-color: #430063;
+  /* Μωβ χρώμα */
+  color: gold;
+  /* Λευκό κείμενο για καλύτερη αντίθεση */
+  border-radius: 15px;
+  /* Στρογγυλεμένες γωνίες */
+  padding: 10px;
+  /* Εσοχή γύρω από το περιεχόμενο */
 }
 
 .leaflet-popup-tip {
-  background-color: gold; /* Μωβ χρώμα για την "ουρά" */
+  background-color: gold;
+  /* Μωβ χρώμα για την "ουρά" */
 }
 
 .popup-content {
@@ -15,15 +20,35 @@
   font-size: 15px;
 }
 
+.popup-content button {
+  background-color: gold;
+  /* Μωβ χρώμα για το κουμπί */
+  color: black;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.popup-content button:hover {
+  transition: background-color 0.4s;
+  background-color: goldenrod;
+}
+
 .popup-content div:not(:last-child) {
-  border-bottom: 1px solid #ccc; /* Ανοιχτό γκρι χρώμα για τη γραμμή */
-  padding-bottom: 8px; /* Προσθήκη εσοχής στο κάτω μέρος για καλύτερη οπτική απόσταση */
-  margin-bottom: 8px; /* Προσθήκη απόστασης κάτω από το πεδίο */
+  border-bottom: 1px solid #ccc;
+  /* Ανοιχτό γκρι χρώμα για τη γραμμή */
+  padding-bottom: 8px;
+  /* Προσθήκη εσοχής στο κάτω μέρος για καλύτερη οπτική απόσταση */
+  margin-bottom: 8px;
+  /* Προσθήκη απόστασης κάτω από το πεδίο */
 }
 
 .popup-content div:last-child {
-    padding-bottom: 0;
-    margin-bottom: 0;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 .popup-title {
@@ -32,27 +57,27 @@
 }
 
 .popup-button {
-    background-color: gold;
-    color: black;
-    padding: 10px 15px;
-    margin-top: 5px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    border-radius: 25px; /* Στρογγυλεμένες ακρές στο button */
+  background-color: gold;
+  color: black;
+  padding: 10px 15px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  border-radius: 25px;
+  /* Στρογγυλεμένες ακρές στο button */
 }
 
 .popup-button:hover {
-    transition: background-color 0.4s;
-    background-color: goldenrod;
+  transition: background-color 0.4s;
+  background-color: goldenrod;
 }
 
 .leaflet-popup-close-button {
-    color: gold !important;
-    font-size: 16px !important;
+  color: gold !important;
+  font-size: 16px !important;
 }
 
 .leaflet-popup-close-button:hover {
-    color: red !important;
+  color: red !important;
 }
-

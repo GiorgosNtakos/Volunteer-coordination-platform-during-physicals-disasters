@@ -10,7 +10,7 @@ if (isset($_SESSION['user_auth'])){
     $user_id = $_SESSION['user_auth']['id'];
 
     if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
-        $vehicle_id_query = "SELECT vehicle_id FROM vehicles_assignments WHERE user_id = ?";
+        $vehicle_id_query = "SELECT vehicle_id FROM VehicleAssignments WHERE user_id = ?";
         $stmt = $conn->prepare($vehicle_id_query);
         $stmt->bind_param('s', $user_id);
         $stmt->execute();
