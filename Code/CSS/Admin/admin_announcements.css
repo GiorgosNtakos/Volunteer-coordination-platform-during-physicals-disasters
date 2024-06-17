@@ -53,11 +53,6 @@ h2 {
   max-height: 500px;  /* Αντιστοιχίστε αυτό με το max-height του tbody */
 }
 
-table th, table td {
-  height: 50px;  /* ή όποιο ύψος επιλέξετε */
-  padding: 8px 12px;  /* Προσαρμόστε το padding αναλόγως */
-}
-
 .announcement-table{
   margin-top: 0px;
 }

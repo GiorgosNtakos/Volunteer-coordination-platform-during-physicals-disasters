@@ -24,11 +24,14 @@
 </div>
 
 <div class="main">
+    <div>
+        <button class="show-toolbar"><img src=".right_arrow.png" alt=""></button>
+    </div>
     <div id="date-filter">
         <label for="start-date">Αρχική Ημερομηνία:</label>
-        <input type="text" id="start-date">
+        <input class="date" type="text" id="start-date">
         <label for="end-date">Τελική Ημερομηνία:</label>
-        <input type="text" id="end-date">
+        <input class="date" type="text" id="end-date">
         <button onclick="updateStatistics(currentChartType)">Update</button>
     </div>
     <div class="chart-container" id="chartContainer">
@@ -39,5 +42,6 @@
 
 <script src="../../JavaScript/Admin/get_statistics.js"></script>
 <script src="../../JavaScript/Global/HeaderCall.js"></script>
+<script src="../../JavaScript/Global/responsive_navbar.js"></script>
 </body>
 </html>

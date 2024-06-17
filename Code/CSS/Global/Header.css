@@ -1,20 +1,12 @@
-/* Στυλ για το ενεργό link */
-nav ul li a.active {
-  /* Προσαρμόζεις το στυλ όπως θέλεις για το ενεργό link */
-  font-weight: bold; /* Για παράδειγμα, εδώ χρησιμοποιώ bold κείμενο */
-  color: gold; /* Χρώμα του ενεργού link */
-}
-
+/* Αφαίρεση οριζόντιας κύλισης από το σώμα */
 body {
-  font-family: Arial, sans-serif;
+  margin: 0;
   padding: 0;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 header {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -22,29 +14,6 @@ header {
   color: white;
   padding: 1% 3%;
   text-align: center;
-}
-
-#user-options{
-  text-align: bottom;
-}
-
-header h1 {
-  text-align: center;
-  font-size: large;
-  color: gold;
-  text-shadow: 2px 2px 4px rgba(241, 239, 215, 0.5);
-}
-
-@media only screen and (max-width: 640px) {
-  header h1 {
-    flex-direction: column; /* Αλλάζει τη διάταξη σε στήλη για μικρές οθόνες */
-    padding: 2% 0;
-  }
-}
-
-header h1 {
-  font-size: medium;
-  padding: 0;
 }
 
 .user-profile {
@@ -60,91 +29,25 @@ header h1 {
   margin-right: 3%;
 }
 
-@media only screen and (max-width: 640px) {
-  .admin-profile img {
-    width: 30px; /* Μείωση του μεγέθους σε μικρότερες οθόνες */
-    height: 30px;
-    margin-right: 5px; /* Μείωση του διαστήματος μεταξύ της εικόνας και του κειμένου */
-  }
-}
-
 .user-name {
   font-weight: bold;
   font-size: medium;
 }
 
-.hamburger-menu {
-  display: none;
-  cursor: pointer;
-  position: absolute;
-  margin: 2% 1%;
-  right: 3%;
-  z-index: 1000;
-  transition: 0.4s; /* Προσθήκη μετάβασης για ομαλή κίνηση */
+#user-options {
+  text-align: bottom;
 }
 
-.hamburger-menu.show {
-  position: absolute;
-  top: 5vh; /* Το ύψος που κατεβαίνει το icon */
-  
+.header-center {
+  flex-grow: 1;
+  text-align: center;
 }
 
-.bar {
-  width: 25px;
-  height: 3px;
-  background-color: #333;
-  margin: 6px 1px;
-}
-
-.hamburger-menu.right .bar {
-  background-color: white; /* Χρώμα για τις γραμμές στη δεξιά πλευρά */
-}
-
-.hamburger-menu.right:hover .bar {
-  background-color: pink; /* Χρώμα για τις γραμμές στη δεξιά πλευρά κατά το hover */ 
-}
-
-@media only screen and (max-width: 640px) {
-  nav ul.hide-on-mobile {
-    display: none;
-  }
-
-  nav ul.show {
-    display: block;
-    margin-right: 5%;
-  }
-
-  .hamburger-menu {
-    display: block;
-  }
-  
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  padding: 0%;
-}
-
-nav li {
-  margin-right: 15px;
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  transition: color 0.3s, transform 0.3s; /* Μετάβαση χρώματος και μετασχηματισμού */
-}
-
-nav a:hover {
-  color: #ffd700; /* Αλλαγή χρώματος κατά το hover */
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-  transition: color 0.3s ease-in-out;
+header h1 {
+  font-size: large;
+  margin: 0;
+  color: gold;
+  text-shadow: 2px 2px 4px rgba(241, 239, 215, 0.5);
 }
 
 .dropdown {
@@ -174,4 +77,127 @@ nav a:hover {
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.hamburger-menu {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 4%;
+  z-index: 1000;
+}
+
+.bar {
+  width: 100%;
+  height: 3px;
+  background-color: white;
+  transition: all 0.3s;
+}
+
+nav {
+  margin-right: 3%;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  margin-right: 15px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s, transform 0.3s;
+}
+
+nav a:hover {
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+  transition: color 0.3s ease-in-out;
+}
+
+/* Responsive Styles */
+@media only screen and (max-width: 480px) {
+  header h1 {
+    display: block;
+    word-break: break-word;
+  }
+
+  .admin-profile img {
+    width: 30px; /* Μείωση του μεγέθους */
+    height: 30px;
+    margin-right: 5px; /* Μείωση του διαστήματος μεταξύ της εικόνας και του κειμένου */
+  }
+
+  .user-name {
+    font-weight: bold;
+    font-size: small;
+  }
+
+  .hamburger-menu {
+    display: block;
+    padding: 2%;
+    cursor: pointer;
+    transition: 0.4s; /* Προσθήκη μετάβασης για ομαλή κίνηση */
+  }
+
+  body.menu-open main {
+    margin-top: 20vh; /* Προσαρμόστε αυτό το μέγεθος ανάλογα με το ύψος του μενού */
+  }
+
+  .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 6px 1px;
+  }
+
+  .hamburger-menu .bar {
+    background-color: white; /* Αρχικό χρώμα */
+    transition: background-color 0.3s ease;
+  }
+
+  .hamburger-menu:hover .bar {
+    background-color: tan; /* Χρώμα κατά το hover */
+  }
+
+  nav ul.hide-on-mobile {
+    display: none;
+  }
+
+  nav ul {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: #430063;
+    position: absolute;
+    top: 6vh;
+    left: 0;
+    z-index: 999;  /* Μεγάλη τιμή z-index για να εμφανίζονται τα links πάνω από τα άλλα στοιχεία */
+  }
+  
+  nav ul.show {
+    display: flex;
+    flex-direction: column;
+    margin-right: 5%;
+  }
+
+  nav ul li {
+    text-align: center;
+    padding: 10px 0;
+    margin: 0;
+    border-bottom: 1px solid white;
+  }
+
+  nav ul li:last-child {
+    border-bottom: none;
+  }
+
 }

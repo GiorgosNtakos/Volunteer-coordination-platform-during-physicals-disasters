@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login and Signup Page</title>
     <link
       rel="stylesheet"
@@ -21,22 +22,14 @@
           class="sign-in"
           checked
         /><label for="tab-1" class="tab">Sign In</label>
-        <input id="tab-2" type="radio" name="tab" class="sign-up" /><label
-          for="tab-2"
-          class="tab"
-          >Sign Up</label
+        <input id="tab-2" type="radio" name="tab" class="sign-up" />
+        <label for="tab-2" class="tab">Sign Up</label
         >
-        <div class="login-form">
-          <form class="sign-in-htm">
-            <div class="group">
+        <div class="login-form" id="login-form-id">
+          <form class="sign-in-htm" id="sign-in-htm-id">
+            <div class="group" id="group-id">
               <label for="user-login" class="label">Username</label>
-              <input
-                id="user-login"
-                type="text"
-                class="input"
-                placeholder="Username"
-                required
-              />
+              <input id="user-login" type="text" class="input" placeholder="Username" required/>
               <span class="icon"><i class="fas fa-user-alt"></i></span>
             </div>
             <div class="group">
