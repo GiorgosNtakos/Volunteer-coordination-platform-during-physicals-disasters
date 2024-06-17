@@ -100,16 +100,6 @@ CREATE TABLE Users (
     img_path VARCHAR(255) DEFAULT '../../../upload_img/global/user.png'
 );
 
--- Ενδιάμεσος Πίνακας Συσχέτισης Χρηστών-Εργασιών
-CREATE TABLE Users_Tasks (
-    user_id INT,
-    task_id INT,
-    PRIMARY KEY (user_id, task_id),
-    role ENUM('Creator', 'Processor', 'Announcer') NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES Users(id),
-    FOREIGN KEY (task_id) REFERENCES Tasks(id)
-);
-
 -- Πίνακας Εργασιών
 CREATE TABLE Tasks (
     id VARCHAR(36) PRIMARY KEY,
@@ -138,8 +128,6 @@ CREATE TABLE Announcements (
     is_hidden BOOLEAN DEFAULT FALSE,
     user_id VARCHAR(36),
     FOREIGN KEY (user_id) REFERENCES Users(id)
-    -- task_id INT,
-    -- FOREIGN KEY (task_id) REFERENCES Tasks(id),
 );
 
 -- Ενδιάμεσος Πίνακας γιατί τα Items μπορεί να είναι πολλά
