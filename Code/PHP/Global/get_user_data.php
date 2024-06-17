@@ -1,7 +1,7 @@
 <?php 
 header('Access-Control-Allow-Origin: http://127.0.0.1:5500');
 header('Content-Type: application/json');
-require '../Global/db_connect.php';
+require 'db_connect.php';
 $conn->set_charset("utf8");
 session_start();
 

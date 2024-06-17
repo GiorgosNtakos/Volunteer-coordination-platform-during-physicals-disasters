@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   if (
     window.location.href ===
-    "http://localhost/webproject/Code/Html/Global/login_signup.html"
+    "http://localhost/Collaborative-product-search-platform-of-wide-consumption/Code/Html/Global/login_signup.html"
   ) {
     const loginPasswordField = document.getElementById("pass-login");
     const signupPasswordField = document.getElementById("pass-signup");
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   } else if (
     window.location.href ===
-    "http://localhost/webproject/Code/Html/Global/forgot_my_password.html"
+    "http://localhost/Collaborative-product-search-platform-of-wide-consumption/Code/Html/Global/forgot_my_password.html"
   ) {
     const NewPasswordField = document.getElementById("newPassword");
     const RepeatNewPasswordField = document.getElementById("confirmPassword");
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   } else if (
     window.location.href ===
-    "http://localhost/webproject/Code/Html/Global/user_profile_settings.html"
+    "http://localhost/Collaborative-product-search-platform-of-wide-consumption/Code/Html/Global/user_profile_settings.html"
   ) {
 
     const oldPasswordField = document.getElementById("oldPassword")

@@ -96,9 +96,9 @@ function signup(username, password, email) {
       // Αναλύουμε το JSON αντικείμενο που λάβαμε από τον εξυπηρετητή
 
       if (response.status === "created") {
-        // Η εγγραφή ήταν επιτυχής
-        //showMessage("extra-success-message", response.message, "#user-signup");
-        window.location.href = "index_page.html";
+        
+        showMessage("extra-success-message", response.message, "#user-signup");
+          
 
         // Ενέργειες που θέλετε να κάνετε μετά την επιτυχημένη εγγραφή
       } else {

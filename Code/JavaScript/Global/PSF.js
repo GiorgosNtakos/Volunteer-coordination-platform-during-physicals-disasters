@@ -86,16 +86,16 @@ function handlePreviousButton() {
       document.querySelectorAll(".category-checkbox-filter:checked")
     ).map((cb) => cb.value);
     var currentSearchTerm = searchTerm.value;
-    if(window.location.href === "http://localhost/webproject/Code/HTML/Admin/upload_products.html"){
+    if(window.location.href === "http://localhost/Collaborative-product-search-platform-of-wide-consumption/Code/HTML/Admin/upload_products.html"){
       loadItems(currentPage, 15, currentSearchTerm, selectedCategories);
-    } else if (window.location.href === "http://localhost/webproject/Code/HTML/Rescuer/cargo_page.html"){
+    } else if (window.location.href === "http://localhost/Collaborative-product-search-platform-of-wide-consumption/Code/HTML/Rescuer/cargo_page.html"){
       var isBaseCargoShown = document.getElementById('show-base-cargo').textContent.includes('Βάση');
                 if (isBaseCargoShown) {
                     loadVehicleCargo(currentPage, 15, currentSearchTerm, selectedCategories);
                 } else {
                     loadItems(c, 15, currentSearchTerm, selectedCategories);
                 }
-    } else if (window.location.href === "http://localhost/webproject/Code/Html/User/request_page.html"){
+    } else if (window.location.href === "http://localhost/Collaborative-product-search-platform-of-wide-consumption/Code/HTML/User/request_page.html"){
       getAvailableItems(currentPage, 15, currentSearchTerm, selectedCategories);
     }
   }

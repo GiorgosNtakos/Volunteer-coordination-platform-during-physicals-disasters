@@ -18,8 +18,8 @@ if (isset($_SESSION['user_auth'])) {
         // Check if the task exists and is assigned to the rescuer
         $sql = "SELECT Tasks.id 
                 FROM Tasks 
-                INNER JOIN VehicleAssignments ON VehicleAssignments.vehicle_id = Tasks.vehicle_id 
-                WHERE Tasks.id = ? AND Tasks.status = 'accepted' AND VehicleAssignments.user_id = ?";
+                INNER JOIN Vehicleassignments ON Vehicleassignments.vehicle_id = Tasks.vehicle_id 
+                WHERE Tasks.id = ? AND Tasks.status = 'accepted' AND Vehicleassignments.user_id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('ss', $task_id, $user_id);
         $stmt->execute();

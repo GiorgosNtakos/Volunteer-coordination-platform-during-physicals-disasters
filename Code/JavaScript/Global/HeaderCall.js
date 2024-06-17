@@ -40,7 +40,7 @@ function getHeaderUserInfo(){
     success: function (response) {
       if (response.status === "success") {
         userNameElement.textContent = response.username.replace("_", " ");
-        userImageElement.src = response.img_path;
+        userImageElement.src = response.img_path || "../../../upload_img/global/user.png";
         updateNavItems(response.type);
         console.log("Απάντηση από τον διακομιστή:", response);
       } else {

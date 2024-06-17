@@ -2,7 +2,7 @@
 header('Access-Control-Allow-Origin: http://127.0.0.1:5500');
 header('Content-Type: application/json');
 require '../Global/db_connect.php';
-require 'C:\wamp64\www\webproject\Code\PHP\vendor\autoload.php'; 
+require 'C:\wamp64\www\Collaborative-product-search-platform-of-wide-consumption\Code\PHP\vendor\autoload.php'; 
 
 $conn->set_charset("utf8");
 use Ramsey\Uuid\Uuid;

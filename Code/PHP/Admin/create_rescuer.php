@@ -11,7 +11,7 @@ if(empty($_SERVER["HTTPS"]) || $_SERVER["HTTPS"] !== "on"){
 header('Access-Control-Allow-Origin: http://127.0.0.1:5500');
 header('Content-Type: application/json');
 require '../Global/db_connect.php';
-require 'C:\wamp64\www\webproject\Code\PHP\vendor\autoload.php';
+require '../vendor/autoload.php';
 $conn->set_charset("utf8");
 
 use Ramsey\Uuid\Uuid;

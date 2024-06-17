@@ -24,7 +24,7 @@ function login(event) {
 
         } else {
 
-          window.location.href = "personal_info_form.html";
+          window.location.href = "http://localhost/Collaborative-product-search-platform-of-wide-consumption/Code/HTML/User/personal_info_form.html";
           showMessage("extra-success-message", response.message, "#user-login");
           // Ενέργειες που θέλετε να κάνετε μετά την επιτυχημένη σύνδεση
 

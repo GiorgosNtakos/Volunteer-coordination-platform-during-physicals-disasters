@@ -104,7 +104,7 @@ function GetUserInfo() {
   
     // Φορτώστε τα στοιχεία του διαχειριστή με AJAX
     $.ajax({
-      url: "http://localhost/webproject/Code/PHP/Global/get_user_data.php", // Αντικαταστήστε με τον σωστό δρόμο προς το PHP αρχείο
+      url: "../../PHP/Global/get_user_data.php", // Αντικαταστήστε με τον σωστό δρόμο προς το PHP αρχείο
       method: "GET",
       success: function (response) {
         if (response.status === "success") {
@@ -154,7 +154,7 @@ function GetUserInfo() {
     formData.append('file', file);
 
     $.ajax({
-        url: "http://localhost/webproject/Code/PHP/Global/change_profile_image.php", // Αντικαταστήστε με τον σωστό δρόμο προς το PHP αρχείο
+        url: "../../PHP/Global/change_profile_image.php", // Αντικαταστήστε με τον σωστό δρόμο προς το PHP αρχείο
         method: "POST",
         data: formData,
         contentType: false,
@@ -215,7 +215,7 @@ function changeOldPassword(oldPassword, newPassword){
     const changePasswordButton = document.getElementById("changePassword");
     const passwordChangeArea = document.getElementById("passwordChangeArea");
     $.ajax({
-        url: "http://localhost/webproject/Code/PHP/Global/change_password.php",
+        url: "../../PHP/Global/change_password.php",
         method: "POST",
         data: {
             oldPassword: oldPassword,

@@ -125,7 +125,7 @@ CREATE TABLE Tasks (
     FOREIGN KEY (item_id) REFERENCES Items(id),
     FOREIGN KEY (vehicle_id) REFERENCES Vehicles(id),
     FOREIGN KEY (user_id) REFERENCES Users(id),
-    FOREIGN KEY (announcement_id) REFERENCES Announcements(id)
+    FOREIGN KEY (announcement_id) REFERENCES Announcements(id),
     UNIQUE INDEX vehicle_item_unique (user_id, item_id, announcement_id)
 );
 

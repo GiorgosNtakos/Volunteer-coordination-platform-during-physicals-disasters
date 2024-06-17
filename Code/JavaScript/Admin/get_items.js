@@ -8,7 +8,7 @@ const addStockFormContainer = document.getElementById("addStock-form-container")
 document.addEventListener("DOMContentLoaded", function () {
   var searchTerm = document.getElementById("search-input");
   loadCategories("checkbox-filter", "#categoryFilter", true);
-  if(window.location.href === "http://localhost/webproject/Code/HTML/Admin/upload_products.html"){
+  if(window.location.href === "http://localhost/Collaborative-product-search-platform-of-wide-consumption/Code/HTML/Admin/upload_products.html"){
   loadItems(1, 15, searchTerm.value);
 }
   handlePreviousButton();
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
   filterDropDown();
   searchOperation();
 
-  if(window.location.href === "http://localhost/webproject/Code/HTML/Rescuer/cargo_page.html"){
+  if(window.location.href === "http://localhost/Collaborative-product-search-platform-of-wide-consumption/Code/HTML/Rescuer/cargo_page.html"){
     loadVehicleCargo(1, 15, searchTerm.value)
     let isBaseCargoShown = false;
     var unloadButton = document.getElementById('unload-vehicle-cargo');
@@ -117,7 +117,7 @@ function loadItems(page, perPage, searchTerm, selectedCategories = []) {
           row.appendChild(detailsCell);
           console.log(item.details);
 
-          if(window.location.href === "http://localhost/webproject/Code/HTML/Admin/upload_products.html")
+          if(window.location.href === "http://localhost/Collaborative-product-search-platform-of-wide-consumption/Code/HTML/Admin/upload_products.html")
           {
             // Ημερομηνια Εισαγωγης
             var importDateCell = document.createElement("td");
@@ -131,7 +131,7 @@ function loadItems(page, perPage, searchTerm, selectedCategories = []) {
           }
 
           var ChoiseButtonCell = document.createElement("td");
-          if(window.location.href === "http://localhost/webproject/Code/HTML/Admin/upload_products.html")
+          if(window.location.href === "http://localhost/Collaborative-product-search-platform-of-wide-consumption/Code/HTML/Admin/upload_products.html")
           {
           var deleteButton = document.createElement("span");
           deleteButton.title = "Διαγραφή";
@@ -164,7 +164,7 @@ function loadItems(page, perPage, searchTerm, selectedCategories = []) {
           });
 
           ChoiseButtonCell.appendChild(optionsFormButton);
-        } else if (window.location.href === "http://localhost/webproject/Code/HTML/Rescuer/cargo_page.html"){
+        } else if (window.location.href === "http://localhost/Collaborative-product-search-platform-of-wide-consumption/Code/HTML/Rescuer/cargo_page.html"){
           var addItemsButton = document.createElement("span");
           addItemsButton.title = "Πρόσθεση ποσότητας";
           addItemsButton.innerHTML =

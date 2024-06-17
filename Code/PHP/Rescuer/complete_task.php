@@ -63,7 +63,7 @@ if (isset($_SESSION['user_auth'])) {
 
                                             if ($distance <= 0.05) { // 50 meters
                                                 // Update task status to 'completed'
-                                                $update_sql = "DELETE FROM Tasks WHERE id = ?";
+                                                $update_sql = "UPDATE Tasks SET status = 'completed' WHERE id = ?";
                                                 if ($update_stmt = $conn->prepare($update_sql)) {
                                                     $update_stmt->bind_param('s', $task_id);
                                                     if ($update_stmt->execute()) {
