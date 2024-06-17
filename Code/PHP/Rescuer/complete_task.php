@@ -3,24 +3,28 @@ header('Access-Control-Allow-Origin: http://127.0.0.1:5500');
 header('Content-Type: application/json');
 session_start();
 
-require 'db_connect.php';
+require '../Global/db_connect.php';
 
 $conn->set_charset("utf8");
 
 $response = array();
 
 if (isset($_SESSION['user_auth'])) {
-    $username = $_SESSION['user_auth']['username'];
-    error_log("Username: " . $username);
+    $user_id = $_SESSION['user_auth']['id'];
+    error_log("Username: " . $user_id);
 
     if (isset($_POST['task_id'])) {
         $task_id = $_POST['task_id'];
         error_log("Task ID: " . $task_id);
 
         // Check if rescuer exists
-        $rescuer_sql = "SELECT * FROM Users WHERE username = ? AND type = 'Rescuer'";
+        $rescuer_sql = "SELECT vehicles.*
+                        FROM vehicles
+                        JOIN VehicleAssignments ON vehicles.id = VehicleAssignments.vehicle_id
+                        JOIN users ON VehicleAssignments.user_id = users.id
+                        WHERE users.id = ? AND users.type = 'Rescuer'";
         if ($rescuer_stmt = $conn->prepare($rescuer_sql)) {
-            $rescuer_stmt->bind_param('s', $username);
+            $rescuer_stmt->bind_param('s', $user_id);
             if ($rescuer_stmt->execute()) {
                 $rescuer_result = $rescuer_stmt->get_result();
                 if ($rescuer_result->num_rows > 0) {
@@ -59,12 +63,43 @@ if (isset($_SESSION['user_auth'])) {
 
                                             if ($distance <= 0.05) { // 50 meters
                                                 // Update task status to 'completed'
-                                                $update_sql = "UPDATE Tasks SET status = 'completed' WHERE id = ?";
+                                                $update_sql = "DELETE FROM Tasks WHERE id = ?";
                                                 if ($update_stmt = $conn->prepare($update_sql)) {
                                                     $update_stmt->bind_param('s', $task_id);
                                                     if ($update_stmt->execute()) {
-                                                        $response['status'] = 'success';
-                                                    } else {
+                                                        // Update vehicle cargo
+                                                        $vehicle_id = $rescuer['id'];
+                                                        $item_id = $task['item_id'];
+                                                        $quantity = $task['quantity'];
+
+                                                        if ($task['type'] === 'Request') {
+                                                            // Subtract quantity from vehicle cargo
+                                                            $cargo_update_sql = "
+                                                                UPDATE VehicleCargo
+                                                                SET quantity = quantity - ?
+                                                                WHERE vehicle_id = ? AND item_id = ?";
+                                                        } else if ($task['type'] === 'Offer') {
+                                                            // Add quantity to vehicle cargo
+                                                            $cargo_update_sql = "
+                                                                UPDATE VehicleCargo
+                                                                SET quantity = quantity + ?
+                                                                WHERE vehicle_id = ? AND item_id = ?";
+                                                        }
+
+                                                        if ($cargo_update_stmt = $conn->prepare($cargo_update_sql)) {
+                                                            $cargo_update_stmt->bind_param('iss', $quantity, $vehicle_id, $item_id);
+                                                            if ($cargo_update_stmt->execute()) {
+                                                                $response['status'] = 'success';
+                                                            } else {
+                                                                $response['status'] = 'error';
+                                                                $response['message'] = 'Failed to update vehicle cargo: ' . $cargo_update_stmt->error;
+                                                            }
+                                                            $cargo_update_stmt->close();
+                                                    }  else {
+                                                        $response['status'] = 'error';
+                                                        $response['message'] = 'Prepare cargo update statement failed: ' . $conn->error;
+                                                    } 
+                                                }else {
                                                         $response['status'] = 'error';
                                                         $response['message'] = 'Failed to update task status: ' . $update_stmt->error;
                                                     }

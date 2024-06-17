@@ -1,15 +1,11 @@
 /* map.css */
-body, html {
-    height: 100%; /* Χρειάζεται για να λειτουργήσει σωστά το grid layout */
+body,
+html {
+    height: 100%;
+    /* Χρειάζεται για να λειτουργήσει σωστά το grid layout */
     margin: 0;
-    overflow: hidden; /* Αποκρύπτει την κύλιση σε όλη τη σελίδα */
-}
-
-header {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    text-align: center;
+    overflow: hidden;
+    /* Αποκρύπτει την κύλιση σε όλη τη σελίδα */
 }
 
 main {
@@ -17,141 +13,86 @@ main {
 }
 
 #map {
-    height: 1080px;
-    width: 1920px;
+    height: 92vh;
+    width: 70%;
+    float: left;
 }
 
-  #vehicleCargoDetails {
-    position: fixed; /* ή absolute αν θέλετε να είναι σε σχέση με έναν γονέα container */
-    top: 50px; /* ή άλλη τιμή ανάλογα με τη θέση που θέλετε */
-    right: 50px; /* ή άλλη τιμή ανάλογα με τη θέση που θέλετε */
-    width: 300px; /* Προαιρετικά, ανάλογα με το περιεχόμενο */
-    background-color: #430063;
-    color: gold;
-    border-radius: 15px;
-    padding: 10px;
-    display: none; /* Αρχικά κρυμμένο */
-    z-index: 1000; /* Βεβαιωθείτε ότι είναι υψηλότερο από το z-index του χάρτη */
-}
-
-#cargoList {
-    max-height: 250px; /* Ορίζετε το μέγιστο ύψος που επιθυμείτε */
-    overflow-y: auto; /* Ενεργοποιείτε κύλιση κατακόρυφα αν ο χώρος δεν επαρκεί */
-    margin-bottom: 20px; /* Δίνετε επιπλέον χώρο κάτω από τη λίστα */
-}
-
-.cargo-item {
-    border-bottom: 1px solid #ddd; /* Γραμμή για το διαχωρισμό των στοιχείων */
-    padding: 5px 0; /* Προσθέτει μικρό κενό για κάθε στοιχείο */
-    display: flex;
-    justify-content: space-between; /* Διαχωρίζει τις στήλες Είδος και Ποσότητα */
-}
-
-.cargo-item:last-child {
-    border-bottom: none; /* Αφαιρεί τη γραμμή από το τελευταίο στοιχείο */
-}
-
-.cargo-item div {
-    flex: 1; /* Κάθε στήλη καταλαμβάνει ίσο χώρο */
-    text-align: center; /* Κεντραρισμένο κείμενο */
-}
-
-.cargo-item div:first-child {
-    border-right: 1px solid #ddd; /* Καθέτη γραμμή μεταξύ των στηλών */
-    flex: 1;
-}
-
-.cargo-header {
-    font-weight: bold; /* Δίνει έμφαση στις επικεφαλίδες */
-    display: flex;
-    justify-content: space-between; /* Διασφαλίζει την ίδια διάταξη με τα στοιχεία */
-    border-bottom: 1px solid #ddd; /* Προαιρετικό, γραμμή κάτω από τις επικεφαλίδες */
-}
-
-.cargo-header div:first-child, .cargo-item div:first-child {
-    border-right: 1px solid #ddd; /* Προσθήκη καθέτης γραμμής διαχωρισμού */
-}
-
-.cargo-header, .cargo-item {
-    display: flex;
-    justify-content: space-between;
-}
-
-.cargo-header div, .cargo-item div {
-    flex: 1; /* Κάθε στήλη καταλαμβάνει ίσο χώρο */
-    text-align: center; /* Κεντραρισμένο κείμενο */
-}
-
-.cargo-details {
-    border-top: 1px solid #ddd; /* Καθέτη γραμμή κάτω από τον τίτλο Φορτίο Οχήματος */
-}
-
-.cargo-title {
-    border-bottom: 1px solid #ddd; /* Καθέτη γραμμή κάτω από τον τίτλο */
-    font-size: 35px;
-
-}
-
-/* Προσαρμογή του στύλ της μπάρας κύλισης για το WebKit (Chrome, Safari) */
-::-webkit-scrollbar {
-    width: 10px; /* Πλάτος της μπάρας κύλισης */
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Χρώμα του φόντου της μπάρας κύλισης */
-}
-
-::-webkit-scrollbar-thumb {
-    background: #888; /* Χρώμα της μπάρας κύλισης */
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Χρώμα της μπάρας κύλισης κατά τον κατάδειγμα */
-}
-
-/* Προσαρμογή του στύλ της μπάρας κύλισης για τα υπόλοιπα προγράμματα περιήγησης */
-scrollbar {
-    width: 10px; /* Πλάτος της μπάρας κύλισης */
-}
-
-scrollbar-track {
-    background: #f1f1f1; /* Χρώμα του φόντου της μπάρας κύλισης */
-}
-
-scrollbar-thumb {
-    background: #888; /* Χρώμα της μπάρας κύλισης */
-}
-
-scrollbar-thumb:hover {
-    background: #555; /* Χρώμα της μπάρας κύλισης κατά τον κατάδειγμα */
-}
-#task-panel {
-    position: absolute;
-    top: 50px;
-    left: 20px; /* Change 'right' to 'left' */
-    width: 300px;
-    max-height: 400px;
+.task-panel {
+    height: 92vh;
+    width: 30%;
+    float: right;
     overflow-y: auto;
-    background-color: white;
-    border: 1px solid #ccc;
+    border: 1px solid #000;
+    /* Προσθήκη περιγράμματος στο panel των tasks */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    /* Προσθήκη σκιάς για καλύτερη εμφάνιση */
     padding: 10px;
-    z-index: 1000;
+    /* Προσθήκη εσωτερικού περιθωρίου για καλύτερη εμφάνιση */
+    background-color: #430063;
+    /* Λευκό φόντο για το panel */
 }
 
-/* Additional styles */
-#task-panel h2 {
-    font-size: 18px;
+.task-panel h2 {
+    text-align: center;
+    /* Κεντράρισμα της επικεφαλίδας */
+    color: gold;
+    /* Χρυσό χρώμα για την επικεφαλίδα */
+    font-size: 44px;
+    margin-bottom: 20px;
+}
+
+.list-group-item {
+    border: 1px solid #f2f2f2;
+    background-color: #430063;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    padding: 10px;
+    /* Ελαφρύ γκρι φόντο για τα items */
+}
+
+.task-container {
+    background-color: #430063;
+    /* Μωβ φόντο */
+    color: gold;
+    /* Χρυσά γράμματα */
+    padding: 10px;
     margin-bottom: 10px;
+    border-radius: 5px;
 }
 
-.task-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+.task-container h5,
+.task-container p {
+    margin: 5px 0;
 }
 
-.task-buttons {
-    display: flex;
-    gap: 5px;
+.btn-task {
+    background-color: gold;
+    color: black;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.btn-task:hover {
+    transition: background-color 0.4s;
+    background-color: goldenrod;
+}
+
+
+.task-panel::-webkit-scrollbar {
+    width: 12px;
+}
+
+.task-panel::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.task-panel::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+.task-panel::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

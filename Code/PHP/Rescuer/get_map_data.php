@@ -2,24 +2,24 @@
 header('Access-Control-Allow-Origin: http://127.0.0.1:5500');
 header('Content-Type: application/json');
 session_start();
-require 'db_connect.php';
+require '../Global/db_connect.php';
 $conn->set_charset("utf8");
 
 $response = array();
 
 if (isset($_SESSION['user_auth'])) {
-    $username = $_SESSION['user_auth']['username'];
+    $user_id = $_SESSION['user_auth']['id'];
 
     // Fetch rescuer's data along with vehicle location
     $sql = "
-        SELECT u.username, v.location_lat, v.location_lon 
+        SELECT v.name, v.street, v.number, v.town, v.assigned_tasks, v.assigned_rescuers, u.username, v.location_lat, v.location_lon 
         FROM Users u
         JOIN VehicleAssignments va ON u.id = va.user_id
         JOIN Vehicles v ON va.vehicle_id = v.id
-        WHERE u.username = ?";
+        WHERE u.id = ?";
     $stmt = $conn->prepare($sql);
     if ($stmt) {
-        $stmt->bind_param('s', $username);
+        $stmt->bind_param('s', $user_id);
         $stmt->execute();
         $result = $stmt->get_result();
         $rescuer = $result->fetch_assoc();
@@ -32,7 +32,7 @@ if (isset($_SESSION['user_auth'])) {
     }
 
     // Fetch base location
-    $sql = "SELECT location_lat, location_lon FROM Warehouse LIMIT 1";
+    $sql = "SELECT street, number, town, location_lat, location_lon FROM Warehouse LIMIT 1";
     $result = $conn->query($sql);
     if ($result) {
         $base = $result->fetch_assoc();
@@ -45,8 +45,10 @@ if (isset($_SESSION['user_auth'])) {
 
     // Fetch unassigned tasks
     $sql =  "
-        SELECT t.id, t.type, t.created_at, t.updated_at, t.quantity, u.location_lat, u.location_lon , u.full_name, u.phone
-        FROM Tasks t 
+        SELECT t.id, t.type, t.created_at, t.updated_at, t.quantity, u.location_lat, u.location_lon , u.full_name, u.phone, u.town, u.number, u.street,
+        i.name as item_name
+        FROM Tasks t
+        JOIN items i ON t.item_id = i.id 
         JOIN Users u ON t.user_id = u.id 
         WHERE t.status = 'pending' ";
     $result = $conn->query($sql);
@@ -61,16 +63,17 @@ if (isset($_SESSION['user_auth'])) {
 
     // Fetch tasks assigned to the rescuer's vehicle
     $sql = "
-        SELECT t.id, t.type,  t.created_at, t.updated_at as accepted_at, t.quantity, u.location_lat, u.location_lon,u.full_name, u.phone,
-         v.location_lat AS vehicle_lat,  v.location_lon AS vehicle_lon, v.name
-        FROM Tasks t 
+        SELECT t.id, t.type,  t.created_at, t.updated_at as accepted_at, t.quantity, u.location_lat, u.location_lon,u.full_name, u.phone, u.town, u.number, u.street,
+         v.location_lat AS vehicle_lat,  v.location_lon AS vehicle_lon, i.name as item_name
+        FROM Tasks t
+        JOIN items i ON t.item_id = i.id 
         JOIN VehicleAssignments va ON t.vehicle_id = va.vehicle_id 
-        JOIN Vehicles v ON va.vehicle_id = v.id 
+        JOIN Vehicles v ON t.vehicle_id = v.id 
         JOIN Users u ON t.user_id = u.id 
-        WHERE va.user_id = (SELECT id FROM Users WHERE username = ?)";
+        WHERE va.user_id = ? AND t.status = 'accepted'";
     $stmt = $conn->prepare($sql);
     if ($stmt) {
-        $stmt->bind_param('s', $username);
+        $stmt->bind_param('s', $user_id);
         $stmt->execute();
         $result = $stmt->get_result();
         $assignedTasks = $result->fetch_all(MYSQLI_ASSOC);

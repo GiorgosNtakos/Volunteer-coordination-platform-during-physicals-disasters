@@ -1,3 +1,7 @@
+.show-toolbar {
+  display: none;
+}
+
 #show-add-form,
 #delete-all-button,
 #show-check-categories-form,
@@ -46,16 +50,21 @@
   background-color: #440466;
 }
 
-/*
-.toolbar button {
-  background-color: #5a197d; /* Initially set to a lighter shade of purple, adjust as needed 
-  color: white; /* Text color for the buttons 
-  border: none; /* No border for a flat style 
-  padding: 8px 16px; /* Padding inside the buttons 
-  margin: 10px 0; /* Margin between buttons 
-  cursor: pointer; /* Pointer cursor on hover 
-  transition: background-color 0.3s; /* Smooth background color transition for hover effect 
-  width: 100%; /* Make buttons fill the toolbar width 
-  box-sizing: border-box; /* Include padding in the button's total width 
-} 
-*/
+/* Responsive Styles */
+@media only screen and (max-width: 480px) {
+  /* A button with an arrow icon that reveals the toolbar*/
+  .show-toolbar {
+    display: flex;
+    position: relative;
+    background: transparent;
+    border: none;
+    padding: 5px;
+    margin: 10px 0;
+    cursor: pointer;
+  }
+
+  .show-toolbar img {
+    width: 30px;
+    height: 30px;
+  }
+}

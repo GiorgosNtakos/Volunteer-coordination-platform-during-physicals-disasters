@@ -24,13 +24,13 @@
   <body>
     <div id="Header"></div>
     <div id="overlay"></div>
+
     <div class="container">
       <div class="toolbar">
         <!-- Buttons -->
         <div>
           <button id="show-add-announcement-form">Προσθήκη Ανακοίνωσης</button>
         </div>
-
         <div>
           <button id="delete-all-button">Διαγραφή Όλων</button>
         </div>
@@ -57,6 +57,9 @@
         </form>
       </div>
       <main>
+        <div>
+          <button class="show-toolbar"><img src=".right_arrow.png" alt=""></button>
+        </div>
         <h2>Πίνακας Ανακοινώσεων</h2>
         <div class="scroll-container">
         <table class="announcement-table">
@@ -77,6 +80,7 @@
     </div>
 
     <script src="../../JavaScript/Global/HeaderCall.js"></script>
+    <script src="../../JavaScript/Global/responsive_navbar.js"></script>
     <script src="../../JavaScript/Admin/operations_announcements.js"></script>
     <script src="../../JavaScript/Admin/add_announcement.js"></script>
     <script src="../../JavaScript/Global/showMessage.js"></script>

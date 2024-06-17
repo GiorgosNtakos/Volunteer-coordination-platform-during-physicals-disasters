@@ -3,7 +3,8 @@ header('Access-Control-Allow-Origin: http://127.0.0.1:5500');
 header('Content-Type: application/json');
 session_start();
 
-require 'db_connect.php';
+// Adjust the path to 'db_connection.php' according to your directory structure
+require '../Global/db_connect.php'; 
 
 $conn->set_charset("utf8");
 
@@ -12,24 +13,30 @@ $response = array();
 if (isset($_SESSION['user_auth'])) {
     $user_id = $_SESSION['user_auth']['id'];
 
-    if (isset($_POST['task_id'])) {
+    if (isset($_POST['task_id']) && isset($_POST['task_type'])) {
         $task_id = $_POST['task_id'];
+        $task_type = $_POST['task_type'];
 
-        // Check if the task exists and is assigned to the rescuer
-        $sql = "SELECT Tasks.id 
-                FROM Tasks 
-                INNER JOIN VehicleAssignments ON VehicleAssignments.vehicle_id = Tasks.vehicle_id 
-                WHERE Tasks.id = ? AND Tasks.status = 'accepted' AND VehicleAssignments.user_id = ?";
+        // Get the rescuer's vehicle_id
+        $sql = "SELECT va.vehicle_id 
+                FROM VehicleAssignments va 
+                JOIN Users u ON va.user_id = u.id 
+                WHERE u.id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('ss', $task_id, $user_id);
+        $stmt->bind_param('s', $user_id);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            // Update the task status to 'pending' and remove the user_id
-            $sql = "UPDATE Tasks SET status = 'pending', vehicle_id = NULL, updated_at = NOW() WHERE id = ?";
+            $row = $result->fetch_assoc();
+            $vehicle_id = $row['vehicle_id'];
+
+            // Update the task to assign it to the rescuer's vehicle
+            $sql = "UPDATE Tasks 
+                    SET status = 'accepted', vehicle_id = ?, updated_at = NOW() 
+                    WHERE id = ? AND status = 'pending'";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param('s', $task_id);
+            $stmt->bind_param('ss', $vehicle_id, $task_id);
 
             if ($stmt->execute()) {
                 $response['status'] = 'success';
@@ -39,7 +46,7 @@ if (isset($_SESSION['user_auth'])) {
             }
         } else {
             $response['status'] = 'error';
-            $response['message'] = 'Task not found or not assigned to the rescuer.';
+            $response['message'] = 'Rescuer vehicle not found.';
         }
     } else {
         $response['status'] = 'error';

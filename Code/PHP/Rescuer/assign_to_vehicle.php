@@ -16,7 +16,7 @@ if (isset($_SESSION['user_auth'])){
 
             $vehicle_id = $_POST['vehicle_id'];
 
-            $sqlCheckUser = "SELECT COUNT(*) AS count FROM vehicles_assignments WHERE user_id = ?";
+            $sqlCheckUser = "SELECT COUNT(*) AS count FROM VehicleAssignments WHERE user_id = ?";
             $stmtCheckUser = $conn->prepare($sqlCheckUser);
             $stmtCheckUser->bind_param("s", $user_id);
             $stmtCheckUser->execute();
@@ -46,7 +46,7 @@ if (isset($_SESSION['user_auth'])){
                 $stmt ->execute();
 
                 // Προσθήκη εγγραφής στον πίνακα VehicleAssignments
-                $sql = "INSERT INTO vehicles_assignments (vehicle_id, user_id) VALUES (?, ?)";
+                $sql = "INSERT INTO VehicleAssignments (vehicle_id, user_id) VALUES (?, ?)";
                 $stmt = $conn->prepare($sql);
                 $stmt -> bind_param("ss", $vehicle_id, $user_id);
                 $stmt ->execute();
