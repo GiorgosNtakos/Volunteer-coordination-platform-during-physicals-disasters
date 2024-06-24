@@ -5,6 +5,7 @@ $(document).ready(function () {
   $("#Header").load("../../Html/Global/Header.html", function() {
     updateHeaderTitle(); // Εκτελέστε μετά την φόρτωση του Header
     getHeaderUserInfo();
+    adjustToolbar();
   });
 });
 
@@ -70,6 +71,17 @@ function getHeaderUserInfo(){
     },
   });
 }
+
+function adjustToolbar() {
+  const headerHeight = $('#Header').outerHeight();
+  const toolbar = $('.toolbar');
+
+  if (toolbar.length) {
+      toolbar.css({
+          'top': headerHeight + 'px',
+      });
+  }
+  }
 
 function updateNavItems(userType) {
   const navItems = {

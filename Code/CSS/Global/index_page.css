@@ -16,7 +16,14 @@ background-color: #f0f0f0;
 
 .welcome-message {
     text-align: center;
-    margin: 15px 3%;
+    margin: 80px 20% 0 0;
     font-size: 2em;
     color: #333;
+}
+
+/* Responsive styles */
+@media (max-width: 480px) {
+  .welcome-message {
+    margin: 80px auto;
+  }
 }

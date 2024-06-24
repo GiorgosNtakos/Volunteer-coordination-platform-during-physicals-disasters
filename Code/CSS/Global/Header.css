@@ -6,13 +6,16 @@ body {
 }
 
 header {
+  position: fixed;
+  top: 0;
   width: 100%;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #430063;
   color: white;
-  padding: 1% 3%;
+  padding: 15px 10px;
   text-align: center;
 }
 
@@ -77,6 +80,8 @@ header h1 {
 
 .dropdown:hover .dropdown-content {
   display: block;
+  z-index: 1500;
+
 }
 
 .hamburger-menu {
@@ -136,9 +141,18 @@ nav a:hover {
     margin-right: 5px; /* Μείωση του διαστήματος μεταξύ της εικόνας και του κειμένου */
   }
 
+  .user-profile img {
+    width: 30px;
+    height: 30px;
+  }
+
   .user-name {
-    font-weight: bold;
     font-size: small;
+  }
+
+  .header {
+    margin: 0;
+    margin-left: 4%;
   }
 
   .hamburger-menu {
@@ -148,9 +162,9 @@ nav a:hover {
     transition: 0.4s; /* Προσθήκη μετάβασης για ομαλή κίνηση */
   }
 
-  body.menu-open main {
-    margin-top: 20vh; /* Προσαρμόστε αυτό το μέγεθος ανάλογα με το ύψος του μενού */
-  }
+  /* body.menu-open main {
+    margin-top: 20vh;
+  } */
 
   .bar {
     width: 25px;
@@ -180,7 +194,7 @@ nav a:hover {
     position: absolute;
     top: 6vh;
     left: 0;
-    z-index: 999;  /* Μεγάλη τιμή z-index για να εμφανίζονται τα links πάνω από τα άλλα στοιχεία */
+    z-index: 998;  /* Μεγάλη τιμή z-index για να εμφανίζονται τα links πάνω από τα άλλα στοιχεία */
   }
   
   nav ul.show {
@@ -200,4 +214,11 @@ nav a:hover {
     border-bottom: none;
   }
 
+  nav a {
+    margin: 0 0 0 10%;
+  }
+
+  .main.push-down {
+    margin-top: 70px; /* Το αρχικό margin είναι 0 */
+  }
 }

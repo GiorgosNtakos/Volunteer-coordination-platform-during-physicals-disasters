@@ -13,14 +13,20 @@ header {
 
 main {
     display: flex;
+    margin: 2vh 0 0 0;
 }
 
 #map {
-    height: 1080px;
-    width: 1920px;
+    height: 90vh;
+    width: 80vw;
 }
 
-  #vehicleCargoDetails {
+.leaflet-top.leaflet-left {
+    top: 2%;
+    left: 10px;
+}
+
+#vehicleCargoDetails {
     position: fixed; /* ή absolute αν θέλετε να είναι σε σχέση με έναν γονέα container */
     top: 50px; /* ή άλλη τιμή ανάλογα με τη θέση που θέλετε */
     right: 50px; /* ή άλλη τιμή ανάλογα με τη θέση που θέλετε */

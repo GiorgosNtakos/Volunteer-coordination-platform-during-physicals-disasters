@@ -56,3 +56,11 @@ input {
 .hidden {
   display: none;
 }
+
+/* Responsive Styles */
+@media only screen and (max-width: 480px) {
+  #Global_form {
+    display: block;
+    min-width: 80vw;
+  }
+}

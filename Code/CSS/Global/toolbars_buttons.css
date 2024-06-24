@@ -24,11 +24,6 @@
   cursor: pointer;
   width: 100%;
   height: 65%;
-  /* left: 48px; */
-}
-
-#Show_History_Requests {
-  left: 18px;
 }
 
 #unload-vehicle-cargo{
@@ -59,12 +54,13 @@
     background: transparent;
     border: none;
     padding: 5px;
-    margin: 10px 0;
+    margin: 5px 0 0 0;
     cursor: pointer;
   }
 
   .show-toolbar img {
     width: 30px;
     height: 30px;
+    margin: 0 0 5px 0;
   }
 }

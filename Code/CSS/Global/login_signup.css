@@ -227,10 +227,6 @@ a {
   color: #838181;
 }
 
-.check-group .check:checked + .label {
-  color: #fff;
-}
-
 .tab:hover {
   color: #fff; /* Αλλαγή χρώματος κειμένου */
   border-color: #1161ee; /* Αλλαγή χρώματος περίγραμμα */
@@ -255,13 +251,17 @@ a {
   }
   
   .login-html {
-    padding: 30px 15px;
+    padding: 20% 7%;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background: rgba(40, 57, 101, 0.9);
+  }
+
+  .sign-up-htm {
+    margin: 3% 0 0 0;
   }
 
   .login-html .tab {

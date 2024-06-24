@@ -46,14 +46,14 @@ table {
     width: 100%;
     max-width: 400px; /* Ορίστε το πλάτος του search bar όπως θέλετε */
     margin: 0 auto;
-    padding: 10px;
+    padding: 10px 0px 10px 40px;
     border: 2px solid #ccc;
     border-radius: 25px; /* Δημιουργεί στρογγυλεμένα άκρα */
     font-size: 16px;
     background-color: #f2f2f2;
     background-repeat: no-repeat;
     background-position: 10px center;
-    padding-left: 40px; /* Το πλάτος του εικονιδίου + περιθώριο */
+    /* padding-left: 40px;  Το πλάτος του εικονιδίου + περιθώριο */
   }
   
   .icon {
@@ -193,14 +193,31 @@ border-bottom: none;
 
 @media only screen and (max-width: 480px) {
   table th, table td {
+    font-size: small;
     text-align: center;
-    height: 60px;
-    padding: 1%;
+    height: 40px;
+    min-width: 110px;
+    padding: 2% 0;
     border: 1px solid #ddd;
   }
+
+  #search_bar {
+    flex-grow: 0;
+    margin: 0;
+    text-align: initial;
+  }
   
+  #search-input {
+    width: 45vw;
+    padding: 10px 10px;
+  }
+
+  #search-button {
+    display: inline;
+  }
+
   .custom-select {
-    width: 100%;
+    width: 80vw;
     position: relative;
   }
 }

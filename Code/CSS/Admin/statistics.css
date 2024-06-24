@@ -19,6 +19,13 @@ body {
     transition: width 0.5s;
 }
 
+.canvas-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
 .chart-container.doughnut {
     width: 40%; /* Μικρότερο πλάτος για το doughnut */
 }
@@ -117,4 +124,29 @@ body {
 #toggleChartButton{
     transition: background-color 0.3s;
     background-color: #440466;
+}
+
+/* Responsive Styles */
+@media (max-width: 480px) {
+    #date-filter {
+        display: grid;
+        height: 22vh;
+        margin: auto;
+    }
+
+    #date-filter label {
+        padding: 0;
+    }
+
+    .date, #date-filter label, #date-filter button {
+        padding: 5px;
+        margin: 5px;
+        width: 40vw;
+    }
+
+    .chart-container {
+        width: 100%;
+        margin: 5% 2%;
+      }
+
 }
