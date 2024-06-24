@@ -158,10 +158,22 @@ function updateNavItems(userType) {
   const pathname = window.location.pathname.split("/").pop();
   const items = (navItems[userType] && navItems[userType][pathname]) || [];
   const navList = $('#nav-items');
-  navList.empty(); // Καθαρίζει τα υπάρχοντα στοιχεία
+  if (pathname === "user_profile_settings.html") {
+    const backButton = navList.find("#backButton").parent().clone(true);
+    navList.empty(); // Καθαρίζει τα υπάρχοντα στοιχεία
+    navList.append(backButton); // Προσθήκη του κουμπιού "Πίσω" ξανά
+    console.log("Back button added to nav-items");
+  } else {
+    navList.empty(); // Καθαρίζει τα υπάρχοντα στοιχεία
+  }
 
   items.forEach(item => {
     const listItem = `<li><a href="${item.href}">${item.text}</a></li>`;
     navList.append(listItem);
   });
+}
+
+
+ function goBack() {
+  window.history.back();
 }
