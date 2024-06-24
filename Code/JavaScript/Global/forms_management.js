@@ -282,7 +282,7 @@ function createForm(full_name, phone, street, number, town) {
       },
     });
 
-    } else if(window.location.href === "http://localhost/Collaborative-product-search-platform-of-wide-consumption/Code/Html/User/personal_info_form.html"){
+    } else if(window.location.href === "http://localhost/Collaborative-product-search-platform-of-wide-consumption/Code/HTML/User/personal_info_form.html"){
       $.ajax({
         url: "../../PHP/User/personal_info_form.php",
         method: "POST",
