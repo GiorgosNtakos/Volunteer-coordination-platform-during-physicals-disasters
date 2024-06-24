@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
           mainContent.style.marginTop = "0";
         }
 
-        // Επαναφορά λευκού χρώματος όταν το μενού είναι κλειστό
+        // Επαναφέρει το λευκό χρώμα όταν το μενού είναι κλειστό
         bars.forEach(bar => bar.style.backgroundColor = 'white');
       });
     });
@@ -75,6 +75,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Προσθήκη event listener για κλικ έξω από το μενού
     document.addEventListener("click", closeMenuOnClickOutside);
+
+    // Extra κώδικας για να εμφανίζουμε όποτε χρειάζεται το toolbar
+    document.querySelector('.show-toolbar').addEventListener('click', function() {
+    const toolbar = document.querySelector('.toolbar');
+    toolbar.classList.toggle('show');
+    });
   }
 
   // Ελέγχει αν το Header έχει φορτωθεί ήδη
