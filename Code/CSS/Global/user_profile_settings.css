@@ -127,3 +127,12 @@ label {
     color: gold;
     text-align: center; /* Center the label */
 }
+
+@media (max-width: 480px) {
+    .profile-form,
+    .form-container {
+        width: 100%;
+        height: 40vh;
+
+    }
+}

@@ -25,19 +25,16 @@
     <link rel="stylesheet" href="../../CSS/Rescuer/map.css" />
     <link rel="stylesheet" href="../../CSS/Global/switches_style.css" />
     <link rel="stylesheet" href="../../CSS/Global/toolbar_style.css" />
+    <link rel="stylesheet" href="../../CSS/Global/toolbars_buttons.css" />
     <link rel="stylesheet" href="../../CSS/Global/pop_ups.css" />
+    <link rel="stylesheet" href="../../CSS/Global/Header.css" />
     <title>Map with Subcategories</title>
   </head>
 
   <body>
     <div id="Header"></div>
-    <main>
-      <div id="map"></div>
-      <div id="task-panel" class="task-panel">
-        <h2>Τρέχοντα Tasks</h2>
-        <ul id="task-list" class="list-group"></ul>
-      </div>
-
+    <div class="container">
+      
       <!-- Filter toggles -->
       <div class="toolbar">
         <div class="form-check form-switch filter-switch">
@@ -49,7 +46,7 @@
             data-toggle="toggle"
           />
           <label class="form-check-label" for="assignedRequestsSwitch"
-            >Assigned Requests</label
+          >Assigned Requests</label
           >
         </div>
         <div class="form-check form-switch filter-switch">
@@ -59,28 +56,28 @@
             role="switch"
             id="unassignedRequestsSwitch"
             data-toggle="toggle"
-          />
-          <label class="form-check-label" for="unassignedRequestsSwitch"
+            />
+            <label class="form-check-label" for="unassignedRequestsSwitch"
             >Unassigned Requests</label
-          >
-        </div>
-        <div class="form-check form-switch filter-switch">
-          <input
+            >
+          </div>
+          <div class="form-check form-switch filter-switch">
+            <input
             class="form-check-input"
             type="checkbox"
             role="switch"
             id="assignedOffersSwitch"
-          />
-          <label class="form-check-label" for="assignedOffersSwitch"
+            />
+            <label class="form-check-label" for="assignedOffersSwitch"
             >Assigned Offers</label
           >
         </div>
         <div class="form-check form-switch filter-switch">
           <input
-            class="form-check-input"
-            type="checkbox"
-            role="switch"
-            id="unassignedOffersSwitch"
+          class="form-check-input"
+          type="checkbox"
+          role="switch"
+          id="unassignedOffersSwitch"
           />
           <label class="form-check-label" for="unassignedOffersSwitch"
             >Unassigned Offers</label
@@ -88,26 +85,35 @@
         </div>
         <div class="form-check form-switch filter-switch">
           <input
-            class="form-check-input"
-            type="checkbox"
-            role="switch"
-            id="showLinesSwitch"
+          class="form-check-input"
+          type="checkbox"
+          role="switch"
+          id="showLinesSwitch"
           />
           <label class="form-check-label" for="showLinesSwitch"
-            >Show Lines</label
+          >Show Lines</label
           >
         </div>
       </div>
+    <main>
+      <div>
+        <button class="show-toolbar"><img src="../../../upload_img/global/right_arrow.png" alt=""></button>
+      </div>
+      <div id="map"></div>
+      <div id="task-panel" class="task-panel">
+        <h2>Τρέχοντα Tasks</h2>
+        <ul id="task-list" class="list-group"></ul>
+      </div>
     </main>
-
+  </div>
+    
     <script type="module" src="../../JavaScript/Rescuer/map.js"></script>
-    <script
-      type="module"
-      src="../../JavaScript/Rescuer/map_filters.js"
-    ></script>
+    <script type="module" src="../../JavaScript/Rescuer/map_filters.js"></script>
     <script type="module" src="../../JavaScript/Rescuer/task_panel.js"></script>
     <script src="../../JavaScript/Global/showMessage.js"></script>
-
+    <script src="../../JavaScript/Global/HeaderCall.js"></script>
+    <script src="../../JavaScript/Global/responsive_navbar.js"></script>
+    
     <!-- <script type="module" src="../../JavaScript/Admin/map_filters.js"></script> -->
   </body>
 </html>

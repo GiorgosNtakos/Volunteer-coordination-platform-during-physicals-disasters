@@ -1,7 +1,8 @@
 .container {
   display: flex; /* Use flexbox layout */
   height: 100vh;
-  margin-top: 70px;
+  padding: 0 !important;
+  margin: 70px 0 0 0 !important;
 }
 
 .toolbar {

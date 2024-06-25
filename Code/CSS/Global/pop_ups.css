@@ -81,3 +81,17 @@
 .leaflet-popup-close-button:hover {
   color: red !important;
 }
+
+@media (max-width: 480px) {
+  .leaflet-popup-content-wrapper {
+    max-width: 220px;
+  }
+
+  .popup-title {
+    font-size: 24px;
+  }
+
+  .popup-content button {
+    padding: 5px;
+  }
+}
