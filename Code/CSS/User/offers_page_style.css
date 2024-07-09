@@ -62,3 +62,21 @@ table th, table td {
 #table_of_announcements{
   margin-top: 0px;
 }
+
+
+@media only screen and (max-width: 480px) {
+  .main {
+    display: block;
+}
+
+.scroll-container {
+    width: 100%;
+    margin-bottom: 20px; /* Προαιρετικό: Απόσταση μεταξύ των πινάκων */
+}
+
+
+.history-table {
+    width: 100%;
+    margin-bottom: 20px; /* Προαιρετικό: Απόσταση μεταξύ των πινάκων */
+}
+}

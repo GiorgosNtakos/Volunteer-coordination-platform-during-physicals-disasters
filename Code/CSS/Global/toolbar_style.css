@@ -23,10 +23,6 @@
   margin: 10px 0; /* Add margin between buttons for better spacing */
 }
 
-.hidden {
-  display: none !important; /* Hide the toolbar */
-}
-
 @media only screen and (max-width: 480px) {
   .toolbar {
     display: none; /* Hide the toolbar for phones' screens */
@@ -34,9 +30,5 @@
 
   .toolbar.show {
     display: flex; /* Show the toolbar when the button is clicked */
-  }
-
-  .container {
-    margin-left: 0; /* Remove the left margin for small screens */
   }
 }

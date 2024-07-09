@@ -10,8 +10,9 @@ background-color: #f0f0f0;
 
 .main {
     position: relative;
-    flex-grow: 1; /* Take up the remaining space */
-    padding: 20px; /* Padding around the content */
+    width: 100vw;
+    flex-grow: 1;
+    padding: 20px;
   }
 
 .welcome-message {

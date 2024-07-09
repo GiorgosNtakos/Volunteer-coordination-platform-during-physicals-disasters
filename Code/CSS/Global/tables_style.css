@@ -220,4 +220,8 @@ border-bottom: none;
     width: 80vw;
     position: relative;
   }
+
+  .history-container {
+    display: block;
+  }
 }
