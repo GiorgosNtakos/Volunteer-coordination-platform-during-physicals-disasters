@@ -93,7 +93,7 @@ function handlePreviousButton() {
                 if (isBaseCargoShown) {
                     loadVehicleCargo(currentPage, 15, currentSearchTerm, selectedCategories);
                 } else {
-                    loadItems(c, 15, currentSearchTerm, selectedCategories);
+                    loadItems(currentPage, 15, currentSearchTerm, selectedCategories);
                 }
     } else if (window.location.href === "http://localhost/Collaborative-product-search-platform-of-wide-consumption/Code/HTML/User/request_page.html"){
       getAvailableItems(currentPage, 15, currentSearchTerm, selectedCategories);

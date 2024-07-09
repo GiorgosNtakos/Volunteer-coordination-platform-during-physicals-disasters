@@ -8,36 +8,38 @@ $conn->set_charset("utf8");
 parse_str(file_get_contents("php://input"), $_DELETE);
 
 if ($_SERVER["REQUEST_METHOD"] === 'DELETE') {
-    if (isset($_DELETE['itemName'])) {
+    if (isset($_DELETE['item_id'])) {
         
-        $itemName = $_DELETE["itemName"];
+        $item_id = $_DELETE["item_id"];
 
-        $sql = "SELECT id FROM items WHERE name = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $itemName);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows > 0) {
-            // Διαγραφή του προϊόντος
-            $sql = "DELETE items,warehouse_stock FROM items INNER JOIN warehouse_stock ON warehouse_stock.item_id = items.id WHERE name = ?";
+            $sql = "DELETE FROM warehouse_stock WHERE item_id = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("s", $itemName);
-            if ($stmt->execute()) {                
+            $stmt->bind_param("i", $item_id);
+            if ($stmt->execute()) {
+                // Επιτυχής διαγραφή και ενημέρωση
+                http_response_code(200);
+                $response = array("status" => "success", "message" => "H ποσοτητα διαγράφηκε επιτυχώς.");
+
+            } else {
+                // Σφάλμα κατά τη διαγραφή του προϊόντος
+                http_response_code(500); // Επιστροφή κωδικού σφάλματος 500
+                $response = array("status" => "server_error", "message" => "Σφάλμα κατά τη διαγραφή της ποσοτητας: " . $conn->error);
+            }
+
+            // Διαγραφή του προϊόντος
+            $sql = "DELETE FROM items WHERE id = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i", $item_id);
+            if ($stmt->execute()) {
                 // Επιτυχής διαγραφή και ενημέρωση
                 http_response_code(200);
                 $response = array("status" => "success", "message" => "Το είδος διαγράφηκε επιτυχώς.");
-    
+
             } else {
                 // Σφάλμα κατά τη διαγραφή του προϊόντος
                 http_response_code(500); // Επιστροφή κωδικού σφάλματος 500
                 $response = array("status" => "server_error", "message" => "Σφάλμα κατά τη διαγραφή του είδους: " . $conn->error);
             }
-        } else {
-            // Το προϊόν δεν βρέθηκε
-            http_response_code(404);
-            $response = array("status" => "not_found_404", "message" => "Το είδος δεν βρέθηκε.");
-        }
 
     } else {
         // Μη έγκυρο όνομα προϊόντος

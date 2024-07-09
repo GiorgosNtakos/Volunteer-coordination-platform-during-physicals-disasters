@@ -284,11 +284,11 @@ function addProduct(form) {
   });
 }
 
-function deleteItem(itemName) {
+function deleteItem(item_id) {
   $.ajax({
     url: "../../PHP/Admin/delete_item.php",
     method: "DELETE",
-    data: { itemName: itemName },
+    data: { item_id: item_id },
     success: function (response) {
       if (response.status === "success") {
         showMessage("success-message", response.message, "#items-list");

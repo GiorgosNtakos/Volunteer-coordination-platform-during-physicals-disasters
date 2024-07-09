@@ -139,7 +139,7 @@ function loadItems(page, perPage, searchTerm, selectedCategories = []) {
           deleteButton.style.marginRight = "20px";
           deleteButton.addEventListener("click", function () {
             // Καλείτε τη συνάρτηση για διαγραφή του προϊόντος με το item.name
-            deleteItem(item.name);
+            deleteItem(item.id);
             updateItemsBasedOnCategoryAndSearch();
           });
           ChoiseButtonCell.appendChild(deleteButton);
