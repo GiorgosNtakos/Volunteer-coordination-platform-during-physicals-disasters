@@ -22,7 +22,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         $stmt->close();
         $conn->close();
     } else {
-        // Αν λείπουν πεδία
         http_response_code(400);
         echo json_encode(array("status" => "missing_400", "message" => "Λείπουν παράμετροι από το αίτημα GET."));
         exit;

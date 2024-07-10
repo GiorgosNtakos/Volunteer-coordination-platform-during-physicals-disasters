@@ -7,20 +7,17 @@ session_start();
 
 if (isset($_SESSION['user_auth'])){
     if($_SERVER["REQUEST_METHOD"] === "POST"){
-// Εκκαθάριση όλων των στοιχείων του session
 $_SESSION = array();
 
-// Καταστροφή του session
 session_destroy();
 
 http_response_code(200);
 
-// Επιστροφή JSON απόκρισης
 $response = array("status" => "success");
 
     } else{
         
-        http_response_code(405); // Επιστροφή κωδικού σφάλματος 400
+        http_response_code(405); 
         $response = array("status" => "wrong_method_405", "message" => "Μη έγκυρη αίτηση.");
     }
 } else{

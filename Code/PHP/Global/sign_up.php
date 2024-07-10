@@ -60,17 +60,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $response = array("status" => "created", "message" => "Επιτυχής εγγραφή!");
 
             } else {
-                // Η εγγραφή απέτυχε
                 http_response_code(500);
                 $response = array("status" => "server_error", "message" => "Η εγγραφή απέτυχε. Παρακαλώ δοκιμάστε ξανά.". $conn->error);
                 }
         }
     } else {
-        http_response_code(400); // Επιστροφή κωδικού σφάλματος 400
+        http_response_code(400);
         $response = array("status" => "missing_400", "message" => "Λείπουν παράμετροι από το αίτημα POST.");
     }
 } else {
-    http_response_code(405); // Επιστροφή κωδικού σφάλματος 400
+    http_response_code(405);
     $response = array("status" => "wrong_method_405", "message" => "Μη έγκυρη αίτηση.". $conn->error);
 }
 

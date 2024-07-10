@@ -55,7 +55,7 @@ if (isset($_SESSION['user_auth'])){
 
         } else {
             // Μη έγκυρη ανακοίνωση
-            http_response_code(400); // Επιστροφή κωδικού σφάλματος 400
+            http_response_code(400);
             $response = array("status" => "missing_400", "message" => "Λείπουν παράμετροι από το αίτημα DELETE.");
         }
     } else{

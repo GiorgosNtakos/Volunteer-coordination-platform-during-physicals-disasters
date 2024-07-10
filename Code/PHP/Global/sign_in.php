@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $_SESSION['user_auth'] = array(
                 'id' => $row['id'],
                 'username' => $username,
-                'email' => $row['email'],  // Προσθήκη πεδίου email από τη βάση δεδομένων
+                'email' => $row['email'], 
                 'type' => $row['type'],
                 'image_path' => $row['img_path'],
                 'login_time' => time()  // Προσθήκη timestamp
@@ -45,18 +45,18 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             http_response_code(401);
             $response = array("status" => "username_401", "message" => "Λάθος username χρήστη. Παρακαλώ δοκιμάστε ξανά.");
      } else{
-            http_response_code(404); // Επιστροφή κωδικού σφάλματος 404
+            http_response_code(404);
             $response = array("status" => "not_found_404", "message" => "Ο χρηστης που ζητήθηκε δεν βρέθηκε: " . $conn->error);
      }
     } else{
 
-        http_response_code(400); // Επιστροφή κωδικού σφάλματος 400
+        http_response_code(400);
         $response = array("status" => "missing_400", "message" => "Λείπουν παράμετροι από το αίτημα GET.");
 
     }
 } else{
 
-    http_response_code(405); // Επιστροφή κωδικού σφάλματος 400
+    http_response_code(405);
     $response = array("status" => "wrong_method_405", "message" => "Μη έγκυρη αίτηση.". $conn->error);
 
 }

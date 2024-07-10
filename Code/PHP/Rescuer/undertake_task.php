@@ -3,7 +3,6 @@ header('Access-Control-Allow-Origin: http://127.0.0.1:5500');
 header('Content-Type: application/json');
 session_start();
 
-// Adjust the path to 'db_connection.php' according to your directory structure
 require '../Global/db_connect.php'; 
 
 $conn->set_charset("utf8");

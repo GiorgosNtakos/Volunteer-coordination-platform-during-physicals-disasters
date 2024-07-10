@@ -66,7 +66,6 @@ if (isset($_SESSION['user_auth']) && isset($_SESSION['item_id_auth'])){
                 $updateWarehouse->close();
 
             } else{
-                 // Αν λείπουν πεδία
             http_response_code(400);
             $response = array("status" => "missing_400", "message" => "Λείπουν παράμετροι από το αίτημα POST.");
             }

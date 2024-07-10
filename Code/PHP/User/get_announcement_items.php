@@ -28,7 +28,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         }
         $response = array("items" => $items);
     } else {
-        // Αν λείπουν πεδία
         http_response_code(400);
         $response = array("status" => "missing_400", "message" => "Λείπουν παράμετροι από το αίτημα GET.");
     }

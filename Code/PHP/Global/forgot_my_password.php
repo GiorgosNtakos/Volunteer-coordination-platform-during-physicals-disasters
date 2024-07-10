@@ -15,13 +15,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s', $email);
         $stmt->execute();
-        $stmt->store_result(); // Αποθήκευση των αποτελεσμάτων της δήλωσης
+        $stmt->store_result(); 
 
         if ($stmt->num_rows > 0) {
             $stmt->bind_result($user_id);
             $stmt->fetch();
     
-            // Ενημέρωση του κωδικού χρήστη
+            // Ενημερώνουμε τον κωδικό του χρήστη
             $new_hashed_password = password_hash($newPassword, PASSWORD_DEFAULT);
             $update_sql = "UPDATE Users SET password = ? WHERE email = ?";
             $update_stmt = $conn->prepare($update_sql);

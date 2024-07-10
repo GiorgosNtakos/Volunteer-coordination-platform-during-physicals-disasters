@@ -1,5 +1,4 @@
 <?php
-//! προσθηκη καποιου flag σε περιπτωση που δεν υπαρχει ορος στο searchTerm και δημιουργια νεου μηνυματος αν το flag εινα ενεργο
 header('Access-Control-Allow-Origin: http://127.0.0.1:5500');
 header('Content-Type: application/json');
 require '../Global/db_connect.php';

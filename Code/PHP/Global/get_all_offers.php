@@ -2,7 +2,6 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
-// Replace with the real path to your database connection file
 require 'db_connect.php'; 
 $conn->set_charset("utf8");
 
@@ -20,7 +19,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
     $stmt = $conn->prepare($sql);
     if ($stmt === false) {
-        // Preparation fails, return an error
         error_log("Prepare failed: " . $conn->error);
         http_response_code(500);
         echo json_encode(array("status" => "error", "message" => "Failed to prepare the SQL statement."));
@@ -29,7 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
     $stmt->bind_param("s", $type);
     if (!$stmt->execute()) {
-        // Execution fails, return an error
         error_log("Execute failed: " . $stmt->error);
         http_response_code(500);
         echo json_encode(array("status" => "error", "message" => "Failed to execute the SQL statement."));

@@ -1,7 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: http://127.0.0.1:5500');
 header('Content-Type: application/json');
-require 'db_connect.php'; // Ensure this points to the correct database connection script
+require 'db_connect.php'; 
 $conn->set_charset("utf8");
 
 $sql = "SELECT v.*, t.id AS task_id, t.type AS task_type, t.status AS task_status, 

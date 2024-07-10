@@ -1,13 +1,4 @@
 <?php
-// ! Δεν το ενεργοποιω ακομα για να μπορω να δουλευω το live server
-// ! Επισης πρεπει να βρουμε μια λυση για duplicates usernames,phones,ονομ/νυμα,emails(κυριως username, ονομ/νυμα).Να λαβουμε και υποψι αν χρειαστει λυση με το τυπο του καθε χρήστη
-/*
-if(empty($_SERVER["HTTPS"]) || $_SERVER["HTTPS"] !== "on"){
-    header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
-    exit();
-}
-*/
-
 header('Access-Control-Allow-Origin: http://127.0.0.1:5500');
 header('Content-Type: application/json');
 require '../Global/db_connect.php';
@@ -62,18 +53,15 @@ if (isset($_SESSION['user_auth'])){
                         $response = array("status" => "server_error", "message" => "Η εισαγωγή απέτυχε. Παρακαλώ δοκιμάστε ξανά." . $conn->error);
                     }
         
-                    // Κλείσιμο της προετοιμασμένης δήλωσης
                     $stmt->close();
 
                 }
 
             } else {
-                // Αν λείπουν πεδία
                 http_response_code(400);
                 $response = array("status" => "missing_400", "message" => "Λείπουν παράμετροι από το αίτημα POST.");
             }
         } else {
-            // Αν η αίτηση δεν είναι POST
             http_response_code(405);
             $response = array("status" => "wrong_method_405", "message" => "Μη έγκυρη αίτηση.");
         }

@@ -20,12 +20,10 @@ $conn->set_charset("utf8");
             http_response_code(200);
             $response = array("status" => "success", "message" => "Τα δεδομενα ανακτηθηκαν με επιτυχια." , "username" => $user_name , "img_path" =>$user_img, "type"=> $user_type);
     }else {
-    // Μη έγκυρη αίτηση
-    http_response_code(405); // Επιστροφή κωδικού σφάλματος 400
+    http_response_code(405); 
     $response = array("status" => "wrong_method_405", "message" => "Μη έγκυρη αίτηση.". $conn->error);
 } 
  } else {
-    // Ο διαχειριστής δεν έχει συνδεθεί. Επιστρέψτε κάποιο προεπιλεγμένο όνομα ή μήνυμα.
     http_response_code(401);
     $response = array("status" => "need_connection", "message" => 'Πρέπει να συνδεθείτε');
  }

@@ -29,13 +29,11 @@ if (isset($_SESSION['user_auth'])){
                     $item_id = $row['item_id'];
                     $quantity = $row['quantity'];
 
-                    // Ενημέρωση των ποσοτήτων στην αποθήκη
                     $updateSql = "UPDATE warehouse_stock SET quantity = quantity + ? WHERE item_id = ?";
                     $updateStmt = $conn->prepare($updateSql);
                     $updateStmt->bind_param("ii", $quantity, $item_id);
                     $updateStmt->execute();
 
-                    // Αφαίρεση αντικειμένων από το φορτίο του οχήματος
                     $deleteSql = "DELETE FROM vehiclecargo WHERE item_id = ? AND vehicle_id = ?";
                     $deleteStmt = $conn->prepare($deleteSql);
                     $deleteStmt->bind_param("is", $item_id, $vehicle_id);

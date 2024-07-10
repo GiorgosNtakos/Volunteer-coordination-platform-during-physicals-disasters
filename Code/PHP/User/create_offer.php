@@ -33,7 +33,7 @@ if (isset($_SESSION['user_auth'])) {
                 $row = $result->fetch_assoc();
                 $required_quantity = $row['quantity'] - $row['covered_quantity'];
             
-                // Αν η προσφερόμενη ποσότητα υπερβαίνει την απαιτούμενη ποσότητα, προσαρμόζουμε την ποσότητα
+                // Προσαρμόζουμε την ποσότητα
                 if ($quantity > $required_quantity) {
                     $quantity = $required_quantity;
                 }
@@ -53,10 +53,8 @@ if (isset($_SESSION['user_auth'])) {
                     http_response_code(500);
                     $response = array('status' => 'server_error', 'message' => 'Προέκυψε σφάλμα κατά τη δημιουργία της προσφοράς.');
                 }
-                //$stmt->close();
             }
         } else{
-            // Αν λείπουν πεδία
         http_response_code(400);
         $response = array("status" => "missing_400", "message" => "Λείπουν παράμετροι από το αίτημα POST.");
        }

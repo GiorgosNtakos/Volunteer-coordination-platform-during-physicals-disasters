@@ -7,7 +7,6 @@ require '../vendor/autoload.php';
 $conn->set_charset("utf8");
 use Ramsey\Uuid\Uuid;
 
-// Έλεγχος για την ύπαρξη των δεδομένων από το FormData
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_POST['loadTypeQuantities'])) {
@@ -47,12 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
                     if ($updateStmt->execute()) {
-                        // Η εγγραφή ήταν επιτυχής
                         http_response_code(201);
                         $response = array("status" => "created", "message" => "Επιτυχής εισαγωγή της ποσότητας των αντικειμένων!");
             
                         } else {
-                            // Η εγγραφή απέτυχε
                             http_response_code(500);
                             $response = array("status" => "server_error", "message" => "Η εισαγωγή απέτυχε. Παρακαλώ δοκιμάστε ξανά.". $conn->error);
                             }
@@ -117,7 +114,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
         } 
     } else {
-        // Αν λείπουν πεδία
         http_response_code(400);
         $response = array("status" => "missing_400", "message" => "Λείπουν παράμετροι από το αίτημα POST.");
     }

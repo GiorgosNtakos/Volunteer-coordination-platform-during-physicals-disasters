@@ -96,7 +96,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             $response = array("status" => "server_error" , "message" => "Σφάλμα κατά την ανάκτηση των αντικειμένων: " . $conn->error);
         }
     } else {
-        // Αν λείπουν πεδία
         http_response_code(400);
         $response = array("status" => "missing_400", "message" => "Λείπουν παράμετροι από το αίτημα GET.");
     }

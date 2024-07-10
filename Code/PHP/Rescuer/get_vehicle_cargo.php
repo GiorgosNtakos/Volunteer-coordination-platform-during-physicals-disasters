@@ -1,5 +1,4 @@
 <?php
-//! προσθηκη καποιου flag σε περιπτωση που δεν υπαρχει ορος στο searchTerm και δημιουργια νεου μηνυματος αν το flag εινα ενεργο
 header('Access-Control-Allow-Origin: http://127.0.0.1:5500');
 header('Content-Type: application/json');
 require '../Global/db_connect.php';
@@ -100,7 +99,6 @@ if (isset($_SESSION['user_auth'])){
             }
             
         } else {
-            // Αν λείπουν πεδία
             http_response_code(400);
             $response = array("status" => "missing_400", "message" => "Λείπουν παράμετροι από το αίτημα GET.");
         }
