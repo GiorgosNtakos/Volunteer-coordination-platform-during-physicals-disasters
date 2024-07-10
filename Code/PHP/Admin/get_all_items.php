@@ -8,9 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
   $sql = "SELECT * FROM Items";
   $result = $conn->query($sql);
 
-  // Έλεγχος εάν υπάρχουν εγγραφές
   if ($result->num_rows > 0) {
-      // Αν υπάρχουν, επιστροφή των δεδομένων σε μορφή JSON
       $items = array();
       while ($row = $result->fetch_assoc()) {
           $items[] = $row;

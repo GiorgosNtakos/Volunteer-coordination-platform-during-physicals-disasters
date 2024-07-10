@@ -1,9 +1,6 @@
-// * Header call function in HTML pages where need it
-
 $(document).ready(function () {
-  // Load common.html content into #commonContent div
   $("#Header").load("../../Html/Global/Header.html", function() {
-    updateHeaderTitle(); // Εκτελέστε μετά την φόρτωση του Header
+    updateHeaderTitle();
     getHeaderUserInfo();
   });
 });
@@ -160,11 +157,11 @@ function updateNavItems(userType) {
   const navList = $('#nav-items');
   if (pathname === "user_profile_settings.html") {
     const backButton = navList.find("#backButton").parent().clone(true);
-    navList.empty(); // Καθαρίζει τα υπάρχοντα στοιχεία
-    navList.append(backButton); // Προσθήκη του κουμπιού "Πίσω" ξανά
+    navList.empty(); 
+    navList.append(backButton);
     console.log("Back button added to nav-items");
   } else {
-    navList.empty(); // Καθαρίζει τα υπάρχοντα στοιχεία
+    navList.empty(); 
   }
 
   items.forEach(item => {

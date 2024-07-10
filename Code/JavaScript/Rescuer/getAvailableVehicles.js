@@ -12,17 +12,14 @@ function getAvailableVehicles(){
         success: function (response) {
           if (response.status === "success") {
             console.log(response);
-            // Τώρα έχετε τα δεδομένα των προϊόντων από τον server
     
             var vehicles = response.vehicles;
     
             vehiclesList.innerHTML = "";
     
-            // Εξετάζουμε τα δεδομένα των προϊόντων και δημιουργούμε τα table rows
             vehicles.forEach(function (vehicle) {
               var row = document.createElement("tr");
     
-              // Ονομασία προϊόντος
               var nameCell = document.createElement("td");
               var decorateIcon = document.createElement("span");
               decorateIcon.innerHTML = "<i id = 'decorate' class='fa'>&#xf0d1;</i>";
@@ -30,22 +27,18 @@ function getAvailableVehicles(){
               nameCell.appendChild(decorateIcon);
               row.appendChild(nameCell);
     
-              // Κατηγορία
               var crewCell = document.createElement("td");
               crewCell.textContent = vehicle.crew;
               row.appendChild(crewCell);
     
-              // Ποσότητα
               var streetCell = document.createElement("td");
               streetCell.textContent = vehicle.street;
               row.appendChild(streetCell);
     
-              // λεπτομέρειες
               var numberCell = document.createElement("td");
               numberCell.textContent = vehicle.number;
               row.appendChild(numberCell);
     
-              // Ημερομηνια Εισαγωγης
               var townCell = document.createElement("td");
               townCell.textContent = vehicle.town;
               row.appendChild(townCell);
@@ -56,14 +49,12 @@ function getAvailableVehicles(){
               assignButton.innerHTML = "<i id='choose'class='fa'>&#xf055;</i>";
               assignButton.style.marginRight = "20px";
               assignButton.addEventListener("click", function () {
-                // Καλείτε τη συνάρτηση για διαγραφή του προϊόντος με το vehicle.name
                 assignvehicle(vehicle.id);
               });
               ChoiseButtonCell.appendChild(assignButton);
     
               row.appendChild(ChoiseButtonCell);
     
-              // Προσθέστε τη σειρά στον πίνακα
               vehiclesList.appendChild(row);
             });
           } else if (response.status === "success_but_empty") {

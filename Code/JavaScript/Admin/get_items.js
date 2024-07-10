@@ -1,5 +1,3 @@
-//! ΝΑ ΔΩ ΠΩΣ ΘΑ ΦΤΙΑΞΩ ΤΟ DELETE ΜΕ ΤΗΝ ΑΝΑΝΕΩΣΗ ΤΩΝ ΑΝΤΙΚΕΙΜΕΝΩΝ(Αλλαξε και μεθοδο μηπως φτιαξει)
-
 const overlay = document.getElementById("overlay");
 const OptionsFormContainer = document.getElementById("options-form-container");
 const RemoveStockFormContainer = document.getElementById("removeStock-form-container");
@@ -25,17 +23,15 @@ document.addEventListener("DOMContentLoaded", function () {
     isInDistance().then(isClose => {
       if(isClose) {
       if (!isBaseCargoShown) {
-        // Αν τώρα είναι ενεργά τα είδη από τη βάση, φόρτωσε τα είδη από το φορτίο του οχήματος
         loadItems(1, 15, searchTerm.value);
-        this.textContent = 'Εμφάνιση Ειδών από το Όχημα'; // Αλλαγή του κειμένου του κουμπιού
+        this.textContent = 'Εμφάνιση Ειδών από το Όχημα';
         unloadButton.style.display = "block";
-        isBaseCargoShown = true; // Ενημέρωσε τη μεταβλητή για να δείξει ότι τώρα εμφανίζονται τα είδη από το φορτίο του οχήματος
+        isBaseCargoShown = true;
       } else {
-        // Αντίστοιχα, αν τώρα είναι ενεργά τα είδη από το φορτίο του οχήματος, φόρτωσε τα είδη από τη βάση
         loadVehicleCargo(1, 15, searchTerm.value)
         unloadButton.style.display = "none";
-        this.textContent = 'Εμφάνιση Ειδών από την Βάση'; // Αλλαγή του κειμένου του κουμπιού πίσω στην αρχική κατάσταση
-        isBaseCargoShown = false; // Ενημέρωσε τη μεταβλητή για να δείξει ότι τώρα εμφανίζονται τα είδη από τη βάση
+        this.textContent = 'Εμφάνιση Ειδών από την Βάση';
+        isBaseCargoShown = false;
       }
 
     }else{
@@ -73,7 +69,6 @@ function loadItems(page, perPage, searchTerm, selectedCategories = []) {
     success: function (response) {
       if (response.status === "success") {
         console.log(response);
-        // Τώρα έχετε τα δεδομένα των προϊόντων από τον server
 
         var items = response.items;
 
@@ -88,43 +83,36 @@ function loadItems(page, perPage, searchTerm, selectedCategories = []) {
 
         itemList.innerHTML = "";
 
-        // Εξετάζουμε τα δεδομένα των προϊόντων και δημιουργούμε τα table rows
         items.forEach(function (item) {
           var row = document.createElement("tr");
 
-          // Ονομασία προϊόντος
           var nameCell = document.createElement("td");
           nameCell.textContent = item.name;
           row.appendChild(nameCell);
 
-          // Κατηγορία
           var categoryCell = document.createElement("td");
           categoryCell.textContent = item.category;
           row.appendChild(categoryCell);
 
-          // Ποσότητα
           var quantityCell = document.createElement("td");
           quantityCell.textContent = item.quantity;
           row.appendChild(quantityCell);
 
-          // λεπτομέρειες
           var detailsCell = document.createElement("td");
           if (item.details) {
             detailsCell.innerHTML = item.details.replace(/\n/g, "<br>");
           } else {
-            detailsCell.innerHTML = "No details"; // or any other placeholder you want to use
+            detailsCell.innerHTML = "No details";
           }
           row.appendChild(detailsCell);
           console.log(item.details);
 
           if(window.location.href === "http://localhost/Collaborative-product-search-platform-of-wide-consumption/Code/HTML/Admin/upload_products.html")
           {
-            // Ημερομηνια Εισαγωγης
             var importDateCell = document.createElement("td");
             importDateCell.textContent = item.created_at;
             row.appendChild(importDateCell);
 
-            // Ημερομηνια Ενημέρωσης
             var updateDateCell = document.createElement("td");
             updateDateCell.textContent = item.updated_at;
             row.appendChild(updateDateCell);
@@ -138,7 +126,6 @@ function loadItems(page, perPage, searchTerm, selectedCategories = []) {
           deleteButton.innerHTML = "<i class='fa' id = 'deleteIcon'>&#xf014;</i>";
           deleteButton.style.marginRight = "20px";
           deleteButton.addEventListener("click", function () {
-            // Καλείτε τη συνάρτηση για διαγραφή του προϊόντος με το item.name
             deleteItem(item.id);
             updateItemsBasedOnCategoryAndSearch();
           });
@@ -149,7 +136,7 @@ function loadItems(page, perPage, searchTerm, selectedCategories = []) {
           optionsFormButton.innerHTML =
             "<i class='fas'  id='optionIcon'" + item.id + "'>&#xf013;</i>";
           optionsFormButton.addEventListener("click", function () {
-            overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)"; // Προσαρμόστε το χρώμα ανάλογα με τις ανάγκες σας
+            overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
             overlay.style.display = "block";
             OptionsFormContainer.style.display = "block";
             loadCategories("select", "#category", false);
@@ -158,7 +145,6 @@ function loadItems(page, perPage, searchTerm, selectedCategories = []) {
           });
 
           overlay.addEventListener("click", function () {
-            // Κλείστε τη φόρμα και το overlay όταν γίνει κλικ στο overlay
             OptionsFormContainer.style.display = "none";
             overlay.style.display = "none";
           });
@@ -170,14 +156,13 @@ function loadItems(page, perPage, searchTerm, selectedCategories = []) {
           addItemsButton.innerHTML =
             "<i class='fas'  id='addIcon'" + item.id + "'>&#xf0fe;</i>";
             addItemsButton.addEventListener("click", function () {
-            overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)"; // Προσαρμόστε το χρώμα ανάλογα με τις ανάγκες σας
+            overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
             overlay.style.display = "block";
             addStockFormContainer.style.display = "block";
             getitemInformation(item.name);
           });
 
           overlay.addEventListener("click", function () {
-            // Κλείστε τη φόρμα και το overlay όταν γίνει κλικ στο overlay
             addStockFormContainer.style.display = "none";
             overlay.style.display = "none";
           });
@@ -187,7 +172,6 @@ function loadItems(page, perPage, searchTerm, selectedCategories = []) {
 
           row.appendChild(ChoiseButtonCell);
 
-          // Προσθέστε τη σειρά στον πίνακα
           itemList.appendChild(row);
         });
       } else if (response.status === "success_but_empty") {
@@ -238,7 +222,6 @@ function loadVehicleCargo(page, perPage, searchTerm, selectedCategories = []){
 
       if (response.status === "success") {
       console.log(response);
-      // Τώρα έχετε τα δεδομένα των προϊόντων από τον server
 
       var items = response.items;
 
@@ -253,31 +236,26 @@ function loadVehicleCargo(page, perPage, searchTerm, selectedCategories = []){
 
       itemList.innerHTML = "";
 
-      // Εξετάζουμε τα δεδομένα των προϊόντων και δημιουργούμε τα table rows
       items.forEach(function (item) {
         var row = document.createElement("tr");
 
-        // Ονομασία προϊόντος
         var nameCell = document.createElement("td");
         nameCell.textContent = item.name;
         row.appendChild(nameCell);
 
-        // Κατηγορία
         var categoryCell = document.createElement("td");
         categoryCell.textContent = item.category;
         row.appendChild(categoryCell);
 
-        // Ποσότητα
         var quantityCell = document.createElement("td");
         quantityCell.textContent = item.quantity;
         row.appendChild(quantityCell);
 
-        // λεπτομέρειες
         var detailsCell = document.createElement("td");
         if (item.details) {
           detailsCell.innerHTML = item.details.replace(/\n/g, "<br>");
         } else {
-          detailsCell.innerHTML = "No details"; // or any other placeholder you want to use
+          detailsCell.innerHTML = "No details";
         }
         row.appendChild(detailsCell);
         console.log(item.details);
@@ -290,7 +268,7 @@ function loadVehicleCargo(page, perPage, searchTerm, selectedCategories = []){
           removeButton.addEventListener("click", function () {
             isInDistance().then(isClose => {
               if(isClose) {
-            overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)"; // Προσαρμόστε το χρώμα ανάλογα με τις ανάγκες σας
+            overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
             overlay.style.display = "block";
             RemoveStockFormContainer.style.display = "block";
             getVehicleitemInformation(item.name);
@@ -307,7 +285,6 @@ function loadVehicleCargo(page, perPage, searchTerm, selectedCategories = []){
           });
 
           overlay.addEventListener("click", function () {
-            // Κλείστε τη φόρμα και το overlay όταν γίνει κλικ στο overlay
             RemoveStockFormContainer.style.display = "none";
             overlay.style.display = "none";
           });

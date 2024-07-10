@@ -1,34 +1,31 @@
 .container {
-  display: flex; /* Use flexbox layout */
+  display: flex;
   padding: 0 !important;
-  margin: 70px 0 0 0 !important; /* Adjust margin for the toolbar */
+  margin: 70px 0 0 0 !important; /* Κενό πάνω από το toolbar για το Header */
 }
 
 .toolbar {
-  background-color: #f2f2f2; /* Light gray background */
-  position: sticky; /* Sticky positioning */
-  top: 70px !important;
-  left: 0 !important; 
-  height: calc(100vh - 70px); /* Full height minus the height of the header */
-  width: 200px; /* Set a fixed width for the toolbar */
-  padding: 10px; /* Padding for spacing inside the toolbar */
-  display: flex; /* Use flexbox for layout */
-  flex-direction: column; /* Stack children vertically */
-  justify-content: flex-start; /* Align items to the start */
-  box-sizing: border-box; /* Include padding in the element's total width and height */
-  z-index: 999; /* Ensure it has a high z-index */
+  background-color: #f2f2f2;
+  position: sticky;
+  width: 200px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  z-index: 999;
 }
 
 .toolbar button {
-  margin: 10px 0; /* Add margin between buttons for better spacing */
+  margin: 10px 0;
 }
 
 @media only screen and (max-width: 480px) {
   .toolbar {
-    display: none; /* Hide the toolbar for phones' screens */
+    display: none;
   }
 
   .toolbar.show {
-    display: flex; /* Show the toolbar when the button is clicked */
+    display: flex;
   }
 }

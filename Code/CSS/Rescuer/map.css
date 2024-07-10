@@ -1,11 +1,8 @@
-/* map.css */
 body,
 html {
-    height: 100%;
-    /* Χρειάζεται για να λειτουργήσει σωστά το grid layout */
+    height: 100%; /* Χρειάζεται για να λειτουργήσει σωστά το grid layout */
     margin: 0;
     overflow: hidden;
-    /* Αποκρύπτει την κύλιση σε όλη τη σελίδα */
 }
 
 main {
@@ -30,20 +27,14 @@ main {
     float: right;
     overflow-y: auto;
     border: 1px solid #000;
-    /* Προσθήκη περιγράμματος στο panel των tasks */
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    /* Προσθήκη σκιάς για καλύτερη εμφάνιση */
     padding: 10px;
-    /* Προσθήκη εσωτερικού περιθωρίου για καλύτερη εμφάνιση */
     background-color: #430063;
-    /* Λευκό φόντο για το panel */
 }
 
 .task-panel h2 {
     text-align: center;
-    /* Κεντράρισμα της επικεφαλίδας */
     color: gold;
-    /* Χρυσό χρώμα για την επικεφαλίδα */
     font-size: 44px;
     margin-bottom: 20px;
 }
@@ -54,14 +45,11 @@ main {
     margin-bottom: 5px;
     border-radius: 5px;
     padding: 10px;
-    /* Ελαφρύ γκρι φόντο για τα items */
 }
 
 .task-container {
     background-color: #430063;
-    /* Μωβ φόντο */
     color: gold;
-    /* Χρυσά γράμματα */
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -129,7 +117,6 @@ main {
 
     .task-panel {
         scrollbar-width: none;
-        /* -ms-overflow-style: none;  IE και Edge */
     }
 
     .task-panel::-webkit-scrollbar {

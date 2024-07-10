@@ -1,6 +1,6 @@
 .form-check-input {
-    width: 34px;  /* Ορίστε το πλάτος του switch */
-    height: 20px; /* Ορίστε το ύψος του switch */
+    width: 34px; 
+    height: 20px;
     position: relative;
     appearance: none;
     background-color: #430063;
@@ -16,7 +16,7 @@
 }
 
 .form-check-input:checked {
-    background-color: #af04ff; /* Χρώμα όταν είναι ενεργοποιημένο */
+    background-color: #af04ff;
 }
 
 .form-check-input:before {
@@ -32,5 +32,5 @@
 }
 
 .form-check-input:checked:before {
-    transform: translateX(14px); /* Μετακίνηση του κύκλου όταν είναι ενεργοποιημένο */
+    transform: translateX(14px);
 }

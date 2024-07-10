@@ -1,5 +1,3 @@
-//? Ισως βαλουμε καποιο οριο στο πληθος των ατομων που δηλωνει ο χρηστης
-
 const overlay = document.getElementById("overlay");
 const requestFormContainer = document.getElementById("request-form-container");
 const requestSubmit = document.getElementById("request-form");
@@ -57,7 +55,6 @@ function getAvailableItems(page, perPage, searchTerm, selectedCategories = []) {
     success: function (response) {
       if (response.status === "success") {
         console.log(response);
-        // Τώρα έχετε τα δεδομένα των προϊόντων από τον server
 
         var items = response.items;
 
@@ -72,26 +69,22 @@ function getAvailableItems(page, perPage, searchTerm, selectedCategories = []) {
 
         itemList.innerHTML = "";
 
-        // Εξετάζουμε τα δεδομένα των προϊόντων και δημιουργούμε τα table rows
         items.forEach(function (item) {
           var row = document.createElement("tr");
 
-          // Ονομασία προϊόντος
           var nameCell = document.createElement("td");
           nameCell.textContent = item.name;
           row.appendChild(nameCell);
 
-          // Κατηγορία
           var categoryCell = document.createElement("td");
           categoryCell.textContent = item.category;
           row.appendChild(categoryCell);
 
-          // λεπτομέρειες
           var detailsCell = document.createElement("td");
           if (item.details) {
             detailsCell.innerHTML = item.details.replace(/\n/g, "<br>");
           } else {
-            detailsCell.innerHTML = "No details"; // or any other placeholder you want to use
+            detailsCell.innerHTML = "No details";
           }
           row.appendChild(detailsCell);
           console.log(item.details);
@@ -102,21 +95,19 @@ function getAvailableItems(page, perPage, searchTerm, selectedCategories = []) {
           requestButton.innerHTML =
             "<i class = 'fas' id = 'requestIcon'" + item.id + "'>&#xf256;</i>";
             requestButton.addEventListener("click", function () {
-              overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)"; // Προσαρμόστε το χρώμα ανάλογα με τις ανάγκες σας
+              overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
               overlay.style.display = "block";
               requestFormContainer.style.display = "block";
               getitemInformation(item.name);
             });
   
             overlay.addEventListener("click", function () {
-              // Κλείστε τη φόρμα και το overlay όταν γίνει κλικ στο overlay
               requestFormContainer.style.display = "none";
               overlay.style.display = "none";
             });
           ChoiseButtonCell.appendChild(requestButton);
           row.appendChild(ChoiseButtonCell);
 
-          // Προσθέστε τη σειρά στον πίνακα
           itemList.appendChild(row);
         });
       }

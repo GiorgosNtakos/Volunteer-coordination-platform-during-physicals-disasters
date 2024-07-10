@@ -1,16 +1,9 @@
 <?php
-// Προσθέστε το αρχείο σύνδεσης στη βάση δεδομένων
 header('Access-Control-Allow-Origin: http://127.0.0.1:5500');
 header('Content-Type: application/json');
-//header("Access-Control-Allow-Methods: PUT");
 require '../Global/db_connect.php';
 $conn->set_charset("utf8");
 
-
-//parse_str(file_get_contents("php://input"), $_POST);
-
-
-// Ελέγξτε αν το αίτημα είναι POST
 if ($_SERVER["REQUEST_METHOD"] === "POST") { 
     if(isset($_POST['location_lat']) && isset($_POST['location_lon']) && isset($_POST['street']) && isset($_POST['number']) && isset($_POST['town'])){
 
@@ -37,12 +30,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt->close();
 
     } else{
-        // Αν λείπουν πεδία
         http_response_code(400);
         $response = array("status" => "missing_400", "message" => "Λείπουν παράμετροι από το αίτημα POST.");
     }
 } else{
-    // Αν η αίτηση δεν είναι POST
     http_response_code(405);
     $response = array("status" => "wrong_method_405", "message" => "Μη έγκυρη αίτηση.");
 }

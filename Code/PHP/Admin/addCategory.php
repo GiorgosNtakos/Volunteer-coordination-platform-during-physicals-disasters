@@ -1,11 +1,4 @@
 <?php
-// ! Δεν το ενεργοποιω ακομα για να μπορω να δουλευω το live server
-/*
-if(empty($_SERVER["HTTPS"]) || $_SERVER["HTTPS"] !== "on"){
-    header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
-    exit();
-}
-*/
 
 header('Access-Control-Allow-Origin: http://127.0.0.1:5500');
 header('Content-Type: application/json');
@@ -31,22 +24,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $conn->prepare("INSERT INTO Categories (category_name) VALUES (?)");
             $stmt->bind_param("s", $categoryName);
             if ($stmt->execute()) {
-                // Επιτυχής εισαγωγή
                 http_response_code(201);
                 $response = array("status" => "created", "message" => "H νέα κατηγορία προστέθηκε επιτυχώς !");
             } else {
-                // Σφάλμα κατά την εισαγωγή
-                http_response_code(500); // Επιστροφή κωδικού σφάλματος 500
+                http_response_code(500);
                 $response = array("status" => "server_error", "message" => "Σφάλμα κατά την εισαγωγή της νέας κατηγορίας: " . $conn->error);
             }   
         }
     } else{
-        // Αν λείπουν πεδία
         http_response_code(400);
         $response = array("status" => "missing_400", "message" => "Λείπουν παράμετροι από το αίτημα POST.");
     }
 } else{
-    // Αν η αίτηση δεν είναι POST
     http_response_code(405);
     $response = array("status" => "wrong_method_405", "message" => "Μη έγκυρη αίτηση.");
 }

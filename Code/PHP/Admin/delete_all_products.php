@@ -21,14 +21,12 @@ if ($_SERVER["REQUEST_METHOD"] === 'DELETE') {
         $stm_items->close();
         
     } else  {
-        // Σφάλμα κατά την εισαγωγή
-        http_response_code(500); // Επιστροφή κωδικού σφάλματος 500
+        http_response_code(500);
         $response = array("status" => "server_500", "message" => "Σφάλμα κατά την διαγραφή: " . $conn->error);
          }
 
 } else {
-    // Μη έγκυρη αίτηση
-    http_response_code(405); // Επιστροφή κωδικού σφάλματος 400
+    http_response_code(405);
     $response = array("status" => "wrong_method_405", "message" => "Μη έγκυρη αίτηση.". $conn->error);
 
 }

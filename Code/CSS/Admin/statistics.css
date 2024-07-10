@@ -9,13 +9,13 @@ body {
 
 .main {
     position: relative;
-    flex-grow: 1; /* Take up the remaining space */
-    padding: 20px; /* Padding around the content */
+    flex-grow: 1;
+    padding: 20px;
   }
 
 .chart-container {
     width: 80%;
-    margin: 2% 10%; /* Κεντράρισμα του γραφήματος */
+    margin: 2% 10%;
     transition: width 0.5s;
 }
 
@@ -27,17 +27,17 @@ body {
   }
 
 .chart-container.doughnut {
-    width: 40%; /* Μικρότερο πλάτος για το doughnut */
+    width: 40%;
 }
 
 #date-filter {
     margin: 2% 10%;
-    background-color: #430063; /* Μωβ φόντο */
+    background-color: #430063;
     padding: 20px;
     border-radius: 25px;
     justify-content: center;
-    color: gold; /* Χρυσά γράμματα */
-    display: inline-flex; /* Για να μην απλώνεται σε όλο το πλάτος */
+    color: gold; 
+    display: inline-flex;
     width: 60vw;
     height: 8vh;
 }
@@ -47,7 +47,7 @@ body {
     padding: 15px;
     margin: 10px;
     text-align: center;
-    color: gold; /* Χρυσά στοιχεία */
+    color: gold; 
 }
 
 #date-filter label {
@@ -78,35 +78,35 @@ body {
 }
 
 .ui-datepicker {
-    background: #430063; /* Μωβ φόντο */
+    background: #430063;
     border: 1px solid #555;
-    color: gold; /* Χρυσά γράμματα */
+    color: gold;
 }
 .ui-datepicker-header {
-    background: #430063; /* Μωβ φόντο */
+    background: #430063;
     border-bottom: 1px solid #555;
     color: gold;
 }
 
 .ui-datepicker-title {
-    color: gold; /* Χρυσά γράμματα */
+    color: gold;
 }
 
 .ui-datepicker-calendar .ui-state-default {
-    background: #fff; /* Λευκό φόντο για τις ημέρες */
-    color: #000; /* Μαύρα γράμματα για τις ημέρες */
+    background: #fff;
+    color: #000;
 }
 .ui-datepicker-calendar .ui-state-hover {
-    background: gold; /* Χρυσό φόντο για την επιλεγμένη ημέρα */
-    color: #430063; /* Μωβ γράμματα για την επιλεγμένη ημέρα */
+    background: gold;
+    color: #430063;
 }
 
 .ui-datepicker-prev span, .ui-datepicker-next span {
-    background-color: #ffd700 !important; /* Χρυσό φόντο για τα βελάκια */
+    background-color: #ffd700 !important;
 }
 
 .ui-datepicker-prev:hover, .ui-datepicker-next:hover {
-    background-color: #5a0c9e !important; /* Χρυσά γράμματα για τα βελάκια στο hover */
+    background-color: #5a0c9e !important;
 }
 
 #toggleChartButton{

@@ -10,9 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $sql = "SELECT * FROM Categories";
     $result = $conn->query($sql);
 
-    // Έλεγχος εάν υπάρχουν εγγραφές
     if ($result->num_rows > 0) {
-        // Αν υπάρχουν, επιστροφή των δεδομένων σε μορφή JSON
         $categories = array();
         while ($row = $result->fetch_assoc()) {
             $categories[] = $row;
@@ -33,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $response = array("status" => "wrong_method_405", "message" => "Μη έγκυρη αίτηση.");
 }
 
-// Κλείσιμο της σύνδεσης με τη βάση δεδομένων
 echo json_encode($response);
 $conn->close();
 ?>

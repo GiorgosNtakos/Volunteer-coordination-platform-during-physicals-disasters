@@ -23,7 +23,7 @@ function updateMapVisibility() {
     const anyFilterIsActive = anyFiltersActive();
 
     vehicleMarkers.forEach(marker => {
-        let shouldBeVisible = true;  // Default to true
+        let shouldBeVisible = true; 
         if (anyFilterIsActive) {
             const hasTask = marker.options.tasks ;
             shouldBeVisible = (filters.vehiclesWithTasks && (hasTask > 0)) ||
@@ -33,7 +33,7 @@ function updateMapVisibility() {
     });
 
     offerMarkers.forEach(marker => {
-        let shouldBeVisible = true;  // Default to true
+        let shouldBeVisible = true; 
         if (anyFilterIsActive) {
             const markerStatus = marker.options.status;
             shouldBeVisible = (filters.acceptedOffers && markerStatus === "accepted") ||
@@ -43,7 +43,7 @@ function updateMapVisibility() {
     });
 
     requestMarkers.forEach(marker => {
-        let shouldBeVisible = true;  // Default to true
+        let shouldBeVisible = true; 
         if (anyFilterIsActive) {
             const markerStatus = marker.options.status;
             shouldBeVisible = (filters.acceptedRequests && markerStatus === "accepted") ||

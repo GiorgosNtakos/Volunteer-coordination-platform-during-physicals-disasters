@@ -30,7 +30,7 @@ input {
   padding: 8px;
   margin-bottom: 12px;
   box-sizing: border-box;
-  border-radius: 15px; /* Στρογγυλεμένες ακρές στο button */
+  border-radius: 15px;
 }
 
 #Global_form button[type="submit"],
@@ -43,7 +43,7 @@ input {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  border-radius: 15px; /* Στρογγυλεμένες ακρές στο button */
+  border-radius: 15px;
 }
 
 #Global_form button[type="submit"]:hover,

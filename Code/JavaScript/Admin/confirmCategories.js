@@ -1,10 +1,3 @@
-//! Υπαρχει καποιο περιεργο bug με το refresh δηλαδη αν κανουμε πολλα refresh σε
-//! συντομο χρονικο διαστημα (refresh ανα 1 sec) τοτε αν εχουμε 6 refresh τα 5
-//! πρωτα θα εχουν τα αναμενομενα αποτελεσματα αλλα στο 6ο refresh θα μας δειχνει
-//! οτι ολες οι κατηγοριες ειναι ανενεργες πραγμα που δεν ισχυει
-//? Solution 1: Εφαρμογή ενός μηχανισμού κράτησης (throttling) για τα refresh requests: καποια setTimeout
-//? Solution 2:Επιβεβαίωση ότι το αίτημα προς τον server ολοκληρώνεται προτού ξεκινήσετε τον επόμενο κύκλο του refresh : χρηση συναρτησης complete στο αιτημα ajax
-
 $(document).ready(function () {
   const showCheckCategoriesFormButton = document.getElementById(
     "show-check-categories-form"
@@ -15,9 +8,8 @@ $(document).ready(function () {
   );
 
   showCheckCategoriesFormButton.addEventListener("click", function () {
-    // Αλλάζετε το φόντο του overlay σε θολό χρώμα και το εμφανίζετε όταν εμφανίζεται η φόρμα
     const overlay = document.getElementById("overlay");
-    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)"; // Προσαρμόστε το χρώμα ανάλογα με τις ανάγκες σας
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
     overlay.style.display = "block";
     CheckCategoriesFormContainer.style.display = "block";
 
@@ -27,23 +19,16 @@ $(document).ready(function () {
 
   overlay.addEventListener("click", function () {
     document.getElementById("categoriesList").innerHTML = "";
-    // Κλείστε τη φόρμα και το overlay όταν γίνει κλικ στο overlay
     CheckCategoriesFormContainer.style.display = "none";
     overlay.style.display = "none";
   });
 
-  // Προσθήκη event listener στο κουμπί με id "submitCategories"
   $("#submitCategories").on("click", function () {
-    // Εδώ μπορείτε να εκτελέσετε τον κώδικα που θέλετε πριν το confirm
-    // Σε αυτό το σημείο, μπορείτε να ελέγξετε τις εισαγωγές ή να κάνετε άλλες ενέργειες
-    // Καλεί τη συνάρτηση confirmSelection όταν το κουμπί πατηθεί
     confirmSelection();
   });
 });
 
-// Συνάρτηση που επιβεβαιώνει τις επιλογές
 function confirmSelection() {
-  // Εδώ μπορείτε να τοποθετήσετε τον κώδικα που χρειάζεται για να επιβεβαιώσετε τις επιλογές
   var categoriesList = $(".category-checkbox");
   console.log(categoriesList);
   var activeCategories = [];
@@ -62,7 +47,6 @@ function confirmSelection() {
   console.log(activeCategories);
   console.log(inactiveCategories);
 
-  // Δημιουργία κειμένου που θα προβληθεί στο confirm box
   if (activeCategories.length > 0 && inactiveCategories.length > 0) {
     var confirmationText =
       "Είστε σίγουροι ότι θέλετε να ενεργοποιησετε τις κατηγορίες:\n";
@@ -103,11 +87,10 @@ function confirmSelection() {
     }
   }
 
-  // Εμφάνιση του confirm box με το προσαρμοσμένο κείμενο
   var confirmed = confirm(confirmationText);
 
   if (confirmed) {
-    // Εάν ο χρήστης πατήσει "ΟΚ", καλέστε το PHP για να επικυρώσετε τις επιλεγμένες κατηγορίες
+    // Εάν ο χρήστης πατήσει "ΟΚ" καλείται το PHP
     $.ajax({
       method: "POST",
       url: "../../PHP/Admin/confirmCategories.php",
@@ -116,7 +99,6 @@ function confirmSelection() {
         inactiveCategories: inactiveCategories,
       },
       success: function (response) {
-        // Επεξεργασία της απάντησης από τον διακομιστή (πιθανόν μήνυμα επικύρωσης)
         alert(response.message);
       },
       error: function (xhr, status, error) {
@@ -124,7 +106,7 @@ function confirmSelection() {
       },
     });
   } else {
-    // Εάν ο χρήστης πατήσει "Άκυρο", επαναφέρετε ή κάντε ό,τι χρειάζεται
+    // Εάν ο χρήστης πατήσει "Άκυρο", επαναφορά
     console.log("Οι κατηγορίες δεν επιβεβαιώθηκαν.");
   }
 }
@@ -134,7 +116,6 @@ function categoriesStatus() {
     method: "GET",
     url: "../../PHP/Admin/categoriesStatus.php",
     success: function (categoriesStatus) {
-      // Έλεγχος της κατάστασης και τσεκάρισμα των κουτιών
       for (var id in categoriesStatus) {
         if (categoriesStatus.hasOwnProperty(id)) {
           var isActive = categoriesStatus[id];

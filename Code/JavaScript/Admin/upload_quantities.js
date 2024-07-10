@@ -1,4 +1,3 @@
-//! Φτιαξιμο ετσι ωστε οταν κλεινει η φορμα να πηγαινει στις default τιμες (οπως εγινε δηλαδη και με την φορμα του upload data)
 $(document).ready(function () {
   document
     .getElementById("loadTypeQuantities")
@@ -22,17 +21,15 @@ $(document).ready(function () {
   );
 
   loadQuantitiesFormButton.addEventListener("click", function () {
-    // Αλλάζετε το φόντο του overlay σε θολό χρώμα και το εμφανίζετε όταν εμφανίζεται η φόρμα
     const overlay = document.getElementById("overlay");
-    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)"; // Προσαρμόστε το χρώμα ανάλογα με τις ανάγκες σας
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
     overlay.style.display = "block";
     loadQuantitiesFormContainer.style.display = "block";
     uploadQuantities();
   });
 
   overlay.addEventListener("click", function () {
-    // Κλείστε τη φόρμα και το overlay όταν γίνει κλικ στο overlay
-    //resetUploadForm();
+
     loadQuantitiesFormContainer.style.display = "none";
     overlay.style.display = "none";
   });

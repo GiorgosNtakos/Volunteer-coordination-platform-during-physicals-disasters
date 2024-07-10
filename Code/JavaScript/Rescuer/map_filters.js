@@ -1,4 +1,3 @@
-// map_filters.js
 import { map, polylineLayers, unassignedtaskMarkers, assignedtaskMarkers } from './map.js';
 
 const filters = {

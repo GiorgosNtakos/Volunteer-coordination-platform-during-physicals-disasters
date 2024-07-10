@@ -7,7 +7,7 @@ body, html {
 }
 
 main {
-    flex-grow: 1; /* Καταλαμβάνει τον υπόλοιπο διαθέσιμο χώρο */
+    flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,7 +18,7 @@ main {
 .form-container {
     width: 100%;
     max-width: 700px;
-    padding: 100px 20px 20px; /* Αύξηση του πάνω padding για αποφυγή επικάλυψης */
+    padding: 100px 20px 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: relative;
     border: 1px solid gold;
@@ -31,7 +31,7 @@ main {
     width: 120px;
     height: 120px;
     left: 50%;
-    top: -60px; /* Αύξηση του αποκεντρώματος ώστε να βρίσκεται εν μέρει εντός της φόρμας */
+    top: -60px;
     transform: translateX(-50%);
     border-radius: 50%;
     overflow: hidden;
@@ -84,7 +84,7 @@ main {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 25px;
-    padding-right: 40px; /* Προσθέστε χώρο για το εικονίδιο */
+    padding-right: 40px;
     margin-top: 10px;
     margin-bottom: 0;
 }
@@ -125,7 +125,7 @@ label {
     display: block;
     font-weight: bold;
     color: gold;
-    text-align: center; /* Center the label */
+    text-align: center;
 }
 
 @media (max-width: 480px) {

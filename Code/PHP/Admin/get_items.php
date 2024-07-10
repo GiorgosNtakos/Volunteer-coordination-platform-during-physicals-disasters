@@ -1,5 +1,4 @@
 <?php
-//! προσθηκη καποιου flag σε περιπτωση που δεν υπαρχει ορος στο searchTerm και δημιουργια νεου μηνυματος αν το flag εινα ενεργο
 header('Access-Control-Allow-Origin: http://127.0.0.1:5500');
 header('Content-Type: application/json');
 require '../Global/db_connect.php';
@@ -70,7 +69,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             error_log("MySQL prepare statement error: " . $conn->error);
         }
     
-        // Εκτύπωση του έτοιμου SQL query για επιβεβαίωση (μόνο για debugging, καλύτερα να αφαιρεθεί σε παραγωγικό περιβάλλον)
         error_log("Prepared statement: " . $sql);
         error_log("Bound parameters: " . implode(", ", $bindValues));
 
@@ -105,7 +103,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             $response = array("status" => "server_error" , "message" => "Σφάλμα κατά την ανάκτηση των αντικειμένων: " . $conn->error);
         }
     }else {
-        // Αν λείπουν πεδία
         http_response_code(400);
         $response = array("status" => "missing_400", "message" => "Λείπουν παράμετροι από το αίτημα GET.");
     }

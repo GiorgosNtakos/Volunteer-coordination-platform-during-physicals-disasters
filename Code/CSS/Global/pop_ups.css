@@ -1,18 +1,12 @@
-/* Επηρεάζει το κύριο στοιχείο του popup του Leaflet */
 .leaflet-popup-content-wrapper {
   background-color: #430063;
-  /* Μωβ χρώμα */
   color: gold;
-  /* Λευκό κείμενο για καλύτερη αντίθεση */
   border-radius: 15px;
-  /* Στρογγυλεμένες γωνίες */
   padding: 10px;
-  /* Εσοχή γύρω από το περιεχόμενο */
 }
 
 .leaflet-popup-tip {
   background-color: gold;
-  /* Μωβ χρώμα για την "ουρά" */
 }
 
 .popup-content {
@@ -22,7 +16,6 @@
 
 .popup-content button {
   background-color: gold;
-  /* Μωβ χρώμα για το κουμπί */
   color: black;
   padding: 10px 20px;
   border: none;
@@ -39,11 +32,8 @@
 
 .popup-content div:not(:last-child) {
   border-bottom: 1px solid #ccc;
-  /* Ανοιχτό γκρι χρώμα για τη γραμμή */
   padding-bottom: 8px;
-  /* Προσθήκη εσοχής στο κάτω μέρος για καλύτερη οπτική απόσταση */
   margin-bottom: 8px;
-  /* Προσθήκη απόστασης κάτω από το πεδίο */
 }
 
 .popup-content div:last-child {
@@ -65,7 +55,6 @@
   border-radius: 5px;
   cursor: pointer;
   border-radius: 25px;
-  /* Στρογγυλεμένες ακρές στο button */
 }
 
 .popup-button:hover {

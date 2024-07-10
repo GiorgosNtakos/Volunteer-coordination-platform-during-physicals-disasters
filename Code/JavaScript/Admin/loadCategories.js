@@ -4,14 +4,11 @@ function loadCategories(type, element, listen) {
     method: "GET",
     url: "../../PHP/Admin/getCategories.php",
     success: function (response) {
-      // Επεξεργασία της απάντησης από τον διακομιστή (πιθανόν JSON)
       var categories = response.categories;
 
-      // Προσθήκη των τσεκβοξ ή options για κάθε κατηγορία στη λίστα
       var categoryList = $(element);
 
       if (type === "select") {
-        // Άδειασμα της λίστας μόνο για το select
         categoryList.empty();
       }
 
@@ -49,7 +46,7 @@ function updateCategoryCheckboxesListeners() {
     checkbox.removeEventListener("change", handleCheckboxChange);
     checkbox.addEventListener("change", function () {
       handleCheckboxChange();
-      updateItemsBasedOnCategoryAndSearch(); // Νέα συνάρτηση που θα φτιάξουμε
+      updateItemsBasedOnCategoryAndSearch();
     });
   });
 }
@@ -57,13 +54,11 @@ function updateCategoryCheckboxesListeners() {
 function handleCheckboxChange() {
   console.log("Checkbox value:", this.value);
   var tagsInput = document.querySelector(".tags-input");
-  // Ελέγχουμε εάν το checkbox είναι επιλεγμένο ή όχι
+  // Αν το checkbox είναι επιλεγμένο ή όχι
   if (this.checked) {
-    // Δημιουργούμε μια νέα ετικέτα
     var tag = createTag(this.value);
     tagsInput.appendChild(tag);
   } else {
-    // Αναζητούμε και αφαιρούμε την αντίστοιχη ετικέτα
     var tag = tagsInput.querySelector(`.tag[data-value="${this.value}"]`);
     if (tag) {
       tagsInput.removeChild(tag);
@@ -80,7 +75,7 @@ function createTag(value) {
   var i = document.createElement("i");
   i.className = "fas fa-times";
   i.onclick = function (e) {
-    tagClicked(e, span); // Περνάμε το event object και το span ως όρισμα
+    tagClicked(e, span);
   };
   span.appendChild(i);
   return span;
@@ -94,7 +89,6 @@ function tagClicked(e, span) {
 
 function removeTag(tag) {
   var value = tag.getAttribute("data-value");
-  // Ο ενημερωμένος selector τώρα περιορίζει την αναζήτηση μόνο στα checkboxes που σχετίζονται με tags
   var checkbox = document.querySelector(
     `.category-checkbox-filter[value="${value}"]`
   );
@@ -112,11 +106,9 @@ function updatePlaceholderText() {
   );
   var tagsInput = document.querySelector(".tags-input");
 
-  // Καθαρίζουμε το tags-input div
   tagsInput.innerHTML = "";
 
   if (selectedCategories.length > 0) {
-    // Δημιουργούμε και προσθέτουμε tags
     selectedCategories.forEach((checkbox) => {
       var tag = createTag(checkbox.value);
       tagsInput.appendChild(tag);
@@ -124,7 +116,6 @@ function updatePlaceholderText() {
   } else if (selectedCategories.length === checkboxes.length) {
     tagsInput.textContent = "Επιλέχθηκαν όλες οι κατηγορίες";
   } else {
-    // Προσθέτουμε το αρχικό κείμενο ως placeholder
     tagsInput.textContent = "Επιλογή Ειδών Βάση Κατηγορίας";
   }
 }

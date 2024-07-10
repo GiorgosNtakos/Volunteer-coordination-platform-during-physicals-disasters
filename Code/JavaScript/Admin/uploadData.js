@@ -1,5 +1,3 @@
-// * CHANGE THE NAME OF FILE AFTER FINISHED
-
 $(document).ready(function () {
   document.getElementById("loadType").addEventListener("change", function () {
     var urlSection = document.getElementById("urlSection");
@@ -22,16 +20,14 @@ $(document).ready(function () {
   const loadDataFormButton = document.getElementById("show-load-data-form");
 
   loadDataFormButton.addEventListener("click", function () {
-    // Αλλάζετε το φόντο του overlay σε θολό χρώμα και το εμφανίζετε όταν εμφανίζεται η φόρμα
     const overlay = document.getElementById("overlay");
-    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)"; // Προσαρμόστε το χρώμα ανάλογα με τις ανάγκες σας
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
     overlay.style.display = "block";
     loadDataFormContainer.style.display = "block";
     uploadDatas();
   });
 
   overlay.addEventListener("click", function () {
-    // Κλείστε τη φόρμα και το overlay όταν γίνει κλικ στο overlay
     resetUploadForm();
     loadDataFormContainer.style.display = "none";
     overlay.style.display = "none";
@@ -55,7 +51,7 @@ function uploadDatas() {
 
     $.ajax({
       method: "POST",
-      url: "../../PHP/Admin/uploadData.php", // Αντικαταστήστε με το πραγματικό όνομα του PHP αρχείου
+      url: "../../PHP/Admin/uploadData.php",
       data: formData,
       contentType: false,
       processData: false,
@@ -73,7 +69,6 @@ function uploadDatas() {
 
 function displayFileName(id) {
   document.getElementById(id).addEventListener("change", function (event) {
-    // Navigating to the parent of the input and then finding the .filename span in the sibling label
     var filenameSpan = this.parentNode.querySelector("label .filename");
     if (filenameSpan && this.files && this.files.length > 0) {
       filenameSpan.textContent = this.files[0].name;

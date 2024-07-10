@@ -1,7 +1,7 @@
 body, html {
     height: 100%; /* Χρειάζεται για να λειτουργήσει σωστά το grid layout */
     margin: 0;
-    overflow: hidden; /* Αποκρύπτει την κύλιση σε όλη τη σελίδα */
+    overflow: hidden;
 }
 
 header {
@@ -27,54 +27,54 @@ main {
 }
 
 #vehicleCargoDetails {
-    position: fixed; /* ή absolute αν θέλετε να είναι σε σχέση με έναν γονέα container */
-    top: 50px; /* ή άλλη τιμή ανάλογα με τη θέση που θέλετε */
-    right: 50px; /* ή άλλη τιμή ανάλογα με τη θέση που θέλετε */
-    width: 300px; /* Προαιρετικά, ανάλογα με το περιεχόμενο */
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    width: 300px;
     background-color: #430063;
     color: gold;
     border-radius: 15px;
     padding: 10px;
-    display: none; /* Αρχικά κρυμμένο */
-    z-index: 1000; /* Βεβαιωθείτε ότι είναι υψηλότερο από το z-index του χάρτη */
+    display: none; 
+    z-index: 1000;
 }
 
 #cargoList {
-    max-height: 250px; /* Ορίζετε το μέγιστο ύψος που επιθυμείτε */
-    overflow-y: auto; /* Ενεργοποιείτε κύλιση κατακόρυφα αν ο χώρος δεν επαρκεί */
-    margin-bottom: 20px; /* Δίνετε επιπλέον χώρο κάτω από τη λίστα */
+    max-height: 250px; 
+    overflow-y: auto;
+    margin-bottom: 20px;
 }
 
 .cargo-item {
-    border-bottom: 1px solid #ddd; /* Γραμμή για το διαχωρισμό των στοιχείων */
-    padding: 5px 0; /* Προσθέτει μικρό κενό για κάθε στοιχείο */
+    border-bottom: 1px solid #ddd;
+    padding: 5px 0;
     display: flex;
-    justify-content: space-between; /* Διαχωρίζει τις στήλες Είδος και Ποσότητα */
+    justify-content: space-between;
 }
 
 .cargo-item:last-child {
-    border-bottom: none; /* Αφαιρεί τη γραμμή από το τελευταίο στοιχείο */
+    border-bottom: none;
 }
 
 .cargo-item div {
-    flex: 1; /* Κάθε στήλη καταλαμβάνει ίσο χώρο */
-    text-align: center; /* Κεντραρισμένο κείμενο */
+    flex: 1;
+    text-align: center;
 }
 
 .cargo-item div:first-child {
-    border-right: 1px solid #ddd; /* Καθέτη γραμμή μεταξύ των στηλών */
+    border-right: 1px solid #ddd;
     flex: 1;
 }
 
 .cargo-header {
-    font-weight: bold; /* Δίνει έμφαση στις επικεφαλίδες */
+    font-weight: bold;
     display: flex;
-    justify-content: space-between; /* Διασφαλίζει την ίδια διάταξη με τα στοιχεία */
-    border-bottom: 1px solid #ddd; /* Προαιρετικό, γραμμή κάτω από τις επικεφαλίδες */
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd
 }
 
 .cargo-header div:first-child, .cargo-item div:first-child {
-    border-right: 1px solid #ddd; /* Προσθήκη καθέτης γραμμής διαχωρισμού */
+    border-right: 1px solid #ddd;
 }
 
 .cargo-header, .cargo-item {
@@ -83,50 +83,49 @@ main {
 }
 
 .cargo-header div, .cargo-item div {
-    flex: 1; /* Κάθε στήλη καταλαμβάνει ίσο χώρο */
-    text-align: center; /* Κεντραρισμένο κείμενο */
+    flex: 1;
+    text-align: center;
 }
 
 .cargo-details {
-    border-top: 1px solid #ddd; /* Καθέτη γραμμή κάτω από τον τίτλο Φορτίο Οχήματος */
+    border-top: 1px solid #ddd;
 }
 
 .cargo-title {
-    border-bottom: 1px solid #ddd; /* Καθέτη γραμμή κάτω από τον τίτλο */
+    border-bottom: 1px solid #ddd;
     font-size: 35px;
 
 }
 
-/* Προσαρμογή του στύλ της μπάρας κύλισης για το WebKit (Chrome, Safari) */
 ::-webkit-scrollbar {
-    width: 10px; /* Πλάτος της μπάρας κύλισης */
+    width: 10px; 
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Χρώμα του φόντου της μπάρας κύλισης */
+    background: #f1f1f1; /* Χρώμα του track */
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #888; /* Χρώμα της μπάρας κύλισης */
+    background: #888; /* Χρώμα της λαβής */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Χρώμα της μπάρας κύλισης κατά τον κατάδειγμα */
+    background: #555;
 }
 
-/* Προσαρμογή του στύλ της μπάρας κύλισης για τα υπόλοιπα προγράμματα περιήγησης */
+
 scrollbar {
-    width: 10px; /* Πλάτος της μπάρας κύλισης */
+    width: 10px;
 }
 
 scrollbar-track {
-    background: #f1f1f1; /* Χρώμα του φόντου της μπάρας κύλισης */
+    background: #f1f1f1;
 }
 
 scrollbar-thumb {
-    background: #888; /* Χρώμα της μπάρας κύλισης */
+    background: #888; 
 }
 
 scrollbar-thumb:hover {
-    background: #555; /* Χρώμα της μπάρας κύλισης κατά τον κατάδειγμα */
+    background: #555; 
 }

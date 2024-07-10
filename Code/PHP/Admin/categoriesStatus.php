@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     // Κατάσταση κατηγοριών
     $categoriesStatus = array();
 
-    // Επιλέξτε τα δεδομένα από τον πίνακα categories
+    // Επιλέγουμε τα δεδομένα από τον πίνακα categories
     $stmt = $conn->prepare("SELECT id, active FROM categories");
     $stmt->execute();
     $result = $stmt->get_result();

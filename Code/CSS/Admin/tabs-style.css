@@ -1,16 +1,14 @@
-/* Style the tabs */
 .tab {
-  display: flex; /* Align tabs side by side */
-  justify-content: start; /* Align tabs to the start */
-  background-color: #430063; /* Match container background */
-  border-bottom: 2px solid solid gold; /* Optional: adds a line below the tabs */
+  display: flex;
+  justify-content: start;
+  background-color: #430063;
+  border-bottom: 2px solid solid gold;
   padding: 0;
   margin: 0;
 }
 
-/* Style the buttons inside the tab */
 .tab button {
-  background-color: #430063; /* Match container background */
+  background-color: #430063;
   border: none;
   outline: none;
   cursor: pointer;
@@ -18,25 +16,22 @@
   border-radius: 8px;
   padding: 10px 20px;
   font-size: 16px;
-  color: gold; /* Matched to the container's theme */
+  color: gold;
   border: 1px solid black;
 }
 
-/* Change background color on hover */
 .tab button:hover {
-  background-color: #5c007a; /* Slightly lighter purple for hover effect */
+  background-color: #5c007a;
 }
 
-/* Style for the active tab button */
 .tab button.active {
-  background-color: #5c007a; /* Slightly lighter purple for active tab */
-  border-bottom: none; /* Ensures no white line below active tab */
+  background-color: #5c007a;
+  border-bottom: none; 
 }
 
-/* Style the tab content */
 .tabcontent {
   display: none;
   padding: 20px;
-  background-color: #430063; /* Match container background */
-  color: white; /* Text color for the content */
+  background-color: #430063;
+  color: white;
 }

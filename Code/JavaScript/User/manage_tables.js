@@ -11,7 +11,6 @@ function showHistoryRequests(){
 
     historyRequestButton.addEventListener("click", function() {
         if (!showHistoryRequest) {
-            // Κρύψε τα στοιχεία για την αναζήτηση και εμφάνιση αντικειμένων
             searchArea.style.display = 'none';
             categoryFilter.style.display = 'none';
             itemsList.style.display = 'none';
@@ -27,11 +26,9 @@ function showHistoryRequests(){
 
             getRequests();
 
-            // Αλλαγή του κειμένου του κουμπιού
             historyRequestButton.textContent = "Προβολή Διαθέσιμων Αντικειμένων";
             showHistoryRequest = true;
         } else {
-            // Εμφάνισε τα στοιχεία για την αναζήτηση και εμφάνιση αντικειμένων
             searchArea.style.display = '';
             categoryFilter.style.display = '';
             itemsList.style.display = '';
@@ -45,7 +42,6 @@ function showHistoryRequests(){
                 header.style.display = 'none';
             });
 
-            // Επαναφορά του κειμένου του κουμπιού
             historyRequestButton.textContent = "Ιστορικό Αιτήσεων";
             showHistoryRequest = false;
         }
@@ -76,11 +72,9 @@ function showHistoryOffers(){
 
           getOffers();
 
-          // Αλλαγή του κειμένου του κουμπιού
           historyOffersButton.textContent = "Προβολή Διαθέσιμων Ανακοινώσεων";
           showHistoryOffers = true;
       } else {
-          // Εμφάνισε τα στοιχεία για την αναζήτηση και εμφάνιση αντικειμένων
           AnnouncementList.style.display = '';
 
           historytables.forEach(function(table){
@@ -91,7 +85,6 @@ function showHistoryOffers(){
               header.style.display = 'none';
           });
 
-          // Επαναφορά του κειμένου του κουμπιού
           historyOffersButton.textContent = "Ιστορικό των Προσφορών σας";
           showHistoryOffers = false;
       }
@@ -116,27 +109,22 @@ function getRequests(){
                     requests.forEach(function(request){
                         var row = document.createElement("tr");;
 
-                        // Αίτηση Προιοντος
                         var requestCell = document.createElement("td");
                         requestCell.textContent ="Αίτηση για " + request.name;
                         row.appendChild(requestCell);
 
-                        // Κατασταση Αιτησης
                         var statusCell = document.createElement("td");
                         statusCell.textContent = request.status;
                         row.appendChild(statusCell);
 
-                        // Ατομα
                         var populationCell = document.createElement("td");
                         populationCell.textContent = (request.quantity)/2;
                         row.appendChild(populationCell);
 
-                        // Ημερομηνια Εισαγωγης
                         var importDateCell = document.createElement("td");
                         importDateCell.textContent = new Date(request.created_at).toLocaleDateString();;
                         row.appendChild(importDateCell);
 
-                        // Ημερομηνια Ολοκλήρωσης/Εγκρισης
                         var completeDateCell = document.createElement("td");
                         completeDateCell.textContent = new Date(request.updated_at).toLocaleDateString();
                         row.appendChild(completeDateCell);
@@ -202,27 +190,22 @@ function getOffers(){
                   offers.forEach(function(offer){
                       var row = document.createElement("tr");;
 
-                      // Αίτηση Προιοντος
                       var offerCell = document.createElement("td");
                       offerCell.textContent ="Προσφορά για " + offer.name;
                       row.appendChild(offerCell);
 
-                      // Κατασταση Αιτησης
                       var statusCell = document.createElement("td");
                       statusCell.textContent = offer.status;
                       row.appendChild(statusCell);
 
-                      // Ατομα
                       var populationCell = document.createElement("td");
                       populationCell.textContent = offer.quantity;
                       row.appendChild(populationCell);
 
-                      // Ημερομηνια Εισαγωγης
                       var importDateCell = document.createElement("td");
                       importDateCell.textContent = new Date(offer.created_at).toLocaleDateString();
                       row.appendChild(importDateCell);
 
-                      // Ημερομηνια Ολοκλήρωσης/Εγκρισης
                       var completeDateCell = document.createElement("td");
                       completeDateCell.textContent = new Date(offer.updated_at).toLocaleDateString();
                       row.appendChild(completeDateCell);
@@ -239,7 +222,6 @@ function getOffers(){
                         deleteButton.style.marginRight = "20px";
                         deleteButton.addEventListener("click", function () {
                             var currentRow = $(this).closest("tr");
-                            // Καλείτε τη συνάρτηση για διαγραφή του προϊόντος με το item.name
                             cancelOffer(offer.id, currentRow);
                           });
                           ChoiseButtonCell.appendChild(deleteButton);

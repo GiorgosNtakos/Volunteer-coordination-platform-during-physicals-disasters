@@ -1,12 +1,9 @@
 <?php
-//* CHANGE THE NAME OF FILE AFTER FINISHED
-
 header('Access-Control-Allow-Origin: http://127.0.0.1:5500');
 header('Content-Type: application/json');
 require '../Global/db_connect.php';
 $conn->set_charset("utf8");
 
-// Έλεγχος για την ύπαρξη των δεδομένων από το FormData
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
   if (isset($_POST['loadType'])) {
@@ -45,11 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
     }
 
-    // Ανάλυση των JSON δεδομένων
     $data = json_decode($jsonData, true);
     $forbiddenCategories = array(10, 13, 9, 8, 15, 11, 39);
 
-    // Εισαγωγή δεδομένων στη βάση
     foreach ($data['items'] as $item) {
         $item_id = $item['id'];
         $category_id = $item['category'];
@@ -105,7 +100,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $response = array("status" => "data_created", "message" => "Τα δεδομένα έχουν αποθηκευτεί με επιτυχία στη βάση δεδομένων.", "data" => $allData);
 
 } else {
-    // Μήνυμα λάθους αν τα αναμενόμενα δεδομένα δεν υπάρχουν
     http_response_code(400);
     $response = array("status" => "missing_400", "message" => "Λείπουν παράμετροι από το αίτημα POST.");
  }

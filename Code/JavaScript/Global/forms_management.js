@@ -18,10 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
       var number = $("#number").val();
       const town = "Πάτρα";
 
-      // Ελέγχουμε το όνομα
       var trimmedFullName = full_name.trim();
 
-      // Ελληνικοί χαρακτήρες και έγκυρη μορφή "Όνομα Επώνυμο"
       var greekRegex = /^[Α-ΩΆ-Ώα-ωά-όώΐϊΰύ\s]*$/u;
       var nameFormatRegex = /^[Α-ΩΆ-Ώα-ωά-όώΐϊΰύ]+\s[Α-ΩΆ-Ώα-ωά-όώΐϊΰύ]+$/u;
 
@@ -99,7 +97,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     }
 
-      //Street
 
       if (street.trim() === "") {
         showMessage("error-message", "Συμπληρώστε το πεδίο Οδός.", "#street");
@@ -126,7 +123,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (!/^\d+$/.test(number)) {
         showMessage("error-message", "Λάθος αριθμός διεύθυνσης.", "#number");
-        // Επαναφέρουμε την τιμή στην προκαθορισμένη μορφή
         $("#number").val('');
         return;
       }
@@ -142,15 +138,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// ! Δεν το ενεργοποιω ακομα για να μπορω να δουλευω το live server
-/*if (
-  location.protocol !== "https:" ||
-  window.location.hostname !== "localhost"
-) {
-  location.replace(
-    `https://${location.hostname}${location.pathname}${location.search}`
-  );
-}*/
 
 function createForm(full_name, phone, street, number, town) {
   console.log("Create Rescuer - Full Name:", full_name);
@@ -159,18 +146,13 @@ function createForm(full_name, phone, street, number, town) {
   console.log("Create Rescuer - Number:", number);
   console.log("Create Rescuer - Town:", town);
 
-  //const transliterate = require('../../../node_modules/transliteration');
 
-  // Σχηματίστε τη διεύθυνση από τα στοιχεία της φόρμας
   var address = street + " " + number + ", " + town;
 
-  // Καλέστε τη συνάρτηση για να λάβετε τις συντεταγμένες από το OpenStreetMap
   getCoordinatesFromAddress(address)
     .then((coordinates) => {
-      // Προετοιμασία των δεδομένων για αποστολή με τη χρήση AJAX
     if(window.location.href === "http://localhost/Collaborative-product-search-platform-of-wide-consumption/Code/HTML/Admin/form_completion.html"){
       if (checkActiveForm()) {
-        // Είμαστε στη φόρμα του διασώστη, συμπεριλαμβάνουμε όλα τα πεδία
         formData = $("#Global_form").serialize();
       } else {
         // Είμαστε στη φόρμα του οχήματος, αποκλείουμε το πεδίο τηλεφώνου από τη σειριοποίηση
@@ -191,7 +173,6 @@ function createForm(full_name, phone, street, number, town) {
       if (window.location.href === "http://localhost/Collaborative-product-search-platform-of-wide-consumption/Code/HTML/Admin/form_completion.html" && checkActiveForm()) {
 
 
-        //var englishFullName = transliterate(full_name);
         var username = generateUsername(full_name);
         username = convertToEnglishChars(username);
         formData += "&username=" + username;
@@ -211,7 +192,6 @@ function createForm(full_name, phone, street, number, town) {
         success: function (response) {
           if (response.status === "created") {
             showMessage("success-message", response.message, "#full_name");
-            // Εδώ μπορείτε να προσθέσετε άλλες ενέργειες μετά την επιτυχή δημιουργία
           } else {
             showMessage(
               "error-message",
@@ -251,7 +231,6 @@ function createForm(full_name, phone, street, number, town) {
       success: function (response) {
         if (response.status === "created") {
           showMessage("success-message", response.message, "#full_name");
-          // Εδώ μπορείτε να προσθέσετε άλλες ενέργειες μετά την επιτυχή δημιουργία
         } else {
           showMessage(
             "error-message",
@@ -293,7 +272,6 @@ function createForm(full_name, phone, street, number, town) {
             showMessage("success-message", response.message, "#full_name");
             window.location.href =
             "http://localhost/Collaborative-product-search-platform-of-wide-consumption/Code/HTML/Global/index_page.html";
-            // Εδώ μπορείτε να προσθέσετε άλλες ενέργειες μετά την επιτυχή δημιουργία
           } else {
             showMessage(
               "error-message",
@@ -334,7 +312,6 @@ function createForm(full_name, phone, street, number, town) {
     });
 }
 
-// Συνάρτηση για τη γεωκωδικοποίηση της διεύθυνσης χρησιμοποιώντας το OpenStreetMap
 function getCoordinatesFromAddress(address) {
   const apiUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
     address
@@ -360,7 +337,6 @@ function getCoordinatesFromAddress(address) {
 }
 
 function generateUsername(fullName) {
-  // Μετατροπή του ονόματος σε πεζούς χαρακτήρες και αφαίρεση των κενών
   return fullName.replace(/\s/g, "_");
 }
 
@@ -372,7 +348,7 @@ function generatePassword() {
   var allChars = uppercase + numbers + specialChars;
 
   var password = "";
-  var length = 8; // Μπορείτε να προσαρμόσετε το μήκος του κωδικού πρόσβασης
+  var length = 8;
 
   for (var i = 0; i < length; i++) {
     password += allChars.charAt(Math.floor(Math.random() * allChars.length));
@@ -382,10 +358,8 @@ function generatePassword() {
 }
 
 function validatePhoneNumber(phone) {
-  // Κανονική έκφραση για επαλήθευση του τηλεφώνου
   var phoneRegex = /^\+30\s69\d{8}$/;
 
-  // Εάν ο αριθμός τηλεφώνου πληροί τα κριτήρια
   return phoneRegex.test(phone);
 }
 
@@ -458,21 +432,19 @@ function ChangeForms(){
       numberInput.value = "";
       phoneInput.value = "+30 "; 
 
-      // Έλεγχος για το αν τα πεδία του διασώστη είναι εμφανή
       if (toggleFormButton.textContent === "Φόρμα Προσθήκης Νέου Οχήματος") {
-          // Αλλαγή σε φόρμα οχήματος
-          rescuerFields.style.display = "none"; // Απόκρυψη των πεδίων διασώστη
-          fullNameLabel.textContent = "Όνομα Οχήματος:"; // Επιστροφή στην αρχική ετικέτα
-          fullNameInput.placeholder = "Όνομα Οχήματος"; // Επιστροφή στο αρχικό placeholder
-          submitFormButton.textContent = "Προσθήκη Νέου Οχήματος"; // Επιστροφή στο αρχικό κείμενο κουμπιού υποβολής
-          toggleFormButton.textContent = "Φόρμα Προσθήκης Νέου Διασώστη"; // Επιστροφή στο αρχικό κείμενο κουμπιού εναλλαγής
+          rescuerFields.style.display = "none";
+          fullNameLabel.textContent = "Όνομα Οχήματος:";
+          fullNameInput.placeholder = "Όνομα Οχήματος";
+          submitFormButton.textContent = "Προσθήκη Νέου Οχήματος";
+          toggleFormButton.textContent = "Φόρμα Προσθήκης Νέου Διασώστη";
 
       } else {
-        rescuerFields.style.display = "block"; // Εμφάνιση των πεδίων διασώστη
-        fullNameLabel.textContent = "Ονομ/νυμο:"; // Αλλαγή ετικέτας
-        fullNameInput.placeholder = "Ονομ/νυμο"; // Αλλαγή placeholder
-        submitFormButton.textContent = "Δημιουργία Λογαριασμού Διασώστη"; // Αλλαγή κειμένου κουμπιού υποβολής
-        toggleFormButton.textContent = "Φόρμα Προσθήκης Νέου Οχήματος"; // Αλλαγή κειμένου κουμπιού εναλλαγής
+        rescuerFields.style.display = "block";
+        fullNameLabel.textContent = "Ονομ/νυμο:";
+        fullNameInput.placeholder = "Ονομ/νυμο";
+        submitFormButton.textContent = "Δημιουργία Λογαριασμού Διασώστη";
+        toggleFormButton.textContent = "Φόρμα Προσθήκης Νέου Οχήματος";
       }
       });
   }

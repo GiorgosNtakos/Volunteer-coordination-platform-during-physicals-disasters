@@ -10,7 +10,7 @@
   }
   
   .tag {
-    display: inline-block; /* ώστε να μην πιάνουν όλο το πλάτος και να μπορούν να κάνουν scroll */
+    display: inline-block;
     margin-right: 5px;
     background-color: #5a197db9;
     color: gold;
@@ -45,9 +45,9 @@
     border: 1px solid #ccc;
     background: white;
     z-index: 100;
-    max-height: 300px;  /* ή όποιο ύψος επιθυμείς */
-    overflow-y: auto;  /* ενεργοποιεί το κάθετο scroll */
-    overflow-x: hidden;  /* κρύβει το οριζόντιο scroll αν δεν είναι απαραίτητο */
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
   
   .custom-dropdown div {
@@ -66,54 +66,50 @@
   }
   
   .category-checkbox-filter:checked {
-    /* Προσθέστε τα επιθυμητά στυλ εδώ, π.χ.: */
-    accent-color: #9900ffb9; /* Αλλάξτε το χρώμα του checkbox */
+    accent-color: #9900ffb9;
   }
   
   .category-checkbox-filter:checked + label {
-    color: #9900ffb9; /* Χρώμα όταν το checkbox είναι επιλεγμένο */
+    color: #9900ffb9;
   }
 
   .custom-dropdown::-webkit-scrollbar {
-    width: 10px; /* Πλάτος του scrollbar */
+    width: 10px; 
 }
 
 .custom-dropdown::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Χρώμα του track (της διαδρομής που κινείται ο scrollbar) */
+    background: #f1f1f1; /* Χρώμα του track */
 }
 
 .custom-dropdown::-webkit-scrollbar-thumb {
-    background: #888; /* Χρώμα της λαβής του scrollbar */
+    background: #888; /* Χρώμα της λαβής */
 }
 
 .custom-dropdown::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Χρώμα της λαβής όταν το ποντίκι περνάει πάνω της */
+    background: #555; 
 }
 
-/* Βασικό στυλ για όλα τα <select> elements σε όλες τις φόρμες */
 select {
-  width: 100%; /* Πλήρης πλάτος στο περιβάλλον του container */
-  padding: 8px 12px; /* Προσθήκη padding για καλύτερο look και αίσθηση */
-  margin: 8px 0; /* Κάποιο margin γύρω από το dropdown */
-  box-sizing: border-box; /* Βοηθάει το width να παραμένει σωστό ακόμη και με padding */
-  border: 1px solid #ccc; /* Προσθήκη ενός στοιχείου περιμέτρου */
-  border-radius: 4px; /* Στρογγυλεμένες γωνίες */
-  background-color: white; /* Θέτει το χρώμα φόντου σε λευκό */
-  cursor: pointer; /* Αλλάζει το δείκτη σε pointer όταν περνά πάνω */
+  width: 100%; 
+  padding: 8px 12px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
 }
 
 select option {
-  padding: 8px 10px; /* Προσθήκη ελαφριάς απόστασης για καλύτερη αισθητική */
-  border-bottom: 1px solid #ccc; /* Διαχωριστική γραμμή ανάμεσα στα items */
+  padding: 8px 10px;
+  border-bottom: 1px solid #ccc;
 }
 
-/* Στυλ για τα options όταν το ποντίκι βρίσκεται πάνω τους */
 select option:hover {
-  background-color: #800080; /* Μωβ φόντο */
-  color: #FFD700; /* Χρυσά γράμματα */
+  background-color: #800080;
+  color: #FFD700;
 }
 
-/* Στυλ για το scrollbar εντός των select elements */
 select::-webkit-scrollbar {
   width: 10px;
 }

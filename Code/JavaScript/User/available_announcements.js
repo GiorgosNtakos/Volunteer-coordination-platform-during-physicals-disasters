@@ -65,17 +65,15 @@ function getAvailableAnnouncements() {
                     offerButton.innerHTML = "<i class='fas' id = 'offerIcon'>&#xf06b;</i>";
                     offerButton.style.marginRight = "20px";
                     offerButton.addEventListener("click", function () {
-                        overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)"; // Προσαρμόστε το χρώμα ανάλογα με τις ανάγκες σας
+                        overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
                         overlay.style.display = "block";
                         offerFormContainer.style.display = "block";
 
                         loadAnnouncementItems("#item_name",announcement.announcement_id)
 
-                        //offerAnnouncement(announcement.announcement_id, currentRow);
                       });
 
                       overlay.addEventListener("click", function () {
-                        // Κλείστε τη φόρμα και το overlay όταν γίνει κλικ στο overlay
                         offerFormContainer.style.display = "none";
                         overlay.style.display = "none";
                       });

@@ -1,5 +1,3 @@
-//! NA FTIAKSO SWSTA RA RESETS STO CARGO PAGE ME TA FILTRA
-
 document.addEventListener("DOMContentLoaded", function () {
   var numberPattern = /^[1-9]\d*$/;
   const unloadButton = document.getElementById("unload-vehicle-cargo");

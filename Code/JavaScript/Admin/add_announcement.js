@@ -25,12 +25,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   showAddannouncementFormButton.addEventListener("click", function () {
     console.log("Το κουμπί προσθηκη ανακοινωσης πατήθηκε!");
-    // Αλλάζει το φόντο του overlay σε θολό χρώμα όταν εμφανίζεται η φόρμα
     const overlay = document.getElementById("overlay");
     overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
     overlay.style.display = "block";
     addannouncementFormContainer.style.display = "block";  
-    // Πέρνει διναμικά το κουμπί για να μπορεσει να προσθεσει event listener στην σειρα 54
     addannouncementForm = document.getElementById(
       "add-announcement-form"
     );
@@ -38,15 +36,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   overlay.addEventListener("click", function () {
-    // Κλείνει τη φόρμα όταν γίνει κλικ στο overlay
     addannouncementFormContainer.style.display = "none";
     overlay.style.display = "none";
   });
 
   addannouncementForm.addEventListener("submit", function (event) {
-    event.preventDefault(); // Αποτρέψτε την προεπιλεγμένη υποβολή φόρμας
+    event.preventDefault();
 
-    // Δημιουργία αντικειμένου FormData για τη συλλογή δεδομένων φόρμας
     var formData = new FormData(addannouncementForm);
 
     var item_name = document.getElementById("item_name").value;
@@ -58,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "Παρακαλώ εισάγεται κάποια ποσότητα.",
         "#content"
       );
-      return; // Σταματά την εκτέλεση της function
+      return;
     }
 
     if (!numberPattern.test(content)) {
@@ -91,23 +87,23 @@ document.addEventListener("DOMContentLoaded", function () {
       if (
         itemValues[i].value.trim() === ""
       ) {
-        event.preventDefault(); // Αποτροπή υποβολής της φόρμας
+        event.preventDefault();
         showMessage(
           "error-message",
           "Παρακαλώ συμπληρώστε όλα τα πεδία ποσοτήτων.",
           "#content"
         );
-        return; // Διακοπή της εκτέλεσης της συνάρτησης
+        return;
       }
 
       if (!numberPattern.test(itemValues[i].value)) {
-        event.preventDefault(); // Αποτροπή υποβολής της φόρμας
+        event.preventDefault();
         showMessage(
           "error-message",
           "Οι ποσότητες πρέπει να είναι ακέραιες θετικές τιμές.",
           "#content"
         );
-        return; // Διακοπή της εκτέλεσης της συνάρτησης
+        return;
       }
     }
 
@@ -157,7 +153,7 @@ function loadItems(elementClass) {
       var itemsList = document.querySelectorAll('.' + elementClass);
       
       itemsList.forEach(function (list) {
-        $(list).empty(); // Καθαρίζει τα προηγούμενα στοιχεία από τη λίστα
+        $(list).empty();
 
         items.forEach(function (item) {
           itemsMapping[item.name] = item.id;
@@ -174,7 +170,6 @@ function loadItems(elementClass) {
 }
 
 
-// Eισαγωγή νέας ανακοίνωσης στη βάση δεδομένων
 function addAnnouncement(form) {
 
   $.ajax({
@@ -196,7 +191,6 @@ function addAnnouncement(form) {
       }
     },
     error: function (response) {
-      // Χειριστείτε εδώ τα σφάλματα
       var errorResponse = JSON.parse(response.responseText);
 
       if (errorResponse.status === "wrong_method_405") {

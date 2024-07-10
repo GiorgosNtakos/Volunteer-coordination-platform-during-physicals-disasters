@@ -1,7 +1,7 @@
 let statsChart;
 let currentChartType = 'bar'
 
-// Initialize with default date range
+// Αρχικό εύρος ημερομηνιών
 document.addEventListener('DOMContentLoaded', function() {
     const today = new Date();
     document.getElementById('end-date').value = formatDate(today);
@@ -46,16 +46,16 @@ function updateStatistics(chartType) {
                     borderColor = 'rgba(67, 0, 99, 1)'; // Μωβ για το ραβδόγραμμα
                 } else {
                     backgroundColor = [
-                        'rgba(255, 0, 0, 1)', // Κόκκινο για Νέα Αιτήματα
-                        'rgba(255, 255, 0, 1)', // Κίτρινο για Νέες Προσφορές
-                        'rgba(0, 255, 0, 1)', // Πράσινο για Ολοκληρωμένα Αιτήματα
-                        'rgba(0, 191, 255, 1)' // Γαλάζιο για Ολοκληρωμένες Προσφορές
+                        'rgba(255, 0, 0, 1)', // Κόκκινο για τα Νέα Αιτήματα
+                        'rgba(255, 255, 0, 1)', // Κίτρινο για τις Νέες Προσφορές
+                        'rgba(0, 255, 0, 1)', // Πράσινο για τα Ολοκληρωμένα Αιτήματα
+                        'rgba(0, 191, 255, 1)' // Γαλάζιο για τις Ολοκληρωμένες Προσφορές
                     ];
                     borderColor = [
-                        'rgba(255, 0, 0, 1)', // Κόκκινο για Νέα Αιτήματα
-                        'rgba(255, 255, 0, 1)', // Κίτρινο για Νέες Προσφορές
-                        'rgba(0, 255, 0, 1)', // Πράσινο για Ολοκληρωμένα Αιτήματα
-                        'rgba(0, 191, 255, 1)' // Γαλάζιο για Ολοκληρωμένες Προσφορές
+                        'rgba(255, 0, 0, 1)', // Κόκκινο για τα Νέα Αιτήματα
+                        'rgba(255, 255, 0, 1)', // Κίτρινο για τις Νέες Προσφορές
+                        'rgba(0, 255, 0, 1)', // Πράσινο για τα Ολοκληρωμένα Αιτήματα
+                        'rgba(0, 191, 255, 1)' // Γαλάζιο για τις Ολοκληρωμένες Προσφορές
                     ];
                 }
 
@@ -75,10 +75,10 @@ function updateStatistics(chartType) {
                     scales: {
                         y: {
                             beginAtZero: true,
-                            display: chartType === 'bar' // Μόνο όταν είναι bar να εμφανίζεται ο άξονας
+                            display: chartType === 'bar'
                         },
                         x: {
-                            display: chartType === 'bar' // Μόνο όταν είναι bar να εμφανίζεται ο άξονας
+                            display: chartType === 'bar'
                         }
                     }
                 }

@@ -1,5 +1,3 @@
-/*! Φτιαξιμο στυλ select(Προσθηκη και Uplaod)(δες και https://www.w3schools.com/howto/howto_custom_select.asp)*/
-
 #add-form-container,
 #load-data-form-container,
 #load-quantities-form-container,
@@ -14,10 +12,10 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #430063; /* Θολό φόντο με χρώμα */
+  background-color: #430063;
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Σκιά */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   z-index: 2;
 }
 
@@ -31,10 +29,10 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #430063; /* Θολό φόντο με χρώμα */
+  background-color: #430063;
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Σκιά */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   z-index: 2;
   max-height: 300px;
   overflow-y: auto;
@@ -51,19 +49,18 @@
 .category-checkbox {
   margin: 0;
   padding: 0;
-  /* ...other styles... */
 }
 
 .category-checkbox + label {
   margin-left: 5px;
   padding-right: 5px;
-  color: gold; /* ή οποιοδήποτε άλλο χρώμα ταιριάζει με το φόντο σας */
+  color: gold;
   font-weight: bold;
 }
 
 .category-label {
-  display: block; /* Make the label take up the full width of its container */
-  max-width: 150px; /* Adjust this value as needed */
+  display: block;
+  max-width: 150px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -71,9 +68,9 @@
 
 .category-item {
   display: flex;
-  justify-content: start; /* Aligns items to the start of the flex container */
-  align-items: center; /* Vertically centers the items in the container */
-  min-height: 40px; /* You can set a minimum height to ensure that items with less content don't collapse and misalign */
+  justify-content: start;
+  align-items: center;
+  min-height: 40px;
 }
 
 #add-category-form,
@@ -106,7 +103,7 @@
 #offer-form label {
   display: block;
   font-weight: bold;
-  color: gold; /* Χρυσό χρώμα για τις ετικέτες */
+  color: gold;
 }
 
 #add-detail,
@@ -166,7 +163,7 @@
 
 #fileSection label::before,
 #fileSectionQuantities label::before {
-  content: "\f07c"; /* Κώδικας για το εικονίδιο φάκελου (Font Awesome) */
+  content: "\f07c"; /* Φάκελος από την Font Awesome */
   font-family: "Font Awesome 5 Free";
   margin-right: 10px;
   color: gold;
@@ -180,7 +177,7 @@
 
 #fileSection label:hover,
 #fileSectionQuantities label:hover {
-  background-color: #5a197d; /* Αλλάξτε το χρώμα όπως επιθυμείτε */
+  background-color: #5a197d;
 }
 
 /* Στυλ για το όνομα του αρχείου που έχει επιλεγεί */
@@ -190,7 +187,7 @@
   color: gold;
 }
 
-/* Στυλ για να τονίσεις ότι δεν έχει επιλεγεί αρχείο */
+/* Στυλ για το αρχείο δεν έχει επιλεγεί */
 #fileSection .no-file,
 #fileSectionQuantities .no-file {
   color: gold;
@@ -210,7 +207,7 @@
 #request-form button[type="submit"],
 #offer-form button[type="submit"]
  {
-  background-color: gold; /* Μωβ χρώμα για το κουμπί */
+  background-color: gold;
   color: black;
   padding: 10px 20px;
   border: none;
@@ -248,7 +245,7 @@
     0,
     0,
     0.5
-  ); /* Χρώμα για το θολό φόντο με 50% διαφάνεια */
-  z-index: 2; /* Τοποθετούμε το θολό φόντο πίσω από τα άλλα στοιχεία */
-  display: none; /* Αρχικά αόρατο */
+  );
+  z-index: 2;
+  display: none;
 }

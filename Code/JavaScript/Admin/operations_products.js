@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const ChangeItemInfoForm = document.getElementById("options-item-form");
 
   deleteAllButton.addEventListener("click", function () {
-    // Καλείτε τη συνάρτηση για διαγραφή όλων των προϊόντων
     deleteAllProducts();
     updateItemsBasedOnCategoryAndSearch();
   });
@@ -20,11 +19,10 @@ document.addEventListener("DOMContentLoaded", function () {
   showAddItemFormButton.addEventListener("click", function () {
     addItemFormContainer.style.display = "block";
 
-    // Click the 'Add Item' tab
+    // Κλικ στο 'Add Item' tab
     document.getElementsByClassName("tablinks")[0].click();
-    // Αλλάζετε το φόντο του overlay σε θολό χρώμα και το εμφανίζετε όταν εμφανίζεται η φόρμα
     const overlay = document.getElementById("overlay");
-    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)"; // Προσαρμόστε το χρώμα ανάλογα με τις ανάγκες σας
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
     overlay.style.display = "block";
     addItemFormContainer.style.display = "block";
 
@@ -33,7 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   overlay.addEventListener("click", function () {
     resetForms("add-form-container");
-    // Κλείστε τη φόρμα και το overlay όταν γίνει κλικ στο overlay
     addItemFormContainer.style.display = "none";
     overlay.style.display = "none";
   });
@@ -96,14 +93,12 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   addItemForm.addEventListener("submit", function (event) {
-    event.preventDefault(); // Αποτρέψτε την προεπιλεγμένη υποβολή φόρμας
+    event.preventDefault();
 
     var itemName = document.getElementById("item-name").value;
 
-    // Δημιουργία αντικειμένου FormData για τη συλλογή δεδομένων φόρμας
     var formData = new FormData(addItemForm);
 
-    // Προσθήκη των λεπτομερειών προϊόντος
     var details = [];
     var detailNames = document.querySelectorAll(
       'input[name="item-detail-name[]"]'
@@ -128,7 +123,6 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // Αποστολή δεδομένων φόρμας μέσω AJAX
     if (!pattern.test(itemName)) {
       showMessage(
         "error-message",
@@ -143,35 +137,34 @@ document.addEventListener("DOMContentLoaded", function () {
         detailNames[i].value.trim() === "" ||
         detailValues[i].value.trim() === ""
       ) {
-        event.preventDefault(); // Αποτροπή υποβολής της φόρμας
+        event.preventDefault();
         showMessage(
           "error-message",
           "Παρακαλώ συμπληρώστε όλα τα πεδία λεπτομερειών.",
           "#item-name"
         );
-        return; // Διακοπή της εκτέλεσης της συνάρτησης
+        return;
       }
 
       if (!pattern.test(detailNames[i].value)) {
-        event.preventDefault(); // Αποτροπή υποβολής της φόρμας
+        event.preventDefault();
         showMessage(
           "error-message",
           "Το όνομα λεπτομερειών πρέπει να περιέχει μόνο χαρακτήρες.",
           "#item-name"
         );
-        return; // Διακοπή της εκτέλεσης της συνάρτησης
+        return;
       }
     }
     addProduct(formData);
     updateItemsBasedOnCategoryAndSearch();
   });
 
-  // Προσθήκη λειτουργικότητας για την προσθήκη πεδίων λεπτομερειών
+  // Προσθήκη πεδίων λεπτομερειών
   var addDetailButton = document.getElementById("add-detail");
   addDetailButton.addEventListener("click", function () {
     var container = document.getElementById("item-details-container");
 
-    // Δημιουργία της ετικέτας για το όνομα λεπτομέρειας
     var labelDetailName = document.createElement("label");
     labelDetailName.textContent = "Όνομα λεπτομερειών στοιχείου:";
 
@@ -180,7 +173,6 @@ document.addEventListener("DOMContentLoaded", function () {
     newDetailName.name = "item-detail-name[]";
     newDetailName.placeholder = "π.χ. 'βάρος'";
 
-    // Δημιουργία της ετικέτας για την τιμή λεπτομέρειας
     var labelDetailValue = document.createElement("label");
     labelDetailValue.textContent = "Τιμή λεπτομέρειας στοιχείου:";
 
@@ -242,13 +234,12 @@ function deleteAllProducts() {
 
 function addProduct(form) {
   $.ajax({
-    url: "../../PHP/Admin/addProduct.php", // Αντικαταστήστε με το δικό σας URL
+    url: "../../PHP/Admin/addProduct.php",
     method: "POST",
     data: form,
     processData: false,
     contentType: false,
     success: function (response) {
-      // Χειριστείτε εδώ την επιτυχή απόκριση
       console.log("Επιτυχής προσθήκη προϊόντος", response);
 
       if (response.status === "created") {
@@ -262,7 +253,6 @@ function addProduct(form) {
       }
     },
     error: function (response) {
-      // Χειριστείτε εδώ τα σφάλματα
       var errorResponse = JSON.parse(response.responseText);
 
       if (errorResponse.status === "wrong_method_405") {
@@ -436,12 +426,8 @@ function changeitemInformation(form) {
 }
 
 function resetForms(id) {
-  // Get all forms within the container
   var forms = document.getElementById(id).getElementsByTagName("form");
   for (var i = 0; i < forms.length; i++) {
-    forms[i].reset(); // This will reset all forms to their default values
+    forms[i].reset();
   }
 }
-
-//! (FREEZE).Φτιαξιμο επεξεργασια προφιλ(Telika tha to paw pros to telos gia na ftiajw mia koinh html poy tha xrhsimopoihoyn kai 3 typoy xrhstwn)
-//! 4. ΔΙΑΒΑΣΕ ΘΕΩΡΙΑ ΜΛΚ ΘΑ ΚΟΠΕΙΣ

@@ -9,8 +9,8 @@ body {
 
 .main {
     position: relative;
-    flex-grow: 1; /* Take up the remaining space */
-    padding: 20px; /* Padding around the content */
+    flex-grow: 1; 
+    padding: 20px;
 }
 
 #removeIcon {

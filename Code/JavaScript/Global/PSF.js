@@ -10,28 +10,26 @@ function searchOperation(){
 $( "#search-input" ).autocomplete({
     source: function(request, response) {
       $.ajax({
-        url: "../../PHP/Global/autocomplete_data.php", // Η διεύθυνση του σεναρίου αναζήτησης στον server
+        url: "../../PHP/Global/autocomplete_data.php",
         dataType: "json",
         data: {
           term: request.term
         },
         success: function(data) {
-          // Μετατρέπουμε την απόκριση σε μια μορφή που μπορεί να χειριστεί το Autocomplete:
           response($.map(data, function(item) {
             return {
-                label: item.name, // Εδώ υποθέτουμε ότι η απόκριση περιέχει ένα πεδίο "name"
+                label: item.name,
                 value: item.name
             };
         }));
       }
    });
-}, minLength: 2, // Ορίζετε τον ελάχιστο αριθμό χαρακτήρων που πρέπει να πληκτρολογήσει ο χρήστης πριν εμφανιστούν προτάσεις
+}, minLength: 2,
    select: function(event, ui) {
-        // Προαιρετικά: Κάτι να συμβεί όταν ο χρήστης επιλέγει μια πρόταση
         console.log("Επιλέχθηκε: " + ui.item.value);
         $("#search-input").val(ui.item.value);
         updateItemsBasedOnCategoryAndSearch();
-        // Αποτρέψτε την προεπιλεγμένη συμπεριφορά του autocomplete που θα επαναφέρει την παλιά τιμή
+        // Αποτρέπουμε το να επαναφέρει το autocomplete την παλιά τιμή
         return false;
        }
     });
@@ -46,7 +44,7 @@ function handlePreviousButton() {
         10
       );
       if (currentPage > 1) {
-        currentPage -= 1; // Μείωσε την τρέχουσα σελίδα κατά 1
+        currentPage -= 1;
         updateItemsBasedOnCategoryAndSearch(currentPage);
       }
     });
@@ -60,7 +58,7 @@ function handlePreviousButton() {
         10
       );
       if (currentPage < totalPages) {
-        currentPage += 1; // Αύξησε την τρέχουσα σελίδα κατά 1
+        currentPage += 1;
         updateItemsBasedOnCategoryAndSearch(currentPage);
       }
     });
@@ -74,7 +72,6 @@ function handlePreviousButton() {
     nextButton.disabled = currentPage >= totalPages;
   }
   
-  // Ενεργοποίηση και απενεργοποίηση του dropdown
   function toggleDropdown() {
     var dropdown = document.querySelector(".custom-dropdown");
     dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
@@ -105,9 +102,8 @@ function handlePreviousButton() {
         var customSelect = document.querySelector(".custom-select");
         var dropdown = document.querySelector(".custom-dropdown");
     
-        // Ελέγξτε αν το κλικ έγινε εκτός του custom-select div
         if (!customSelect.contains(event.target)) {
-          dropdown.style.display = "none"; // Κλείστε τη λίστα
+          dropdown.style.display = "none";
         }
       });
   }

@@ -68,7 +68,7 @@
           <button id="show-add-form">Προσθήκη Αντικειμένου/Κατηγορίας</button>
         </div>
 
-        <!-- Κρύψτε αρχικά τη φόρμα με CSS -->
+      <!-- Κρυμμένη φόρμα για προσθήκη -->
         <div id="add-form-container">
           <div class="tab">
             <button class="tablinks" id="AddItemTab">
@@ -92,9 +92,8 @@
             <select id="item_category" name="item_category"></select
             ><br />
 
-            <!-- Νέα πεδία για λεπτομέρειες -->
             <div id="item-details-container">
-              <!-- Πεδία λεπτομέρειας εισάγονται εδώ -->
+              <!-- Πεδία λεπτομέρειων -->
             </div>
             <button type="button" id="add-detail">
               Προσθήκη Περισσότερων Λεπτομερειών</button
@@ -133,7 +132,6 @@
             >
             <div id="deleteCategoriesList" class="categories-container"></div>
 
-            <!-- Κουμπί για επικύρωση επιλογών -->
             <button type="sumbit" id="submitDeleteCategories">Διαγραφή</button>
           </form>
         </div>
@@ -146,11 +144,10 @@
 
         <div id="check-categories-form-container">
           <form id="categoriesListForm">
-            <!-- Δυναμικά γεμισμένη λίστα με τις κατηγορίες -->
+            <!-- Λίστα με τις κατηγορίες -->
             <label id="check-label-title">Επιλέξτε κατηγορίες</label>
             <div id="categoriesList" class="categories-container"></div>
 
-            <!-- Κουμπί για επικύρωση επιλογών -->
             <button type="sumbit" id="submitCategories">
               Επικύρωση Επιλογών
             </button>
@@ -263,11 +260,10 @@
           <i class="fas" id="dropElement">&#xf107;</i>
           <div class="custom-dropdown" style="display: none">
             <div id="categoryFilter"></div>
-            <!-- Εδώ θα πάνε τα υπόλοιπα checkboxes, γεννημένα μέσω JavaScript -->
+            <!-- Εδώ θα πάνε τα υπόλοιπα checkboxes -->
           </div>
         </div>
 
-        <!--! ΤΡΟΠΟΠΟΙΗΣΗ ΟΤΑΝ ΘΑ ΜΠΕΙ ΚΑΙ ΤΟ CARGO ΤΟΥ ΟΧΗΜΑΤΟΣ -->
         <table>
           <thead>
             <tr>
@@ -281,7 +277,7 @@
             </tr>
           </thead>
           <tbody id="items-list">
-            <!-- Εδώ θα εμφανιστούν τα προϊόντα από τη βάση δεδομένων -->
+            <!-- Εδώ θα εμφανιστούν τα προϊόντα -->
           </tbody>
         </table>
 

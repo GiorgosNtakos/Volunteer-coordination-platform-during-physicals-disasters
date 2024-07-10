@@ -1,6 +1,3 @@
-/* * Login, SignUp style for various pages*/
-/*? In the future it will be only in one login/sign_up page*/
-
 body {
   margin: 0;
   color: #6a6f8c;
@@ -211,8 +208,6 @@ a {
 }
 .icon {
   position: absolute;
-  /* top: 65%; */
-  /* padding: 2%; */
   right: 10px;
   transform: translateY(-50%);
 }
@@ -228,15 +223,15 @@ a {
 }
 
 .tab:hover {
-  color: #fff; /* Αλλαγή χρώματος κειμένου */
-  border-color: #1161ee; /* Αλλαγή χρώματος περίγραμμα */
-  transition: color 0.3s, border-color 0.3s; /* Ομαλή μετάβαση */
-  cursor: pointer; /* Εμφάνιση του κέρσορα ως δείκτης */
+  color: #fff;
+  border-color: #1161ee;
+  transition: color 0.3s, border-color 0.3s;
+  cursor: pointer;
 }
 
 .login-form .group .button:hover {
-  background: #2b85e4; /* Αλλαγή χρώματος όταν το ποντίκι περνάει πάνω */
-  transition: background 0.3s; /* Ομαλή μετάβαση */
+  background: #2b85e4;
+  transition: background 0.3s;
   cursor: pointer;
 }
 
@@ -265,7 +260,7 @@ a {
   }
 
   .login-html .tab {
-    font-size: 24px; /* Αυξήθηκε το μέγεθος των γραμμάτων */
+    font-size: 24px;
     margin-right: 0;
     margin-bottom: 5px;
     display: inline;
@@ -284,7 +279,7 @@ a {
   .login-form .group .label,
   .login-form .group .input,
   .login-form .group .button {
-    font-size: 18px; /* Αυξήθηκε το μέγεθος των γραμμάτων */
+    font-size: 18px;
 
   }
 
@@ -294,7 +289,7 @@ a {
   }
 
   .login-form .group .input {
-    padding: 15px 40px 15px 15px; /* Αυξήθηκε το padding για να υπάρχει χώρος για τα εικονίδια */
+    padding: 15px 40px 15px 15px;
     margin-top: 20px;
   }
 
@@ -309,6 +304,6 @@ a {
   }
 
   .group .input {
-    padding-right: 40px; /* Χώρος για το εικονίδιο */
+    padding-right: 40px;
   }
 }

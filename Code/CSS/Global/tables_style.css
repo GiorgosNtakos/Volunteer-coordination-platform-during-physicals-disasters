@@ -4,7 +4,6 @@ table {
     margin-top: 20px;
   }
   
-  /* Στυλ για την επικεφαλίδα του πίνακα */
   table th {
     border: 1px solid #ddd;
     padding: 12px;
@@ -13,7 +12,6 @@ table {
     font-weight: bold;
   }
   
-  /* Στυλ για τις γραμμές του πίνακα */
   table td {
     border: 1px solid #ddd;
     padding: 12px;
@@ -31,29 +29,27 @@ table {
 
   .search-area {
     display: flex;
-    justify-content: space-between; /* If you want space between the search bar and button */
-    margin-bottom: 20px; /* Space below the search area */
+    justify-content: space-between;
+    margin-bottom: 20px;
   }
   
   #search_bar {
-    flex-grow: 1; /* Let the search bar take up the available space */
-    margin-right: 10px; /* Margin between the search bar and button */
+    flex-grow: 1;
+    margin-right: 10px;
     text-align: center;
   }
   
-  /* Στυλ για το search bar */
   #search-input {
     width: 100%;
-    max-width: 400px; /* Ορίστε το πλάτος του search bar όπως θέλετε */
+    max-width: 400px;
     margin: 0 auto;
     padding: 10px 0px 10px 40px;
     border: 2px solid #ccc;
-    border-radius: 25px; /* Δημιουργεί στρογγυλεμένα άκρα */
+    border-radius: 25px;
     font-size: 16px;
     background-color: #f2f2f2;
     background-repeat: no-repeat;
     background-position: 10px center;
-    /* padding-left: 40px;  Το πλάτος του εικονιδίου + περιθώριο */
   }
   
   .icon {
@@ -63,31 +59,29 @@ table {
     margin-right: 40px;
   }
   
-  /* Στυλ για το κουμπί αναζήτησης */
   #search-button {
     background-color: #5a197d;
     color: gold;
     border: none;
-    border-radius: 25px; /* Δημιουργεί στρογγυλεμένα άκρα */
+    border-radius: 25px;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin-left: 5px; /* Μικρό περιθώριο μεταξύ του κουμπιού και του search bar */
+    margin-left: 5px;
     cursor: pointer;
   }
   
-  /* Στυλ για το κουμπί "Αναζήτηση" όταν είναι σε hover */
   #search-button:hover {
     transition: background-color 0.4s;
     background-color: #440466;
   }
 
   #pagination {
-    display: flex; /* Establishes a flex container */
-    justify-content: center; /* Centers the flex items on the main axis */
-    margin-top: 20px; /* Adds space between the table and the pagination */
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
   }
   
   #prev,
@@ -107,48 +101,44 @@ table {
   
   #prev:disabled,
   #next:disabled {
-    color: #ccc; /* Dims the button text to indicate it's disabled */
-    border-color: #ccc; /* Dims the button border */
-    cursor: default; /* Reverts the cursor to the default to indicate the button is not clickable */
+    color: #ccc;
+    border-color: #ccc;
+    cursor: default;
   }
 
-  /* Προσαρμόστε το container του autocomplete */
 .ui-autocomplete {
     border: 1px solid #ccc;
     background: #FFF;
     padding: 0px;
-    border-radius: 10px; /* ίδια με το input */
+    border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    overflow: hidden; /* Κρύβει τυχόν περιεχόμενο που ξεπερνά τα όρια */
-    max-height: 300px; /* Μέγιστο ύψος με δυνατότητα κύλισης */
-    overflow-y: auto; /* Ενεργοποίηση κύλισης όταν είναι απαραίτητο */
+    overflow: hidden;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
-/* Προσαρμόστε τις επιμέρους προτάσεις */
 .ui-menu .ui-menu-item  {
     padding: 10px;
-    border-bottom: 1px solid #f0f0f0; /* Διαχωριστική γραμμή μεταξύ προτάσεων */
-    display: block; /* Οι προτάσεις να εμφανίζονται ως block για να καλύπτουν όλο το πλάτος */
-    font-size: 16px; /* ίδιο μέγεθος με το input */
-    color: #333333; /* Χρώμα κειμένου */
-    text-decoration: none; /* Καμία υπογράμμιση στους συνδέσμους */
+    border-bottom: 1px solid #f0f0f0;
+    display: block;
+    font-size: 16px;
+    color: #333333;
+    text-decoration: none;
 }
 
-/* Στυλ για το hover και focus στις προτάσεις */
 ui-menu .ui-menu-item :hover,
 .ui-menu .ui-menu-item .ui-state-focus,
 .ui-menu .ui-menu-item .ui-state-active {
-background: #9900ffb9; /* Χρώμα φόντου κατά την επιλογή ή hover */
-color: gold; /* Χρώμα κειμένου */
+background: #9900ffb9;
+color: gold;
 }
 
-/* Κρύψτε τα border μεταξύ των προτάσεων για το τελευταίο item */
 .ui-menu .ui-menu-item:last-child  {
 border-bottom: none;
 }
 
 .ui-autocomplete::-webkit-scrollbar {
-  width: 8px; /* Πλάτος του scrollbar */
+  width: 8px;
 }
 
 .ui-autocomplete::-webkit-scrollbar-track {
@@ -156,12 +146,12 @@ border-bottom: none;
 }
 
 .ui-autocomplete::-webkit-scrollbar-thumb {
-  background-color: #c1c1c1; /* Χρώμα της λαβής του scrollbar */
-  border-radius: 10px; /* Στρογγυλεμένες γωνίες για τη λαβή */
+  background-color: #c1c1c1; /* Χρώμα της λαβής */
+  border-radius: 10px;
 }
 
 .ui-autocomplete::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8; /* Χρώμα της λαβής όταν το ποντίκι περνάει πάνω της */
+  background: #a8a8a8;
 }
 
 .history_requests,
@@ -175,19 +165,19 @@ border-bottom: none;
 }
 
 .history-table {
-  flex: 1;  /* Κάθε πίνακας παίρνει ίσο χώρο στη διάταξη */
-  padding: 10px; /* Προαιρετικά, προσθέστε padding για εσοχή ανάμεσα στους πίνακες */
+  flex: 1;  /* Οι πίνακες πιάνουν ίσο χώρο */
+  padding: 10px;
 }
 
 .history-table h2 {
-  text-align: center;  /* Κεντράρει το κείμενο οριζόντια */
-  margin-top: 20px;    /* Προσθέτει απόσταση από το πάνω μέρος του container */
-  margin-bottom: 20px; /* Προσθέτει απόσταση πριν το περιεχόμενο που ακολουθεί */
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .history-table table{
-  max-height: 300px; /* Θέτει το μέγιστο ύψος του πίνακα */
-  overflow-y: auto; /* Ενεργοποιεί την κάθετη κύλιση αν χρειάζεται */
+  max-height: 300px;
+  overflow-y: auto;
   margin-bottom: 20px;
 }
 
