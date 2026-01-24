@@ -140,6 +140,6 @@ All data used are dummy and the platform is **not intended for real-world emerge
 
 ---
 
-## License
+## 🔐 License
 
 MIT License
