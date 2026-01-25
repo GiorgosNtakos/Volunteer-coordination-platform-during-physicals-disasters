@@ -1,65 +1,29 @@
--- phpMyAdmin SQL Dump
--- version 5.0.2
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1:3306
--- Generation Time: Apr 17, 2024 at 03:44 PM
--- Server version: 5.7.31
--- PHP Version: 7.4.9
+-- Demo seed data extracted from original dumps (dummy data)
+-- Import after schema.sql
+SET SQL_MODE = 'NO_AUTO_VALUE_ON_ZERO';
+SET time_zone = '+00:00';
+SET FOREIGN_KEY_CHECKS = 0;
+TRUNCATE TABLE `warehouse`;
+TRUNCATE TABLE `vehicles`;
+TRUNCATE TABLE `users`;
+TRUNCATE TABLE `tasks`;
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+-- Seed for `warehouse`
+INSERT INTO `warehouse` (`id`, `street`, `number`, `town`, `location_lat`, `location_lon`, `created_at`, `updated_at`) VALUES
+('cdc4c156-a4e6-4fce-b72b-c147b2908d02', 'Μαιζώνος', 0, 'Municipal Unit of Patras', '38.24684668', '21.73500985', '2024-01-27 13:57:36', '2024-04-14 09:21:45');
 
+-- Seed for `vehicles`
+INSERT INTO `vehicles` (`id`, `name`, `assigned_tasks`, `street`, `number`, `town`, `location_lat`, `location_lon`, `created_at`, `updated_at`, `assigned_rescuers`) VALUES
+('317408fd-e2d0-46a0-8abe-6b06458f52e7', 'Ερμής', 0, 'Ζαΐμη', 14, 'Πάτρα', '38.24903950', '21.73950059', '2024-03-23 19:17:23', '2024-03-29 19:32:29', 1),
+('9af32816-8521-421f-8842-c69381550d89', 'Τηλέμαχος', 0, 'Ρήγα Φεραίου', 113, 'Πάτρα', '38.24657885', '21.73368324', '2024-03-24 19:57:27', '2024-03-26 17:12:28', 2),
+('950bf973-715f-4f1f-a91b-0dbf2bd3f3e6', 'Ανάργυρος', 0, 'Ρήγα Φεραίου', 115, 'Πάτρα', '38.24652305', '21.73364310', '2024-03-24 20:02:57', '2024-03-24 20:02:57', 0),
+('bffea2b8-b4e2-478a-8950-6303a9a0db21', 'Όχημα_1', 0, 'Μαιζώνος', 11, 'Πάτρα', '38.24690020', '21.73502791', '2024-03-26 17:05:05', '2024-03-29 19:32:44', 1);
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `my_sql_db`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` varchar(36) NOT NULL,
-  `username` varchar(85) NOT NULL,
-  `password` varchar(85) NOT NULL,
-  `email` varchar(85) NOT NULL,
-  `full_name` varchar(85) DEFAULT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `street` varchar(255) DEFAULT NULL,
-  `number` int(11) DEFAULT NULL,
-  `town` varchar(255) DEFAULT NULL,
-  `type` enum('Admin','Rescuer','Citizen') DEFAULT NULL,
-  `location_lat` decimal(10,8) DEFAULT NULL,
-  `location_lon` decimal(11,8) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `img_path` varchar(255) DEFAULT NULL,
-  `formCompleted` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `email` (`email`),
-  UNIQUE KEY `phone` (`phone`),
-  UNIQUE KEY `full_name` (`full_name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `users`
---
-
+-- Seed for `users`
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `full_name`, `phone`, `street`, `number`, `town`, `type`, `location_lat`, `location_lon`, `created_at`, `updated_at`, `img_path`, `formCompleted`) VALUES
-('5642fda0-799a-4c5a-9f4f-f2053d6386b9', 'Giorgos_Ntakos', '$2y$10$IjjttnZWkI8dHwXcfFGwiOlpT04zEttMEvPDjOFMWL928yYF7vQ/e', 'giorgos-1001@hotmail.com', 'Γιώργος Ντάκος', '', 'asd', 23, 'asd', 'Admin', '12.00000000', '12.00000000', '2023-12-24 21:53:17', '2023-12-24 21:53:17', NULL, 0),
+('5642fda0-799a-4c5a-9f4f-f2053d6386b9', 'Giorgos_Ntakos', '$2y$10$IjjttnZWkI8dHwXcfFGwiOlpT04zEttMEvPDjOFMWL928yYF7vQ/e', 'giorgos-ntakos@hotmail.com', 'Γιώργος Ντάκος', '', 'asd', 23, 'asd', 'Admin', '12.00000000', '12.00000000', '2023-12-24 21:53:17', '2023-12-24 21:53:17', NULL, 0),
 ('6c57eb8b-3e71-4a70-b3c7-29a059f3b96b', 'Citizen_4', 'citizen_Password_4', 'citizen_4@example.com', 'Citizen_4', '5647382910', 'Μεσολογγίου', 50, 'Πάτρα', 'Citizen', '38.23802274', '21.73270620', '2024-04-08 11:17:05', '2024-04-08 11:17:05', 'NULL', 1),
-('3bab5915-8278-4a47-89e7-de737ba5f206', 'Giorgos_Ntali', '$2y$10$tXIOfMzdZ/3cVvTdauG.U.jd7hcSShApmRj7GeeY0pxIpuEIKHD3O', 'Giorgos_Ntali@VolunteersInAction.gr', 'Γιώργος Νταλι', '+30 6948758669', 'Ζαΐμη', 14, 'Πάτρα', 'Rescuer', '38.24903950', '21.73950059', '2024-03-27 21:48:16', '2024-03-27 21:48:16', NULL, 0),
+('3bab5915-8278-4a47-89e7-de737ba5f206', 'Giorgos_Ntali', '$2y$10$tXIOfMzdZ/3cVvTdauG.U.jd7hcSShApmRj7GeeY0pxIpuEIKHD3O', 'Giorgos_Ntali@VolunteersInAction.gr', 'Γιώργος Νταλι', '+30 6973241025', 'Ζαΐμη', 14, 'Πάτρα', 'Rescuer', '38.24903950', '21.73950059', '2024-03-27 21:48:16', '2024-03-27 21:48:16', NULL, 0),
 ('66e42249-a22c-4bb7-90f9-fda0eb51fd4a', 'Citizen_3', 'citizen_Password_3', 'citizen_3@example.com', 'Citizen_3', '1029384756', 'Σουλίου', 16, 'Πάτρα', 'Citizen', '38.23807745', '21.73621239', '2024-04-08 11:17:05', '2024-04-08 11:17:05', 'NULL', 1),
 ('1054ef77-b245-421e-9652-20624cc487d2', 'Citizen_1', 'citizen_Password_1', 'citizen_1@example.com', 'Citizen_1', '1234567890', 'Κερύνειας', 7, 'Πάτρα', 'Citizen', '38.26155900', '21.74055500', '2024-04-08 11:17:05', '2024-04-08 11:17:05', 'NULL', 1),
 ('b5540dfb-fee2-4982-9d4a-300617ba87b6', 'Citizen_2', 'citizen_Password_2', 'citizen_2@example.com', 'Citizen_2', '0987654321', 'Ν.Ε.Ο. Πατρών - Αθηνών', 31, 'Πάτρα', 'Citizen', '38.26405500', '21.75175400', '2024-04-08 11:17:05', '2024-04-08 11:17:05', 'NULL', 1),
@@ -71,8 +35,12 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `full_name`, `phone`
 ('9c3ce7e3-c189-438c-86a0-57f6260e65ef', 'Giorgos_Ntalis', '&FR3PG31', 'Giorgos_Ntalis@VolunteersInAction.gr', 'Γιώργος Νταλης', '+30 6901423455', 'Ζαΐμη', 14, 'Πάτρα', 'Rescuer', '38.24903950', '21.73950059', '2024-03-28 10:58:41', '2024-03-29 14:33:38', NULL, 0),
 ('aae63035-05c3-4e0f-920e-2f2869a99972', 'Giorgos_Pikaso', '$2y$10$YDnHbwPKn.4QDl1YqBx39ODNvCtdXexp6zKPa2bxnjqhiksT.sgri', 'Giorgos_Pikaso@VolunteersInAction.gr', 'Γιωργος Πικασο', '+30 6912345679', 'Μαιζώνος', 11, 'Πάτρα', 'Rescuer', '38.24690020', '21.73502791', '2024-03-29 14:38:57', '2024-03-29 14:38:57', NULL, 0),
 ('1ad1b2f4-3445-4922-b98e-4c46a586a7b5', 'Giorgos_Ntakosta', '$2y$10$pfxJc1ca4s0R3dvuidAMvOb4xfA2dQmgolxzYfvB1q6EmCMfkbyQu', 'Giorgos_Ntakosta@VolunteersInAction.gr', 'Γιώργος Ντάκοστα', '+30 6948123678', 'Ζαΐμη', 14, 'Πάτρα', 'Rescuer', '38.24903950', '21.73950059', '2024-03-28 11:02:57', '2024-03-28 11:02:57', NULL, 0);
-COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- Seed for `tasks`
+INSERT INTO `tasks` (`id`, `quantity`, `type`, `status`, `created_at`, `updated_at`, `item_id`, `vehicle_id`, `user_id`) VALUES
+('601b3cc5-1290-4db7-b107-9e5d159cdc6d', 15, 'Request', 'pending', '2024-04-08 11:24:37', '2024-04-08 11:24:37', 16, '317408fd-e2d0-46a0-8abe-6b06458f52e7', '66e42249-a22c-4bb7-90f9-fda0eb51fd4a'),
+('d2a578aa-9c25-4363-9c6d-df61003768f9', 25, 'Request', 'pending', '2024-04-08 11:24:37', '2024-04-08 11:24:37', 16, '317408fd-e2d0-46a0-8abe-6b06458f52e7', '6c57eb8b-3e71-4a70-b3c7-29a059f3b96b'),
+('39739656-3f41-499c-a257-f23c7fa5034b', 35, 'Offer', 'pending', '2024-04-08 11:24:37', '2024-04-08 11:24:37', 16, '317408fd-e2d0-46a0-8abe-6b06458f52e7', '1054ef77-b245-421e-9652-20624cc487d2'),
+('2b0ce878-f3f8-4adf-9b7f-ae0dc200b5c3', 45, 'Offer', 'pending', '2024-04-08 11:24:37', '2024-04-08 11:24:37', 16, '317408fd-e2d0-46a0-8abe-6b06458f52e7', 'b5540dfb-fee2-4982-9d4a-300617ba87b6');
+
+SET FOREIGN_KEY_CHECKS = 1;

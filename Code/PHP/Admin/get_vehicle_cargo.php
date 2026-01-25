@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         }
 
     } else {
+        // Αν λείπουν πεδία
         http_response_code(400);
         $response = array("status" => "missing_400", "message" => "Λείπουν παράμετροι από το αίτημα GET.");
     }
@@ -49,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $response = array("status" => "wrong_method_405", "message" => "Μη έγκυρη αίτηση.");
 }
 
+// Κλείσιμο της σύνδεσης με τη βάση δεδομένων
 echo json_encode($response);
 $stmt->close();
 $conn->close();

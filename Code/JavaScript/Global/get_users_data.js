@@ -10,17 +10,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const cancelPasswordChange = document.getElementById("cancelPasswordChange");
 
     changePasswordButton.addEventListener("click", function() {
-        changePasswordButton.style.display = "none";
-        passwordChangeArea.style.display = "block";
+        changePasswordButton.style.display = "none"; // Απόκρυψη του κουμπιού "Αλλαγή Κωδικού"
+        passwordChangeArea.style.display = "block"; // Εμφάνιση της περιοχής αλλαγής κωδικού
     });
 
     cancelPasswordChange.addEventListener("click", function() {
-        changePasswordButton.style.display = "block";
-        passwordChangeArea.style.display = "none";
-        resetPasswordFields(); 
+        changePasswordButton.style.display = "block"; // Επανεμφάνιση του κουμπιού "Αλλαγή Κωδικού"
+        passwordChangeArea.style.display = "none"; // Απόκρυψη της περιοχής αλλαγής κωδικού
+        resetPasswordFields(); // Επαναφορά των πεδίων κωδικού
     });
 
     submitPasswordChange.addEventListener("click", function() {
+        // Εδώ μπορείτε να προσθέσετε τη λογική για την υποβολή του νέου κωδικού μέσω AJAX
         const oldPassword = document.getElementById("oldPassword").value;
         const newPassword = document.getElementById("newPassword").value;
         const confirmPassword = document.getElementById("confirmPassword").value;
@@ -103,7 +104,7 @@ function GetUserInfo() {
   
     // Φορτώστε τα στοιχεία του διαχειριστή με AJAX
     $.ajax({
-      url: "../../PHP/Global/get_user_data.php", // Αντικαταστήστε με τον σωστό δρόμο προς το PHP αρχείο
+      url: "http://localhost/webproject/Code/PHP/Global/get_user_data.php", // Αντικαταστήστε με τον σωστό δρόμο προς το PHP αρχείο
       method: "GET",
       success: function (response) {
         if (response.status === "success") {
@@ -153,7 +154,7 @@ function GetUserInfo() {
     formData.append('file', file);
 
     $.ajax({
-        url: "../../PHP/Global/change_profile_image.php",
+        url: "http://localhost/webproject/Code/PHP/Global/change_profile_image.php", // Αντικαταστήστε με τον σωστό δρόμο προς το PHP αρχείο
         method: "POST",
         data: formData,
         contentType: false,
@@ -214,7 +215,7 @@ function changeOldPassword(oldPassword, newPassword){
     const changePasswordButton = document.getElementById("changePassword");
     const passwordChangeArea = document.getElementById("passwordChangeArea");
     $.ajax({
-        url: "../../PHP/Global/change_password.php",
+        url: "http://localhost/webproject/Code/PHP/Global/change_password.php",
         method: "POST",
         data: {
             oldPassword: oldPassword,
@@ -227,9 +228,9 @@ function changeOldPassword(oldPassword, newPassword){
                     response.message,
                     "#userData_form"
                   );
-                changePasswordButton.style.display = "block";
-                passwordChangeArea.style.display = "none";
-                resetPasswordFields();
+                changePasswordButton.style.display = "block"; // Επανεμφάνιση του κουμπιού "Αλλαγή Κωδικού"
+                passwordChangeArea.style.display = "none"; // Απόκρυψη της περιοχής αλλαγής κωδικού
+                resetPasswordFields(); // Επαναφορά των πεδίων κωδικού
             } else {
                 showMessage(
                     "error-message",

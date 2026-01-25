@@ -9,13 +9,12 @@ $response = array();
 
 if (isset($_SESSION['user_auth'])) {
     $user_id = $_SESSION['user_auth']['id'];
-    error_log("User ID: " . $user_id); // Log the user ID
 
     // Fetch rescuer's data along with vehicle location
     $sql = "
         SELECT v.name, v.street, v.number, v.town, v.assigned_tasks, v.assigned_rescuers, u.username, v.location_lat, v.location_lon 
         FROM Users u
-        JOIN Vehicleassignments va ON u.id = va.user_id
+        JOIN VehicleAssignments va ON u.id = va.user_id
         JOIN Vehicles v ON va.vehicle_id = v.id
         WHERE u.id = ?";
     $stmt = $conn->prepare($sql);
@@ -55,7 +54,6 @@ if (isset($_SESSION['user_auth'])) {
     $result = $conn->query($sql);
     if ($result) {
         $unassignedTasks = $result->fetch_all(MYSQLI_ASSOC);
-        error_log("Unassigned Tasks: " . json_encode($unassignedTasks));
     } else {
         error_log("Failed to query unassigned tasks: " . $conn->error);
         echo json_encode(array("status" => "error", "message" => "Failed to fetch unassigned tasks"));
@@ -69,7 +67,7 @@ if (isset($_SESSION['user_auth'])) {
          v.location_lat AS vehicle_lat,  v.location_lon AS vehicle_lon, i.name as item_name
         FROM Tasks t
         JOIN items i ON t.item_id = i.id 
-        JOIN Vehicleassignments va ON t.vehicle_id = va.vehicle_id 
+        JOIN VehicleAssignments va ON t.vehicle_id = va.vehicle_id 
         JOIN Vehicles v ON t.vehicle_id = v.id 
         JOIN Users u ON t.user_id = u.id 
         WHERE va.user_id = ? AND t.status = 'accepted'";
@@ -80,7 +78,6 @@ if (isset($_SESSION['user_auth'])) {
         $result = $stmt->get_result();
         $assignedTasks = $result->fetch_all(MYSQLI_ASSOC);
         $stmt->close();
-        error_log("Assigned Tasks: " . json_encode($assignedTasks));
     } else {
         error_log("Failed to prepare statement for assigned tasks: " . $conn->error);
         echo json_encode(array("status" => "error", "message" => "Failed to fetch assigned tasks"));

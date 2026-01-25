@@ -17,8 +17,9 @@ function initializeMap() {
     maxZoom: 19,
   }).addTo(map);
 
+  // Check if the user is signed in
   if (isUserSignedIn()) {
-    fetchMapData();
+    fetchMapData(); // Fetch and display map data
   } else {
     console.log("User is not signed in.");
   }
@@ -132,7 +133,7 @@ function fetchMapData() {
               },
             });
           } else {
-            // Επαναφέρουμε το marker στην αρχική του θέση εάν ο χρήστης ακυρώσει την αλλαγή
+            // Επαναφέρετε το marker στην αρχική του θέση εάν ο χρήστης ακυρώσει την αλλαγή
             baseMarker
               .setLatLng([
                 response.cordinates.location_lat,
@@ -335,9 +336,9 @@ window.completeTask = function (taskId) {
     url: "../../PHP/Rescuer/complete_task.php",
     method: "POST",
     data: { task_id: taskId },
-    dataType: "json",
+    dataType: "json", // Expect JSON response
     success: function (response) {
-      console.log("Server response:", response);
+      console.log("Server response:", response); // Log the server response for debugging
       if (response.status === "success") {
         alert("Task successfully completed!");
         fetchMapData();
@@ -376,7 +377,7 @@ window.cancelTask = function (taskId) {
 };
 
 function formatDateIntl(dateStr) {
-  const dateObj = new Date(dateStr);
+  const dateObj = new Date(dateStr); // Δημιουργία ενός αντικειμένου Date από τη συμβολοσειρά
   return new Intl.DateTimeFormat("el-GR", {
     day: "2-digit",
     month: "2-digit",

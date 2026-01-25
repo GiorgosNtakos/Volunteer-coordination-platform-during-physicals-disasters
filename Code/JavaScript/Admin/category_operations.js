@@ -13,8 +13,9 @@ $(document).ready(function () {
   });
 
   showDeleteCategoryFormButton.addEventListener("click", function () {
+    // Αλλάζετε το φόντο του overlay σε θολό χρώμα και το εμφανίζετε όταν εμφανίζεται η φόρμα
     const overlay = document.getElementById("overlay");
-    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)"; // Προσαρμόστε το χρώμα ανάλογα με τις ανάγκες σας
     overlay.style.display = "block";
     deleteCategoryFormContainer.style.display = "block";
 
@@ -23,6 +24,7 @@ $(document).ready(function () {
 
   overlay.addEventListener("click", function () {
     document.getElementById("deleteCategoriesList").innerHTML = "";
+    // Κλείστε τη φόρμα και το overlay όταν γίνει κλικ στο overlay
     deleteCategoryFormContainer.style.display = "none";
     overlay.style.display = "none";
   });
@@ -31,7 +33,7 @@ $(document).ready(function () {
     .getElementById("deleteCategory")
     .addEventListener("submit", function (event) {
       event.preventDefault();
-      deleteCategories();
+      deleteCategories(); // Call the delete function
     });
 });
 
@@ -49,11 +51,13 @@ function addCategory() {
     return;
   }
 
+  // Κλήση στο PHP για προσθήκη κατηγορίας
   $.ajax({
     method: "POST",
     url: "../../PHP/Admin/addCategory.php",
     data: { category_name: categoryName },
     success: function (response) {
+      // Επεξεργασία της απάντησης από τον διακομιστή (ενδεχομένως εμφάνιση μηνύματος)
       alert(response);
     },
     error: function (xhr, status, error) {

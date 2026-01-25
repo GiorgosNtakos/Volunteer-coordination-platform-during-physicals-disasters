@@ -68,7 +68,7 @@
           <button id="show-add-form">Προσθήκη Αντικειμένου/Κατηγορίας</button>
         </div>
 
-      <!-- Κρυμμένη φόρμα για προσθήκη -->
+        <!-- Κρύψτε αρχικά τη φόρμα με CSS -->
         <div id="add-form-container">
           <div class="tab">
             <button class="tablinks" id="AddItemTab">
@@ -92,8 +92,9 @@
             <select id="item_category" name="item_category"></select
             ><br />
 
+            <!-- Νέα πεδία για λεπτομέρειες -->
             <div id="item-details-container">
-              <!-- Πεδία λεπτομέρειων -->
+              <!-- Πεδία λεπτομέρειας εισάγονται εδώ -->
             </div>
             <button type="button" id="add-detail">
               Προσθήκη Περισσότερων Λεπτομερειών</button
@@ -132,6 +133,7 @@
             >
             <div id="deleteCategoriesList" class="categories-container"></div>
 
+            <!-- Κουμπί για επικύρωση επιλογών -->
             <button type="sumbit" id="submitDeleteCategories">Διαγραφή</button>
           </form>
         </div>
@@ -144,10 +146,11 @@
 
         <div id="check-categories-form-container">
           <form id="categoriesListForm">
-            <!-- Λίστα με τις κατηγορίες -->
+            <!-- Δυναμικά γεμισμένη λίστα με τις κατηγορίες -->
             <label id="check-label-title">Επιλέξτε κατηγορίες</label>
             <div id="categoriesList" class="categories-container"></div>
 
+            <!-- Κουμπί για επικύρωση επιλογών -->
             <button type="sumbit" id="submitCategories">
               Επικύρωση Επιλογών
             </button>
@@ -239,7 +242,7 @@
 
       <div class="main">
         <div>
-          <button class="show-toolbar"><img src="../../../upload_img/global/right_arrow.png" alt=""></button>
+          <button class="show-toolbar"><img src=".right_arrow.png" alt=""></button>
         </div>
         <div class="search-area">
           <div id="search_bar">
@@ -260,10 +263,11 @@
           <i class="fas" id="dropElement">&#xf107;</i>
           <div class="custom-dropdown" style="display: none">
             <div id="categoryFilter"></div>
-            <!-- Εδώ θα πάνε τα υπόλοιπα checkboxes -->
+            <!-- Εδώ θα πάνε τα υπόλοιπα checkboxes, γεννημένα μέσω JavaScript -->
           </div>
         </div>
 
+        <!--! ΤΡΟΠΟΠΟΙΗΣΗ ΟΤΑΝ ΘΑ ΜΠΕΙ ΚΑΙ ΤΟ CARGO ΤΟΥ ΟΧΗΜΑΤΟΣ -->
         <table>
           <thead>
             <tr>
@@ -277,7 +281,7 @@
             </tr>
           </thead>
           <tbody id="items-list">
-            <!-- Εδώ θα εμφανιστούν τα προϊόντα -->
+            <!-- Εδώ θα εμφανιστούν τα προϊόντα από τη βάση δεδομένων -->
           </tbody>
         </table>
 

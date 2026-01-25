@@ -23,7 +23,7 @@ if (isset($_SESSION['user_auth']) && isset($_SESSION['item_id_auth'])){
 
                 $desired_quantity=(int)$_POST['quantity'];
 
-                            // Ελέγχουμε τη διαθεσιμότητα του είδους στο όχημα
+                            // Ελέγξτε τη διαθεσιμότητα του είδους στο όχημα
                 $stmt = $conn->prepare("SELECT quantity FROM vehiclecargo WHERE item_id = ? AND vehicle_id =  ?");
                 $stmt->bind_param("is", $item_id, $vehicle_id);
                 $stmt->execute();
@@ -38,7 +38,7 @@ if (isset($_SESSION['user_auth']) && isset($_SESSION['item_id_auth'])){
                     exit;
                 }
 
-                            // Αφαιρούμε την ποσότητα από το όχημα
+                            // Αφαιρέστε την ποσότητα από το όχημα
                     $stmtVehicle = $conn->prepare("UPDATE vehiclecargo SET quantity = quantity - ? WHERE item_id = ? AND vehicle_id = ?");
                     $stmtVehicle->bind_param("iis", $desired_quantity, $item_id, $vehicle_id);
                     $stmtVehicle->execute();
@@ -51,7 +51,7 @@ if (isset($_SESSION['user_auth']) && isset($_SESSION['item_id_auth'])){
                         $newQuantityCheck->close();
                     
                         if ($quantityResult['quantity'] == 0) {
-                            // Αφού η ποσότητα είναι μηδέν, διαγράφουμε την εγγραφή
+                            // Αφού η ποσότητα είναι μηδέν, διαγράψτε την εγγραφή
                             $deleteStmt = $conn->prepare("DELETE FROM vehiclecargo WHERE item_id = ? AND vehicle_id = ?");
                             $deleteStmt->bind_param("is", $item_id, $vehicle_id);
                             $deleteStmt->execute();
@@ -59,7 +59,7 @@ if (isset($_SESSION['user_auth']) && isset($_SESSION['item_id_auth'])){
                         }
                     }
 
-                    // Προσθέτουμε την ποσότητα στην αποθήκη
+                    // Προσθέστε την ποσότητα στην αποθήκη
                     $stmtBase = $conn->prepare("UPDATE warehouse_stock SET quantity = quantity + ? WHERE item_id = ?");
                     $stmtBase->bind_param("ii", $desired_quantity, $item_id);
                     $stmtBase->execute();
@@ -76,6 +76,7 @@ if (isset($_SESSION['user_auth']) && isset($_SESSION['item_id_auth'])){
                     $stmtBase->close();
 
             } else{
+                // Αν λείπουν πεδία
            http_response_code(400);
            $response = array("status" => "missing_400", "message" => "Λείπουν παράμετροι από το αίτημα POST.");
            }

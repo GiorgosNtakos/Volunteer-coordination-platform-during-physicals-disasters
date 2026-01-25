@@ -3,6 +3,7 @@ header('Access-Control-Allow-Origin: http://127.0.0.1:5500');
 header('Content-Type: application/json');
 session_start();
 require '../Global/db_connect.php';
+$conn->set_charset("utf8");
 
 $response = array();
 
@@ -37,10 +38,12 @@ if (isset($_SESSION['user_auth'])) {
         $stmt->close();
 
     } else{
+        // Αν λείπουν πεδία
         http_response_code(400);
         $response = array("status" => "missing_400", "message" => "Λείπουν παράμετροι από το αίτημα POST.");
     }
 } else{
+    // Αν η αίτηση δεν είναι POST
     http_response_code(405);
     $response = array("status" => "wrong_method_405", "message" => "Μη έγκυρη αίτηση.");
 }

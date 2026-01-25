@@ -25,6 +25,7 @@ if (isset($_SESSION['user_auth'])){
             $stmt->fetch();
 
             if (password_verify($oldPassword, $hashed_password)) {
+                // Κωδικός σωστός, ενημερώστε τον κωδικό με τον νέο
                 $new_hashed_password = password_hash($newPassword, PASSWORD_DEFAULT);
                 $update_sql = "UPDATE users SET password = ? WHERE id = ?";
                 $update_stmt = $conn->prepare($update_sql);
@@ -34,7 +35,7 @@ if (isset($_SESSION['user_auth'])){
                     http_response_code(200);
                     $response = array("status" => "success", "message" => "Ο κωδικός ενημερώθηκε με επιτυχία.");
                 } else {
-                    http_response_code(500); 
+                    http_response_code(500); // Επιστροφή κωδικού σφάλματος 403
                     $response = array("status" => "server_error", "message" => "Σφάλμα κατά την ενημέρωση του κωδικού: " . $update_stmt->error);
                 }
                 $update_stmt->close();

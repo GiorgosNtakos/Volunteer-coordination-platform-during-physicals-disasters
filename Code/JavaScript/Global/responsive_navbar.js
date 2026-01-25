@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     
+      // Αλλαγή χρώματος στις γραμμές
       if (navMenu.classList.contains("show")) {
         bars.forEach(bar => bar.style.backgroundColor = 'tan'); // Κίτρινο χρώμα όταν το μενού είναι ανοιχτό
       } else {
@@ -41,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
+    // Προσθήκη event listener για το κλικ στο εικονίδιο hamburger
     hamburgerMenu.addEventListener("click", toggleMenu);
 
     links.forEach((link) => {
@@ -53,10 +55,12 @@ document.addEventListener("DOMContentLoaded", function () {
           mainContent.style.marginTop = "0";
         }
 
+        // Επαναφέρει το λευκό χρώμα όταν το μενού είναι κλειστό
         bars.forEach(bar => bar.style.backgroundColor = 'white');
       });
     });
 
+    // Συνάρτηση για το κλείσιμο του μενού και για όταν πατάμε έξω από αυτό
     function closeMenuOnClickOutside(event) {
       if (!navMenu.contains(event.target) && !hamburgerMenu.contains(event.target)) {
         navMenu.classList.remove("show");
@@ -64,10 +68,12 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.classList.remove("menu-open");
         console.log("Clicked outside, menu closed");
 
+        // Επαναφορά λευκού χρώματος όταν το μενού είναι κλειστό
         bars.forEach(bar => bar.style.backgroundColor = 'white');
       }
     }
 
+    // Προσθήκη event listener για κλικ έξω από το μενού
     document.addEventListener("click", closeMenuOnClickOutside);
 
     // Extra κώδικας για να εμφανίζουμε όποτε χρειάζεται το toolbar
@@ -77,6 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // Ελέγχει αν το Header έχει φορτωθεί ήδη
   const header = document.getElementById("Header");
   if (header) {
     console.log("Header found");
@@ -89,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Αν ο Header έχει ήδη φορτωθεί, αρχικοποιούμε το μενού
+  // Αν ο Header έχει ήδη φορτωθεί, αρχικοποίησε αμέσως το μενού
   if (header.complete) {
     console.log("Header already loaded");
     setTimeout(initializeMenu, 100); // Προσθέτουμε μικρή καθυστέρηση

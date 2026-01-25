@@ -2,7 +2,7 @@
 header('Access-Control-Allow-Origin: http://127.0.0.1:5500');
 header('Content-Type: application/json');
 require '../Global/db_connect.php';
-require '../vendor/autoload.php';
+require 'C:\wamp64\www\webproject\Code\PHP\vendor\autoload.php';
 $conn->set_charset("utf8");
 use Ramsey\Uuid\Uuid;
 session_start();
@@ -34,6 +34,7 @@ if (isset($_SESSION['user_auth']) && isset($_SESSION['item_id_auth'])){
                 $response = array('status' => 'server_error', 'message' => 'Προέκυψε σφάλμα κατά τη δημιουργία της αίτησης.');
             }
         } else{
+            // Αν λείπουν πεδία
         http_response_code(400);
         $response = array("status" => "missing_400", "message" => "Λείπουν παράμετροι από το αίτημα POST.");
        }

@@ -42,6 +42,7 @@ function getAvailableAnnouncements(){
                     deleteButton.style.marginRight = "20px";
                     deleteButton.addEventListener("click", function () {
                         var currentRow = $(this).closest("tr");
+                        // Καλείτε τη συνάρτηση για διαγραφή του προϊόντος με το item.name
                         deleteAnnouncement(announcement.announcement_id, currentRow);
                       });
                       ChoiseButtonCell.appendChild(deleteButton);

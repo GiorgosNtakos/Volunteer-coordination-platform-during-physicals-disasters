@@ -10,8 +10,9 @@ document.addEventListener("DOMContentLoaded", function () {
     var mapContainer = document.getElementById("map");
 
     if (mapContainer.classList.contains("hidden")) {
+      // Εμφάνιση του χάρτη
       mapContainer.classList.remove("hidden");
-      this.textContent = "Απόκρυψη Χάρτη";
+      this.textContent = "Απόκρυψη Χάρτη"; // Αλλαγή του κειμένου του κουμπιού
 
       if (!mapInitialized) {
         map = L.map("map").setView([38.246242, 21.7350847], 18); // Συντεταγμένες για την Πλατεία Γεωργίου Πάτρας
@@ -20,8 +21,10 @@ document.addEventListener("DOMContentLoaded", function () {
           attribution: "© OpenStreetMap contributors",
         }).addTo(map);
 
+        // Προσθήκη marker
         var marker = L.marker(map.getCenter(), { draggable: false }).addTo(map);
 
+        // Ενημέρωση των πεδίων κατά το drag end του marker
         map.on("dragstart", function() {
             wasDragged = true;
         });
@@ -45,8 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
         map.invalidateSize();
       }
     } else {
+      // Απόκρυψη του χάρτη
       mapContainer.classList.add("hidden");
-      this.textContent = "Προβολή Χάρτη";
+      this.textContent = "Προβολή Χάρτη"; // Αλλαγή του κειμένου του κουμπιού
     }
   });
 });

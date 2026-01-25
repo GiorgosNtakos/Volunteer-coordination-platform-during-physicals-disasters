@@ -4,9 +4,11 @@ header('Content-Type: application/json');
 require '../Global/db_connect.php';
 $conn->set_charset("utf8");
 
+// Έλεγχος αν έχουν σταλεί δεδομένα
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if(isset($_POST["activeCategories"]) || isset($_POST["inactiveCategories"])) {
+      // Λήψη των επιλεγμένων κατηγοριών από το Ajax request
       
 
       if (!empty($_POST["inactiveCategories"])) {
@@ -24,6 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       if (!empty($_POST["activeCategories"])) {
         $activeCategories = $_POST["activeCategories"];
       foreach ($activeCategories as $category_name) {
+        // Προσθέστε κώδικα για να ενημερώσετε τη βάση δεδομένων
+        // Παράδειγμα:
         $updateQuery = "UPDATE categories SET active = true WHERE category_name = ?";
         $stmt = $conn->prepare($updateQuery);
         $stmt->bind_param("s", $category_name );
@@ -44,6 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $response = array("status" => "wrong_method_405", "message" => "Μη έγκυρη αίτηση.");
 }
 
+// Επιστροφή απάντησης στον client (JavaScript)
 echo json_encode($response);
 $conn->close();
 ?>

@@ -9,8 +9,8 @@ body {
   
 .main {
     position: relative;
-    flex-grow: 1;
-    padding: 20px;
+    flex-grow: 1; /* Take up the remaining space */
+    padding: 20px; /* Padding around the content */
   }
 
 h2 {
@@ -31,8 +31,9 @@ h2 {
     color: red;
   }
 
+  /* Προσαρμογή του scrollbar */
 .scroll-container::-webkit-scrollbar {
-  width: 8px;
+  width: 8px;  /* Πλάτος του scrollbar */
 }
 
 .scroll-container::-webkit-scrollbar-track {
@@ -45,17 +46,17 @@ h2 {
 }
 
 .scroll-container::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+  background: #a8a8a8;  /* Χρώμα κατά την επιλογή */
 }
 
 .scroll-container {
   overflow-y: auto;
-  max-height: 500px;
+  max-height: 500px;  /* Αντιστοιχίστε αυτό με το max-height του tbody */
 }
 
 table th, table td {
-  height: 50px;
-  padding: 8px 12px;
+  height: 50px;  /* ή όποιο ύψος επιλέξετε */
+  padding: 8px 12px;  /* Προσαρμόστε το padding αναλόγως */
 }
 
 #table_of_announcements{
@@ -70,12 +71,12 @@ table th, table td {
 
 .scroll-container {
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Προαιρετικό: Απόσταση μεταξύ των πινάκων */
 }
 
 
 .history-table {
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Προαιρετικό: Απόσταση μεταξύ των πινάκων */
 }
 }

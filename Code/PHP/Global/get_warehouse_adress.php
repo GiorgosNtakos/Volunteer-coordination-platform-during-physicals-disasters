@@ -7,6 +7,7 @@ $conn->set_charset("utf8");
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
+     // Ανάκτηση συντεταγμένων της αποθήκης (υποθέτοντας μία αποθήκη για απλότητα)
      $stmtWarehouseLocation = $conn->prepare("SELECT location_lat, location_lon, street, town, number FROM warehouse LIMIT 1");
      $stmtWarehouseLocation->execute();
      $resultWarehouseLocation = $stmtWarehouseLocation->get_result();
@@ -17,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         $response = array(
             'status' => 'success',
             'message' => 'Οι συνεταγμενες της Βάσης ανακτήθηκαν επιτυχώς.',
-            'cordinates' => $warehouseLocation // Ενσωματώνουμε την απόσταση στο response
+            'cordinates' => $warehouseLocation // Ενσωμάτωση της απόστασης στο response
         );
       } else {
         $response = array(

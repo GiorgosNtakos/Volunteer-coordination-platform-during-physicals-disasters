@@ -10,26 +10,28 @@ function searchOperation(){
 $( "#search-input" ).autocomplete({
     source: function(request, response) {
       $.ajax({
-        url: "../../PHP/Global/autocomplete_data.php",
+        url: "../../PHP/Global/autocomplete_data.php", // Η διεύθυνση του σεναρίου αναζήτησης στον server
         dataType: "json",
         data: {
           term: request.term
         },
         success: function(data) {
+          // Μετατρέπουμε την απόκριση σε μια μορφή που μπορεί να χειριστεί το Autocomplete:
           response($.map(data, function(item) {
             return {
-                label: item.name,
+                label: item.name, // Εδώ υποθέτουμε ότι η απόκριση περιέχει ένα πεδίο "name"
                 value: item.name
             };
         }));
       }
    });
-}, minLength: 2,
+}, minLength: 2, // Ορίζετε τον ελάχιστο αριθμό χαρακτήρων που πρέπει να πληκτρολογήσει ο χρήστης πριν εμφανιστούν προτάσεις
    select: function(event, ui) {
+        // Προαιρετικά: Κάτι να συμβεί όταν ο χρήστης επιλέγει μια πρόταση
         console.log("Επιλέχθηκε: " + ui.item.value);
         $("#search-input").val(ui.item.value);
         updateItemsBasedOnCategoryAndSearch();
-        // Αποτρέπουμε το να επαναφέρει το autocomplete την παλιά τιμή
+        // Αποτρέψτε την προεπιλεγμένη συμπεριφορά του autocomplete που θα επαναφέρει την παλιά τιμή
         return false;
        }
     });
@@ -44,7 +46,7 @@ function handlePreviousButton() {
         10
       );
       if (currentPage > 1) {
-        currentPage -= 1;
+        currentPage -= 1; // Μείωσε την τρέχουσα σελίδα κατά 1
         updateItemsBasedOnCategoryAndSearch(currentPage);
       }
     });
@@ -58,7 +60,7 @@ function handlePreviousButton() {
         10
       );
       if (currentPage < totalPages) {
-        currentPage += 1;
+        currentPage += 1; // Αύξησε την τρέχουσα σελίδα κατά 1
         updateItemsBasedOnCategoryAndSearch(currentPage);
       }
     });
@@ -72,6 +74,7 @@ function handlePreviousButton() {
     nextButton.disabled = currentPage >= totalPages;
   }
   
+  // Ενεργοποίηση και απενεργοποίηση του dropdown
   function toggleDropdown() {
     var dropdown = document.querySelector(".custom-dropdown");
     dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
@@ -83,16 +86,16 @@ function handlePreviousButton() {
       document.querySelectorAll(".category-checkbox-filter:checked")
     ).map((cb) => cb.value);
     var currentSearchTerm = searchTerm.value;
-    if(window.location.href === "http://localhost/Collaborative-product-search-platform-of-wide-consumption/Code/HTML/Admin/upload_products.html"){
+    if(window.location.href === "http://localhost/webproject/Code/HTML/Admin/upload_products.html"){
       loadItems(currentPage, 15, currentSearchTerm, selectedCategories);
-    } else if (window.location.href === "http://localhost/Collaborative-product-search-platform-of-wide-consumption/Code/HTML/Rescuer/cargo_page.html"){
+    } else if (window.location.href === "http://localhost/webproject/Code/HTML/Rescuer/cargo_page.html"){
       var isBaseCargoShown = document.getElementById('show-base-cargo').textContent.includes('Βάση');
                 if (isBaseCargoShown) {
                     loadVehicleCargo(currentPage, 15, currentSearchTerm, selectedCategories);
                 } else {
-                    loadItems(currentPage, 15, currentSearchTerm, selectedCategories);
+                    loadItems(c, 15, currentSearchTerm, selectedCategories);
                 }
-    } else if (window.location.href === "http://localhost/Collaborative-product-search-platform-of-wide-consumption/Code/HTML/User/request_page.html"){
+    } else if (window.location.href === "http://localhost/webproject/Code/Html/User/request_page.html"){
       getAvailableItems(currentPage, 15, currentSearchTerm, selectedCategories);
     }
   }
@@ -102,8 +105,9 @@ function handlePreviousButton() {
         var customSelect = document.querySelector(".custom-select");
         var dropdown = document.querySelector(".custom-dropdown");
     
+        // Ελέγξτε αν το κλικ έγινε εκτός του custom-select div
         if (!customSelect.contains(event.target)) {
-          dropdown.style.display = "none";
+          dropdown.style.display = "none"; // Κλείστε τη λίστα
         }
       });
   }

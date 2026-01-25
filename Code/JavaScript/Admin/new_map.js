@@ -12,12 +12,14 @@ $(document).ready(function() {
     setupDataLayers();
 
     map.on('popupopen', function(e) {
+        // Βρείτε τη θέση του popup
         var popupAnchor = e.popup.getLatLng();
         var point = map.latLngToContainerPoint(popupAnchor);
     
         var cargoDetailsDiv = document.getElementById('vehicleCargoDetails');
-        cargoDetailsDiv.style.top = (point.y + window.scrollY - 107) + 'px';
-        cargoDetailsDiv.style.left = (point.x + window.scrollX + 430) + 'px';
+        // Ενημερώστε τη θέση του div ανάλογα με τη θέση του popup
+        cargoDetailsDiv.style.top = (point.y + window.scrollY - 107) + 'px'; // Μετακινήστε το div λίγο πάνω από το popup
+        cargoDetailsDiv.style.left = (point.x + window.scrollX + 430) + 'px'; // Μετακινήστε το div δεξιά του popup
     });
 
     map.on('zoomend moveend', function() {
@@ -25,12 +27,13 @@ $(document).ready(function() {
     });
 
     map.on('popupclose', function() {
-    document.getElementById('vehicleCargoDetails').style.display = 'none';
+    document.getElementById('vehicleCargoDetails').style.display = 'none'; // Κρύβετε το div
     document.querySelector('.cargo-title').style.display = 'none';
 });
 });
 
 function initializeMap() {
+    // Δημιουργία του map object
     map = L.map('map').setView([38.246242, 21.7350847], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -38,11 +41,13 @@ function initializeMap() {
 }
 
 function setupDataLayers() {
+    // Κλήσεις συναρτήσεων για τη φόρτωση δεδομένων στον χάρτη
     fetchAndDisplayBase();
     displayAllOffers();
     displayAllRequests();
 }
 
+// Συνάρτηση για την ανάκτηση και εμφάνιση της βάσης
 function fetchAndDisplayBase() {
     $.ajax({
         url: "../../PHP/Global/get_warehouse_adress.php",
@@ -106,11 +111,12 @@ function fetchAndDisplayBase() {
                                     }
                                 });
                         } else {
-                            // Επαναφέρουμε το marker στην αρχική του θέση εάν ο χρήστης ακυρώσει την αλλαγή
+                            // Επαναφέρετε το marker στην αρχική του θέση εάν ο χρήστης ακυρώσει την αλλαγή
                             baseMarker.setLatLng([response.cordinates.location_lat, response.cordinates.location_lon]).update();
                         }
                     });
 
+                // Αφού φορτώσει η βάση, φορτώνουμε τα οχήματα
             } else {
                 console.log(response.message);
             }
@@ -121,6 +127,7 @@ function fetchAndDisplayBase() {
     });
 }
 
+// Συνάρτηση για την ανάκτηση και εμφάνιση των οχημάτων
 function fetchAndDisplayVehicles() {
     $.ajax({
         url: "../../PHP/Global/get_all_vehicles.php",
@@ -148,16 +155,16 @@ function fetchAndDisplayVehicles() {
                     </div>`);
                     
                     vehicleMarker.taskStatus = taskStatus;
-                    vehicleMarkers.push(vehicleMarker);
-
+                    vehicleMarkers.push(vehicleMarker);  // Προσθήκη στο array
+                     // Draw lines to each task
                     vehicle.tasks.forEach(task => {
-                        if (task.location_lat && task.location_lon) {
+                        if (task.location_lat && task.location_lon) {  // Check task has valid location data
                             var linePoints = [
                                 [vehicle.location_lat, vehicle.location_lon],
                                 [task.location_lat, task.location_lon]
                             ];
                             const polylineLayer = L.polyline(linePoints, { color: 'green' }).addTo(map);
-                            polylineLayers.push(polylineLayer);
+                            polylineLayers.push(polylineLayer); // Storing layer for potential later use or manipulation
                         }
                     });
 
@@ -210,7 +217,7 @@ function displayAllOffers() {
                             return popupContent;
                         });
 
-                    offerMarkers.push(offerMarker);
+                    offerMarkers.push(offerMarker);  // Προσθήκη στο array
                         
                 });
             } 
@@ -258,7 +265,7 @@ function displayAllRequests() {
                         return popupContent;
                     });
 
-                    requestMarkers.push(requestMarker);
+                    requestMarkers.push(requestMarker);  // Προσθήκη στο array
                 });
             }
         },
@@ -269,7 +276,7 @@ function displayAllRequests() {
 }
 
 function formatDateIntl(dateStr) {
-    const dateObj = new Date(dateStr);
+    const dateObj = new Date(dateStr); // Δημιουργία ενός αντικειμένου Date από τη συμβολοσειρά
     return new Intl.DateTimeFormat('el-GR', {
         day: '2-digit',
         month: '2-digit',
@@ -287,11 +294,11 @@ window.showCargo = function(vehicleId) {
 
     if (cargoDetailsDiv.style.display === 'block') {
         cargoDetailsDiv.style.display = 'none';
-        cargoListDiv.innerHTML = ''; 
+        cargoListDiv.innerHTML = '';  // Καθαρίζει το περιεχόμενο
         pop_button.innerHTML = `Εμφάνιση φορτίου οχήματος`
     } else {
 
-    cargoListDiv.innerHTML = '';
+    cargoListDiv.innerHTML = ''; // Καθαρίζετε το περιεχόμενο πριν την ανανέωση
     
 
     $.ajax({
@@ -304,7 +311,7 @@ window.showCargo = function(vehicleId) {
             if(response.status === 'success'){
 
                 pop_button.innerHTML = `Κλείσιμο Φορτίου`
-                cargoDetailsDiv.style.display = 'block';
+                cargoDetailsDiv.style.display = 'block'; // Εμφάνιση του div
                 document.querySelector('.cargo-title').style.display = 'block';
 
             var items = response.items;
@@ -338,10 +345,10 @@ window.showCargo = function(vehicleId) {
 }
 
 function updateCargoDetailsPosition() {
-    const popup = map._popup;
+    const popup = map._popup;  // Προσπελαύνει το τρέχον popup αν υπάρχει
     if (popup && popup.isOpen()) {
         const popupAnchor = popup.getLatLng();
-        const point = map.latLngToContainerPoint(popupAnchor);
+        const point = map.latLngToContainerPoint(popupAnchor);  // Μετατροπή σε pixel συντεταγμένες
 
         const cargoDetailsDiv = document.getElementById('vehicleCargoDetails');
         if (cargoDetailsDiv.style.display !== 'none') {

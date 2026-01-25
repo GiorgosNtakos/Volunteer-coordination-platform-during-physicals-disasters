@@ -20,7 +20,7 @@ if (isset($_SESSION['user_auth'])){
             $upload_dir = '../../../upload_img/rescuer/';
             break;
         case 'Citizen':
-            $upload_dir = '../../../upload_img/User';
+            $upload_dir = '../../../upload_img/citizen/';
             break;
         default:
             die("Invalid user type.");
@@ -38,6 +38,7 @@ if (isset($_SESSION['user_auth'])){
             $file_dest = $upload_dir . $file_new_name;
 
             if (move_uploaded_file($file_tmp, $file_dest)) {
+                // Ενημέρωση της img_path στον πίνακα Users
                 $img_path_db = '../../../upload_img/' . strtolower($user_type) . '/' . $file_new_name;
         
                 $sql = "UPDATE Users SET img_path = ? WHERE id = ?";

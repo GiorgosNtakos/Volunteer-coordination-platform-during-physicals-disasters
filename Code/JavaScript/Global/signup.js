@@ -1,3 +1,5 @@
+// Λειτουργικότητα για το Sign Up
+
 "use strict";
 document.addEventListener("DOMContentLoaded", function () {
   document
@@ -84,25 +86,33 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function signup(username, password, email) {
+  // Εδώ κάνουμε την AJAX κλήση για το Sign Up //TODO ισως καποιο χρονομετρο μετα την επιτυχης συνδεση με τυπωση του μηνυματος και μετα αλλαγη σε αλλη σελιδα ή απλα εμφανιση μηνυματος
+  //TODO(ΣΕΝΕΧΕΙΑ) και οταν παταει στο tab του login να γινονται κενα τα στοιχεια στο signup.
   $.ajax({
     url: "../../PHP/Global/sign_up.php",
     method: "POST",
     data: { username: username, password: password, email: email },
     success: function (response) {
-      if (response.status === "created") {
-        
-        showMessage("extra-success-message", response.message, "#user-signup");
-          
+      // Αναλύουμε το JSON αντικείμενο που λάβαμε από τον εξυπηρετητή
 
+      if (response.status === "created") {
+        // Η εγγραφή ήταν επιτυχής
+        //showMessage("extra-success-message", response.message, "#user-signup");
+        window.location.href = "index_page.html";
+
+        // Ενέργειες που θέλετε να κάνετε μετά την επιτυχημένη εγγραφή
       } else {
+        // Η εγγραφή απέτυχε
         showMessage(
           "extra-error-message",
           "Ενώ η εγγραφή ήταν επιτυχής κάτι πήγε στραβά.Παρακακλώ δοκιμάστε ξανά",
           "#user-signup"
         );
+        // Ενέργειες που θέλετε να κάνετε αν η εγγραφή αποτύχει
       }
     },
     error: function (response) {
+      // Κάτι πήγε στραβά με την κλήση AJAX
       var errorResponse = JSON.parse(response.responseText);
       if (errorResponse.status === "exists_name") {
         showMessage(
@@ -142,6 +152,7 @@ function signup(username, password, email) {
         );
       }
 
+      // Ενέργειες που θέλετε να κάνετε αν υπάρξει σφάλμα
     },
   });
 }

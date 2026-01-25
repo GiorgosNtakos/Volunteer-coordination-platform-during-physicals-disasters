@@ -1,8 +1,9 @@
+// task_panel.js
 "use strict";
 
 function updateTaskPanel(tasks) {
   const taskList = document.getElementById("task-list");
-  taskList.innerHTML = "";
+  taskList.innerHTML = ""; // Καθαρισμός της λίστας
 
   tasks.forEach((task) => {
     const listItem = document.createElement("li");
@@ -38,7 +39,7 @@ function updateTaskPanel(tasks) {
 }
 
 function formatDateIntl(dateStr) {
-  const dateObj = new Date(dateStr);
+  const dateObj = new Date(dateStr); // Δημιουργία ενός αντικειμένου Date από τη συμβολοσειρά
   return new Intl.DateTimeFormat("el-GR", {
     day: "2-digit",
     month: "2-digit",
