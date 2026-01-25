@@ -136,6 +136,13 @@ http://localhost/volunteer-coordination-platform/Code
 
 ---
 
+## 👥 Συγγραφείς
+- Γιώργος Ντάκος
+- Κατερίνα Παπανικολάου
+- Γιονίντα Μετάι
+
+---
+
 ## 📄 Άδεια Χρήσης
 
 **MIT License**
