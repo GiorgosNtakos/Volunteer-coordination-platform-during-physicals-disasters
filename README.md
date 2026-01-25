@@ -74,21 +74,21 @@ This project was developed as a semester assignment for the course
 
 ## ⚙️ Setup Instructions (Local)
 
-1. Install **WAMP** (or any Apache + MySQL environment)
+**1.** Install **WAMP** (or any Apache + MySQL environment)
 
-2. Clone the repository into the web root directory:
+**2.** Clone the repository into the web root directory:
 
 ```text
 wamp64/www/volunteer-coordination-platform
 ```
-3. Create a MySQL database
+**3.** Create a MySQL database
 
-4. Import the database files:
+**4.** Import the database files:
 - database/Schema.sql
 - database/seeds/seed_demo.sql
 
 
-5. Copy the database configuration file:
+**5.** Copy the database configuration file:
 ```text
 db_connect.example.php → db_connect.php
 
@@ -96,9 +96,9 @@ Edit db_connect.php and update your database credentials (host, database name, u
 The db_connect.example.php file is provided as a template and does not contain real credentials.
 ```
 
-6. Start Apache and MySQL
+**6.** Start Apache and MySQL
 
-7. Open the application in a browser:
+**7.** Open the application in a browser:
 ```text
 http://localhost/volunteer-coordination-platform/Code
 ```
@@ -106,14 +106,14 @@ http://localhost/volunteer-coordination-platform/Code
 
 ## 👤 Demo Accounts
 
-ℹ️ Note:
+ℹ️ **Note:**
 User passwords in seed_demo.sql are provided as hashed values or dummy placeholders.
 For security reasons, plaintext passwords are not included in the repository.
 
 After importing the database, you may:
 
-- register a new user of any role, or
-- manually update a user's password in the database with a value of your choice.
+- **register a new user of any role, or**
+- **manually update a user's password in the database with a value of your choice.**
 
 This approach ensures secure handling of credentials while allowing full testing of all user roles.
 
@@ -140,6 +140,6 @@ All data used are dummy and the platform is **not intended for real-world emerge
 
 ---
 
-## 🔐 License
+## 📄 License
 
-MIT License
+**MIT License**
